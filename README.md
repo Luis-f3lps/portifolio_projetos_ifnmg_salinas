@@ -1,80 +1,59 @@
-# Luís Santiago - Portfólio Pessoal
+# Portfólio de Projetos de Inovação | Hub IFNMG - Campus Salinas
 
-Este portfólio apresenta as habilidades, experiências e certificações, utilizando HTML, CSS e JavaScript.
+![Status](https://img.shields.io/badge/status-ativo-success)
+![Instituição](https://img.shields.io/badge/instituição-IFNMG-blue)
+![Licença](https://img.shields.io/badge/license-CC--BY--NC--SA%204.0-lightgrey)
 
-## Estrutura do Projeto
+Este repositório funciona como a vitrine digital e o catálogo dinâmico dos projetos de pesquisa aplicada, inovação e extensão tecnológica desenvolvidos no âmbito do **Hub de Inovação do Instituto Federal do Norte de Minas Gerais - Campus Salinas**.
 
-1. **Home**
-   - Breve introdução sobre mim.
+Nosso principal objetivo é ser a ponte entre o conhecimento científico gerado na academia e as necessidades práticas de empresas, empresários e produtores do Norte de Minas, fomentando o desenvolvimento regional por meio da inovação.
 
-2. **Sobre**
-   - Informações sobre formação acadêmica e experiência profissional.
+## 🎯 Objetivo do Portfólio
 
-3. **Serviços**
-   - Lista de serviços oferecidos:
-     - Web Design
-     - Manutenção de Computadores
-     - Desenvolvimento de Sistemas
-     - Suporte Técnico
-     - Segurança da Informação
-     - Desenvolvimento de Apps
+* **Apresentar** de forma clara e organizada as competências e tecnologias desenvolvidas no IFNMG - Campus Salinas.
+* **Facilitar** a conexão entre os desafios do mercado e as soluções científicas disponíveis.
+* **Fomentar** a cultura da inovação e da parceria Universidade-Empresa na região.
+* **Servir** como uma ferramenta de consulta para potenciais parceiros, investidores e para a comunidade em geral.
 
-4. **Certificações**
-   - Galeria de certificações com links para visualização.
+## 🔬 Áreas de Foco
 
-5. **Galeria**
-   - Imagens de projetos e atividades.
+Nossas áreas prioritárias de atuação estão alinhadas com os arranjos produtivos locais, com destaque para:
 
-6. **Contato**
-   - Informações de contato e formulário para envio de mensagens.
+* **Tecnologia em Cachaça e Derivados**
+* **Nutrição Animal e Zootecnia de Precisão**
 
-**Tecnologias usadas**
-   - HTML5
-   - CSS3
-   - JavaScript
-   - Font Awesome
-   - Google Sheets
+Além do foco principal, estamos de portas abertas para desenvolver projetos e parcerias em outras áreas estratégicas, como:
+* Fruticultura e Agroindústria
+* Energias Renováveis Aplicadas ao Campo
+* Gestão Hídrica e Agricultura de Precisão
+* Apicultura e Derivados
+* Turismo Tecnológico e Cultural
 
-## Funcionalidades JavaScript
+## 📂 Como Navegar nos Projetos
 
+Os projetos estão organizados em diretórios por área de atuação dentro da pasta `/projetos`.
 
-```javascript
-var sidemenu = document.getElementById("sidemenu");
-function openmenu(){
-    sidemenu.style.right = "0";
-}
-function closemenu(){
-    sidemenu.style.right = "-200px";
-}
+Cada projeto possui seu próprio arquivo `README.md` com informações detalhadas, incluindo:
+* Resumo do Projeto
+* Problema que Resolve
+* Estágio de Desenvolvimento (Ex: Ideia, Protótipo, Produto Final)
+* Pesquisadores Envolvidos
+* Modelo de Parceria Buscado
 
-//Tabs
-//Alternar entre as abas na seção "Sobre":
+## 🤝 Como Contribuir ou Sugerir um Projeto
 
-var tablinks = document.getElementsByClassName("tab-links");
-var tabcontents = document.getElementsByClassName("tab-contents");
+Este é um portfólio vivo e em constante atualização.
 
-function opentab(tabname) {
-    for (var i = 0; i < tablinks.length; i++) {
-        tablinks[i].classList.remove("active-link");
-    }
-    for (var i = 0; i < tabcontents.length; i++) {
-        tabcontents[i].classList.remove("active-tab");
-        if (tabcontents[i].id === tabname) {
-            tabcontents[i].classList.add("active-tab");
-        }
-    }
-    event.currentTarget.classList.add("active-link");
-}
+* **Pesquisadores do IFNMG:** Se você tem um projeto com potencial de inovação e quer incluí-lo no portfólio, entre em contato conosco ou abra uma "Issue" neste repositório descrevendo a sua proposta.
+* **Empresas e Produtores:** Se você tem um desafio ou um problema e acredita que a ciência pode ajudar, nos envie sua demanda! Podemos conectar seu desafio a um pesquisador capaz de desenvolver uma solução.
 
-//Formulário de Contato
-//Enviar dados do formulário para o Google Sheets:
-const scriptURL = 'https://script.google.com/macros/s/AKfycbxJ-y9bAog5Qsv0CT94kKJED2uXWb3Uv_B6fPRUeCyDPXXJ7lhNMUvBq3dEoqmJo-Pp/exec';
-const form = document.forms['submit-to-google-sheet'];
+## ✉️ Contato
 
-form.addEventListener('submit', e => {
-    e.preventDefault();
-    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => console.log('Success!', response))
-        .catch(error => console.error('Error!', error.message));
-});
+Para mais informações, parcerias ou dúvidas, entre em contato com o Hub de Inovação do IFNMG - Campus Salinas.
 
+* **Agente de Inovação Local:** [Seu Nome]
+* **E-mail:** [Seu e-mail profissional ou do Hub]
+* **Website:** [Link para o site do IFNMG ou do Hub, se houver]
+
+---
+O conteúdo textual deste portfólio está licenciado sob a [Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional](http://creativecommons.org/licenses/by-nc-sa/4.0/).

@@ -564,10 +564,7 @@ nav ul li a::after{
 nav ul li a:hover::after{
     width: 100%;
 }
-.header-text{
-    margin-top: 20%;
-    font-size: 30px;
-}
+
 .header-text h1{
     font-size: 60px;
     margin-bottom: 1%;
@@ -711,11 +708,6 @@ nav .fa-solid{
     background-color: #2904af;
 }
 
-
-    .header-text{
-        margin-top: 100%;
-        font-size: 16px;
-    }
     .header-text h1{
         font-size: 30px;
     }
@@ -724,11 +716,8 @@ nav .fa-solid{
         font-size: 25px;
     }
     nav ul{
-        background: #094412;
         top: 0;
         left: 0; 
-        height: 100vh;
-        padding-top: 50px;
         z-index: 2;
         transition: left 0.5s;
     }

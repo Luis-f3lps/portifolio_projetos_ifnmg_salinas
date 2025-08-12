@@ -119,8 +119,6 @@ function updatePortifolioTable(entries) {
         entries.forEach(entry => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td>${entry.id || 'N/A'}</td>
-                <td>${entry.processo || 'N/A'}</td>
                 <td>${entry.titulo || 'N/A'}</td>
                 <td>${entry.tematica || 'N/A'}</td>
                 <td>${entry.nome_coordenador || 'N/A'}</td>

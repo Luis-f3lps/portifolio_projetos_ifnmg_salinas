@@ -1,12 +1,4 @@
 
-var sidemenu = document.getElementById("sidemenu");
-function openmenu(){
-    sidemenu.style.left = "0px";
-}
-function clossmenu(){
-    sidemenu.style.left = "-800px";
-}
-
 var tablinks = document.getElementsByClassName("tab-links");
 var tabcontents = document.getElementsByClassName("tab-contents");
 
@@ -32,310 +24,124 @@ document.querySelectorAll('.submenu > a').forEach(menu => {
     });
 });
 
-function Autenticado() {
-    return fetch('/api/check-auth', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-    .then(response => response.json())
-    .then(data => data.Autenticado)
-    .catch(() => false);
-}
-
-function redirecionarSeNaoAutenticado() {
-    Autenticado().then(authenticated => {
-        if (!authenticated) {
-            window.location.href = 'index.html'; // Redireciona para a página de login
-        }
-    });
-}
-
 document.addEventListener('DOMContentLoaded', function() {
     if (window.location.pathname !== '/index.html') {
         redirecionarSeNaoAutenticado();
     }
 });
 
-
-function geradorPdfEntrada() {
-    fetch('/generate-pdf-entrada', {
-        method: 'GET',
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.blob();
-        }
-        throw new Error('Falha ao gerar o PDF.');
-    })
-    .then(blob => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'Relatorio_Entrada.pdf';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-        alert('Erro ao gerar o PDF.');
-    });
-}
-
-function geradorPdfConsumo() {
-    const table = document.querySelector('table');
-    const originalStyle = table.style;
-
-    table.style.transform = 'scale(1)';
-    table.style.transformOrigin = 'top left';
-    table.style.width = '100%'; 
-
-    html2canvas(table, { scale: 1 }).then(canvas => {
-        table.style = originalStyle; 
-
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF('p', 'mm', 'a4');
-        
-        const imgWidth = pdf.internal.pageSize.width; 
-        const imgHeight = canvas.height * imgWidth / canvas.width; 
-        const pageHeight = pdf.internal.pageSize.height;
-        
-        let heightLeft = imgHeight;
-        let position = 0;
-
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        
-        pdf.setFontSize(18);
-        pdf.text('Relatório de Laboratórios', imgWidth / 2, 15, { align: 'center' });
-
-        heightLeft -= pageHeight;
-
-        while (heightLeft > 0) {
-            pdf.addPage();
-            position = -heightLeft;
-            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-        }
-
-        pdf.save('relatorio_entrada.pdf');
-    }).catch(error => {
-        console.error('Erro ao gerar PDF:', error);
-    });
-}
-
-
-function formatDate(dateString) {
-    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-    const date = new Date(dateString);
-    return date.toLocaleDateString('pt-BR', options); // Formato dd/mm/yyyy
-}
-
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('filter-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const startDate = document.getElementById('start-date').value;
-        const endDate = document.getElementById('end-date').value;
-        const laboratorio = document.getElementById('laboratorios-select2').value || 'todos'; // "todos" para não filtrar
-        loadConsumos(startDate, endDate, laboratorio);
+
+    // Carrega os filtros e a primeira página do portfólio ao iniciar
+    loadTematicas();
+    loadCoordenadores();
+    loadPortifolio(1); 
+
+    // Adiciona o evento de 'submit' ao formulário de filtro do portfólio
+    document.getElementById('portifolio-filter-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Previne o recarregamento da página
+        const tematica = document.getElementById('tematica-select').value;
+        const coordenador = document.getElementById('coordenador-select').value;
+        loadPortifolio(1, tematica, coordenador); // Carrega a primeira página com os filtros
     });
-
-    function loadConsumos(startDate = '', endDate = '', laboratorio = 'todos') {
-        const queryParams = new URLSearchParams({ startDate, endDate, laboratorio });
-        fetch(`/api/consumos?${queryParams}`)
-            .then(response => response.json())
-            .then(data => {
-                const tbody = document.getElementById('consumo-tbody');
-                tbody.innerHTML = '';
-                data.forEach(entry => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td>${entry.id_consumo || 'N/A'}</td>
-                        <td>${formatDate(entry.data_consumo) || 'N/A'}</td>
-                        <td>${entry.sigla || 'N/A'}</td>
-                        <td>${entry.nome_produto || 'N/A'}</td>
-                        <td>${entry.nome_laboratorio || 'N/A'}</td>
-                        <td>${entry.quantidade || 'N/A'}</td>
-                        <td>${entry.tipo_unidade_produto || 'N/A'}</td>
-                        <td>${entry.descricao || 'N/A'}</td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            })
-            .catch(error => console.error('Erro ao carregar consumos:', error));
-    }
-
-    function formatDate(dateString) {
-        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-        return new Date(dateString).toLocaleDateString(undefined, options);
-    }
-
-    loadConsumos();
-    loadtabelaregistraconsumos();
 });
 
-
-// Pegar o nome do usuário logado
-function loadLoggedInUser() {
-  fetch('/api/usuario-logado')
-    .then(response => response.json())
-    .then(data => {
-      const userNameElement = document.getElementById('user-name-text');
-      userNameElement.innerHTML = data.nome;
-      if (data.tipo_usuario === 'admin') {
-        document.querySelector('.admin-menu').style.display = 'block';
-      }
-    })
-    .catch(error => console.error('Erro ao carregar usuário logado:', error));
-}
-loadLoggedInUser();
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    fetch('/api/tabelaregistraentradaInico')
+/**
+ * Carrega a lista de temáticas para o filtro.
+ */
+function loadTematicas() {
+    fetch('/api/portifolio?limit=1000') // Pega uma grande quantidade para obter todas as temáticas
         .then(response => response.json())
         .then(data => {
-            const tbody = document.getElementById('registro-entrada');
-            tbody.innerHTML = ''; 
-            
-            data.forEach(entry => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${entry.id_entrada}</td>
-                    <td>${new Date(entry.data_entrada).toLocaleDateString()}</td>
-                    <td>${entry.quantidade}</td>
-                    <td>${entry.nome_produto}</td>
-                    <td>${entry.descricao || 'N/A'}</td>
-                `;
-                tbody.appendChild(tr);
+            const select = document.getElementById('tematica-select');
+            const tematicas = [...new Set(data.data.map(item => item.tematica))]; // Cria uma lista de temáticas únicas
+            tematicas.sort().forEach(tematica => {
+                const option = document.createElement('option');
+                option.value = tematica;
+                option.textContent = tematica;
+                select.appendChild(option);
             });
         })
-        .catch(error => console.error('Erro ao carregar registros de entrada:', error));
-});
+        .catch(error => console.error('Erro ao carregar temáticas:', error));
+}
 
 
+/**
+ * Carrega a lista de coordenadores para o filtro.
+ */
+function loadCoordenadores() {
+    fetch('/api/coordenadores')
+        .then(response => response.json())
+        .then(data => {
+            const select = document.getElementById('coordenador-select');
+            data.forEach(coordenador => {
+                const option = document.createElement('option');
+                option.value = coordenador.nome_coordenador;
+                option.textContent = coordenador.nome_coordenador;
+                select.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Erro ao carregar coordenadores:', error));
+}
 
-document.getElementById('filter-form2').addEventListener('submit', function(event) {
-    event.preventDefault(); // Previne o comportamento padrão do formulário
 
-    const startDate = document.getElementById('entrada-start-date').value;
-    const endDate = document.getElementById('entrada-end-date').value;
-
-    if (!startDate || !endDate) {
-        alert('Por favor, selecione um período válido.');
-        return;
-    }
-
-    // Carregar a primeira página com o filtro aplicado
-    loadEntradas(1, startDate, endDate);
-});
-
-function loadEntradas(page = 1, startDate = '', endDate = '') {
-    const url = `/api/tabelaregistraentrada?page=${page}&limit=20&startDate=${startDate}&endDate=${endDate}`;
+/**
+ * Carrega os dados do portfólio com paginação e filtros.
+ * @param {number} page - O número da página a ser carregada.
+ * @param {string} tematica - O filtro de temática.
+ * @param {string} coordenador - O filtro de coordenador.
+ */
+function loadPortifolio(page = 1, tematica = '', coordenador = '') {
+    const url = `/api/portifolio?page=${page}&limit=20&tematica=${tematica}&coordenador=${coordenador}`;
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log('Dados recebidos da API:', data); // Debugging: Verificar a resposta da API
-
             if (Array.isArray(data.data)) {
-                updateTable(data.data);
-                updatePagination(data.totalPages, data.currentPage, startDate, endDate);
+                updatePortifolioTable(data.data);
+                updatePortifolioPagination(data.totalPages, data.currentPage, tematica, coordenador);
             } else {
                 console.error('Formato de resposta inesperado:', data);
-                alert('Erro ao carregar registros: Dados recebidos não são no formato esperado.');
+                alert('Erro ao carregar portfólio: Dados recebidos não estão no formato esperado.');
             }
         })
-        .catch(error => console.error('Erro ao carregar registros de entrada:', error));
+        .catch(error => console.error('Erro ao carregar dados do portfólio:', error));
 }
 
-function updateTable(entries) {
-    const tbody = document.getElementById('registro-entrada');
+/**
+ * Atualiza a tabela do portfólio com os novos dados.
+ * @param {Array} entries - Um array de objetos do portfólio.
+ */
+function updatePortifolioTable(entries) {
+    const tbody = document.getElementById('portifolio-tbody');
     tbody.innerHTML = ''; 
 
     if (Array.isArray(entries)) {
         entries.forEach(entry => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td>${entry.id_entrada || 'N/A'}</td>
-                <td>${formatDate(entry.data_entrada) || 'N/A'}</td>
-                <td>${entry.quantidade || 'N/A'}</td>
-                <td>${entry.nome_produto || 'N/A'}</td>
-                <td>${entry.descricao || 'N/A'}</td>
+                <td>${entry.id || 'N/A'}</td>
+                <td>${entry.processo || 'N/A'}</td>
+                <td>${entry.titulo || 'N/A'}</td>
+                <td>${entry.tematica || 'N/A'}</td>
+                <td>${entry.nome_coordenador || 'N/A'}</td>
             `;
             tbody.appendChild(tr);
         });
     } else {
         console.error('Esperava um array de entradas, mas recebeu:', entries);
-        alert('Erro ao atualizar tabela: Dados não são no formato esperado.');
+        alert('Erro ao atualizar tabela: Dados não estão no formato esperado.');
     }
 }
 
-function geradorPdfEntradatipo2() {
-    const startDate = document.getElementById('entrada-start-date').value;
-    const endDate = document.getElementById('entrada-end-date').value;
-
-    const url = `/generate-pdf-entradatipo2?start_date=${startDate || ''}&end_date=${endDate || ''}`;
-
-    fetch(url, {
-        method: 'GET',
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.blob();
-        }
-        throw new Error('Falha ao gerar o PDF.');
-    })
-    .then(blob => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'Relatorio_Entrada.pdf';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-        alert('Erro ao gerar o PDF.');
-    });
-}
-
-function generatePDFConsumo() {
-    const startDate = document.getElementById('start-date').value;
-    const endDate = document.getElementById('end-date').value;
-    const laboratorio = document.getElementById('laboratorios-select2').value || 'todos'; // Pega o valor do select
-
-    const url = `/generate-pdf-consumo?start_date=${encodeURIComponent(startDate || '')}&end_date=${encodeURIComponent(endDate || '')}&laboratorio=${encodeURIComponent(laboratorio)}`;
-
-    console.log('URL da requisição:', url); // Adicione este log para verificar a URL
-
-    fetch(url, {
-        method: 'GET',
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.blob();
-        }
-        throw new Error('Falha ao gerar o PDF.');
-    })
-    .then(blob => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'Relatorio_Consumo.pdf';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-        alert('Erro ao gerar o PDF.');
-    });
-}
-
-function updatePagination(totalPages, currentPage, startDate = '', endDate = '') {
-    const paginationDiv = document.getElementById('pagination');
+/**
+ * Atualiza os botões de paginação.
+ * @param {number} totalPages - O número total de páginas.
+ * @param {number} currentPage - A página atual.
+ * @param {string} tematica - O filtro de temática atual.
+ * @param {string} coordenador - O filtro de coordenador atual.
+ */
+function updatePortifolioPagination(totalPages, currentPage, tematica = '', coordenador = '') {
+    const paginationDiv = document.getElementById('pagination-portifolio');
     paginationDiv.innerHTML = ''; 
 
     for (let i = 1; i <= totalPages; i++) {
@@ -346,55 +152,8 @@ function updatePagination(totalPages, currentPage, startDate = '', endDate = '')
             button.classList.add('active');
         }
         button.addEventListener('click', () => {
-            loadEntradas(i, startDate, endDate); // Carregar a página clicada
+            loadPortifolio(i, tematica, coordenador); // Carrega a página clicada com os filtros atuais
         });
         paginationDiv.appendChild(button);
     }
-}
-
-// Carregar a primeira página ao iniciar
-document.addEventListener('DOMContentLoaded', function() {
-    loadEntradas(1); // Carregar a primeira página sem filtro
-	loadLaboratorios2();
-});
-
-function updatePaginationConsumos(totalPages, currentPage, startDate = '', endDate = '', laboratorio = 'todos') {
-    const paginationDiv = document.getElementById('pagination2');
-    paginationDiv.innerHTML = ''; 
-
-    // Loop para criar botões de paginação
-    for (let i = 1; i <= totalPages; i++) {
-        const button = document.createElement('button');
-        button.textContent = i;
-        button.classList.add('pagination-button');
-        
-        // Destacar a página atual
-        if (i === currentPage) {
-            button.classList.add('active');
-        }
-
-        // Adicionar evento de clique para carregar a página correspondente
-        button.addEventListener('click', () => {
-            loadConsumos(i, startDate, endDate, laboratorio); // Carrega a página clicada com filtros
-        });
-
-        // Adiciona o botão ao contêiner de paginação
-        paginationDiv.appendChild(button);
-    }
-}
-
-function loadLaboratorios2() {
-    fetch('/api/laboratorios')
-        .then(response => response.json())
-        .then(data => {
-            const select = document.getElementById('laboratorios-select2');
-            select.innerHTML = '<option value="">Todos os Laboratórios</option>'; // Adiciona a opção "Todos os Laboratórios"
-            data.forEach(laboratorio => {
-                const option = document.createElement('option');
-                option.value = laboratorio.id_laboratorio;
-                option.textContent = laboratorio.nome_laboratorio;
-                select.appendChild(option);
-            });
-        })
-        .catch(error => console.error('Erro ao carregar laboratórios:', error));
 }

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="images/icone2.png" type="image/png">
+    <title>Luís Santiago</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/915b45d802.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!------------------Home--------------->
+<div id="header">
+    <div class="container">
+        <nav>
+            <img src="images/logo3.png" class="logo">
+            <ul id="sidemenu">
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#services">Trabalhos</a></li>
+                <li><a href="#portifolio">Certificação</a></li>
+                <li><a href="#contact">Contato</a></li>
+                <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
+            </ul>
+            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+        </nav>
+        <div class="header-text">
+            <h1>Olá, sou <span>Luis Santiago</span></h1>
+            <p>Técnico em Informática e Analista de Sistemas</p>
+        </div>
+    </div>
+</div>
+
+<!------------------Sobre--------------->
+<div id="about"> 
+    <div class="container">
+        <div class="row">
+            <div class="about-col-1">
+                <img src="images/a2.jpg">
+            </div>
+            <div class="about-col-2">
+                <h1 class="sub-title">Sobre mim</h1>
+                <p>Sou graduado em Sistemas de Informação e técnico em Informática pelo Instituto Federal do Norte de Minas Gerais (IFNMG). Além disso, desempenho o papel de diretor do Conselho Fiscal na empresa júnior SIFSoft. Participo ativamente de programas e projetos de iniciação científica, contribuindo para pesquisas e desenvolvimento de novos conhecimentos na área.</p>
+                
+                <div class="tab-titles">
+                    <p class="tab-links active-link" onclick="opentab('Skills')">Habilidades</p>
+                    <p class="tab-links" onclick="opentab('Experience')">Estagio/Bolsas</p>
+                    <p class="tab-links" onclick="opentab('Education')">Projetos de Inovação Cientifica</p>
+                </div>
+
+                <div class="tab-contents active-tab" id="Skills">
+                    <ul>
+                        <li><img src="images/Python.svg.png" alt="Descrição da imagem" width="25" height="25"> Python</li>
+                        <li><img src="images/c1.png" alt="Descrição da imagem" width="25" height="25"> C</li>
+                        <li><img src="images/h1.png" alt="Descrição da imagem" width="25" height="25"> HTML</li>
+                        <li><img src="images/css1.png" alt="Descrição da imagem" width="25" height="25"> CSS</li>
+                        <li><img src="images/j2.png" alt="Descrição da imagem" width="25" height="15"> JAVA</li>
+                        <li><img src="images/j1.png" alt="Descrição da imagem" width="25" height="25"> JAVA SCRIPT</li>
+                        <li><img src="images/node.png" alt="Descrição da imagem" width="25" height="15"> NODE.JS</li>
+                        <li><img src="images/msql.png" alt="Descrição da imagem" width="45" height="35"> MYSQL</li>
+                    </ul>
+                </div>
+                <div class="tab-contents" id="Experience">
+                    <ul>
+                        <li><span>03/2022 a 03/2023</span><br><br><img src="images/if.png" alt="Descrição da imagem" width="20" height="20"> PROJETO DE APOIO TÉCNICO AO DESENVOLVIMENTO ACADÊMICO E ADMINISTRATIVO DA INOVAÇÃO NO IFNMG</li><br>
+                        <li><span>04/2023 a 12/2023</span><br><br><img src="images/if.png" alt="Descrição da imagem" width="20" height="20"> PROGRAMA DE BOLSAS DE APOIO TÉCNICO (BAT) À INOVAÇÃO NO IFNMG</li><br>
+                        <li><span>03/2024 a 12/2024</span><br><br><img src="images/if.png" alt="Descrição da imagem" width="20" height="20"> PROGRAMA DE BOLSAS DE APOIO TÉCNICO (BAT) À INOVAÇÃO E A EXTENSÃO TECNOLÓGICA DO IFNMG</li>
+                    </ul>
+                </div>
+                <div class="tab-contents" id="Education">
+                    <ul>
+                        <li><span>08/2022 a 10/2022</span><br><br><img src="images/if.png" alt="Descrição da imagem" width="20" height="20">  Estudo de caso: digitalização e organização do banco de dados do Setor de Pesquisa,
+                            Pós-Graduação e Inovação do IFNMG Campus Salinas</li><br>
+                        <li><span>01/2024  a 07/2024</span><br><br><img src="images/if.png" alt="Descrição da imagem" width="20" height="20">  Modelagem genético-nebulosa da relação entre variáveis ambientais e a
+                            temperatura retal de frangos de corte</li><br>
+                        <li><span>01/2024 até o momento</span><br><br><img src="images/if.png" alt="Descrição da imagem" width="20" height="20">  	
+                            Desenvolvimento de Sistema para Controle de Produtos Químicos de Uso Restrito para os laboratórios do Campus Salinas</li><br>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------Serviços--------------->
+<div id="services">
+    <div class="container">
+        <h1 class="sub-title-type-2">Alguns Trabalhos</h1>
+        <div class="services-list">
+            <a href="https://sistema-inventario-postgre.vercel.app/" target="_blank" style="text-decoration: none; color: inherit;">
+            <div>
+                <img src="images/icone3.png" class="logo">
+                <br><h2>Sistema de Estoque</h2><br>
+                <p>Desenvolvi um sistema web para o IFNMG Campus Salinas com o objetivo de otimizar a gestão de produtos químicos controlados. Utilizei HTML, CSS e JavaScript no front-end, Node.js com Express no back-end e Oracle PL/SQL como banco de dados.</p><br>
+                <p>login: admin@sistema.com <br>senha: 12345678</p>
+            </div>
+            </a>
+
+            <a href="https://luis-f3lps.github.io/pokedex/" target="_blank" style="text-decoration: none; color: inherit;">
+            <div>
+                <img src="images/Pokebola-pokeball-png-0.png" class="logo">
+                <br><h2>Pokedex</h2><br>
+                <p>Criei um site Pokedex que utiliza uma API pública para exibir informações detalhadas sobre os Pokémon. O site permite buscar Pokémon por nome ou número, mostrando dados como imagem, tipo, habilidades e estatísticas. </p><br>
+            </div>
+            </a>
+
+            <a href="https://age-of-empires-4.vercel.app/" target="_blank" style="text-decoration: none; color: inherit;">
+            <div>
+                <img src="images/logo03-removebg-preview.png" class="logo">
+                <br><h2>Site de Age of empires 4</h2><br>
+                <p>Desenvolvi um sistema para apoiar estratégias do jogo Age of Empires, focado nas metas e gameplay das civilizações. O sistema utiliza um banco de dados para armazenar informações detalhadas sobre unidades, tecnologias, recursos e táticas específicas de cada civilização.</p><br>
+            </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!----------------- Portifolio ------------>
+<div id="portifolio">
+    <div class="container">
+        <h1 class="sub-title-type-2">Minhas Certificações</h1>
+        <div class="work-list-certificados">
+            <div class="work">
+                <img src="images/certificados/1.jpg">
+                <div class="layer">
+                    <a href="https://www.instagram.com/reel/CxGCosluDGe/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/certificados/2.jpg">
+                <div class="layer">
+                    <a href="https://www.instagram.com/reel/CxGCosluDGe/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/certificados/4.jpg">
+                <div class="layer">
+                    <a href="https://www.instagram.com/reel/CxGCosluDGe/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="work">
+                <img src="images/certificados/9.jpg">
+                <div class="layer">
+                    <a href="https://www.instagram.com/reel/CxGCosluDGe/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/certificados/12.jpg">
+                <div class="layer">
+                    <a href="https://www.instagram.com/reel/CxGCosluDGe/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/certificados/19.jpg">
+                <div class="layer">
+                    <a href="https://www.instagram.com/reel/CxGCosluDGe/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="work">
+                <img src="images/certificados/17.jpg">
+                <div class="layer">
+                    <a href="https://www.instagram.com/reel/CxGCosluDGe/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>            
+            <div class="work">
+                <img src="images/certificados/13.jpg">
+                <div class="layer">
+                    <a href="https://www.instagram.com/reel/CxGCosluDGe/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/certificados/14.jpg">
+                <div class="layer">
+                    <a href="https://www.instagram.com/reel/CxGCosluDGe/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <a href="https://www.linkedin.com/in/luis-gustavo-barbosa-santiago-648395280/details/certifications/" class="btn">Ver todos</a>
+    </div>
+</div>
+
+<div id="portifolio"></div>
+    <div class="container">
+        <h1 class="sub-title-type-2">Minha Galeria</h1>
+        <div class="work-list">
+            <div class="work">
+                <img src="images/work4.jpg">
+                <div class="layer">
+                    <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/work5.jpg">
+                <div class="layer">
+                    <a href="https://www.instagram.com/p/CzmezW4vsJd/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/work6.jpeg">
+                <div class="layer">
+                    <a href="https://www.instagram.com/reel/CxGCosluDGe/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/work10.jpeg">
+                <div class="layer">
+                    <a href="https://www.instagram.com/p/C0ZQR6tuOOp/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/work6.jpg">
+                <div class="layer">
+                    <a href="https://www.instagram.com/p/CwYlpoWpt1S/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/work3.jpg">
+                <div class="layer">
+                    <a href="https://www.instagram.com/reel/C4yPesXOvv6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!----------------- Contato ------------>
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title-type-2">Meu contato</h1>
+                <p><i class="fa-solid fa-paper-plane"></i> luisphelps671@gmail</p>
+                <p><i class="fa-brands fa-square-whatsapp"></i> 38 988643820</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/profile.php?id=100008665060845"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/luis_f3lps/"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/luis-gustavo-barbosa-santiago-648395280/"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+                <a href="pdf/Cúrriculo_Luis_Gustavo_B_Santiago.pdf" download class="btn btn2"><i class="fa-solid fa-file-pdf" style="color: aliceblue;"></i> Cúrriculo</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Pega todos os elementos com a classe "tab-links" e "tab-contents"
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+    //abre uma aba específica
+    function opentab(tabname) {
+        // Loop para remover a classe "active-link" de todos os links das abas
+        for (var i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active-link");
+        }
+        // Mesma coisa da de cima só que com "active-tab" 
+        for (var i = 0; i < tabcontents.length; i++) {
+            tabcontents[i].classList.remove("active-tab");
+            // Se o id for igual ao nome da aba, adiciona a classe "active-tab" a esse trem para mostrar
+            if (tabcontents[i].id === tabname) {
+                tabcontents[i].classList.add("active-tab");
+            }
+        }
+        // Adiciona a classe "active-link" ao link da aba que foi clicada
+        event.currentTarget.classList.add("active-link");
+    }
+</script>
+
+<script>
+    var sidemenu = document.getElementById("sidemenu");
+    function openmenu(){
+        sidemenu.style.right = "-200px";
+    }
+    function clossmenu(){
+        sidemenu.style.right = "-800px";
+    }
+</script>
+
+</body>
+</html>

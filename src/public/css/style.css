@@ -634,17 +634,17 @@ select:focus {
 }
 table {
     border-collapse: collapse;
-    width: 80%;
     margin: 20px auto;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: black;
 }
 
 th, td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: center;
+    text-align: left;
 }
 #red{
     background-color: #ff0000;
@@ -743,7 +743,7 @@ nav .fa-solid{
         font-size: 30px;
     }
     .about-col-1, .about-col-2{
-        flex: 100%;
+        flex: 50%;
     }
     .about-col-1{
         margin: 30px;

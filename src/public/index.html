@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="images/icone2.png" type="image/png">
+    <title>Agência de Projetos de Inovação do IFNMG Salinas</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/915b45d802.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!------------------Home--------------->
+<div id="header">
+    <div class="container">
+        <nav>
+            <img src="images/logo3.png" class="logo">
+            <ul id="sidemenu">
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#services">Projetos</a></li>
+                <li><a href="#contact">Contato</a></li>
+                <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
+            </ul>
+            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+        </nav>
+        <div class="header-text">
+            <h1>Olá, <span>Bem vindo ao portifolio</span></h1>
+            <p>Agência de Projetos de Inovação do IFNMG</p>
+        </div>
+    </div>
+</div>
+<div id="services"> 
+    <div class="container">
+        <div class="row">
+            <div class="services-col-1">
+                <img src="images/a2.png">
+            </div>
+            <div class="services-col-2">
+                <h1 class="sub-title">Sobre</h1>
+
+                <div class="container">
+<h1>Objetivo do Projeto "Agência de Projetos de Inovação do IFNMG"</h1>
+        
+<p>
+    O principal objetivo do projeto, conforme detalhado no Edital Nº 587, é fortalecer o ecossistema de inovação na área de abrangência do Instituto Federal do Norte de Minas Gerais (IFNMG) por meio do desenvolvimento de sua Agência de Projetos de Inovação.
+</p>
+
+<p>
+    Com uma duração de 48 meses, o projeto visa atender às demandas de inovação e extensão tecnológica da região. Para isso, ele está estruturado em cinco pilares fundamentais:
+</p>
+        
+<ul>
+    <li>Valoração de Tecnologia</li>
+    <li>Criação de Hubs de Inovação</li>
+    <li>Agenciamento de Tecnologias e Competências para prospecção de parcerias</li>
+    <li>Apoio ao Inventor Independente</li>
+    <li>Gestão dos Ambientes de Inovação</li>
+</ul>
+
+<p>
+    Este projeto foi aprovado pela Chamada 041/2024 e é financiado pela Fundação de Amparo à Pesquisa do Estado de Minas Gerais (FAPEMIG). A implementação do projeto contará com a atuação de bolsistas nas cidades de Araçuaí, Arinos, Januária, Montes Claros, Salinas e Teófilo Otoni.
+</p>
+
+    </div>
+
+<!------------------Sobre--------------->
+<div id="about"> 
+    <div class="container">
+        <div class="row">
+            <div class="about-col-1">
+                <img src="images/a2.png">
+            </div>
+            <div class="about-col-2">
+                <h1 class="sub-title">Sobre</h1>
+
+                <div class="container">
+   <h1>Objetivo do Projeto "Agência de Projetos de Inovação do IFNMG"</h1>
+        
+<p>
+    O principal objetivo do projeto, conforme detalhado no Edital Nº 587, é fortalecer o ecossistema de inovação na área de abrangência do Instituto Federal do Norte de Minas Gerais (IFNMG) por meio do desenvolvimento de sua Agência de Projetos de Inovação.
+</p>
+
+<p>
+    Com uma duração de 48 meses, o projeto visa atender às demandas de inovação e extensão tecnológica da região. Para isso, ele está estruturado em cinco pilares fundamentais:
+</p>
+        
+<ul>
+    <li>Valoração de Tecnologia</li>
+    <li>Criação de Hubs de Inovação</li>
+    <li>Agenciamento de Tecnologias e Competências para prospecção de parcerias</li>
+    <li>Apoio ao Inventor Independente</li>
+    <li>Gestão dos Ambientes de Inovação</li>
+</ul>
+
+    </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!----------------- Contato ------------>
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title-type-2">Contato do Agente de Inovação dO ifnmg Salinas</h1>
+                <p><i class="fa-solid fa-paper-plane"></i> luisphelps671@gmail</p>
+                <p><i class="fa-brands fa-square-whatsapp"></i> 38 988643820</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/profile.php?id=100008665060845"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/luis_f3lps/"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/luis-gustavo-barbosa-santiago-648395280/"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Pega todos os elementos com a classe "tab-links" e "tab-contents"
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+    //abre uma aba específica
+    function opentab(tabname) {
+        // Loop para remover a classe "active-link" de todos os links das abas
+        for (var i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active-link");
+        }
+        // Mesma coisa da de cima só que com "active-tab" 
+        for (var i = 0; i < tabcontents.length; i++) {
+            tabcontents[i].classList.remove("active-tab");
+            // Se o id for igual ao nome da aba, adiciona a classe "active-tab" a esse trem para mostrar
+            if (tabcontents[i].id === tabname) {
+                tabcontents[i].classList.add("active-tab");
+            }
+        }
+        // Adiciona a classe "active-link" ao link da aba que foi clicada
+        event.currentTarget.classList.add("active-link");
+    }
+</script>
+
+<script>
+    var sidemenu = document.getElementById("sidemenu");
+    function openmenu(){
+        sidemenu.style.right = "-200px";
+    }
+    function clossmenu(){
+        sidemenu.style.right = "-800px";
+    }
+</script>
+
+</body>
+</html>

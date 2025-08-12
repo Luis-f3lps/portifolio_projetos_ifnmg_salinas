@@ -742,15 +742,6 @@ nav .fa-solid{
     .sub-title-type-2{
         font-size: 30px;
     }
-    .about-col-1, .about-col-2{
-        flex: 50%;
-    }
-    .about-col-1{
-        margin: 30px;
-    }
-    .about-col-2{
-        font-size: 14px;
-    }
     .tab-links{
         font-size: 16px;
         margin-right: 20px;

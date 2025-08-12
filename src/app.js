@@ -7,8 +7,9 @@ import pool from './database.js'; // Importa a pool de conexões do arquivo data
 // Definindo __filename e __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 // Carregando variáveis de ambiente do arquivo .env
-dotenv.config({ path: path.resolve(__dirname, 'variaveis.env') }); // Ajuste o caminho conforme necessário
+dotenv.config({ path: path.resolve(__dirname, 'variaveis.env') }); 
 console.log({
   DB_HOST: process.env.DB_HOST,
   DB_USER: process.env.DB_USER,
@@ -28,11 +29,8 @@ const app = express();
   }
 })();
 
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 // Configurar middleware para servir arquivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
@@ -42,18 +40,14 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-
-
 // Iniciar o servidor
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Servidor rodando no endereço http://localhost:${PORT}`);
 });
 
-
-
 // Obter lista paginada de projetos do portfólio (com filtros)
-app.get('/api/portifolio', Autenticado, async (req, res) => {
+app.get('/api/portifolio', async (req, res) => { // 'Autenticado' foi removido daqui
     // Parâmetros de paginação e filtros
     const { page = 1, limit = 20, tematica, coordenador } = req.query;
 
@@ -131,7 +125,7 @@ app.get('/api/portifolio', Autenticado, async (req, res) => {
 });
 
 // Obter a lista completa de coordenadores
-app.get('/api/coordenadores', Autenticado, async (req, res) => {
+app.get('/api/coordenadores', async (req, res) => { // 'Autenticado' foi removido daqui
     try {
         const { rows } = await pool.query('SELECT * FROM coordenadores ORDER BY nome_coordenador ASC');
         res.json(rows);

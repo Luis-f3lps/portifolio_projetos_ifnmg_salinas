@@ -8,7 +8,7 @@ html{
     scroll-behavior: smooth;
 }
 body{
-    background: #080808;
+    background: white;
     color: white;
 }
 /* --------------Home------------------*/
@@ -912,7 +912,7 @@ nav .fa-solid{
             font-size: 1.1em;
             line-height: 1.7; /* Espaçamento entre linhas para melhor legibilidade */
             margin-bottom: 20px;
-            color: #BDBDBD; /* Cor de texto ligeiramente mais suave */
+            color: #ffffff; /* Cor de texto ligeiramente mais suave */
         }
 
         /* Estilização da lista não ordenada */

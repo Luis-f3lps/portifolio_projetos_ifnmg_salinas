@@ -876,7 +876,7 @@ nav .fa-solid{
 
         /* Container principal da seção "Sobre" */
         .sobre {
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
             background-color: white; /* Um tom de cinza escuro para destacar o conteúdo */
             padding: 40px 50px;
@@ -912,7 +912,7 @@ nav .fa-solid{
             font-size: 1.1em;
             line-height: 1.7; /* Espaçamento entre linhas para melhor legibilidade */
             margin-bottom: 20px;
-            color: #ffffff; /* Cor de texto ligeiramente mais suave */
+            color: black; /* Cor de texto ligeiramente mais suave */
         }
 
         /* Estilização da lista não ordenada */

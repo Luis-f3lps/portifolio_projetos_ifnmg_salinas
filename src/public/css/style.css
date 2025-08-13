@@ -78,7 +78,7 @@ nav ul li a:hover::after{
     flex-wrap: wrap;
 }
 .about-col-1{
-    flex-basis: 35%;
+    flex-basis: 40%;
 }
 .about-col-1 img{
     width: 100%;
@@ -869,12 +869,6 @@ nav .fa-solid{
 
         /* Estilização geral do corpo da página */
         body {
-            background-color: #121212; /* Um preto suave para não cansar a vista */
-            color: #E0E0E0; /* Cor de texto principal, um cinza claro */
-            font-family: 'Poppins', sans-serif; /* Fonte moderna e limpa */
-            margin: 0;
-            padding: 40px 20px;
-            display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;

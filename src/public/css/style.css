@@ -214,7 +214,7 @@ nav ul li a:hover::after{
     margin-top: 20px;
     margin-bottom: 20px;
     font-weight: 400;
-    color: #fff;
+    color: black;
 }
 .layer{
     width: 100%;
@@ -675,7 +675,7 @@ button[type="submit2"] {
 button {
     padding: 10px;
     border-radius: 4px;
-    background-color: #094412;
+    background-color: #357093;
     color: #fff;
     font-size: 16px;
     cursor: pointer;

@@ -864,3 +864,84 @@ nav .fa-solid{
                 margin-top: 5px;
             }
         }
+        /* Importando uma fonte moderna do Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        /* Estilização geral do corpo da página */
+        body {
+            background-color: #121212; /* Um preto suave para não cansar a vista */
+            color: #E0E0E0; /* Cor de texto principal, um cinza claro */
+            font-family: 'Poppins', sans-serif; /* Fonte moderna e limpa */
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Container principal da seção "Sobre" */
+        .sobre {
+            max-width: 800px;
+            width: 100%;
+            background-color: #1E1E1E; /* Um tom de cinza escuro para destacar o conteúdo */
+            padding: 40px 50px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-left: 5px solid #00BFFF; /* Um detalhe em azul ciano para dar um toque de cor */
+        }
+
+        /* Estilização do subtítulo "Sobre" */
+        .sub-title {
+            font-size: 2em; /* Tamanho maior para o título principal da seção */
+            font-weight: 300; /* Peso mais leve para um visual elegante */
+            color: #FFFFFF;
+            margin-top: 0;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #00BFFF;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* Estilização do título do objetivo */
+        .sobre h1:not(.sub-title) {
+            font-size: 1.8em; /* Tamanho de fonte um pouco menor que o subtítulo */
+            color: #00BFFF; /* Cor de destaque azul ciano */
+            margin-bottom: 25px;
+            font-weight: 600; /* Peso mais forte para ênfase */
+        }
+
+        /* Estilização dos parágrafos */
+        .sobre p {
+            font-size: 1.1em;
+            line-height: 1.7; /* Espaçamento entre linhas para melhor legibilidade */
+            margin-bottom: 20px;
+            color: #BDBDBD; /* Cor de texto ligeiramente mais suave */
+        }
+
+        /* Estilização da lista não ordenada */
+        .sobre ul {
+            list-style-type: none; /* Remove os marcadores padrão */
+            padding-left: 0;
+            margin-top: 25px;
+        }
+
+        /* Estilização dos itens da lista */
+        .sobre li {
+            background-color: rgba(0, 191, 255, 0.05); /* Fundo sutil para os itens da lista */
+            margin-bottom: 12px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            color: #E0E0E0;
+            border-left: 3px solid #00BFFF;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        /* Efeito de hover nos itens da lista para interatividade */
+        .sobre li:hover {
+            transform: translateX(10px);
+            background-color: rgba(0, 191, 255, 0.15);
+        }

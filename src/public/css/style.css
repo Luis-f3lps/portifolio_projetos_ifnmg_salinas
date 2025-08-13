@@ -766,7 +766,12 @@ nav .fa-solid{
                 position: static;
                 z-index: 2;
         }
-        
+        .row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 10px 4%;
+        }
         #sidemenu {
             left: -800px;
 

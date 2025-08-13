@@ -714,6 +714,7 @@ nav .fa-solid{
     nav .fa-solid{
         display: block;
         font-size: 25px;
+        color: white;
     }
     nav ul{
         top: 0;
@@ -733,7 +734,7 @@ nav .fa-solid{
         top: 25px;
         left: 200px;
         cursor: pointer;
-        color: #094412;
+        color: white;
     }
     .sub-title{
         margin-top: 10px;
@@ -785,7 +786,7 @@ nav .fa-solid{
             z-index: 1;
         }
         nav ul{
-            background: #094412;
+            background: black;
             top: 0;
             right: -600px;
             width: 600px;

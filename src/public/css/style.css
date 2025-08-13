@@ -196,7 +196,7 @@ nav ul li a:hover::after{
     margin-top: 40px;
 }
 .work-list-certificados h3{
-    color: #fff;
+    color: black;
 }
 .work{
     border-radius: 10px;
@@ -288,7 +288,7 @@ nav ul li a:hover::after{
 }
 .contact-left p{
     margin-top: 30px;
-    color: #fff;
+    color: black;
 }
 .contact-left p i{
     color: #ff004f;
@@ -513,7 +513,7 @@ nav .fa-solid{
     }
     p{
         font-size: 22px;
-            color: #ffffff;
+            color:black;
     }
     .work-list-certificados {
         display: grid;
@@ -726,7 +726,7 @@ nav .fa-solid{
         margin: 25px;
     }
     nav ul li a{
-        color: #ffffff;
+        color: black;
     }
     nav ul .fa-solid {
         position: absolute;
@@ -878,7 +878,7 @@ nav .fa-solid{
         .sobre {
             max-width: 800px;
             width: 100%;
-            background-color: #1E1E1E; /* Um tom de cinza escuro para destacar o conteúdo */
+            background-color: white; /* Um tom de cinza escuro para destacar o conteúdo */
             padding: 40px 50px;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -889,7 +889,7 @@ nav .fa-solid{
         .sub-title {
             font-size: 2em; /* Tamanho maior para o título principal da seção */
             font-weight: 300; /* Peso mais leve para um visual elegante */
-            color: #FFFFFF;
+            color: black;
             margin-top: 0;
             margin-bottom: 30px;
             text-transform: uppercase;
@@ -929,7 +929,7 @@ nav .fa-solid{
             padding: 15px 20px;
             border-radius: 8px;
             font-size: 1.1em;
-            color: #E0E0E0;
+            color: black;
             border-left: 3px solid #00BFFF;
             transition: transform 0.3s ease, background-color 0.3s ease;
         }

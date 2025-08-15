@@ -956,7 +956,7 @@ nav .fa-solid{
     right: -500px;
     border-left: 5px solid #00BFFF;
 }
-    .descricao {
+    #descricao {
     background-color: white;
     padding: 40px 50px;
     border-radius: 12px;
@@ -964,7 +964,7 @@ nav .fa-solid{
     border-left: 5px solid #00BFFF;
     font-size: 16px;
 }
-.livro-container:hover .descricao {
+.livro-container:hover #descricao {
         max-width: 900px;
     width: 50%;
     background-color: white;

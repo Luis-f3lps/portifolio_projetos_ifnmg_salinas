@@ -22,7 +22,7 @@ function carregarLivros() {
                     <div class="about-col-4">
                         <img src="${livro.link_capa || 'images/placeholder.png'}" alt="Capa do livro ${livro.titulo}">
                     </div>
-                    <div class="descricao">
+                    <div class="sobre">
                         <h1 class="sub-title">${livro.titulo || 'Título não disponível'}</h1>
                         <p><strong>Autor:</strong> ${livro.nome_coordenador || 'Autor não disponível'}</p>
                         <p>${livro.descricao || 'Descrição não disponível.'}</p>

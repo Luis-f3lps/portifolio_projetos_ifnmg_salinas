@@ -758,7 +758,7 @@ nav .fa-solid{
         color: #ffffff;
     }
     .about-col-4 img {
-    width: 300px; /* Largura fixa para a imagem como exemplo */
+    width: 350px; /* Largura fixa para a imagem como exemplo */
     border-radius: 15px;
     cursor: pointer; /* Muda o cursor para indicar interatividade */
     margin: 15px;

@@ -980,7 +980,7 @@ nav .fa-solid{
     /* Estilos que você quer aplicar no hover */
     max-width: 900px;
     width: 50%;
-    right: -450px; /* Posição final (ajuste conforme necessário) */
+    right: -350px; /* Posição final (ajuste conforme necessário) */
 
     /* Efeitos para mostrar */
     opacity: 1;

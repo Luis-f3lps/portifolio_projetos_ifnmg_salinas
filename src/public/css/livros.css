@@ -498,10 +498,8 @@ nav .fa-solid{
         font-size: 13px;
     }
     a {
-        color: #007BFF; /* Cor azul vibrante para o link */
         text-decoration: none; /* Remove o sublinhado padrão */
         font-size: 16px;
-        font-weight: 600; /* Deixa a fonte um pouco mais encorpada */
         transition: color 0.3s ease; /* Adiciona uma transição suave na mudança de cor */
     }
 
@@ -914,7 +912,7 @@ nav .fa-solid{
             opacity: 0;
             visibility: hidden;
             position: absolute; /* Importante para o efeito de aparecer ao lado */
-            left: 220px; /* Posição inicial, ao lado da imagem */
+            left: 450px; /* Posição inicial, ao lado da imagem */
         }
         /* Estilização do subtítulo "Sobre" */
         .sub-title {

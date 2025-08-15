@@ -757,6 +757,28 @@ nav .fa-solid{
     .services-list div a{
         color: #ffffff;
     }
+    .about-col-4 img {
+    width: 200px; /* Largura fixa para a imagem como exemplo */
+    border-radius: 15px;
+    border-left: 5px solid #999999;
+    cursor: pointer; /* Muda o cursor para indicar interatividade */
+    position: relative;
+}
+
+/* Estilo INICIAL da descrição (usando a classe) */
+
+
+/* Estilo FINAL da descrição (QUANDO o mouse está sobre o container) */
+.row:hover .sobre {
+    /* Estilos que você quer aplicar no hover */
+    max-width: 900px;
+    width: 50%;
+    right: -350px; /* Posição final (ajuste conforme necessário) */
+
+    /* Efeitos para mostrar */
+    opacity: 1;
+    visibility: visible;
+}
     @media only screen and (min-width: 901px) and (min-height: 1601px) {
 
         .container {
@@ -856,8 +878,9 @@ nav .fa-solid{
         }
         }
         @media only screen and (max-width: 1080px) and (max-height: 2340px) {
-            img {
-                left: 300px;
+            .about-col-4 img {
+                left: 210px;
+                width: 700px;
             }
         }
 
@@ -951,25 +974,3 @@ nav .fa-solid{
 
 
 
-.about-col-4 img {
-    width: 200px; /* Largura fixa para a imagem como exemplo */
-    border-radius: 15px;
-    border-left: 5px solid #999999;
-    cursor: pointer; /* Muda o cursor para indicar interatividade */
-    position: relative;
-}
-
-/* Estilo INICIAL da descrição (usando a classe) */
-
-
-/* Estilo FINAL da descrição (QUANDO o mouse está sobre o container) */
-.row:hover .sobre {
-    /* Estilos que você quer aplicar no hover */
-    max-width: 900px;
-    width: 50%;
-    right: -350px; /* Posição final (ajuste conforme necessário) */
-
-    /* Efeitos para mostrar */
-    opacity: 1;
-    visibility: visible;
-}

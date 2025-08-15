@@ -954,7 +954,7 @@ nav .fa-solid{
 .about-col-4 img {
     width: 200px; /* Largura fixa para a imagem como exemplo */
     border-radius: 15px;
-    border-left: 5px solid #00BFFF;
+    border-left: 5px solid #00ff37;
     cursor: pointer; /* Muda o cursor para indicar interatividade */
 }
 
@@ -980,7 +980,7 @@ nav .fa-solid{
     /* Estilos que você quer aplicar no hover */
     max-width: 900px;
     width: 50%;
-    right: -150px; /* Posição final (ajuste conforme necessário) */
+    right: -450px; /* Posição final (ajuste conforme necessário) */
 
     /* Efeitos para mostrar */
     opacity: 1;

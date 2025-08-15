@@ -135,4 +135,34 @@ app.get('/api/coordenadores', async (req, res) => { // 'Autenticado' foi removid
     }
 });
 
+// Rota para obter a lista de livros com os nomes dos coordenadores
+app.get('/api/livros', async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                l.id,
+                l.titulo,
+                l.descricao,
+                l.link_livro,
+                l.link_capa,
+                c.nome_coordenador
+            FROM 
+                livro l
+            JOIN 
+                coordenadores c ON l.coordenador_id = c.coordenador_id
+            WHERE 
+                l.link_capa IS NOT NULL AND l.link_capa != '' -- Adicionado este filtro
+            ORDER BY 
+                l.id;
+        `;
+        
+        const { rows } = await pool.query(query);
+        res.json(rows);
+
+    } catch (error) {
+        console.error('Erro ao buscar livros:', error);
+        res.status(500).json({ error: 'Erro no servidor ao buscar livros.' });
+    }
+});
+
 export default app;

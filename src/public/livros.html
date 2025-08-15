@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="images/tl.webp" type="image/png">
+    <title>Agência de Projetos de Inovação do IFNMG Salinas</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/915b45d802.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!------------------Home--------------->
+<div id="header">
+    <div class="container">
+        <nav>
+            <img src="images/tl.webp" class="logo">
+            <ul id="sidemenu">
+                <li><a href="#header">Sobre</a></li>
+                <li><a href="#about">Projetos</a></li>
+                <li><a href="#livros">Livros</a></li>
+                <li><a href="#contact">Contato</a></li>
+                <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
+            </ul>
+            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+        </nav>
+
+<div id="livros-container">
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Pega todos os elementos com a classe "tab-links" e "tab-contents"
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+    //abre uma aba específica
+    function opentab(tabname) {
+        // Loop para remover a classe "active-link" de todos os links das abas
+        for (var i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active-link");
+        }
+        // Mesma coisa da de cima só que com "active-tab" 
+        for (var i = 0; i < tabcontents.length; i++) {
+            tabcontents[i].classList.remove("active-tab");
+            // Se o id for igual ao nome da aba, adiciona a classe "active-tab" a esse trem para mostrar
+            if (tabcontents[i].id === tabname) {
+                tabcontents[i].classList.add("active-tab");
+            }
+        }
+        // Adiciona a classe "active-link" ao link da aba que foi clicada
+        event.currentTarget.classList.add("active-link");
+    }
+</script>
+
+<script>
+    var sidemenu = document.getElementById("sidemenu");
+    function openmenu(){
+        sidemenu.style.right = "-200px";
+        sidemenu.style.left = "0px";
+    }
+    function clossmenu(){
+        sidemenu.style.left = "-800px";
+    }
+</script>
+<script src="js/livros.js"></script>
+
+</body>
+</html>

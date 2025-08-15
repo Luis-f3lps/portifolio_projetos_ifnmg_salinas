@@ -73,7 +73,7 @@ nav ul li a:hover::after{
     color: #cfcfcf;
 }
 .row{
-    display: flex;
+    display: ruby;
     justify-content: space-between;
     flex-wrap: wrap;
 }
@@ -364,15 +364,7 @@ nav .fa-solid{
         color: white;
     }
     nav ul{
-        background: #ff004f;
         position: fixed;
-        top: 0;
-        right: -600px;
-        width: 600px;
-        height: 100vh;
-        padding-top: 50px;
-        z-index: 2;
-        transition: right 0.5s;
     }
     nav ul li{
         display: block;
@@ -758,11 +750,9 @@ nav .fa-solid{
         color: #ffffff;
     }
     .about-col-4 img {
-    width: 200px; /* Largura fixa para a imagem como exemplo */
+    width: 300px; /* Largura fixa para a imagem como exemplo */
     border-radius: 15px;
-    border-left: 5px solid #999999;
     cursor: pointer; /* Muda o cursor para indicar interatividade */
-    position: relative;
 }
 
 /* Estilo INICIAL da descrição (usando a classe) */

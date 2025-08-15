@@ -972,7 +972,6 @@ nav .fa-solid{
     visibility: hidden;
     position: absolute; /* Importante para o efeito de aparecer ao lado */
     left: 220px; /* Posição inicial, ao lado da imagem */
-    transition: opacity 0.3s ease, visibility 0.3s;
 }
 
 /* Estilo FINAL da descrição (QUANDO o mouse está sobre o container) */

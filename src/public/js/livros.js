@@ -19,14 +19,14 @@ function carregarLivros() {
 
                 // Define o conteúdo HTML usando os dados do livro
                 livroElemento.innerHTML = `
-                    <div class="about-col-1">
+                    <div class="about-col-4">
                         <img src="${livro.link_capa || 'images/placeholder.png'}" alt="Capa do livro ${livro.titulo}">
                     </div>
-                    <div class="sobre">
+                    <div class="descricao">
                         <h1 class="sub-title">${livro.titulo || 'Título não disponível'}</h1>
                         <p><strong>Autor:</strong> ${livro.nome_coordenador || 'Autor não disponível'}</p>
                         <p>${livro.descricao || 'Descrição não disponível.'}</p>
-                        ${livro.link_livro ? `<a href="${livro.link_livro}" target="_blank">Leia mais</a>` : ''}
+                        ${livro.link_livro ? `<a href="${livro.link_livro}" target="_blank">Ler livro</a>` : ''}
                     </div>
                 `;
                 
@@ -40,4 +40,5 @@ function carregarLivros() {
             const container = document.getElementById('livros-container');
             container.innerHTML = '<p>Não foi possível carregar os livros. Tente novamente mais tarde.</p>';
         });
+        
 }

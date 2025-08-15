@@ -946,3 +946,33 @@ nav .fa-solid{
             transform: translateX(10px);
             background-color: rgba(0, 191, 255, 0.15);
         }
+
+        /* css livros */
+
+.about-col-4 img{
+    width: 60%;
+    border-radius: 15px;
+    position: relative;
+    right: -500px;
+    border-left: 5px solid #00BFFF;
+}
+    .descricao {
+    background-color: white;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-left: 5px solid #00BFFF;
+    font-size: 16px;
+}
+.livro-container:hover .descricao {
+        max-width: 900px;
+    width: 50%;
+    background-color: white;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-left: 5px solid #00BFFF;
+    position: absolute;
+    right: -150px;
+    font-size: 16px;
+}

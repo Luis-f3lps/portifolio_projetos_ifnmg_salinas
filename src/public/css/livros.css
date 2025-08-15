@@ -778,6 +778,21 @@ nav .fa-solid{
 }
     @media only screen and (min-width: 901px) and (min-height: 1601px) {
 
+        .sobre {
+            max-width: 900px;
+            width: 100%;
+            background-color: white; /* Um tom de cinza escuro para destacar o conteúdo */
+            padding: 40px 50px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-left: 5px solid #00BFFF; /* Um detalhe em azul ciano para dar um toque de cor */
+
+            /* Efeitos para esconder */
+            opacity: 0;
+            visibility: hidden;
+            position: absolute; /* Importante para o efeito de aparecer ao lado */
+            left: 450px; /* Posição inicial, ao lado da imagem */
+        }
         .container {
             padding: 1px 1%;
                 position: static;

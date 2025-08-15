@@ -497,8 +497,16 @@ nav .fa-solid{
         text-align: start;
         font-size: 13px;
     }
-    a{
-        font-size: 22px;
+    a {
+        color: #007BFF; /* Cor azul vibrante para o link */
+        text-decoration: none; /* Remove o sublinhado padrão */
+        font-size: 16px;
+        font-weight: 600; /* Deixa a fonte um pouco mais encorpada */
+        transition: color 0.3s ease; /* Adiciona uma transição suave na mudança de cor */
+    }
+
+    a:hover {
+        color: #0056b3; /* Um tom de azul mais escuro ao passar o mouse */
     }
     p{
         font-size: 22px;
@@ -753,6 +761,7 @@ nav .fa-solid{
     width: 300px; /* Largura fixa para a imagem como exemplo */
     border-radius: 15px;
     cursor: pointer; /* Muda o cursor para indicar interatividade */
+    margin: 15px;
 }
 
 /* Estilo INICIAL da descrição (usando a classe) */
@@ -869,9 +878,11 @@ nav .fa-solid{
         }
         @media only screen and (max-width: 1080px) and (max-height: 2340px) {
             .about-col-4 img {
-                left: 210px;
+                left: 180px;
                 width: 700px;
+                position: relative;
             }
+            
         }
 
         @media only screen and (max-width: 1366px) and (max-height: 768px) {
@@ -907,7 +918,7 @@ nav .fa-solid{
         }
         /* Estilização do subtítulo "Sobre" */
         .sub-title {
-            font-size: 2em; /* Tamanho maior para o título principal da seção */
+            font-size: 1.1em; /* Tamanho maior para o título principal da seção */
             font-weight: 300; /* Peso mais leve para um visual elegante */
             color: black;
             margin-top: 0;
@@ -921,7 +932,7 @@ nav .fa-solid{
 
         /* Estilização do título do objetivo */
         .sobre h1:not(.sub-title) {
-            font-size: 1.8em; /* Tamanho de fonte um pouco menor que o subtítulo */
+            font-size: 1.0em; /* Tamanho de fonte um pouco menor que o subtítulo */
             color: #00BFFF; /* Cor de destaque azul ciano */
             margin-bottom: 25px;
             font-weight: 600; /* Peso mais forte para ênfase */
@@ -929,7 +940,7 @@ nav .fa-solid{
 
         /* Estilização dos parágrafos */
         .sobre p {
-            font-size: 1.1em;
+            font-size: 0.8em;
             line-height: 1.7; /* Espaçamento entre linhas para melhor legibilidade */
             margin-bottom: 20px;
             color: black; /* Cor de texto ligeiramente mais suave */

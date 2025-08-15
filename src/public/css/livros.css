@@ -856,19 +856,14 @@ nav .fa-solid{
         }
         }
         @media only screen and (max-width: 1080px) and (max-height: 2340px) {
-            img{
-                margin-top: 20px;
-                visibility: collapse;
-                height: 10px;
+            img {
+                left: 300px;
             }
         }
 
         @media only screen and (max-width: 1366px) and (max-height: 768px) {
             #about {
                 margin-left: 170px;
-            }
-            img{
-                margin-top: 5px;
             }
         }
         /* Importando uma fonte moderna do Google Fonts */
@@ -890,8 +885,13 @@ nav .fa-solid{
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             border-left: 5px solid #00BFFF; /* Um detalhe em azul ciano para dar um toque de cor */
-        }
 
+            /* Efeitos para esconder */
+            opacity: 0;
+            visibility: hidden;
+            position: absolute; /* Importante para o efeito de aparecer ao lado */
+            left: 220px; /* Posição inicial, ao lado da imagem */
+        }
         /* Estilização do subtítulo "Sobre" */
         .sub-title {
             font-size: 2em; /* Tamanho maior para o título principal da seção */
@@ -954,28 +954,16 @@ nav .fa-solid{
 .about-col-4 img {
     width: 200px; /* Largura fixa para a imagem como exemplo */
     border-radius: 15px;
-    border-left: 5px solid #00ff37;
+    border-left: 5px solid #999999;
     cursor: pointer; /* Muda o cursor para indicar interatividade */
+    position: relative;
 }
 
 /* Estilo INICIAL da descrição (usando a classe) */
-.descricao {
-    background-color: white;
-    padding: 40px 50px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border-left: 5px solid #00BFFF;
-    font-size: 16px;
 
-    /* Efeitos para esconder */
-    opacity: 0;
-    visibility: hidden;
-    position: absolute; /* Importante para o efeito de aparecer ao lado */
-    left: 220px; /* Posição inicial, ao lado da imagem */
-}
 
 /* Estilo FINAL da descrição (QUANDO o mouse está sobre o container) */
-.row:hover .descricao {
+.row:hover .sobre {
     /* Estilos que você quer aplicar no hover */
     max-width: 900px;
     width: 50%;

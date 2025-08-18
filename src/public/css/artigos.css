@@ -347,7 +347,17 @@ form .btn2{
 nav .fa-solid{
     display: none;
 }
+    a {
+        color: #007BFF; /* Cor principal do link (um azul vibrante) */
+        text-decoration: none; /* Remove o sublinhado */
+        font-weight: 600; /* Deixa a fonte um pouco mais forte */
+        position: relative; /* Necessário para o efeito de sublinhado animado */
+        transition: color 0.3s ease-in-out; /* Transição suave para a mudança de cor */
+    }
 
+    a:hover {
+        color: #0056b3; /* Cor do link ao passar o mouse (um azul mais escuro) */
+    }
 @media only screen and (max-width: 2532px) and (min-height: 1170px),
        only screen and (max-width: 2340px) and (min-height: 1080px) {
     .tab-titles{

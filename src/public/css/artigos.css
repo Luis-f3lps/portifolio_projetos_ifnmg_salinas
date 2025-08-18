@@ -28,6 +28,9 @@ body{
     width: 100px;
     margin-bottom: 20px;
 }
+h2 {
+    color: #000000;
+}
 nav{
     display: flex;
     align-items: center;
@@ -425,8 +428,16 @@ nav .fa-solid{
         margin-top: 3px;
         display: grid;
     }
-    a{
-        font-size: 62px;
+    a {
+        color: #007BFF; /* Cor principal do link (um azul vibrante) */
+        text-decoration: none; /* Remove o sublinhado */
+        font-weight: 600; /* Deixa a fonte um pouco mais forte */
+        position: relative; /* Necessário para o efeito de sublinhado animado */
+        transition: color 0.3s ease-in-out; /* Transição suave para a mudança de cor */
+    }
+
+    a:hover {
+        color: #0056b3; /* Cor do link ao passar o mouse (um azul mais escuro) */
     }
     p{
         font-size: 22px;

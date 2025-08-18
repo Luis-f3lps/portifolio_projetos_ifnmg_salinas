@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="images/tl.webp" type="image/png">
     <title>Agência de Projetos de Inovação do IFNMG Salinas</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/artigos.css">
     <script src="https://kit.fontawesome.com/915b45d802.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -28,32 +28,6 @@
         <div class="header-text">
             <h1 style="color: black">Olá, <span>Bem vindo ao portifolio</span></h1>
         </div>
-        <div class="row">
-            <div class="about-col-1">
-                <img src="images/a2.png">
-            </div>
-            <div class="sobre">
-                <h1 class="sub-title">Sobre</h1>
-
-                    <h1>Objetivo do Projeto "Agência de Projetos de Inovação do IFNMG"</h1>
-                            
-                    <p>
-                        O principal objetivo do projeto, conforme detalhado no Edital Nº 587, é fortalecer o ecossistema de inovação na área de abrangência do Instituto Federal do Norte de Minas Gerais (IFNMG) por meio do desenvolvimento de sua Agência de Projetos de Inovação.
-                    </p>
-
-                    <p>
-                        Com uma duração de 48 meses, o projeto visa atender às demandas de inovação e extensão tecnológica da região. Para isso, ele está estruturado em cinco pilares fundamentais:
-                    </p>
-                            
-                    <ul>
-                        <li>Valoração de Tecnologia</li>
-                        <li>Criação de Hubs de Inovação</li>
-                        <li>Agenciamento de Tecnologias e Competências para prospecção de parcerias</li>
-                        <li>Apoio ao Inventor Independente</li>
-                        <li>Gestão dos Ambientes de Inovação</li>
-                    </ul>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -75,30 +49,21 @@
 </p>
                         </br>
                         <p></p>
-                        <div>
-                            <form id="portifolio-filter-form">
-                                <select id="tematica-select">
-                                    <option value="">Todas as Temáticas</option>
-                                    </select>
-                                <select id="coordenador-select">
-                                    <option value="">Todos os Coordenadores</option>
-                                    </select>
-                                <button type="submit">Filtrar</button>
-                            </form>
-                            <table>
-                                <thead>
-                                    <tr id="green">
-                                        <th>Título</th>
-                                        <th>Temática</th>
-                                        <th>Coordenador</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="portifolio-tbody">
-                                    </tbody>
-                            </table>
-                            <div id="pagination-portifolio">
-                                </div>
-                        </div>
+                    <div class="container-artigos">
+                        <h2>Publicações e Artigos</h2>
+                        
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Autores (Coordenadores)</th>
+                                    <th>Link</th>
+                                </tr>
+                            </thead>
+                            <tbody id="artigos-tbody">
+                                </tbody>
+                        </table>
+                    </div>
                     </div>
                 </div>
         </div>
@@ -158,7 +123,7 @@
         sidemenu.style.left = "-800px";
     }
 </script>
-<script src="js/index.js"></script>
+<script src="js/artigos.js"></script>
 
 </body>
 </html>

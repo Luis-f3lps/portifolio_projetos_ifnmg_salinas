@@ -42,7 +42,9 @@ app.get('/', (req, res) => {
 app.get('/livros', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'livros.html'));
 });
-
+app.get('/artigos', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'artigos.html'));
+});
 // Iniciar o servidor
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
@@ -168,4 +170,34 @@ app.get('/api/livros', async (req, res) => {
     }
 });
 
+// Rota para obter a lista de artigos com seus autores
+app.get('/api/artigos', async (req, res) => {
+    try {
+        // A função STRING_AGG agrupa os nomes dos autores de um mesmo artigo, separados por vírgula
+        const query = `
+            SELECT 
+                a.id,
+                a.titulo,
+                a.link_artigo,
+                STRING_AGG(c.nome_coordenador, ', ') AS autores
+            FROM 
+                artigos a
+            LEFT JOIN 
+                artigo_autor aa ON a.id = aa.artigo_id
+            LEFT JOIN 
+                coordenadores c ON aa.coordenador_id = c.coordenador_id
+            GROUP BY 
+                a.id, a.titulo, a.link_artigo
+            ORDER BY 
+                a.titulo ASC;
+        `;
+        
+        const { rows } = await pool.query(query);
+        res.json(rows);
+
+    } catch (error) {
+        console.error('Erro ao buscar artigos:', error);
+        res.status(500).json({ error: 'Erro no servidor ao buscar artigos.' });
+    }
+});
 export default app;

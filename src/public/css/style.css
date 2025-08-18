@@ -23,7 +23,12 @@ body{
 .logo{
     width: 40px;
     margin-bottom: 20px;
-}nav{
+}
+.logoIFNMG {
+    width: 100px;
+    margin-bottom: 20px;
+}
+nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -703,7 +708,7 @@ nav .fa-solid{
     nav .fa-solid{
         display: block;
         font-size: 25px;
-        color: white;
+        color: transparent;
     }
     nav ul{
         top: 0;

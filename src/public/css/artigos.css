@@ -76,7 +76,6 @@ nav ul li a:hover::after{
 }
 /* --------------Sobre------------------*/
 #about{
-    padding-top: 50px;
     padding-bottom: 20px;
     color: #cfcfcf;
 }
@@ -363,7 +362,12 @@ nav .fa-solid{
     .tab-titles{
         margin: 60px 0 40px;
     }
-    
+    tbody{
+        font-size: large;
+    }
+    thead{
+        font-size: x-large;
+    }
         #header {
     width: 100%;
     background-size: cover;
@@ -522,9 +526,6 @@ nav .fa-solid{
         flex-basis: 60%;
         text-align: start;
         font-size: 13px;
-    }
-    a{
-        font-size: 22px;
     }
     p{
         font-size: 22px;
@@ -727,8 +728,6 @@ nav .fa-solid{
         font-size: 30px;
     }
     nav .fa-solid{
-        display: block;
-        font-size: 25px;
         color: transparent;
     }
     nav ul{

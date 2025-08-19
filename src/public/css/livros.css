@@ -11,6 +11,10 @@ body{
     background: white;
     color: white;
 }
+.logoIFNMG {
+    width: 100px;
+    margin-bottom: 20px;
+}
 /* --------------Home------------------*/
 #header{
     width: 100%;

@@ -226,5 +226,30 @@ app.get('/api/stats/tematicas', async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor ao obter estatísticas.' });
     }
 });
+// ROTA PARA DADOS DO GRÁFICO DE COORDENADORES
+app.get('/api/stats/coordenadores', async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                c.nome_coordenador, 
+                COUNT(p.id) as total_projetos
+            FROM 
+                portifolio p
+            JOIN 
+                coordenadores c ON p.coordenador_id = c.coordenador_id
+            GROUP BY 
+                c.nome_coordenador
+            ORDER BY 
+                total_projetos DESC;
+        `;
 
+        const { rows } = await pool.query(query);
+        // Retorna um array como: [{ nome_coordenador: 'Ana Silva', total_projetos: '5' }, ...]
+        res.json(rows);
+
+    } catch (error) {
+        console.error('Erro ao obter estatísticas por coordenador:', error);
+        res.status(500).json({ error: 'Erro no servidor ao obter estatísticas.' });
+    }
+});
 export default app;

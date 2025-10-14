@@ -200,4 +200,31 @@ app.get('/api/artigos', async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor ao buscar artigos.' });
     }
 });
+
+// ROTA PARA DADOS DO GRÁFICO DE TEMÁTICAS
+app.get('/api/stats/tematicas', async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                tematica, 
+                COUNT(*) as total_projetos
+            FROM 
+                portifolio
+            WHERE
+                tematica IS NOT NULL AND tematica <> ''
+            GROUP BY 
+                tematica
+            ORDER BY 
+                total_projetos DESC;
+        `;
+
+        const { rows } = await pool.query(query);
+        res.json(rows); // Retorna um array como: [{ tematica: 'IA', total_projetos: '10' }, ...]
+
+    } catch (error) {
+        console.error('Erro ao obter estatísticas por temática:', error);
+        res.status(500).json({ error: 'Erro no servidor ao obter estatísticas.' });
+    }
+});
+
 export default app;

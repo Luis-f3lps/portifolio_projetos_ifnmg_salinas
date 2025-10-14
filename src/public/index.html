@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="images/tl.webp" type="image/png">
@@ -7,42 +8,46 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/915b45d802.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
 
-<!------------------Home--------------->
-<div id="header">
-    <div class="container">
-        <nav>
-            <img src="images/tl.webp" class="logo">
-            <ul id="sidemenu">
-                <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#header">Sobre</a></li>
-                <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#about">Projetos</a></li>
-                <li><a href="/livros">Livros</a></li>
-                <li><a href="/artigos">Artigos</a></li>
-                <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#contact">Contato</a></li>
-                <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
-            </ul>
-            <img src="images/salinas_vertical_jpg (1).jpg" class="logoIFNMG">
-            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
-        </nav>
-        <div class="header-text">
-            <h1 style="color: black">Olá, <span>Bem vindo ao portifolio</span></h1>
-        </div>
-        <div class="row">
-            <div class="about-col-1">
-                <img src="images/a2.png">
+    <!------------------Home--------------->
+    <div id="header">
+        <div class="container">
+            <nav>
+                <img src="images/tl.webp" class="logo">
+                <ul id="sidemenu">
+                    <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#header">Sobre</a></li>
+                    <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#about">Projetos</a></li>
+                    <li><a href="/livros">Livros</a></li>
+                    <li><a href="/artigos">Artigos</a></li>
+                    <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#contact">Contato</a></li>
+                    <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
+                </ul>
+                <img src="images/salinas_vertical_jpg (1).jpg" class="logoIFNMG">
+                <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+            </nav>
+            <div class="header-text">
+                <h1 style="color: black">Olá, <span>Bem vindo ao portifolio</span></h1>
             </div>
-            <div class="sobre">
-                <h1 class="sub-title">Sobre</h1>
+            <div class="row">
+                <div class="about-col-1">
+                    <img src="images/a2.png">
+                </div>
+                <div class="sobre">
+                    <h1 class="sub-title">Sobre</h1>
 
                     <h1>Objetivo do Projeto "Agência de Projetos de Inovação do IFNMG"</h1>
-                            
+
                     <p>
-                        O principal objetivo do projeto, conforme detalhado no Edital Nº 587, é fortalecer o ecossistema de inovação na área de abrangência do Instituto Federal do Norte de Minas Gerais (IFNMG) por meio do desenvolvimento de sua Agência de Projetos de Inovação.
-                    </br>
-                        Com uma duração de 48 meses, o projeto visa atender às demandas de inovação e extensão tecnológica da região. Para isso, ele está estruturado em cinco pilares fundamentais:
+                        O principal objetivo do projeto, conforme detalhado no Edital Nº 587, é fortalecer o ecossistema
+                        de inovação na área de abrangência do Instituto Federal do Norte de Minas Gerais (IFNMG) por
+                        meio do desenvolvimento de sua Agência de Projetos de Inovação.
+                        </br>
+                        Com uma duração de 48 meses, o projeto visa atender às demandas de inovação e extensão
+                        tecnológica da região. Para isso, ele está estruturado em cinco pilares fundamentais:
                     </p>
-                            
+
                     <ul>
                         <li>Valoração de Tecnologia</li>
                         <li>Criação de Hubs de Inovação</li>
@@ -50,17 +55,17 @@
                         <li>Apoio ao Inventor Independente</li>
                         <li>Gestão dos Ambientes de Inovação</li>
                     </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="container">
+    <div class="container">
         <div id="about">
-                <div class="row">
-                    <div class="port1">
-                        <h1 class="sub-title">Projetos</h1>
-                        <p style="background-color: rgba(255, 255, 255, 0.05); 
+            <div class="row">
+                <div class="port1">
+                    <h1 class="sub-title">Projetos</h1>
+                    <p style="background-color: rgba(255, 255, 255, 0.05); 
            color: black; 
            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
            font-size: 16px; 
@@ -69,94 +74,160 @@
            border-left: 5px solid #28a745; 
            border-radius: 5px; 
            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);">
-    No IFNMG - Campus Salinas, a pesquisa científica não fica só na teoria. Nossos projetos são desenvolvidos para resolver os problemas reais do produtor rural e das empresas do Norte de Minas. Conectamos diretamente nossos laboratórios com as demandas do campo, criando soluções práticas para a agropecuária, a tecnologia de alimentos e o meio ambiente. Nosso foco é gerar inovação aplicada que fortalece a economia local. É a ciência saindo do papel e transformando a realidade da nossa região.
-</p>
-                        </br>
-                        <p></p>
-                        <div>
-                            <form id="portifolio-filter-form">
-                                <select id="tematica-select">
-                                    <option value="">Todas as Temáticas</option>
-                                    </select>
-                                <select id="coordenador-select">
-                                    <option value="">Todos os Coordenadores</option>
-                                    </select>
-                                <button type="submit">Filtrar</button>
-                            </form>
-                            <table>
-                                <thead>
-                                    <tr id="green">
-                                        <th>Título</th>
-                                        <th>Temática</th>
-                                        <th>Coordenador</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="portifolio-tbody">
-                                    </tbody>
-                            </table>
-                            <div id="pagination-portifolio">
-                                </div>
+                        No IFNMG - Campus Salinas, a pesquisa científica não fica só na teoria. Nossos projetos são
+                        desenvolvidos para resolver os problemas reais do produtor rural e das empresas do Norte de
+                        Minas. Conectamos diretamente nossos laboratórios com as demandas do campo, criando soluções
+                        práticas para a agropecuária, a tecnologia de alimentos e o meio ambiente. Nosso foco é gerar
+                        inovação aplicada que fortalece a economia local. É a ciência saindo do papel e transformando a
+                        realidade da nossa região.
+                    </p>
+                    </br>
+                    <p></p>
+                    <div>
+                        <form id="portifolio-filter-form">
+                            <select id="tematica-select">
+                                <option value="">Todas as Temáticas</option>
+                            </select>
+                            <select id="coordenador-select">
+                                <option value="">Todos os Coordenadores</option>
+                            </select>
+                            <button type="submit">Filtrar</button>
+                        </form>
+                        <table>
+                            <thead>
+                                <tr id="green">
+                                    <th>Título</th>
+                                    <th>Temática</th>
+                                    <th>Coordenador</th>
+                                </tr>
+                            </thead>
+                            <tbody id="portifolio-tbody">
+                            </tbody>
+                        </table>
+                        <div id="pagination-portifolio">
                         </div>
                     </div>
-                </div>
-        </div>
-    </div>
-
-
-
-<!----------------- Contato ------------>
-<div id="contact">
-    <div class="container">
-        <div class="row">
-            <div class="contact-left">
-                <h1 class="sub-title-type-2">Contato do Agente de Inovação do IFNMG Salinas</h1>
-                <p><i class="fa-solid fa-paper-plane"></i> luisphelps671@gmail.com</p>
-                <p><i class="fa-brands fa-square-whatsapp"></i> 38 988643820</p>
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/profile.php?id=100008665060845"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="https://www.instagram.com/luis_f3lps/"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/in/luis-gustavo-barbosa-santiago-648395280/"><i class="fa-brands fa-linkedin"></i></a>
                 </div>
             </div>
         </div>
     </div>
-</div>
+ <div class="chart-container">
+        <h2>Projetos por Temática</h2>
+        <canvas id="graficoTematicas"></canvas>
+    </div>
 
-<script>
-    // Pega todos os elementos com a classe "tab-links" e "tab-contents"
-    var tablinks = document.getElementsByClassName("tab-links");
-    var tabcontents = document.getElementsByClassName("tab-contents");
-    //abre uma aba específica
-    function opentab(tabname) {
-        // Loop para remover a classe "active-link" de todos os links das abas
-        for (var i = 0; i < tablinks.length; i++) {
-            tablinks[i].classList.remove("active-link");
+
+    <!----------------- Contato ------------>
+    <div id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="contact-left">
+                    <h1 class="sub-title-type-2">Contato do Agente de Inovação do IFNMG Salinas</h1>
+                    <p><i class="fa-solid fa-paper-plane"></i> luisphelps671@gmail.com</p>
+                    <p><i class="fa-brands fa-square-whatsapp"></i> 38 988643820</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=100008665060845"><i
+                                class="fa-brands fa-facebook"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/luis_f3lps/"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/luis-gustavo-barbosa-santiago-648395280/"><i
+                                class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Pega todos os elementos com a classe "tab-links" e "tab-contents"
+        var tablinks = document.getElementsByClassName("tab-links");
+        var tabcontents = document.getElementsByClassName("tab-contents");
+        //abre uma aba específica
+        function opentab(tabname) {
+            // Loop para remover a classe "active-link" de todos os links das abas
+            for (var i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active-link");
+            }
+            // Mesma coisa da de cima só que com "active-tab" 
+            for (var i = 0; i < tabcontents.length; i++) {
+                tabcontents[i].classList.remove("active-tab");
+                // Se o id for igual ao nome da aba, adiciona a classe "active-tab" a esse trem para mostrar
+                if (tabcontents[i].id === tabname) {
+                    tabcontents[i].classList.add("active-tab");
+                }
+            }
+            // Adiciona a classe "active-link" ao link da aba que foi clicada
+            event.currentTarget.classList.add("active-link");
         }
-        // Mesma coisa da de cima só que com "active-tab" 
-        for (var i = 0; i < tabcontents.length; i++) {
-            tabcontents[i].classList.remove("active-tab");
-            // Se o id for igual ao nome da aba, adiciona a classe "active-tab" a esse trem para mostrar
-            if (tabcontents[i].id === tabname) {
-                tabcontents[i].classList.add("active-tab");
+        async function criarGraficoTematicas() {
+            try {
+                // 1. Buscar os dados agregados do novo endpoint
+                const response = await fetch('/api/stats/tematicas');
+                if (!response.ok) {
+                    throw new Error('Falha ao buscar dados da API');
+                }
+                const data = await response.json();
+
+                // 2. Preparar os dados para o Chart.js
+                const labels = data.map(item => item.tematica); // Ex: ['IA', 'Biologia', 'Saúde']
+                const values = data.map(item => item.total_projetos); // Ex: [10, 5, 8]
+
+                // 3. Renderizar o gráfico
+                const ctx = document.getElementById('graficoTematicas').getContext('2d');
+                
+                new Chart(ctx, {
+                    type: 'bar', // Tipo do gráfico
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Quantidade de Projetos',
+                            data: values,
+                            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    // Garante que o eixo Y só tenha números inteiros
+                                    stepSize: 1
+                                }
+                            }
+                        },
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false // A legenda é redundante neste caso
+                            }
+                        }
+                    }
+                });
+
+            } catch (error) {
+                console.error("Erro ao criar o gráfico:", error);
+                document.getElementById('graficoTematicas').innerHTML = "Não foi possível carregar o gráfico.";
             }
         }
-        // Adiciona a classe "active-link" ao link da aba que foi clicada
-        event.currentTarget.classList.add("active-link");
-    }
-</script>
 
-<script>
-    var sidemenu = document.getElementById("sidemenu");
-    function openmenu(){
-        sidemenu.style.right = "-200px";
-        sidemenu.style.left = "0px";
-    }
-    function clossmenu(){
-        sidemenu.style.left = "-800px";
-    }
-</script>
-<script src="js/index.js"></script>
+        // Chamar a função quando a página carregar
+        document.addEventListener('DOMContentLoaded', criarGraficoTematicas);
+    </script>
+
+    <script>
+        var sidemenu = document.getElementById("sidemenu");
+        function openmenu() {
+            sidemenu.style.right = "-200px";
+            sidemenu.style.left = "0px";
+        }
+        function clossmenu() {
+            sidemenu.style.left = "-800px";
+        }
+    </script>
+    <script src="js/index.js"></script>
 
 </body>
+
 </html>

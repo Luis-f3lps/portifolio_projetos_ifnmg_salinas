@@ -4,36 +4,44 @@
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
 }
+
 html {
   scroll-behavior: smooth;
 }
+
 body {
   background: white;
   color: white;
 }
+
 /* --------------Home------------------*/
 #header {
   width: 100%;
   background-size: cover;
   background-position: center;
 }
+
 .container {
   padding: 10px 8%;
 }
+
 .logo {
   width: 40px;
   margin-bottom: 20px;
 }
+
 .logoIFNMG {
   width: 100px;
   margin-bottom: 20px;
 }
+
 nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
 nav ul li {
   display: inline-block;
   list-style: none;
@@ -46,6 +54,7 @@ nav ul li a {
   font-size: 22px;
   position: relative;
 }
+
 nav ul li a::after {
   content: "";
   width: 0;
@@ -57,52 +66,64 @@ nav ul li a::after {
   bottom: -6px;
   transition: 0.5s;
 }
+
 nav ul li a:hover::after {
   width: 100%;
 }
+
 .header-text {
   font-size: 30px;
 }
+
 .header-text h1 {
   font-size: 60px;
   margin-bottom: 1%;
   color: #ffffff;
 }
+
 .header-text h1 span {
   color: #ff004f;
 }
+
 /* --------------Sobre------------------*/
 #about {
   padding-top: 50px;
   padding-bottom: 20px;
   color: #cfcfcf;
 }
+
 .row {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
 .about-col-1 {
   flex-basis: 40%;
 }
+
 .about-col-1 img {
   width: 100%;
   border-radius: 15px;
 }
+
 .about-col-2 {
   flex-basis: 60%;
   text-align: justify;
 }
+
 .sub-title {
   font-size: 40px;
   margin-bottom: 20px;
   font-weight: 600;
   color: #fff;
 }
+
 .tab-titles {
   display: flex;
   margin: 20px 0 40px;
 }
+
 .tab-links {
   margin-right: 50px;
   font-size: 18px;
@@ -110,6 +131,7 @@ nav ul li a:hover::after {
   cursor: pointer;
   position: relative;
 }
+
 .tab-links::after {
   content: "";
   width: 0;
@@ -120,33 +142,41 @@ nav ul li a:hover::after {
   bottom: -8px;
   transition: 0.5s;
 }
+
 .active-link.active-link::after {
   width: 50%;
 }
+
 .tab-contents ul li {
   list-style: none;
   margin: 20px 0;
 }
+
 .tab-contents ul li span {
   color: #1cff64;
   font-size: 14px;
 }
+
 .tab-contents {
   display: none;
 }
+
 .tab-contents.active-tab {
   display: block;
 }
+
 /* --------------Serviços--------------- */
 #services {
   padding: 60;
 }
+
 .services-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 40px;
   margin-top: 40px;
 }
+
 .services-list div {
   background: #ffffff;
   padding: 40px;
@@ -156,20 +186,24 @@ nav ul li a:hover::after {
   transition: background 0.5s, transform 0.5s;
   height: 100%;
 }
+
 .services-list div i {
   font-size: 50px;
   margin-bottom: 30px;
 }
+
 .services-list div h2 {
   font-size: 22px;
   font-weight: 500;
   margin-bottom: 15px;
   color: black;
 }
+
 .services-list div p {
   text-align: justify;
   color: black;
 }
+
 .services-list div a {
   text-decoration: none;
   color: #ffffff;
@@ -177,42 +211,50 @@ nav ul li a:hover::after {
   margin-top: 3px;
   display: inline-block;
 }
+
 .services-list div:hover {
   background: #ff004f;
   transform: translateY(-10px);
   color: #ffffff;
 }
+
 /* --------------Portifolio--------------- */
 #portifolio {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
 .work-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 40px;
   margin-top: 40px;
 }
+
 .work-list-certificados {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 40px;
   margin-top: 40px;
 }
+
 .work-list-certificados h3 {
   color: black;
 }
+
 .work {
   border-radius: 10px;
   position: relative;
   overflow: hidden;
 }
+
 .work img {
   width: 100%;
   border-radius: 10px;
   display: block;
   transition: transform 0.5s;
 }
+
 .sub-title-type-2 {
   font-size: 40px;
   margin-top: 20px;
@@ -220,6 +262,7 @@ nav ul li a:hover::after {
   font-weight: 400;
   color: black;
 }
+
 .layer {
   width: 100%;
   height: 0;
@@ -238,10 +281,12 @@ nav ul li a:hover::after {
   font-size: 14px;
   transition: height 0.5s;
 }
+
 .layer h3 {
   font-weight: 500;
   margin-bottom: 20px;
 }
+
 .layer a {
   margin-top: 20px;
   color: #ff004f;
@@ -256,12 +301,15 @@ nav ul li a:hover::after {
   border-radius: 50%;
   text-align: center;
 }
+
 .work:hover img {
   transform: scale(1.1);
 }
+
 .work:hover .layer {
   height: 100%;
 }
+
 .btn {
   display: block;
   margin: 50px auto;
@@ -274,35 +322,44 @@ nav ul li a:hover::after {
   transition: background 0.5s;
   background-color: rgb(209, 58, 12);
 }
+
 .btn:hover {
   background: #ff004f;
 }
+
 /* --------------Contato--------------- */
 .fa-solid,
 .fas {
   color: rgb(0, 0, 0);
 }
+
 .fa-app-store {
   color: rgb(209, 58, 12);
 }
+
 .contact-left {
   flex-basis: 35%;
 }
+
 .contact-right {
   flex-basis: 60%;
 }
+
 .contact-left p {
   margin-top: 30px;
   color: black;
 }
+
 .contact-left p i {
   color: #ff004f;
   margin-right: 15px;
   font-size: 25px;
 }
+
 .social-icons {
   margin-top: 30px;
 }
+
 .social-icons a {
   text-decoration: none;
   font-size: 30px;
@@ -311,17 +368,21 @@ nav ul li a:hover::after {
   display: inline-block;
   transition: transform 0.5s;
 }
+
 .social-icons a:hover {
   color: #ff004f;
   transform: translateY(-5px);
 }
+
 .btn.btn2 {
   display: inline-block;
   background: #4800fd;
 }
+
 .contact-right form {
   width: 100%;
 }
+
 form input,
 form textarea {
   width: 100%;
@@ -334,6 +395,7 @@ form textarea {
   font-size: 18px;
   border-radius: 6px;
 }
+
 form .btn2 {
   padding: 14px 60px;
   font-size: 18px;
@@ -347,7 +409,7 @@ nav .fa-solid {
 }
 
 @media only screen and (max-width: 2532px) and (min-height: 1170px),
-  only screen and (max-width: 2340px) and (min-height: 1080px) {
+only screen and (max-width: 2340px) and (min-height: 1080px) {
   .tab-titles {
     margin: 60px 0 40px;
   }
@@ -357,70 +419,87 @@ nav .fa-solid {
     background-size: cover;
     background-position: center;
   }
+
   .header-text h1 {
     font-size: 30px;
   }
+
   .services-list div p {
     text-align: justify;
     font-size: 32px;
   }
+
   nav .fa-solid {
     display: block;
     font-size: 60px;
     color: white;
   }
+
   nav ul {
     position: fixed;
   }
+
   nav ul li {
     display: block;
     margin: 45px;
   }
+
   nav ul li a {
     color: #ffffff;
     font-size: 52px;
   }
+
   nav ul .fa-solid {
     position: absolute;
     top: 25px;
     left: 25px;
     cursor: pointer;
   }
+
   .sub-title {
     margin-top: 10px;
     font-size: 35px;
   }
+
   .sub-title-type-2 {
     font-size: 30px;
   }
+
   .about-col-1,
   .about-col-2 {
     flex: 100%;
   }
+
   .about-col-2 {
     font-size: 14px;
   }
+
   .tab-links {
     font-size: 30px;
     margin-right: 20px;
     color: peachpuff;
   }
+
   .tab-contents ul li {
     list-style: none;
     margin: 20px 0;
     font-size: 30px;
   }
+
   .contact-left,
   .contact-right {
     flex-basis: 100%;
   }
+
   .header-text {
     color: #fff;
   }
+
   .copyright {
     font-size: 14px;
     color: #ffffff;
   }
+
   .services-list div a {
     text-decoration: none;
     color: #ffffff;
@@ -428,27 +507,33 @@ nav .fa-solid {
     margin-top: 3px;
     display: grid;
   }
+
   a {
     font-size: 62px;
   }
+
   p {
     font-size: 22px;
   }
+
   .services-list {
     display: flow;
     grid-gap: 40px;
     margin-top: 40px;
   }
+
   .work-list-certificados {
     display: flow;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 40px;
     margin-top: 40px;
   }
+
   .services-list {
     display: flow;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
+
   .services-list div {
     background: #ffffff;
     padding: 40px;
@@ -459,15 +544,18 @@ nav .fa-solid {
     width: 95%;
     margin: 20px;
   }
+
   .services-list div p {
     font-size: 16px;
   }
+
   .work {
     border-radius: 10px;
     position: relative;
     overflow: hidden;
     margin: 20px;
   }
+
   .social-icons a {
     text-decoration: none;
     font-size: 65px;
@@ -485,39 +573,47 @@ nav .fa-solid {
     grid-gap: 40px;
     margin-top: 40px;
   }
+
   .work-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     grid-gap: 40px;
     margin-top: 40px;
   }
+
   .work-list-certificados {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     grid-gap: 40px;
     margin-top: 40px;
   }
+
   #contact {
     padding-top: 5px;
   }
+
   .about-col-2 {
     flex-basis: 60%;
     text-align: start;
     font-size: 13px;
   }
+
   a {
     font-size: 22px;
   }
+
   p {
     font-size: 22px;
     color: black;
   }
+
   .work-list-certificados {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     grid-gap: 40px;
     margin-top: 40px;
   }
+
   .services-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -527,6 +623,7 @@ nav .fa-solid {
 .rotate {
   transform: rotate(180deg);
 }
+
 .container {
   z-index: 2;
 }
@@ -536,6 +633,7 @@ nav {
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
 nav ul li {
   display: inline-block;
   list-style: none;
@@ -548,6 +646,7 @@ nav ul li a {
   font-size: 22px;
   position: relative;
 }
+
 nav ul li a::after {
   content: "";
   width: 0;
@@ -558,6 +657,7 @@ nav ul li a::after {
   bottom: -6px;
   transition: 0.5s;
 }
+
 nav ul li a:hover::after {
   width: 100%;
 }
@@ -566,6 +666,7 @@ nav ul li a:hover::after {
   font-size: 60px;
   margin-bottom: 1%;
 }
+
 .header-text h1 span {
   color: #ff004f;
 }
@@ -574,6 +675,7 @@ nav ul li a:hover::after {
   display: flex;
   margin: 20px 0 40px;
 }
+
 .tab-links {
   margin-right: 50px;
   font-size: 18px;
@@ -581,6 +683,7 @@ nav ul li a:hover::after {
   cursor: pointer;
   position: relative;
 }
+
 .tab-links::after {
   content: "";
   width: 0;
@@ -591,20 +694,25 @@ nav ul li a:hover::after {
   bottom: -8px;
   transition: 0.5s;
 }
+
 .active-link.active-link::after {
   width: 50%;
 }
+
 .tab-contents ul li {
   list-style: none;
   margin: 10px 0;
 }
+
 .tab-contents ul li span {
   color: #094412;
   font-size: 14px;
 }
+
 .tab-contents {
   display: none;
 }
+
 .tab-contents.active-tab {
   display: block;
 }
@@ -629,6 +737,7 @@ select:focus {
   outline: none;
   border-color: #45a049;
 }
+
 table {
   border-collapse: collapse;
   margin: 20px auto;
@@ -644,6 +753,7 @@ td {
   padding: 8px;
   text-align: left;
 }
+
 #red {
   background-color: #ff0000;
   color: white;
@@ -653,6 +763,7 @@ td {
   background-color: #0035c5;
   color: white;
 }
+
 input[type="date"] {
   padding: 8px 12px;
   font-size: 16px;
@@ -661,6 +772,7 @@ input[type="date"] {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s, box-shadow 0.3s;
 }
+
 button[type="submit"],
 button[type="submit2"] {
   padding: 10px;
@@ -709,22 +821,27 @@ nav .fa-solid {
 .header-text h1 {
   font-size: 30px;
 }
+
 nav .fa-solid {
   color: transparent;
 }
+
 nav ul {
   top: 0;
   left: 0;
   z-index: 2;
   transition: left 0.5s;
 }
+
 ul li {
   display: block;
   margin: 25px;
 }
+
 nav ul li a {
   color: black;
 }
+
 nav ul .fa-solid {
   position: absolute;
   top: 25px;
@@ -732,58 +849,72 @@ nav ul .fa-solid {
   cursor: pointer;
   color: white;
 }
+
 .sub-title {
   margin-top: 10px;
   font-size: 35px;
 }
+
 .sub-title-type-2 {
   font-size: 30px;
 }
+
 .tab-links {
   font-size: 16px;
   margin-right: 20px;
 }
+
 .contact-left,
 .contact-right {
   flex-basis: 100%;
 }
+
 .header-text {
   color: #fff;
 }
+
 .copyright {
   font-size: 14px;
   color: #ffffff;
 }
+
 .services-list div a {
   color: #ffffff;
 }
+
 @media only screen and (min-width: 901px) and (min-height: 1601px) {
   .header-text h1 {
     font-size: 50px;
     margin-left: 32px;
   }
+
   .container {
     padding: 1px 1%;
     position: static;
     z-index: 2;
   }
+
   tbody {
     font-size: large;
   }
+
   thead {
     font-size: x-large;
   }
+
   nav .fa-solid {
     display: block;
     font-size: 40px;
     color: black;
   }
+
   .row {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 10px 4%;
   }
+
   #sidemenu {
     left: -800px;
 
@@ -791,6 +922,7 @@ nav ul .fa-solid {
     margin: 0;
     z-index: 1;
   }
+
   nav ul {
     background: black;
     top: 0;
@@ -801,10 +933,12 @@ nav ul .fa-solid {
     z-index: 2;
     transition: right 0.5s;
   }
+
   nav ul li {
     display: block;
     margin: 45px;
   }
+
   nav ul li a {
     color: #ffffff;
     font-size: 52px;
@@ -820,6 +954,7 @@ nav ul .fa-solid {
     color: #e60000;
     transform: scale(1.2);
   }
+
   img {
     margin-top: 90px;
   }
@@ -832,11 +967,13 @@ nav ul .fa-solid {
     color: #ffffff;
     font-size: 60px;
   }
+
   #sidemenu .submenu-items li a {
     padding: 10px;
     font-size: 46px;
     color: #ffffff;
   }
+
   #sidemenu li a {
     display: block;
     padding: 10px;
@@ -844,6 +981,7 @@ nav ul .fa-solid {
     color: #ffffff;
     transition: background-color 0.3s;
   }
+
   #sidemenu .submenu-items {
     display: none;
     list-style-type: none;
@@ -851,6 +989,7 @@ nav ul .fa-solid {
     margin-top: -40px;
     margin-left: -50px;
   }
+
   #sidemenu li span {
     display: block;
     padding: 10px;
@@ -860,10 +999,12 @@ nav ul .fa-solid {
     font-size: 40px;
     align-items: center;
   }
+
   nav {
     margin-top: 40px;
   }
 }
+
 @media only screen and (max-width: 1080px) and (max-height: 2340px) {
   img {
     margin-top: 20px;
@@ -876,9 +1017,11 @@ nav ul .fa-solid {
   #about {
     margin-left: 170px;
   }
+
   img {
     margin-top: 5px;
   }
+
   .sobre {
     max-width: 900px;
     width: 100%;
@@ -887,8 +1030,20 @@ nav ul .fa-solid {
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border-left: 5px solid #00bfff;
+  }
+
+  .chart-container-linhas {
+    position: relative;
+    /* width: 100%; */
+    margin: 20px;
+    height: 500px;
+  }
+
+  .pizza {
+    display: inline;
+  }
 }
-}
+
 /* Importando uma fonte moderna do Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
@@ -903,17 +1058,21 @@ body {
 .sobre {
   max-width: 900px;
   width: 60%;
-  background-color: white; /* Um tom de cinza escuro para destacar o conteúdo */
+  background-color: white;
+  /* Um tom de cinza escuro para destacar o conteúdo */
   padding: 40px 50px;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  border-left: 5px solid #00bfff; /* Um detalhe em azul ciano para dar um toque de cor */
+  border-left: 5px solid #00bfff;
+  /* Um detalhe em azul ciano para dar um toque de cor */
 }
 
 /* Estilização do subtítulo "Sobre" */
 .sub-title {
-  font-size: 2em; /* Tamanho maior para o título principal da seção */
-  font-weight: 300; /* Peso mais leve para um visual elegante */
+  font-size: 2em;
+  /* Tamanho maior para o título principal da seção */
+  font-weight: 300;
+  /* Peso mais leve para um visual elegante */
   color: black;
   margin-top: 0;
   margin-bottom: 30px;
@@ -926,35 +1085,40 @@ body {
 
 /* Estilização do título do objetivo */
 .sobre h1:not(.sub-title) {
-  font-size: 1.8em; /* Tamanho de fonte um pouco menor que o subtítulo */
-  color: #00bfff; /* Cor de destaque azul ciano */
+  font-size: 1.8em;
+  /* Tamanho de fonte um pouco menor que o subtítulo */
+  color: #00bfff;
+  /* Cor de destaque azul ciano */
   margin-bottom: 25px;
-  font-weight: 600; /* Peso mais forte para ênfase */
+  font-weight: 600;
+  /* Peso mais forte para ênfase */
 }
 
 /* Estilização dos parágrafos */
 .sobre p {
   font-size: 1.1em;
-  line-height: 1.7; /* Espaçamento entre linhas para melhor legibilidade */
+  line-height: 1.7;
+  /* Espaçamento entre linhas para melhor legibilidade */
   margin-bottom: 20px;
-  color: black; /* Cor de texto ligeiramente mais suave */
+  color: black;
+  /* Cor de texto ligeiramente mais suave */
 }
 
 /* Estilização da lista não ordenada */
 .sobre ul {
-  list-style-type: none; /* Remove os marcadores padrão */
+  list-style-type: none;
+  /* Remove os marcadores padrão */
   padding-left: 0;
   margin-top: 25px;
 }
 
 /* Estilização dos itens da lista */
 .sobre li {
-  background-color: rgba(
-    0,
-    191,
-    255,
-    0.05
-  ); /* Fundo sutil para os itens da lista */
+  background-color: rgba(0,
+      191,
+      255,
+      0.05);
+  /* Fundo sutil para os itens da lista */
   margin-bottom: 12px;
   padding: 15px 20px;
   border-radius: 8px;
@@ -974,23 +1138,15 @@ body {
 
 /* Adicione este CSS no seu arquivo .css ou dentro de uma tag <style> no <head> */
 .chart-container {
-    position: relative;
-    width: 100%;
-    margin: 20px auto;
-    height: 100%;
+  position: relative;
+  width: 100%;
+  margin: 20px auto;
+  height: 100%;
 }
-.chart-container-linhas{
-    position: relative;
-    width: 100%;
-    margin: 20px auto;
-    height: 500px;
-}
-.sobre {
-    max-width: 900px;
-    width: 100%;
-    background-color: white;
-    padding: 40px 50px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border-left: 5px solid #00bfff;
+
+.chart-container-linhas {
+  position: relative;
+  width: 100%;
+  margin: 20px auto;
+  height: 500px;
 }

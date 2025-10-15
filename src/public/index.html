@@ -117,7 +117,7 @@
         <h2>Projetos por Temática</h2>
         <canvas id="graficoTematicas"></canvas>
     </div>
-    <div>
+    <div style="display: flex;">
         <div class="chart-container">
             <canvas id="graficoPizzaTematicas"></canvas>
         </div>
@@ -152,7 +152,8 @@
         function gerarCores(quantidade) {
             const cores = [];
             for (let i = 0; i < quantidade; i++) {
-                const r = Math.floor(Math.random() * 200); // Tons um pouco mais escuros
+                // Tons um pouco mais escuros para melhor visualização
+                const r = Math.floor(Math.random() * 200);
                 const g = Math.floor(Math.random() * 200);
                 const b = Math.floor(Math.random() * 200);
                 cores.push(`rgba(${r}, ${g}, ${b}, 0.8)`);
@@ -160,31 +161,64 @@
             return cores;
         }
 
+        // Função principal do gráfico, agora com a lógica de agrupar "Outros"
         async function criarGraficoPizzaCoordenadores() {
             try {
-                // 1. Buscar os dados do NOVO endpoint
+                // 1. Buscar os dados do endpoint
                 const response = await fetch('/api/stats/coordenadores');
-                if (!response.ok) throw new Error('Falha ao buscar dados');
+                if (!response.ok) throw new Error('Falha ao buscar dados dos coordenadores');
                 const data = await response.json();
 
+                // ---- INÍCIO DA NOVA LÓGICA ----
+
+                const LIMITE_PRINCIPAIS = 10;
+                let labelsProcessados = [];
+                let valuesProcessados = [];
+
+                // Certifique-se que os valores são numéricos para os cálculos
+                const dataNumerica = data.map(item => ({
+                    ...item,
+                    total_projetos: parseInt(item.total_projetos, 10)
+                }));
+
+                if (dataNumerica.length > LIMITE_PRINCIPAIS) {
+                    // Pega os 10 principais
+                    const principais = dataNumerica.slice(0, LIMITE_PRINCIPAIS);
+                    labelsProcessados = principais.map(item => item.nome_coordenador);
+                    valuesProcessados = principais.map(item => item.total_projetos);
+
+                    // Pega o restante para agrupar em "Outros"
+                    const outros = dataNumerica.slice(LIMITE_PRINCIPAIS);
+                    const somaOutros = outros.reduce((soma, item) => soma + item.total_projetos, 0);
+
+                    // Adiciona a categoria "Outros"
+                    if (somaOutros > 0) {
+                        labelsProcessados.push('Outros');
+                        valuesProcessados.push(somaOutros);
+                    }
+                } else {
+                    // Se tiver 10 ou menos coordenadores, usa todos
+                    labelsProcessados = dataNumerica.map(item => item.nome_coordenador);
+                    valuesProcessados = dataNumerica.map(item => item.total_projetos);
+                }
+
+                // ---- FIM DA NOVA LÓGICA ----
+
                 // 2. Preparar os dados para o Chart.js
-                // ATENÇÃO: Os nomes das propriedades mudaram para 'nome_coordenador'
-                const labels = data.map(item => item.nome_coordenador);
-                const values = data.map(item => item.total_projetos);
-                const totalProjetos = values.reduce((sum, current) => sum + parseInt(current, 10), 0);
+                const totalProjetos = valuesProcessados.reduce((soma, valor) => soma + valor, 0);
+                const backgroundColors = gerarCores(labelsProcessados.length);
 
-                const backgroundColors = gerarCores(data.length);
-
-                // 3. Renderizar o gráfico no novo canvas
+                // 3. Renderizar o gráfico
                 const ctx = document.getElementById('graficoPizzaCoordenadores').getContext('2d');
 
                 new Chart(ctx, {
                     type: 'pie',
                     data: {
-                        labels: labels,
+                        // Usar os dados processados
+                        labels: labelsProcessados,
                         datasets: [{
                             label: 'Projetos',
-                            data: values,
+                            data: valuesProcessados, // Usar os dados processados
                             backgroundColor: backgroundColors,
                             borderColor: '#fff',
                             borderWidth: 2
@@ -194,7 +228,7 @@
                         responsive: true,
                         plugins: {
                             legend: {
-                                position: 'right', // Legenda na direita funciona bem para nomes
+                                position: 'right',
                             },
                             title: {
                                 display: true,
@@ -208,6 +242,7 @@
                                     label: function (context) {
                                         const label = context.label || '';
                                         const value = context.raw;
+                                        // Recalcula a porcentagem baseada no total geral
                                         const percentage = ((value / totalProjetos) * 100).toFixed(1);
                                         return `${label}: ${value} projetos (${percentage}%)`;
                                     }
@@ -219,22 +254,14 @@
 
             } catch (error) {
                 console.error("Erro ao criar o gráfico de pizza por coordenador:", error);
-                document.querySelector('.chart-container').innerHTML = "Não foi possível carregar o gráfico.";
+                // Procure por um seletor mais específico se possível
+                const container = document.getElementById('graficoPizzaCoordenadores').parentElement;
+                if (container) {
+                    container.innerHTML = "Não foi possível carregar o gráfico.";
+                }
             }
         }
 
-        // Chamar a função quando a página carregar
-        document.addEventListener('DOMContentLoaded', criarGraficoPizzaCoordenadores);
-        function gerarCores(quantidade) {
-            const cores = [];
-            for (let i = 0; i < quantidade; i++) {
-                const r = Math.floor(Math.random() * 255);
-                const g = Math.floor(Math.random() * 255);
-                const b = Math.floor(Math.random() * 255);
-                cores.push(`rgba(${r}, ${g}, ${b}, 0.7)`);
-            }
-            return cores;
-        }
 
         async function criarGraficoPizza() {
             try {

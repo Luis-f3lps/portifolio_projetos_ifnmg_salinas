@@ -1171,7 +1171,7 @@ nav ul .fa-solid {
   /* Adicione este CSS no seu arquivo .css ou dentro de uma tag <style> no <head> */
   .chart-container {
     position: relative;
-    width: 50%;
+    width: 100%;
     margin: 20px auto;
   }
 

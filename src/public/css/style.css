@@ -1172,6 +1172,7 @@ nav ul .fa-solid {
   .chart-container {
     position: relative;
     margin: 20px auto;
+    height: 500px;
   }
 
   .chart-container-linhas {

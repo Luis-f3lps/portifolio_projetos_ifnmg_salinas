@@ -317,7 +317,47 @@
         document.addEventListener('DOMContentLoaded', () => {
             criarGraficoPizzaCoordenadores();
             criarGraficoPizzaTematicas();
+            criarGraficoTematicas();
         });
+
+        async function criarGraficoTematicas() {
+            try {
+                // Simulando a chamada à API
+                const response = await fetch('/api/stats/tematicas');
+                const data = await response.json();
+
+                const labels = data.map(item => item.tematica);
+                const values = data.map(item => item.total_projetos);
+
+                const ctx = document.getElementById('graficoTematicas').getContext('2d');
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Quantidade de Projetos',
+                            data: values,
+                            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        // OPÇÕES ATUALIZADAS
+                        responsive: true,
+                        maintainAspectRatio: false, // Correção principal!
+                        scales: {
+                            y: { beginAtZero: true, ticks: { stepSize: 1 } }
+                        }
+                    }
+                });
+
+            } catch (error) {
+                console.error("Erro ao criar o gráfico:", error);
+            }
+        }
+
     </script>
 
     <script>

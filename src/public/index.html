@@ -114,7 +114,7 @@
             <h2>Projetos por Temática</h2>
             <canvas id="graficoTematicas"></canvas>
         </div>
-        <div style="display: flex;">
+        <div>
             <div class="chart-container">
                 <canvas id="graficoPizzaTematicas"></canvas>
             </div>
@@ -143,7 +143,8 @@
 
 
     <script>
-        const PALETA_CORES = [
+        // Paleta de cores para o gráfico de Coordenadores
+        const PALETA_CORES_COORDENADORES = [
             'rgba(239, 83, 80, 0.8)',   // Vermelho
             'rgba(106, 27, 154, 0.8)',  // Roxo
             'rgba(26, 35, 126, 0.8)',   // Azul Escuro
@@ -163,6 +164,22 @@
             'rgba(41, 121, 255, 0.8)'   // Azul Royal
         ];
 
+        // Paleta de cores diferente para o gráfico de Temáticas
+        const PALETA_CORES_TEMATICAS = [
+            'rgba(76, 175, 80, 0.8)',   // Verde
+            'rgba(3, 169, 244, 0.8)',   // Azul Céu
+            'rgba(255, 193, 7, 0.8)',   // Ambar
+            'rgba(244, 67, 54, 0.8)',   // Vermelho Claro
+            'rgba(156, 39, 176, 0.8)',  // Roxo
+            'rgba(0, 150, 136, 0.8)',   // Teal
+            'rgba(255, 87, 34, 0.8)',   // Laranja Escuro
+            'rgba(63, 81, 181, 0.8)',   // Índigo
+            'rgba(205, 220, 57, 0.8)',  // Lima
+            'rgba(121, 85, 72, 0.8)',   // Marrom
+            'rgba(33, 150, 243, 0.8)',  // Azul Padrão
+            'rgba(255, 152, 0, 0.8)'    // Laranja Padrão
+        ];
+
         // Gráfico 1: Coordenadores
         async function criarGraficoPizzaCoordenadores() {
             try {
@@ -170,8 +187,7 @@
                 if (!response.ok) throw new Error('Falha ao buscar dados dos coordenadores');
                 const data = await response.json();
 
-                // --- LÓGICA ATUALIZADA ---
-                const LIMITE_PRINCIPAIS = 16; // <-- MUDANÇA AQUI: Limite alterado para 16
+                const LIMITE_PRINCIPAIS = 16;
                 let labelsProcessados = [];
                 let valuesProcessados = [];
 
@@ -196,7 +212,6 @@
                     labelsProcessados = dataNumerica.map(item => item.nome_coordenador);
                     valuesProcessados = dataNumerica.map(item => item.total_projetos);
                 }
-                // --- FIM DA LÓGICA ---
 
                 const totalProjetos = valuesProcessados.reduce((soma, valor) => soma + valor, 0);
                 const ctx = document.getElementById('graficoPizzaCoordenadores').getContext('2d');
@@ -208,7 +223,7 @@
                         datasets: [{
                             label: 'Projetos',
                             data: valuesProcessados,
-                            backgroundColor: PALETA_CORES, // <-- MUDANÇA AQUI: Usando a paleta fixa
+                            backgroundColor: PALETA_CORES_COORDENADORES,
                             borderColor: '#fff',
                             borderWidth: 2
                         }]
@@ -216,9 +231,7 @@
                     options: {
                         responsive: true,
                         plugins: {
-                            legend: {
-                                position: 'right',
-                            },
+                            legend: { position: 'right' },
                             title: {
                                 display: true,
                                 text: 'Projetos por Coordenador',
@@ -264,7 +277,7 @@
                         datasets: [{
                             label: 'Projetos',
                             data: values,
-                            backgroundColor: PALETA_CORES, // <-- MUDANÇA AQUI: Usando a mesma paleta fixa
+                            backgroundColor: PALETA_CORES_TEMATICAS,
                             borderColor: '#fff',
                             borderWidth: 2
                         }]
@@ -272,9 +285,7 @@
                     options: {
                         responsive: true,
                         plugins: {
-                            legend: {
-                                position: 'right', // Mantendo a padronização
-                            },
+                            legend: { position: 'right' },
                             title: {
                                 display: true,
                                 text: 'Projetos por Área Temática',

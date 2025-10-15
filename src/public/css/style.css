@@ -1068,7 +1068,7 @@ nav ul .fa-solid {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin: 40px;
+    margin-top: 40px;
 }
   .chart-container {
     position: relative;
@@ -1188,3 +1188,11 @@ nav ul .fa-solid {
   align-items: center;
   text-align: center; /* Garante que o texto dentro dos parágrafos também fique alinhado */
 }
+  .pizza {
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 40px;
+  }

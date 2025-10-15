@@ -333,26 +333,28 @@
                             label: 'Quantidade de Projetos',
                             data: values,
                             backgroundColor: PALETA_CORES_TEMATICAS,
-                            borderColor: '#333',
-                            borderWidth: 1
+
+                            // MUDANÇA 1: Removendo a borda das barras
+                            borderWidth: 0
                         }]
                     },
                     options: {
+                        // MUDANÇA 2: Transformando em gráfico de barras horizontal
+                        indexAxis: 'y', // Isso "deita" o gráfico, colocando os labels no eixo Y
+
                         responsive: true,
                         maintainAspectRatio: false,
                         scales: {
                             y: {
                                 beginAtZero: true,
                                 ticks: {
-                                    stepSize: 1
+                                    // MUDANÇA 3: Forçando todos os labels a aparecerem
+                                    autoSkip: false
                                 }
                             },
-                            // --- ALTERAÇÃO FEITA AQUI ---
                             x: {
                                 ticks: {
-                                    autoSkip: true,
-                                    maxRotation: 0, // Deixa o texto reto
-                                    minRotation: 0  // Deixa o texto reto
+                                    stepSize: 1
                                 }
                             }
                         },

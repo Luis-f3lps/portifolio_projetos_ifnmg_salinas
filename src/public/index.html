@@ -166,14 +166,14 @@
 
                 // ---- INÍCIO DA NOVA LÓGICA ----
 
-                const LIMITE_PRINCIPAIS = 10;
+                const LIMITE_PRINCIPAIS = 16;
                 let labelsProcessados = [];
                 let valuesProcessados = [];
 
                 // Certifique-se que os valores são numéricos para os cálculos
                 const dataNumerica = data.map(item => ({
                     ...item,
-                    total_projetos: parseInt(item.total_projetos, 10)
+                    total_projetos: parseInt(item.total_projetos, 16)
                 }));
 
                 if (dataNumerica.length > LIMITE_PRINCIPAIS) {
@@ -268,7 +268,7 @@
                 // 2. Preparar os dados para o Chart.js
                 const labels = data.map(item => item.tematica);
                 const values = data.map(item => item.total_projetos);
-                const totalProjetos = values.reduce((sum, current) => sum + parseInt(current, 16), 0);
+                const totalProjetos = values.reduce((sum, current) => sum + parseInt(current, 10), 0);
 
                 const backgroundColors = gerarCores(data.length);
 

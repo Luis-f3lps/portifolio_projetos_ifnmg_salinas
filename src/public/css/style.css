@@ -351,15 +351,7 @@ nav .fa-solid {
   .tab-titles {
     margin: 60px 0 40px;
   }
-.sobre {
-    max-width: 900px;
-    width: 100%;
-    background-color: white;
-    padding: 40px 50px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border-left: 5px solid #00bfff;
-}
+
   #header {
     width: 100%;
     background-size: cover;
@@ -887,6 +879,15 @@ nav ul .fa-solid {
   img {
     margin-top: 5px;
   }
+  .sobre {
+    max-width: 900px;
+    width: 100%;
+    background-color: white;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-left: 5px solid #00bfff;
+}
 }
 /* Importando uma fonte moderna do Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
@@ -977,4 +978,13 @@ body {
     width: 100%;
     margin: 20px auto;
     height: 100%;
+}
+.sobre {
+    max-width: 900px;
+    width: 100%;
+    background-color: white;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-left: 5px solid #00bfff;
 }

@@ -313,12 +313,7 @@
             }
         }
 
-        // Chamar as funções dos gráficos quando a página carregar
-        document.addEventListener('DOMContentLoaded', () => {
-            criarGraficoPizzaCoordenadores();
-            criarGraficoPizzaTematicas();
-            criarGraficoTematicas();
-        });
+
 
         async function criarGraficoTematicas() {
             try {
@@ -357,7 +352,12 @@
                 console.error("Erro ao criar o gráfico:", error);
             }
         }
-
+        // Chamar as funções dos gráficos quando a página carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            criarGraficoTematicas();
+            criarGraficoPizzaCoordenadores();
+            criarGraficoPizzaTematicas();
+        });
     </script>
 
     <script>

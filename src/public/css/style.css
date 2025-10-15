@@ -969,5 +969,5 @@ body {
   width: 80%; /* O gráfico ocupará 80% da largura da página */
   max-width: 900px; /* Mas não passará de 900px em telas grandes */
   margin: 40px auto; /* Centraliza o contêiner na página com margem */
-  height: 450px; /* Defina uma altura fixa para o contêiner */
+  height: 650px; /* Defina uma altura fixa para o contêiner */
 }

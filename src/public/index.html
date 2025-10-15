@@ -325,6 +325,7 @@
                 document.querySelector('.chart-container').innerHTML = "Não foi possível carregar o gráfico.";
             }
         }
+        document.addEventListener('DOMContentLoaded', criarGraficoPizzaCoordenadores);
 
         // Chamar a função quando a página carregar
         document.addEventListener('DOMContentLoaded', criarGraficoPizza);

@@ -314,42 +314,73 @@
         }
 
 
-
         async function criarGraficoTematicas() {
             try {
-                // Simulando a chamada à API
                 const response = await fetch('/api/stats/tematicas');
+                if (!response.ok) throw new Error('Falha ao buscar dados de temáticas');
                 const data = await response.json();
 
                 const labels = data.map(item => item.tematica);
-                const values = data.map(item => item.total_projetos);
+                const values = data.map(item => parseInt(item.total_projetos, 10));
 
                 const ctx = document.getElementById('graficoTematicas').getContext('2d');
 
                 new Chart(ctx, {
-                    type: 'bar',
+                    // 1. MUDANÇA PRINCIPAL: O tipo do gráfico agora é 'line'
+                    type: 'line',
                     data: {
                         labels: labels,
                         datasets: [{
                             label: 'Quantidade de Projetos',
                             data: values,
-                            backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
+
+                            // 2. COR DA LINHA: Usamos a primeira cor da sua paleta
+                            borderColor: PALETA_CORES_TEMATICAS[0],
+
+                            // 3. COR DA ÁREA ABAIXO DA LINHA: Uma versão mais transparente da cor da linha
+                            backgroundColor: 'rgba(211, 47, 47, 0.2)',
+
+                            // 4. ATIVAR PREENCHIMENTO: Para mostrar a cor de fundo
+                            fill: true,
+
+                            // 5. ESTILO DA LINHA: Deixa a linha suavemente curvada
+                            tension: 0.1,
+
+                            borderWidth: 2, // Espessura da linha
+                            pointBackgroundColor: PALETA_CORES_TEMATICAS[0], // Cor dos pontos
+                            pointRadius: 5, // Tamanho dos pontos
+                            pointHoverRadius: 7 // Tamanho dos pontos ao passar o mouse
                         }]
                     },
                     options: {
-                        // OPÇÕES ATUALIZADAS
                         responsive: true,
-                        maintainAspectRatio: false, // Correção principal!
+                        maintainAspectRatio: false,
                         scales: {
-                            y: { beginAtZero: true, ticks: { stepSize: 1 } }
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    // Garante que o eixo Y só tenha números inteiros
+                                    stepSize: 1
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: true // Em gráficos de linha, a legenda pode ser útil
+                            },
+                            title: {
+                                display: true,
+                                text: 'Projetos por Área Temática',
+                                font: { size: 18 }
+                            }
                         }
                     }
                 });
 
             } catch (error) {
-                console.error("Erro ao criar o gráfico:", error);
+                console.error("Erro ao criar o gráfico de linha:", error);
+                const container = document.getElementById('graficoTematicas').parentElement;
+                if (container) container.innerHTML = "Não foi possível carregar o gráfico.";
             }
         }
         // Chamar as funções dos gráficos quando a página carregar

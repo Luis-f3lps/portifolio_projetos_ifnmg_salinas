@@ -893,7 +893,7 @@ body {
 /* Container principal da seção "Sobre" */
 .sobre {
   max-width: 900px;
-  width: 100%;
+  width: 60%;
   background-color: white; /* Um tom de cinza escuro para destacar o conteúdo */
   padding: 40px 50px;
   border-radius: 12px;

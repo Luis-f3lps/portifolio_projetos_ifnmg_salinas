@@ -1171,9 +1171,8 @@ nav ul .fa-solid {
   /* Adicione este CSS no seu arquivo .css ou dentro de uma tag <style> no <head> */
   .chart-container {
     position: relative;
-    width: 100%;
+    width: 50%;
     margin: 20px auto;
-    height: 100%;
   }
 
   .chart-container-linhas {
@@ -1190,7 +1189,7 @@ nav ul .fa-solid {
 }
   .pizza {
     display: flex;
-    width: 90%;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     text-align: center;

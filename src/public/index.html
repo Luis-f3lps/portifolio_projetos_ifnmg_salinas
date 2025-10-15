@@ -326,30 +326,21 @@
                 const ctx = document.getElementById('graficoTematicas').getContext('2d');
 
                 new Chart(ctx, {
-                    // 1. MUDANÇA PRINCIPAL: O tipo do gráfico agora é 'line'
-                    type: 'line',
+                    // 1. Tipo do gráfico de volta para 'bar'
+                    type: 'bar',
                     data: {
                         labels: labels,
                         datasets: [{
                             label: 'Quantidade de Projetos',
                             data: values,
 
-                            // 2. COR DA LINHA: Usamos a primeira cor da sua paleta
-                            borderColor: PALETA_CORES_TEMATICAS[0],
+                            // 2. COR DAS BARRAS: Usando sua paleta de cores
+                            // Cada barra receberá uma cor da lista
+                            backgroundColor: PALETA_CORES_TEMATICAS,
 
-                            // 3. COR DA ÁREA ABAIXO DA LINHA: Uma versão mais transparente da cor da linha
-                            backgroundColor: 'rgba(211, 47, 47, 0.2)',
-
-                            // 4. ATIVAR PREENCHIMENTO: Para mostrar a cor de fundo
-                            fill: true,
-
-                            // 5. ESTILO DA LINHA: Deixa a linha suavemente curvada
-                            tension: 0.1,
-
-                            borderWidth: 2, // Espessura da linha
-                            pointBackgroundColor: PALETA_CORES_TEMATICAS[0], // Cor dos pontos
-                            pointRadius: 5, // Tamanho dos pontos
-                            pointHoverRadius: 7 // Tamanho dos pontos ao passar o mouse
+                            // 3. (Opcional) Cor da borda das barras
+                            borderColor: '#333',
+                            borderWidth: 1
                         }]
                     },
                     options: {
@@ -359,14 +350,22 @@
                             y: {
                                 beginAtZero: true,
                                 ticks: {
-                                    // Garante que o eixo Y só tenha números inteiros
                                     stepSize: 1
+                                }
+                            },
+                            x: {
+                                // Gira os rótulos se eles forem muito longos
+                                ticks: {
+                                    autoSkip: false,
+                                    maxRotation: 45,
+                                    minRotation: 45
                                 }
                             }
                         },
                         plugins: {
                             legend: {
-                                display: true // Em gráficos de linha, a legenda pode ser útil
+                                // Em gráficos de barra com muitas cores, a legenda pode ser redundante
+                                display: false
                             },
                             title: {
                                 display: true,
@@ -378,7 +377,7 @@
                 });
 
             } catch (error) {
-                console.error("Erro ao criar o gráfico de linha:", error);
+                console.error("Erro ao criar o gráfico de barras:", error);
                 const container = document.getElementById('graficoTematicas').parentElement;
                 if (container) container.innerHTML = "Não foi possível carregar o gráfico.";
             }

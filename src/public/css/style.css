@@ -1066,6 +1066,14 @@ nav ul .fa-solid {
     margin: 20px auto;
     height: 100%;
 }
+  .pizza {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 40px;
+  }
 }
   /* Importando uma fonte moderna do Google Fonts */
   @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
@@ -1163,7 +1171,7 @@ nav ul .fa-solid {
   .chart-container {
     position: relative;
     margin: 20px auto;
-    height: 500px;
+    height: 700px;
   }
 
   .chart-container-linhas {
@@ -1179,8 +1187,8 @@ nav ul .fa-solid {
   text-align: center; /* Garante que o texto dentro dos parágrafos também fique alinhado */
 }
   .pizza {
+    display: flex;
     width: 100%;
-    flex-direction: column;
     align-items: center;
     text-align: center;
     margin: 40px;

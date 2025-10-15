@@ -217,7 +217,14 @@ nav ul li a:hover::after {
   transform: translateY(-10px);
   color: #ffffff;
 }
-
+  .pizza {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    margin: 10px;
+    margin-top: 40px;
+  }
 /* --------------Portifolio--------------- */
 #portifolio {
   padding-top: 10px;
@@ -1189,11 +1196,3 @@ nav ul .fa-solid {
   align-items: center;
   text-align: center; /* Garante que o texto dentro dos parágrafos também fique alinhado */
 }
-  .pizza {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    text-align: center;
-    margin: 10px;
-    margin-top: 40px;
-  }

@@ -965,9 +965,8 @@ body {
 
 /* Adicione este CSS no seu arquivo .css ou dentro de uma tag <style> no <head> */
 .chart-container {
-  position: relative; /* Necessário para o Chart.js gerenciar o tamanho corretamente */
-  width: 100%; /* O gráfico ocupará 80% da largura da página */
-  max-width: 600px; /* Mas não passará de 900px em telas grandes */
-  margin: 20px auto; /* Centraliza o contêiner na página com margem */
-  height: 550px; /* Defina uma altura fixa para o contêiner */
+    position: relative;
+    width: 100%;
+    margin: 20px auto;
+    height: 100%;
 }

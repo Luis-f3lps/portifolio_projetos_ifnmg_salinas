@@ -124,24 +124,7 @@ nav ul li a:hover::after {
   margin: 20px 0 40px;
 }
 
-.tab-links {
-  margin-right: 50px;
-  font-size: 18px;
-  font-weight: 500;
-  cursor: pointer;
-  position: relative;
-}
 
-.tab-links::after {
-  content: "";
-  width: 0;
-  height: 3px;
-  background: #ff004f;
-  position: absolute;
-  left: 0;
-  bottom: -8px;
-  transition: 0.5s;
-}
 
 .active-link.active-link::after {
   width: 50%;
@@ -163,59 +146,6 @@ nav ul li a:hover::after {
 
 .tab-contents.active-tab {
   display: block;
-}
-
-/* --------------Serviços--------------- */
-#services {
-  padding: 60;
-}
-
-.services-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 40px;
-  margin-top: 40px;
-}
-
-.services-list div {
-  background: #ffffff;
-  padding: 40px;
-  font-size: 13px;
-  font-weight: 300px;
-  border-radius: 10px;
-  transition: background 0.5s, transform 0.5s;
-  height: 100%;
-}
-
-.services-list div i {
-  font-size: 50px;
-  margin-bottom: 30px;
-}
-
-.services-list div h2 {
-  font-size: 22px;
-  font-weight: 500;
-  margin-bottom: 15px;
-  color: black;
-}
-
-.services-list div p {
-  text-align: justify;
-  color: black;
-}
-
-.services-list div a {
-  text-decoration: none;
-  color: #ffffff;
-  font-size: 36px;
-  margin-top: 3px;
-  display: inline-block;
-}
-
-.services-list div:hover {
-  background: #ff004f;
-  transform: translateY(-10px);
-  color: #ffffff;
 }
 
 /* --------------Portifolio--------------- */
@@ -424,10 +354,7 @@ nav .fa-solid {
     font-size: 30px;
   }
 
-  .services-list div p {
-    text-align: justify;
-    font-size: 32px;
-  }
+
 
   nav .fa-solid {
     display: block;
@@ -474,11 +401,6 @@ nav .fa-solid {
     font-size: 14px;
   }
 
-  .tab-links {
-    font-size: 30px;
-    margin-right: 20px;
-    color: peachpuff;
-  }
 
   .tab-contents ul li {
     list-style: none;
@@ -500,13 +422,6 @@ nav .fa-solid {
     color: #ffffff;
   }
 
-  .services-list div a {
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 102px;
-    margin-top: 3px;
-    display: grid;
-  }
 
   a {
     font-size: 62px;
@@ -516,11 +431,7 @@ nav .fa-solid {
     font-size: 22px;
     color: black;
   }
-  .services-list {
-    display: flow;
-    grid-gap: 40px;
-    margin-top: 40px;
-  }
+
 
   .work-list-certificados {
     display: flow;
@@ -529,25 +440,7 @@ nav .fa-solid {
     margin-top: 40px;
   }
 
-  .services-list {
-    display: flow;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
 
-  .services-list div {
-    background: #ffffff;
-    padding: 40px;
-    font-size: 13px;
-    font-weight: 300px;
-    border-radius: 10px;
-    transition: background 0.5s, transform 0.5s;
-    width: 95%;
-    margin: 20px;
-  }
-
-  .services-list div p {
-    font-size: 16px;
-  }
 
   .work {
     border-radius: 10px;
@@ -568,11 +461,6 @@ nav .fa-solid {
 
 /* --------------ódigo CSS para telas com largura maior ou igual a 1080p--------------- */
 @media only screen and (min-width: 1080px) {
-  .services-list {
-    display: grid;
-    grid-gap: 40px;
-    margin-top: 40px;
-  }
 
   .work-list {
     display: grid;
@@ -614,10 +502,6 @@ nav .fa-solid {
     margin-top: 40px;
   }
 
-  .services-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
 }
 
 .rotate {
@@ -676,24 +560,6 @@ nav ul li a:hover::after {
   margin: 20px 0 40px;
 }
 
-.tab-links {
-  margin-right: 50px;
-  font-size: 18px;
-  font-weight: 500;
-  cursor: pointer;
-  position: relative;
-}
-
-.tab-links::after {
-  content: "";
-  width: 0;
-  height: 3px;
-  background: #ff004f;
-  position: absolute;
-  left: 0;
-  bottom: -8px;
-  transition: 0.5s;
-}
 
 .active-link.active-link::after {
   width: 50%;
@@ -859,10 +725,7 @@ nav ul .fa-solid {
   font-size: 30px;
 }
 
-.tab-links {
-  font-size: 16px;
-  margin-right: 20px;
-}
+
 
 .contact-left,
 .contact-right {
@@ -878,7 +741,7 @@ nav ul .fa-solid {
   color: #ffffff;
 }
 
-.services-list div a {
+.-list div a {
   color: #ffffff;
 }
 
@@ -1011,6 +874,11 @@ nav ul .fa-solid {
     visibility: collapse;
     height: 10px;
   }
+    .pizza {
+    flex-direction: column;
+    height: 500px;
+  }
+
 }
 
 @media only screen and (max-width: 1366px) and (max-height: 768px) {
@@ -1052,19 +920,10 @@ nav ul .fa-solid {
     border-left: 5px solid #00bfff;
   }
 
-  .chart-container-linhas {
-    position: relative;
-    /* width: 100%; */
-    margin: 20px;
-    width: 600px;
-  }
   .chart-container {
     position: relative;
     margin: 20px auto;
     height: 100%;
-  }
-  .pizza {
-    flex-direction: column;
   }
 }
 /* Importando uma fonte moderna do Google Fonts */

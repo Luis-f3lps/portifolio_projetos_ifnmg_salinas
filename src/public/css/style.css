@@ -408,7 +408,8 @@ nav .fa-solid {
   display: none;
 }
 
-
+@media only screen and (max-width: 2532px) and (min-height: 1170px),
+  only screen and (max-width: 2340px) and (min-height: 1080px) {
   .tab-titles {
     margin: 60px 0 40px;
   }
@@ -515,16 +516,6 @@ nav .fa-solid {
     font-size: 22px;
     color: black;
   }
-  .pizza {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    text-align: center;
-    padding: 10px 4%;
-    margin-top: 40px;
-    flex-direction: column;
-  }
-
   .services-list {
     display: flow;
     grid-gap: 40px;
@@ -573,6 +564,7 @@ nav .fa-solid {
     display: inline-block;
     transition: transform 0.5s;
   }
+}
 
 /* --------------ódigo CSS para telas com largura maior ou igual a 1080p--------------- */
 @media only screen and (min-width: 1080px) {
@@ -1072,17 +1064,19 @@ nav ul .fa-solid {
     height: 100%;
   }
   .pizza {
-    display: flex;
-    width: 100%;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 10px 4%;  
-    margin-top: 40px
   }
 }
 /* Importando uma fonte moderna do Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+  .pizza {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    padding: 10px 4%;
+    margin-top: 40px;
+  }
 
 /* Estilização geral do corpo da página */
 body {

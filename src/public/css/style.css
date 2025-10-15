@@ -1063,8 +1063,18 @@ nav ul .fa-solid {
   }
 
   .pizza {
-    display: inline;
-  }
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 40px;
+}
+  .chart-container {
+    position: relative;
+    margin: 20px auto;
+    height: 100%;
+}
 }
   /* Importando uma fonte moderna do Google Fonts */
   @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");

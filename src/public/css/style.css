@@ -1089,7 +1089,7 @@ nav ul .fa-solid {
   /* Container principal da seção "Sobre" */
   .sobre {
     max-width: 900px;
-    width: 60%;
+    width: 100%;
     background-color: white;
     /* Um tom de cinza escuro para destacar o conteúdo */
     padding: 40px 50px;

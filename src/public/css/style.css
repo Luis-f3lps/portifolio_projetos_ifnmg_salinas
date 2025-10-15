@@ -217,14 +217,7 @@ nav ul li a:hover::after {
   transform: translateY(-10px);
   color: #ffffff;
 }
-  .pizza {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    text-align: center;
-    margin: 10px;
-    margin-top: 40px;
-  }
+
 /* --------------Portifolio--------------- */
 #portifolio {
   padding-top: 10px;
@@ -416,7 +409,7 @@ nav .fa-solid {
 }
 
 @media only screen and (max-width: 2532px) and (min-height: 1170px),
-only screen and (max-width: 2340px) and (min-height: 1080px) {
+  only screen and (max-width: 2340px) and (min-height: 1080px) {
   .tab-titles {
     margin: 60px 0 40px;
   }
@@ -521,6 +514,16 @@ only screen and (max-width: 2340px) and (min-height: 1080px) {
 
   p {
     font-size: 22px;
+    color: black;
+  }
+  .pizza {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    margin: 10px;
+    margin-top: 40px;
+    flex-direction: column;
   }
 
   .services-list {
@@ -1072,7 +1075,7 @@ nav ul .fa-solid {
     position: relative;
     margin: 20px auto;
     height: 100%;
-}
+  }
   .pizza {
     display: flex;
     width: 100%;
@@ -1082,115 +1085,111 @@ nav ul .fa-solid {
     margin: 40px;
   }
 }
-  /* Importando uma fonte moderna do Google Fonts */
-  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+/* Importando uma fonte moderna do Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
-  /* Estilização geral do corpo da página */
-  body {
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
+/* Estilização geral do corpo da página */
+body {
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
 
-  /* Container principal da seção "Sobre" */
-  .sobre {
-    max-width: 900px;
-    width: 100%;
-    background-color: white;
-    /* Um tom de cinza escuro para destacar o conteúdo */
-    padding: 40px 50px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border-left: 5px solid #00bfff;
-    /* Um detalhe em azul ciano para dar um toque de cor */
-  }
+/* Container principal da seção "Sobre" */
+.sobre {
+  max-width: 900px;
+  width: 100%;
+  background-color: white;
+  /* Um tom de cinza escuro para destacar o conteúdo */
+  padding: 40px 50px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-left: 5px solid #00bfff;
+  /* Um detalhe em azul ciano para dar um toque de cor */
+}
 
-  /* Estilização do subtítulo "Sobre" */
-  .sub-title {
-    font-size: 2em;
-    /* Tamanho maior para o título principal da seção */
-    font-weight: 300;
-    /* Peso mais leve para um visual elegante */
-    color: black;
-    margin-top: 0;
-    margin-bottom: 30px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-bottom: 1px solid #00bfff;
-    padding-bottom: 10px;
-    display: inline-block;
-  }
+/* Estilização do subtítulo "Sobre" */
+.sub-title {
+  font-size: 2em;
+  /* Tamanho maior para o título principal da seção */
+  font-weight: 300;
+  /* Peso mais leve para um visual elegante */
+  color: black;
+  margin-top: 0;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 1px solid #00bfff;
+  padding-bottom: 10px;
+  display: inline-block;
+}
 
-  /* Estilização do título do objetivo */
-  .sobre h1:not(.sub-title) {
-    font-size: 1.8em;
-    /* Tamanho de fonte um pouco menor que o subtítulo */
-    color: #00bfff;
-    /* Cor de destaque azul ciano */
-    margin-bottom: 25px;
-    font-weight: 600;
-    /* Peso mais forte para ênfase */
-  }
+/* Estilização do título do objetivo */
+.sobre h1:not(.sub-title) {
+  font-size: 1.8em;
+  /* Tamanho de fonte um pouco menor que o subtítulo */
+  color: #00bfff;
+  /* Cor de destaque azul ciano */
+  margin-bottom: 25px;
+  font-weight: 600;
+  /* Peso mais forte para ênfase */
+}
 
-  /* Estilização dos parágrafos */
-  .sobre p {
-    font-size: 1.1em;
-    line-height: 1.7;
-    /* Espaçamento entre linhas para melhor legibilidade */
-    margin-bottom: 20px;
-    color: black;
-    /* Cor de texto ligeiramente mais suave */
-  }
+/* Estilização dos parágrafos */
+.sobre p {
+  font-size: 1.1em;
+  line-height: 1.7;
+  /* Espaçamento entre linhas para melhor legibilidade */
+  margin-bottom: 20px;
+  color: black;
+  /* Cor de texto ligeiramente mais suave */
+}
 
-  /* Estilização da lista não ordenada */
-  .sobre ul {
-    list-style-type: none;
-    /* Remove os marcadores padrão */
-    padding-left: 0;
-    margin-top: 25px;
-  }
+/* Estilização da lista não ordenada */
+.sobre ul {
+  list-style-type: none;
+  /* Remove os marcadores padrão */
+  padding-left: 0;
+  margin-top: 25px;
+}
 
-  /* Estilização dos itens da lista */
-  .sobre li {
-    background-color: rgba(0,
-        191,
-        255,
-        0.05);
-    /* Fundo sutil para os itens da lista */
-    margin-bottom: 12px;
-    padding: 15px 20px;
-    border-radius: 8px;
-    font-size: 1.1em;
-    color: black;
-    border-left: 3px solid #00bfff;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-  }
+/* Estilização dos itens da lista */
+.sobre li {
+  background-color: rgba(0, 191, 255, 0.05);
+  /* Fundo sutil para os itens da lista */
+  margin-bottom: 12px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-size: 1.1em;
+  color: black;
+  border-left: 3px solid #00bfff;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
 
-  /* Efeito de hover nos itens da lista para interatividade */
-  .sobre li:hover {
-    transform: translateX(10px);
-    background-color: rgba(0, 191, 255, 0.15);
-  }
+/* Efeito de hover nos itens da lista para interatividade */
+.sobre li:hover {
+  transform: translateX(10px);
+  background-color: rgba(0, 191, 255, 0.15);
+}
 
-  /* css livros */
+/* css livros */
 
-  /* Adicione este CSS no seu arquivo .css ou dentro de uma tag <style> no <head> */
-  .chart-container {
-    position: relative;
-    margin: 20px auto;
-    display: block;
-    width: 100%;
-    height: 700px;
+/* Adicione este CSS no seu arquivo .css ou dentro de uma tag <style> no <head> */
+.chart-container {
+  position: relative;
+  margin: 20px auto;
+  display: block;
+  width: 100%;
+  height: 700px;
+}
 
-  }
-
-  .chart-container-linhas {
-    position: relative;
-    width: 100%;
-    margin: 20px auto;
-    height: 500px;
-  }
-  #contact {
+.chart-container-linhas {
+  position: relative;
+  width: 100%;
+  margin: 20px auto;
+  height: 500px;
+}
+#contact {
   display: flex;
   flex-direction: column;
   align-items: center;

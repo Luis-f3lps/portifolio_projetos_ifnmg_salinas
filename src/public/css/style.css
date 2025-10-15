@@ -979,6 +979,12 @@ body {
     margin: 20px auto;
     height: 100%;
 }
+.chart-container-linhas{
+    position: relative;
+    width: 100%;
+    margin: 20px auto;
+    height: 500px;
+}
 .sobre {
     max-width: 900px;
     width: 100%;

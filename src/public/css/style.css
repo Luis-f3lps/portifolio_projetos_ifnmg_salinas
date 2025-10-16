@@ -864,8 +864,8 @@ nav ul .fa-solid {
     flex-direction: column;
   }
   .chart-container {
-    height: 700px;
-  }
+    width: 700px;
+    }
 }
 
 @media only screen and (max-width: 1366px) and (max-height: 768px) {
@@ -1015,6 +1015,7 @@ body {
   margin: 20px auto;
   display: block;
   height: 700px;
+  width: 100%;
 }
 
 .chart-container-linhas {

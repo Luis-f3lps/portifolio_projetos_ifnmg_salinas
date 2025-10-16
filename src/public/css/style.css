@@ -337,7 +337,7 @@ nav .fa-solid {
 }
 
 @media only screen and (max-width: 2532px) and (min-height: 1170px),
-  only screen and (max-width: 2340px) and (min-height: 1080px) {
+only screen and (max-width: 2340px) and (min-height: 1080px) {
   .tab-titles {
     margin: 60px 0 40px;
   }
@@ -744,7 +744,7 @@ nav ul .fa-solid {
   }
 
   tbody {
-    font-size: large;
+    font-size: x-large;
   }
 
   thead {
@@ -860,12 +860,27 @@ nav ul .fa-solid {
     visibility: collapse;
     height: 10px;
   }
+
   .pizza {
     flex-direction: column;
   }
+
   .chart-container {
     width: 700px;
-    }
+  }
+
+  select {
+    font-size: x-large;
+  }
+
+  button[type="submit"],
+  button[type="submit2"] {
+    font-size: x-large;
+  }
+
+  button {
+    font-size: x-large;
+  }
 }
 
 @media only screen and (max-width: 1366px) and (max-height: 768px) {
@@ -912,8 +927,10 @@ nav ul .fa-solid {
     height: 100%;
   }
 }
+
 /* Importando uma fonte moderna do Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
 .pizza {
   display: flex;
   width: 100%;
@@ -1015,7 +1032,6 @@ body {
   margin: 20px auto;
   display: block;
   height: 700px;
-  width: 100%;
 }
 
 .chart-container-linhas {
@@ -1024,9 +1040,11 @@ body {
   margin: 20px auto;
   height: 500px;
 }
+
 #contact {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center; /* Garante que o texto dentro dos parágrafos também fique alinhado */
+  text-align: center;
+  /* Garante que o texto dentro dos parágrafos também fique alinhado */
 }

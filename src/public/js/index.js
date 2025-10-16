@@ -285,7 +285,7 @@ async function criarGraficoTematicas() {
           title: {
             display: true,
             text: "Projetos por Área Temática",
-            font: { size: 18 },
+            font: { size: 36 },
           },
         },
       },

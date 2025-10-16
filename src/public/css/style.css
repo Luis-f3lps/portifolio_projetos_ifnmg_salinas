@@ -1032,6 +1032,7 @@ body {
   margin: 20px auto;
   display: block;
   height: 700px;
+  width: 700px;
 }
 
 .chart-container-linhas {

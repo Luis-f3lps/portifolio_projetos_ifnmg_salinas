@@ -53,13 +53,11 @@ app.listen(PORT, () => {
 
 // Obter lista paginada de projetos do portfólio (com filtros)
 app.get('/api/portifolio', async (req, res) => { // 'Autenticado' foi removido daqui
-   // Parâmetros de paginação e filtros
-   // O limit = 10 aqui já define 10 como padrão
    const { page = 1, limit = 15, tematica, coordenador } = req.query;
 
    // Validação dos parâmetros de paginação
-   const pageInt = parseInt(page, 10);
-   const limitInt = parseInt(limit, 10);
+   const pageInt = parseInt(page, 15);
+   const limitInt = parseInt(limit, 15);
 
    if (isNaN(pageInt) || isNaN(limitInt) || limitInt <= 0 || pageInt <= 0) {
      return res.status(400).json({ error: 'Os parâmetros de página e limite devem ser números inteiros positivos.' });

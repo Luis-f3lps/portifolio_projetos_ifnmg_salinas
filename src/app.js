@@ -55,7 +55,7 @@ app.listen(PORT, () => {
 app.get('/api/portifolio', async (req, res) => { // 'Autenticado' foi removido daqui
    // Parâmetros de paginação e filtros
    // O limit = 10 aqui já define 10 como padrão
-   const { page = 1, limit = 10, tematica, coordenador } = req.query;
+   const { page = 1, limit = 15, tematica, coordenador } = req.query;
 
    // Validação dos parâmetros de paginação
    const pageInt = parseInt(page, 10);

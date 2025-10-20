@@ -53,11 +53,10 @@ app.listen(PORT, () => {
 
 // Obter lista paginada de projetos do portfólio (com filtros)
 app.get('/api/portifolio', async (req, res) => { // 'Autenticado' foi removido daqui
-   // O limit = 15 aqui está correto
    const { page = 1, limit = 15, tematica, coordenador } = req.query;
 
    // Validação dos parâmetros de paginação
-   // CORREÇÃO: Mude o radix de 15 para 10
+   // CORREÇÃO AQUI: A base deve ser 10
    const pageInt = parseInt(page, 10);
    const limitInt = parseInt(limit, 10);
 
@@ -67,7 +66,7 @@ app.get('/api/portifolio', async (req, res) => { // 'Autenticado' foi removido d
 
    // Limite máximo de itens por página
    const MAX_LIMIT = 100;
-   const finalLimit = Math.min(limitInt, MAX_LIMIT);
+   const finalLimit = Math.min(limitInt, MAX_LIMIT); // Agora limitInt será 15
    const offset = (pageInt - 1) * finalLimit;
 
    try {
@@ -110,11 +109,11 @@ app.get('/api/portifolio', async (req, res) => { // 'Autenticado' foi removido d
      }
      const countResult = await pool.query(countQuery, params);
      
-     // CORREÇÃO: Mude o radix de 15 para 10
+     // CORREÇÃO AQUI: A base deve ser 10
      const totalItems = parseInt(countResult.rows[0].total, 10);
      const totalPages = Math.ceil(totalItems / finalLimit);
      
-    // --- Adiciona ordenação e paginação à consulta principal ---
+     // --- Adiciona ordenação e paginação à consulta principal ---
      query += ` ORDER BY LOWER(p.titulo) ASC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
      params.push(finalLimit, offset);
 

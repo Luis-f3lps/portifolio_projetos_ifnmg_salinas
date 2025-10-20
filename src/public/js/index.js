@@ -333,68 +333,7 @@ function loadCoordenadores() {
     .catch((error) => console.error("Erro ao carregar coordenadores:", error));
 }
 
-/**
- * Carrega os dados do portfólio com paginação e filtros.
- * @param {number} page - O número da página a ser carregada.
- * @param {string} tematica - O filtro de temática.
- * @param {string} coordenador - O filtro de coordenador.
- */
-function loadPortifolio(page = 1, tematica = "", coordenador = "") {
-  const url = `/api/portifolio?page=${page}&limit=15&tematica=${tematica}&coordenador=${coordenador}`;
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      if (Array.isArray(data.data)) {
-        updatePortifolioTable(data.data);
-        updatePortifolioPagination(
-          data.totalPages,
-          data.currentPage,
-          tematica,
-          coordenador
-        );
-      } else {
-        console.error("Formato de resposta inesperado:", data);
-        alert(
-          "Erro ao carregar portfólio: Dados recebidos não estão no formato esperado."
-        );
-      }
-    })
-    .catch((error) =>
-      console.error("Erro ao carregar dados do portfólio:", error)
-    );
-}
 
-/**
- * Atualiza a tabela do portfólio com os novos dados.
- * @param {Array} entries - Um array de objetos do portfólio.
- */
-function updatePortifolioTable(entries) {
-  const tbody = document.getElementById("portifolio-tbody");
-  tbody.innerHTML = "";
-
-  if (Array.isArray(entries)) {
-    entries.forEach((entry) => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-                <td>${entry.titulo || "N/A"}</td>
-                <td>${entry.tematica || "N/A"}</td>
-                <td>${entry.nome_coordenador || "N/A"}</td>
-            `;
-      tbody.appendChild(tr);
-    });
-  } else {
-    console.error("Esperava um array de entradas, mas recebeu:", entries);
-    alert("Erro ao atualizar tabela: Dados não estão no formato esperado.");
-  }
-}
-
-/**
- * Atualiza os botões de paginação.
- * @param {number} totalPages - O número total de páginas.
- * @param {number} currentPage - A página atual.
- * @param {string} tematica - O filtro de temática atual.
- * @param {string} coordenador - O filtro de coordenador atual.
- */
 function updatePortifolioPagination(
   totalPages,
   currentPage,
@@ -404,16 +343,76 @@ function updatePortifolioPagination(
   const paginationDiv = document.getElementById("pagination-portifolio");
   paginationDiv.innerHTML = "";
 
-  for (let i = 1; i <= totalPages; i++) {
+  // Quantas páginas mostrar ao lado da página atual
+  const context = 1; 
+
+  /**
+   * Helper para criar um botão de paginação
+   */
+  const createButton = (page, text, isActive = false, isDisabled = false) => {
     const button = document.createElement("button");
-    button.textContent = i;
+    button.textContent = text || page;
     button.classList.add("pagination-button");
-    if (i === currentPage) {
+
+    if (isActive) {
       button.classList.add("active");
     }
-    button.addEventListener("click", () => {
-      loadPortifolio(i, tematica, coordenador); // Carrega a página clicada com os filtros atuais
-    });
-    paginationDiv.appendChild(button);
+    if (isDisabled) {
+      button.disabled = true;
+      button.classList.add("disabled"); // Adiciona classe para estilização
+    }
+
+    // Adiciona o evento de clique apenas se não for desabilitado
+    if (!isDisabled) {
+      button.addEventListener("click", () => {
+        // O 'page' aqui será o número da página (ex: 5) ou (currentPage - 1)
+        if (page >= 1 && page <= totalPages) {
+          loadPortifolio(page, tematica, coordenador);
+        }
+      });
+    }
+    return button;
+  };
+
+  /**
+   * Helper para criar o "..." (ellipsis)
+   */
+  const createEllipsis = () => {
+    const span = document.createElement("span");
+    span.textContent = "...";
+    span.classList.add("pagination-ellipsis");
+    return span;
+  };
+
+  // --- 1. Botão "Anterior" (<) ---
+  paginationDiv.appendChild(
+    createButton(currentPage - 1, "<", false, currentPage === 1)
+  );
+
+  let lastPageShown = 0;
+
+  // --- 2. Números das Páginas ---
+  for (let i = 1; i <= totalPages; i++) {
+    const isFirstPage = i === 1;
+    const isLastPage = i === totalPages;
+    // Verifica se a página 'i' está no "contexto" da página atual
+    const isInContext = i >= currentPage - context && i <= currentPage + context;
+
+    // Se for a primeira, a última ou estiver no contexto, mostre o botão
+    if (isFirstPage || isLastPage || isInContext) {
+      // Se houver um pulo desde a última página mostrada, adicione "..."
+      if (i > lastPageShown + 1) {
+        paginationDiv.appendChild(createEllipsis());
+      }
+      
+      // Adiciona o botão da página
+      paginationDiv.appendChild(createButton(i, i, i === currentPage));
+      lastPageShown = i;
+    }
   }
+
+  // --- 3. Botão "Próximo" (>) ---
+  paginationDiv.appendChild(
+    createButton(currentPage + 1, ">", false, currentPage === totalPages)
+  );
 }

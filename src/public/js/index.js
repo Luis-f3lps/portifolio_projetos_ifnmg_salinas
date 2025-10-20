@@ -340,7 +340,7 @@ function loadCoordenadores() {
  * @param {string} coordenador - O filtro de coordenador.
  */
 function loadPortifolio(page = 1, tematica = "", coordenador = "") {
-  const url = `/api/portifolio?page=${page}&limit=20&tematica=${tematica}&coordenador=${coordenador}`;
+  const url = `/api/portifolio?page=${page}&limit=10&tematica=${tematica}&coordenador=${coordenador}`;
   fetch(url)
     .then((response) => response.json())
     .then((data) => {

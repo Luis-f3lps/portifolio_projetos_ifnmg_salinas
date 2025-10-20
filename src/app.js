@@ -113,8 +113,8 @@ app.get('/api/portifolio', async (req, res) => { // 'Autenticado' foi removido d
      const totalPages = Math.ceil(totalItems / finalLimit);
      
      // --- Adiciona ordenação e paginação à consulta principal ---
-     // ALTERAÇÃO AQUI: Mudado de p.id DESC para p.titulo ASC
-     query += ` ORDER BY p.titulo ASC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
+     // CORREÇÃO: Usando LOWER(p.titulo) para ordenação case-insensitive
+     query += ` ORDER BY LOWER(p.titulo) ASC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
      params.push(finalLimit, offset);
 
      const { rows } = await pool.query(query, params);

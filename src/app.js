@@ -53,80 +53,82 @@ app.listen(PORT, () => {
 
 // Obter lista paginada de projetos do portfólio (com filtros)
 app.get('/api/portifolio', async (req, res) => { // 'Autenticado' foi removido daqui
-    // Parâmetros de paginação e filtros
-    const { page = 1, limit = 10, tematica, coordenador } = req.query;
+   // Parâmetros de paginação e filtros
+   // O limit = 10 aqui já define 10 como padrão
+   const { page = 1, limit = 10, tematica, coordenador } = req.query;
 
-    // Validação dos parâmetros de paginação
-    const pageInt = parseInt(page, 10);
-    const limitInt = parseInt(limit, 10);
+   // Validação dos parâmetros de paginação
+   const pageInt = parseInt(page, 10);
+   const limitInt = parseInt(limit, 10);
 
-    if (isNaN(pageInt) || isNaN(limitInt) || limitInt <= 0 || pageInt <= 0) {
-        return res.status(400).json({ error: 'Os parâmetros de página e limite devem ser números inteiros positivos.' });
-    }
+   if (isNaN(pageInt) || isNaN(limitInt) || limitInt <= 0 || pageInt <= 0) {
+     return res.status(400).json({ error: 'Os parâmetros de página e limite devem ser números inteiros positivos.' });
+   }
 
-    // Limite máximo de itens por página
-    const MAX_LIMIT = 100;
-    const finalLimit = Math.min(limitInt, MAX_LIMIT);
-    const offset = (pageInt - 1) * finalLimit;
+   // Limite máximo de itens por página
+   const MAX_LIMIT = 100;
+   const finalLimit = Math.min(limitInt, MAX_LIMIT);
+   const offset = (pageInt - 1) * finalLimit;
 
-    try {
-        let query = `
-            SELECT 
-                p.id,
-                p.processo,
-                p.titulo,
-                p.tematica,
-                c.nome_coordenador
-            FROM 
-                portifolio p
-            JOIN 
-                coordenadores c ON p.coordenador_id = c.coordenador_id
-        `;
-        
-        const params = [];
-        const whereClauses = [];
+   try {
+     let query = `
+       SELECT 
+         p.id,
+         p.processo,
+         p.titulo,
+         p.tematica,
+         c.nome_coordenador
+       FROM 
+         portifolio p
+       JOIN 
+         coordenadores c ON p.coordenador_id = c.coordenador_id
+     `;
+     
+     const params = [];
+     const whereClauses = [];
 
-        // Adiciona filtro por temática (busca parcial, case-insensitive)
-        if (tematica) {
-            params.push(`%${tematica}%`);
-            whereClauses.push(`p.tematica ILIKE $${params.length}`);
-        }
+     // Adiciona filtro por temática (busca parcial, case-insensitive)
+     if (tematica) {
+       params.push(`%${tematica}%`);
+       whereClauses.push(`p.tematica ILIKE $${params.length}`);
+     }
 
-        // Adiciona filtro por nome do coordenador (busca parcial, case-insensitive)
-        if (coordenador) {
-            params.push(`%${coordenador}%`);
-            whereClauses.push(`c.nome_coordenador ILIKE $${params.length}`);
-        }
+     // Adiciona filtro por nome do coordenador (busca parcial, case-insensitive)
+     if (coordenador) {
+       params.push(`%${coordenador}%`);
+       whereClauses.push(`c.nome_coordenador ILIKE $${params.length}`);
+     }
 
-        if (whereClauses.length > 0) {
-            query += ` WHERE ${whereClauses.join(' AND ')}`;
-        }
-        
-        // --- Contagem do total de itens com os filtros aplicados ---
-        let countQuery = `SELECT COUNT(*) as total FROM portifolio p JOIN coordenadores c ON p.coordenador_id = c.coordenador_id`;
-        if (whereClauses.length > 0) {
-            countQuery += ` WHERE ${whereClauses.join(' AND ')}`;
-        }
-        const countResult = await pool.query(countQuery, params);
-        const totalItems = parseInt(countResult.rows[0].total, 10);
-        const totalPages = Math.ceil(totalItems / finalLimit);
-        
-        // --- Adiciona ordenação e paginação à consulta principal ---
-        query += ` ORDER BY p.id DESC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
-        params.push(finalLimit, offset);
+     if (whereClauses.length > 0) {
+       query += ` WHERE ${whereClauses.join(' AND ')}`;
+     }
+     
+     // --- Contagem do total de itens com os filtros aplicados ---
+     let countQuery = `SELECT COUNT(*) as total FROM portifolio p JOIN coordenadores c ON p.coordenador_id = c.coordenador_id`;
+     if (whereClauses.length > 0) {
+       countQuery += ` WHERE ${whereClauses.join(' AND ')}`;
+     }
+     const countResult = await pool.query(countQuery, params);
+     const totalItems = parseInt(countResult.rows[0].total, 10);
+     const totalPages = Math.ceil(totalItems / finalLimit);
+     
+     // --- Adiciona ordenação e paginação à consulta principal ---
+     // ALTERAÇÃO AQUI: Mudado de p.id DESC para p.titulo ASC
+     query += ` ORDER BY p.titulo ASC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
+     params.push(finalLimit, offset);
 
-        const { rows } = await pool.query(query, params);
+     const { rows } = await pool.query(query, params);
 
-        res.json({
-            data: rows,
-            totalItems,
-            totalPages,
-            currentPage: pageInt,
-        });
-    } catch (error) {
-        console.error('Erro ao obter portfólio:', error);
-        res.status(500).json({ error: 'Erro no servidor ao obter portfólio.' });
-    }
+     res.json({
+       data: rows,
+       totalItems,
+       totalPages,
+       currentPage: pageInt,
+     });
+   } catch (error) {
+     console.error('Erro ao obter portfólio:', error);
+     res.status(500).json({ error: 'Erro no servidor ao obter portfólio.' });
+   }
 });
 
 // Obter a lista completa de coordenadores

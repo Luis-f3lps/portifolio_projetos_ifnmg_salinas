@@ -53,11 +53,13 @@ app.listen(PORT, () => {
 
 // Obter lista paginada de projetos do portfólio (com filtros)
 app.get('/api/portifolio', async (req, res) => { // 'Autenticado' foi removido daqui
+   // O limit = 15 aqui está correto
    const { page = 1, limit = 15, tematica, coordenador } = req.query;
 
    // Validação dos parâmetros de paginação
-   const pageInt = parseInt(page, 15);
-   const limitInt = parseInt(limit, 15);
+   // CORREÇÃO: Mude o radix de 15 para 10
+   const pageInt = parseInt(page, 10);
+   const limitInt = parseInt(limit, 10);
 
    if (isNaN(pageInt) || isNaN(limitInt) || limitInt <= 0 || pageInt <= 0) {
      return res.status(400).json({ error: 'Os parâmetros de página e limite devem ser números inteiros positivos.' });
@@ -107,11 +109,12 @@ app.get('/api/portifolio', async (req, res) => { // 'Autenticado' foi removido d
        countQuery += ` WHERE ${whereClauses.join(' AND ')}`;
      }
      const countResult = await pool.query(countQuery, params);
-     const totalItems = parseInt(countResult.rows[0].total, 15);
+     
+     // CORREÇÃO: Mude o radix de 15 para 10
+     const totalItems = parseInt(countResult.rows[0].total, 10);
      const totalPages = Math.ceil(totalItems / finalLimit);
      
-     // --- Adiciona ordenação e paginação à consulta principal ---
-     // CORREÇÃO: Usando LOWER(p.titulo) para ordenação case-insensitive
+    // --- Adiciona ordenação e paginação à consulta principal ---
      query += ` ORDER BY LOWER(p.titulo) ASC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
      params.push(finalLimit, offset);
 

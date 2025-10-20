@@ -54,7 +54,7 @@ app.listen(PORT, () => {
 // Obter lista paginada de projetos do portfólio (com filtros)
 app.get('/api/portifolio', async (req, res) => { // 'Autenticado' foi removido daqui
     // Parâmetros de paginação e filtros
-    const { page = 1, limit = 20, tematica, coordenador } = req.query;
+    const { page = 1, limit = 10, tematica, coordenador } = req.query;
 
     // Validação dos parâmetros de paginação
     const pageInt = parseInt(page, 10);

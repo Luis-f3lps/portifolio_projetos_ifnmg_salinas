@@ -109,7 +109,7 @@ app.get('/api/portifolio', async (req, res) => { // 'Autenticado' foi removido d
        countQuery += ` WHERE ${whereClauses.join(' AND ')}`;
      }
      const countResult = await pool.query(countQuery, params);
-     const totalItems = parseInt(countResult.rows[0].total, 10);
+     const totalItems = parseInt(countResult.rows[0].total, 15);
      const totalPages = Math.ceil(totalItems / finalLimit);
      
      // --- Adiciona ordenação e paginação à consulta principal ---

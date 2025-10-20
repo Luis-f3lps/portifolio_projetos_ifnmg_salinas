@@ -94,6 +94,7 @@ nav ul li a:hover::after {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-top: 50px;
 }
 
 .about-col-1 {
@@ -501,11 +502,16 @@ nav .fa-solid {
   z-index: 2;
 }
 
+
 nav {
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: fixed;
+    background: white;
+    width: 85%;
 }
+
 
 nav ul li {
   display: inline-block;
@@ -851,6 +857,9 @@ nav ul .fa-solid {
 
   nav {
     margin-top: 40px;
+    position: relative;
+     width: 95%;
+
   }
 }
 

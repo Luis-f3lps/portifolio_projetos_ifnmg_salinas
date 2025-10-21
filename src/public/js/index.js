@@ -417,3 +417,88 @@ function updatePortifolioPagination(
     createButton(currentPage + 1, ">", false, currentPage === totalPages)
   );
 }
+
+/**
+ * Carrega e exibe os dados do portfólio com paginação e filtros.
+ * @param {number} page - O número da página a ser buscada (padrão: 1)
+ * @param {string} tematica - O filtro de temática (padrão: "")
+ * @param {string} coordenador - O filtro de coordenador (padrão: "")
+ */
+async function loadPortifolio(page = 1, tematica = "", coordenador = "") {
+ 
+ // 1. Seleciona o container correto da tabela (portifolio-tbody)
+ const container = document.getElementById("portifolio-tbody");
+ const paginationDiv = document.getElementById("pagination-portifolio");
+ 
+ if (container) {
+    // Colspan="3" para bater com as 3 colunas da tabela
+  container.innerHTML = '<tr><td colspan="3">Carregando...</td></tr>';
+ }
+ if (paginationDiv) {
+  paginationDiv.innerHTML = ""; // Limpa a paginação antiga
+ }
+
+ try {
+  // 2. Monta a URL com os parâmetros de consulta
+  const params = new URLSearchParams({
+   page: page,
+   limit: 15, // O limite que você definiu no backend
+  });
+  if (tematica) {
+   params.append("tematica", tematica);
+  }
+  if (coordenador) {
+   params.append("coordenador", coordenador);
+  }
+
+  // 3. Busca os dados da API
+  const response = await fetch(`/api/portifolio?${params.toString()}`);
+  if (!response.ok) {
+   throw new Error("Falha ao carregar dados do portfólio");
+  }
+  const result = await response.json();
+
+  // 4. Limpa o container
+  if (container) {
+   container.innerHTML = "";
+  } else {
+   // Este erro não deve acontecer, já que o HTML existe
+   console.error("Erro: Elemento com ID 'portifolio-tbody' não foi encontrado.");
+   return;
+  }
+
+  // 5. Renderiza os dados na tabela
+  if (result.data && result.data.length > 0) {
+   result.data.forEach((item) => {
+    const row = document.createElement("tr");
+        
+        // CORREÇÃO: Renderiza apenas as 3 colunas que existem no <thead>
+    row.innerHTML = `
+     <td>${item.titulo}</td>
+     <td>${item.tematica}</td>
+     <td>${item.nome_coordenador}</td>
+    `;
+    container.appendChild(row);
+   });
+  } else {
+   // Caso não venha nenhum resultado (colspan="3")
+   container.innerHTML =
+    '<tr><td colspan="3">Nenhum projeto encontrado.</td></tr>';
+  }
+
+  // 6. Atualiza os controles de paginação
+  updatePortifolioPagination(
+   result.totalPages,
+   result.currentPage,
+   tematica,
+   coordenador
+  );
+  
+ } catch (error) {
+  console.error("Erro ao carregar portfólio:", error);
+  if (container) {
+   container.innerHTML =
+    '<tr><td colspan="3">Erro ao carregar dados. Tente novamente.</td></tr>';
+  }
+ }
+}

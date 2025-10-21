@@ -1054,7 +1054,6 @@ body {
 }
 
 .chart-container-linhas {
-  position: relative;
   width: 100%;
   margin: 20px auto;
   height: 500px;

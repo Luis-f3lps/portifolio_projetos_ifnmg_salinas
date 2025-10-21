@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="images/tl.webp" type="image/png">
@@ -7,33 +8,34 @@
     <link rel="stylesheet" href="css/artigos.css">
     <script src="https://kit.fontawesome.com/915b45d802.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
 
-<!------------------Home--------------->
-<div id="header">
-    <div class="container">
-        <nav>
-            <img src="images/tl.webp" class="logo">
-            <ul id="sidemenu">
-                <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#header">Sobre</a></li>
-                <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#about">Projetos</a></li>
-                <li><a href="/livros">Livros</a></li>
-                <li><a href="/artigos">Artigos</a></li>
-                <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#contact">Contato</a></li>
-                <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
-            </ul>
-            <img src="images/salinas_vertical_jpg (1).jpg" class="logoIFNMG">
-            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
-        </nav>
+    <!------------------Home--------------->
+    <div id="header">
+        <div class="container">
+            <nav>
+                <img src="images/tl.webp" class="logo">
+                <ul id="sidemenu">
+                    <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#header">Sobre</a></li>
+                    <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#about">Projetos</a></li>
+                    <li><a href="/livros">Livros</a></li>
+                    <li><a href="/artigos">Artigos</a></li>
+                    <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#contact">Contato</a></li>
+                    <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
+                </ul>
+                <img src="images/salinas_vertical_jpg (1).jpg" class="logoIFNMG">
+                <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+            </nav>
+        </div>
     </div>
-</div>
 
-<div class="container">
+    <div class="container">
         <div id="about">
-                <div class="row">
-                    <div class="port1">
-                        <h1 class="sub-title">Artigos</h1>
-                        <p style="background-color: rgba(255, 255, 255, 0.05); 
+            <div class="row">
+                <div class="port1">
+                    <h1 class="sub-title">Artigos</h1>
+                    <p style="background-color: rgba(255, 255, 255, 0.05); 
            color: black; 
            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
            font-size: 16px; 
@@ -42,12 +44,17 @@
            border-left: 5px solid #28a745; 
            border-radius: 5px; 
            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);">
-A produção de artigos do IFNMG destaca-se pela sua diversidade e forte aplicação regional, abrangendo desde as ciências agrárias e tecnologia de alimentos até as áreas de humanidades e inovação tecnológica. As pesquisas publicadas buscam resolver desafios específicos do Norte de Minas Gerais, fortalecendo o ecossistema de conhecimento local. Com isso, o instituto reafirma seu compromisso com o desenvolvimento científico e social, transformando a pesquisa em impacto real para a comunidade.</p>
-                        </br>
-                        <p></p>
+                        A produção de artigos do IFNMG destaca-se pela sua diversidade e forte aplicação regional,
+                        abrangendo desde as ciências agrárias e tecnologia de alimentos até as áreas de humanidades e
+                        inovação tecnológica. As pesquisas publicadas buscam resolver desafios específicos do Norte de
+                        Minas Gerais, fortalecendo o ecossistema de conhecimento local. Com isso, o instituto reafirma
+                        seu compromisso com o desenvolvimento científico e social, transformando a pesquisa em impacto
+                        real para a comunidade.</p>
+                    </br>
+                    <p></p>
                     <div class="container-artigos">
                         <h2>Publicações e Artigos</h2>
-                        
+
                         <table>
                             <thead>
                                 <tr>
@@ -57,69 +64,72 @@ A produção de artigos do IFNMG destaca-se pela sua diversidade e forte aplica�
                                 </tr>
                             </thead>
                             <tbody id="artigos-tbody">
-                                </tbody>
+                            </tbody>
                         </table>
                     </div>
-                    </div>
-                </div>
-        </div>
-    </div>
-
-
-
-<!----------------- Contato ------------>
-<div id="contact">
-    <div class="container">
-        <div class="row">
-            <div class="contact-left">
-                <h1 class="sub-title-type-2">Contato do Agente de Inovação do IFNMG Salinas</h1>
-                <p><i class="fa-solid fa-paper-plane"></i> luisphelps671@gmail.com</p>
-                <p><i class="fa-brands fa-square-whatsapp"></i> 38 988643820</p>
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/profile.php?id=100008665060845"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="https://www.instagram.com/luis_f3lps/"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/in/luis-gustavo-barbosa-santiago-648395280/"><i class="fa-brands fa-linkedin"></i></a>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    // Pega todos os elementos com a classe "tab-links" e "tab-contents"
-    var tablinks = document.getElementsByClassName("tab-links");
-    var tabcontents = document.getElementsByClassName("tab-contents");
-    //abre uma aba específica
-    function opentab(tabname) {
-        // Loop para remover a classe "active-link" de todos os links das abas
-        for (var i = 0; i < tablinks.length; i++) {
-            tablinks[i].classList.remove("active-link");
-        }
-        // Mesma coisa da de cima só que com "active-tab" 
-        for (var i = 0; i < tabcontents.length; i++) {
-            tabcontents[i].classList.remove("active-tab");
-            // Se o id for igual ao nome da aba, adiciona a classe "active-tab" a esse trem para mostrar
-            if (tabcontents[i].id === tabname) {
-                tabcontents[i].classList.add("active-tab");
+
+
+    <!----------------- Contato ------------>
+    <div id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="contact-left">
+                    <h1 class="sub-title-type-2">Contato do Agente de Inovação do IFNMG Salinas</h1>
+                    <p><i class="fa-solid fa-paper-plane"></i> luisphelps671@gmail.com</p>
+                    <p><i class="fa-brands fa-square-whatsapp"></i> 38 988643820</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=100008665060845"><i
+                                class="fa-brands fa-facebook"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/luis_f3lps/"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/luis-gustavo-barbosa-santiago-648395280/"><i
+                                class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Pega todos os elementos com a classe "tab-links" e "tab-contents"
+        var tablinks = document.getElementsByClassName("tab-links");
+        var tabcontents = document.getElementsByClassName("tab-contents");
+        //abre uma aba específica
+        function opentab(tabname) {
+            // Loop para remover a classe "active-link" de todos os links das abas
+            for (var i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active-link");
             }
+            // Mesma coisa da de cima só que com "active-tab" 
+            for (var i = 0; i < tabcontents.length; i++) {
+                tabcontents[i].classList.remove("active-tab");
+                // Se o id for igual ao nome da aba, adiciona a classe "active-tab" a esse trem para mostrar
+                if (tabcontents[i].id === tabname) {
+                    tabcontents[i].classList.add("active-tab");
+                }
+            }
+            // Adiciona a classe "active-link" ao link da aba que foi clicada
+            event.currentTarget.classList.add("active-link");
         }
-        // Adiciona a classe "active-link" ao link da aba que foi clicada
-        event.currentTarget.classList.add("active-link");
-    }
-</script>
+    </script>
 
-<script>
-    var sidemenu = document.getElementById("sidemenu");
-    function openmenu(){
-        sidemenu.style.right = "-200px";
-        sidemenu.style.left = "0px";
-    }
-    function clossmenu(){
-        sidemenu.style.left = "-800px";
-    }
-</script>
-<script src="js/artigos.js"></script>
+    <script>
+        var sidemenu = document.getElementById("sidemenu");
+        function openmenu() {
+            sidemenu.style.right = "-200px";
+            sidemenu.style.left = "0px";
+        }
+        function clossmenu() {
+            sidemenu.style.left = "-800px";
+        }
+    </script>
+    <script src="js/artigos.js"></script>
 
 </body>
+
 </html>

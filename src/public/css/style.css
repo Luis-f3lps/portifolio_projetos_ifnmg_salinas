@@ -450,7 +450,12 @@ nav .fa-solid {
     transition: transform 0.5s;
   }
 }
-
+button.pagination-button.active {
+    background-color: #030303;
+}
+.pagination-ellipsis{
+  font-size: x-large;
+}
 /* --------------ódigo CSS para telas com largura maior ou igual a 1080p--------------- */
 @media only screen and (min-width: 1080px) {
   .work-list {
@@ -645,7 +650,7 @@ button[type="submit2"] {
 button {
   padding: 10px;
   border-radius: 4px;
-  background-color: #357093;
+  background-color: #007cc6;
   color: #fff;
   font-size: 16px;
   cursor: pointer;

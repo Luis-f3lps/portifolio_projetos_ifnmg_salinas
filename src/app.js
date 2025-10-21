@@ -203,31 +203,27 @@ app.get('/api/artigos', async (req, res) => {
     }
 });
 
-// ROTA PARA DADOS DO GRÁFICO DE TEMÁTICAS
-app.get('/api/stats/tematicas', async (req, res) => {
-    try {
-        const query = `
-            SELECT 
-                tematica, 
-                COUNT(*) as total_projetos
-            FROM 
-                portifolio
-            WHERE
-                tematica IS NOT NULL AND tematica <> ''
-            GROUP BY 
-                tematica
-            ORDER BY 
-                total_projetos DESC;
-        `;
+app.get('/api/tematicas', async (req, res) => {
+  try {
+    const query = `
+      SELECT DISTINCT tematica 
+      FROM portifolio 
+      WHERE tematica IS NOT NULL AND tematica <> '' 
+      ORDER BY tematica ASC
+    `;
+    const { rows } = await pool.query(query);
+    
+    // Transforma o array de objetos [{tematica: 'IA'}, {tematica: 'Saúde'}]
+    // em um array simples: ['IA', 'Saúde']
+    const tematicas = rows.map(item => item.tematica);
+    res.json(tematicas);
 
-        const { rows } = await pool.query(query);
-        res.json(rows); // Retorna um array como: [{ tematica: 'IA', total_projetos: '10' }, ...]
-
-    } catch (error) {
-        console.error('Erro ao obter estatísticas por temática:', error);
-        res.status(500).json({ error: 'Erro no servidor ao obter estatísticas.' });
-    }
+  } catch (error) {
+    console.error('Erro ao obter temáticas:', error);
+    res.status(500).json({ error: 'Erro no servidor ao obter temáticas.' });
+  }
 });
+
 // ROTA PARA DADOS DO GRÁFICO DE COORDENADORES
 app.get('/api/stats/coordenadores', async (req, res) => {
     try {

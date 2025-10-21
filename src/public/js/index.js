@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Carrega os filtros e a primeira página do portfólio ao iniciar
   loadTematicas();
   loadCoordenadores();
-  loadPortifolio(1);
+  loadPortifolio();
   criarGraficoTematicas();
   criarGraficoPizzaCoordenadores();
   criarGraficoPizzaTematicas();
@@ -300,19 +300,20 @@ async function criarGraficoTematicas() {
  * Carrega a lista de temáticas para o filtro.
  */
 function loadTematicas() {
-  fetch("/api/portifolio?limit=1000") // Pega uma grande quantidade para obter todas as temáticas
-    .then((response) => response.json())
-    .then((data) => {
-      const select = document.getElementById("tematica-select");
-      const tematicas = [...new Set(data.data.map((item) => item.tematica))]; // Cria uma lista de temáticas únicas
-      tematicas.sort().forEach((tematica) => {
-        const option = document.createElement("option");
-        option.value = tematica;
-        option.textContent = tematica;
-        select.appendChild(option);
-      });
-    })
-    .catch((error) => console.error("Erro ao carregar temáticas:", error));
+ fetch("/api/tematicas") // Apenas busca a lista de temáticas
+  .then((response) => response.json())
+  .then((tematicas) => { // 'tematicas' agora é um array simples, ex: ['IA', 'Saúde']
+   const select = document.getElementById("tematica-select");
+   
+   // Não precisa mais de new Set() ou .map()
+   tematicas.forEach((tematica) => {
+    const option = document.createElement("option");
+    option.value = tematica;
+    option.textContent = tematica;
+    select.appendChild(option);
+   });
+  })
+  .catch((error) => console.error("Erro ao carregar temáticas:", error));
 }
 
 /**

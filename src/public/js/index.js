@@ -58,26 +58,42 @@ document.querySelectorAll(".submenu > a").forEach((menu) => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Carrega os filtros e a primeira página do portfólio ao iniciar
-  loadTematicas();
-  loadCoordenadores();
-  loadPortifolio();
-  criarGraficoTematicas();
-  criarGraficoPizzaCoordenadores();
-  criarGraficoPizzaTematicas();
+document.addEventListener("DOMContentLoaded", async function () { // <-- Adicionado 'async'
+ // Carrega os filtros e a primeira página do portfólio
+ loadTematicas();
+ loadCoordenadores();
+ loadPortifolio();
+ 
+ // --- OTIMIZAÇÃO AQUI ---
+ try {
+  // 1. Busca os dados de temáticas UMA VEZ
+  const response = await fetch("/api/stats/tematicas");
+  if (!response.ok) throw new Error("Falha ao buscar dados de temáticas");
+  const dadosTematicas = await response.json();
+ 
+  // 2. Passa os mesmos dados para as duas funções
+  criarGraficoTematicas(dadosTematicas);
+  criarGraficoPizzaTematicas(dadosTematicas);
+ 
+ } catch (error) {
+  console.error("Erro ao carregar estatísticas de temáticas:", error);
+  // Você pode exibir um erro genérico para os gráficos aqui
+ }
+ // --- FIM DA OTIMIZAÇÃO ---
 
-  // Adiciona o evento de 'submit' ao formulário de filtro do portfólio
-  document
-    .getElementById("portifolio-filter-form")
-    .addEventListener("submit", function (event) {
-      event.preventDefault(); // Previne o recarregamento da página
-      const tematica = document.getElementById("tematica-select").value;
-      const coordenador = document.getElementById("coordenador-select").value;
-      loadPortifolio(1, tematica, coordenador); // Carrega a primeira página com os filtros
-    });
+ // Gráfico de coordenadores (este está separado, o que está correto)
+ criarGraficoPizzaCoordenadores();
+
+ // Adiciona o evento de 'submit' ao formulário de filtro do portfólio
+ document
+  .getElementById("portifolio-filter-form")
+  .addEventListener("submit", function (event) {
+   event.preventDefault();
+   const tematica = document.getElementById("tematica-select").value;
+   const coordenador = document.getElementById("coordenador-select").value;
+   loadPortifolio(1, tematica, coordenador);
+  });
 });
-
 // Gráfico 1: Coordenadores
 async function criarGraficoPizzaCoordenadores() {
   try {
@@ -169,132 +185,123 @@ async function criarGraficoPizzaCoordenadores() {
     if (container) container.innerHTML = "Não foi possível carregar o gráfico.";
   }
 }
+// Gráfico 2: Temáticas (Pizza) - Modificado
+function criarGraficoPizzaTematicas(data) { // <-- Recebe 'data'
+ try {
+  // O 'fetch' foi removido daqui
 
-// Gráfico 2: Temáticas
-async function criarGraficoPizzaTematicas() {
-  try {
-    const response = await fetch("/api/stats/tematicas");
-    if (!response.ok) throw new Error("Falha ao buscar dados de temáticas");
-    const data = await response.json();
+  const labels = data.map((item) => item.tematica);
+  const values = data.map((item) => parseInt(item.total_projetos, 10));
+  const totalProjetos = values.reduce((sum, current) => sum + current, 0);
 
-    const labels = data.map((item) => item.tematica);
-    const values = data.map((item) => parseInt(item.total_projetos, 10));
-    const totalProjetos = values.reduce((sum, current) => sum + current, 0);
+  const ctx = document
+   .getElementById("graficoPizzaTematicas")
+   .getContext("2d");
 
-    const ctx = document
-      .getElementById("graficoPizzaTematicas")
-      .getContext("2d");
-
-    new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: "Projetos",
-            data: values,
-            backgroundColor: PALETA_CORES_TEMATICAS,
-            borderColor: "#fff",
-            borderWidth: 2,
-          },
-        ],
+  new Chart(ctx, {
+   type: "pie",
+   data: {
+    labels: labels,
+    datasets: [
+     {
+      label: "Projetos",
+      data: values,
+      backgroundColor: PALETA_CORES_TEMATICAS,
+      borderColor: "#fff",
+      borderWidth: 2,
+     },
+    ],
+   },
+   options: {
+    responsive: true,
+    plugins: {
+     legend: { position: "right" },
+     title: {
+      display: true,
+      text: "Projetos por Área Temática",
+      font: { size: 36 },
+      position: "top",
+      align: "start",
+     },
+     tooltip: {
+      callbacks: {
+       label: function (context) {
+        const label = context.label || "";
+        const value = context.raw;
+        const percentage = ((value / totalProjetos) * 100).toFixed(1);
+        return `${label}: ${value} projetos (${percentage}%)`;
+       },
       },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { position: "right" },
-          title: {
-            display: true,
-            text: "Projetos por Área Temática",
-            font: { size: 36 },
-            position: "top",
-            align: "start",
-          },
-          tooltip: {
-            callbacks: {
-              label: function (context) {
-                const label = context.label || "";
-                const value = context.raw;
-                const percentage = ((value / totalProjetos) * 100).toFixed(1);
-                return `${label}: ${value} projetos (${percentage}%)`;
-              },
-            },
-          },
-        },
-      },
-    });
-  } catch (error) {
-    console.error("Erro ao criar o gráfico de temáticas:", error);
-    const container = document.getElementById(
-      "graficoPizzaTematicas"
-    ).parentElement;
-    if (container) container.innerHTML = "Não foi possível carregar o gráfico.";
-  }
+     },
+    },
+   },
+  });
+ } catch (error) {
+  console.error("Erro ao criar o gráfico de temáticas:", error);
+  const container = document.getElementById(
+   "graficoPizzaTematicas"
+  ).parentElement;
+  if (container) container.innerHTML = "Não foi possível carregar o gráfico.";
+ }
 }
 
-async function criarGraficoTematicas() {
-  try {
-    const response = await fetch("/api/stats/tematicas");
-    if (!response.ok) throw new Error("Falha ao buscar dados de temáticas");
-    const data = await response.json();
+// Gráfico de Barras de Temáticas - Modificado
+function criarGraficoTematicas(data) { // <-- Recebe 'data'
+ try {
+  // O 'fetch' foi removido daqui
 
-    const labels = data.map((item) => item.tematica);
-    const values = data.map((item) => parseInt(item.total_projetos, 10));
+  const labels = data.map((item) => item.tematica);
+  const values = data.map((item) => parseInt(item.total_projetos, 10));
 
-    const ctx = document.getElementById("graficoTematicas").getContext("2d");
+  const ctx = document.getElementById("graficoTematicas").getContext("2d");
 
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: "Quantidade de Projetos",
-            data: values,
-            backgroundColor: PALETA_CORES_TEMATICAS,
-
-            // MUDANÇA 1: Removendo a borda das barras
-            borderWidth: 0,
-          },
-        ],
+  new Chart(ctx, {
+   type: "bar",
+   data: {
+    labels: labels,
+    datasets: [
+     {
+      label: "Quantidade de Projetos",
+      data: values,
+      backgroundColor: PALETA_CORES_TEMATICAS,
+      borderWidth: 0,
+     },
+    ],
+   },
+   options: {
+    indexAxis: "y", 
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+     y: {
+      beginAtZero: true,
+      ticks: {
+       autoSkip: false,
       },
-      options: {
-        // MUDANÇA 2: Transformando em gráfico de barras horizontal
-        indexAxis: "y", // Isso "deita" o gráfico, colocando os labels no eixo Y
-
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              // MUDANÇA 3: Forçando todos os labels a aparecerem
-              autoSkip: false,
-            },
-          },
-          x: {
-            ticks: {
-              stepSize: 1,
-            },
-          },
-        },
-        plugins: {
-          legend: {
-            display: false,
-          },
-          title: {
-            display: true,
-            text: "Projetos por Área Temática",
-            font: { size: 36 },
-          },
-        },
+     },
+     x: {
+      ticks: {
+       stepSize: 1,
       },
-    });
-  } catch (error) {
-    console.error("Erro ao criar o gráfico de barras:", error);
-    const container = document.getElementById("graficoTematicas").parentElement;
-    if (container) container.innerHTML = "Não foi possível carregar o gráfico.";
-  }
+     },
+    },
+    plugins: {
+     legend: {
+      display: false,
+     },
+     title: {
+      display: true,
+      text: "Projetos por Área Temática",
+      font: { size: 36 },
+     },
+    },
+   },
+  });
+ } catch (error) {
+  console.error("Erro ao criar o gráfico de barras:", error);
+  const container = document.getElementById("graficoTematicas").parentElement;
+  if (container) container.innerHTML = "Não foi possível carregar o gráfico.";
+ }
 }
 /**
  * Carrega a lista de temáticas para o filtro.

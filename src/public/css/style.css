@@ -94,7 +94,7 @@ nav ul li a:hover::after {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-top: 50px;
+  margin-top: 70px;
 }
 
 .about-col-1 {

@@ -223,7 +223,7 @@ app.get('/api/tematicas', async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor ao obter temáticas.' });
     }
 });
-pp.get('/api/stats/tematicas', async (req, res) => {
+app.get('/api/stats/tematicas', async (req, res) => {
     try {
         const query = `
       SELECT 

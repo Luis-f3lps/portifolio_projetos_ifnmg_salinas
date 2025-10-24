@@ -29,14 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
         redirecionarSeNaoAutenticado();
     }
 });
-// Adiciona um evento que será executado quando a página terminar de carregar
 document.addEventListener('DOMContentLoaded', function() {
     carregarArtigos();
 });
 
-/**
- * Busca os dados dos artigos na API e atualiza a tabela no HTML.
- */
+
 function carregarArtigos() {
     fetch('/api/artigos')
         .then(response => response.json())
@@ -48,7 +45,6 @@ function carregarArtigos() {
                 data.forEach(artigo => {
                     const tr = document.createElement('tr');
 
-                    // Cria o HTML para a linha da tabela
                     tr.innerHTML = `
                         <td>${artigo.titulo || 'N/A'}</td>
                         <td>${artigo.autores || 'N/A'}</td>

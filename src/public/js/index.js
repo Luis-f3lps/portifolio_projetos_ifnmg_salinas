@@ -64,27 +64,20 @@ document.addEventListener("DOMContentLoaded", async function () { // <-- Adicion
  loadCoordenadores();
  loadPortifolio();
  
- // --- OTIMIZAÇÃO AQUI ---
  try {
-  // 1. Busca os dados de temáticas UMA VEZ
   const response = await fetch("/api/stats/tematicas");
   if (!response.ok) throw new Error("Falha ao buscar dados de temáticas");
   const dadosTematicas = await response.json();
  
-  // 2. Passa os mesmos dados para as duas funções
   criarGraficoTematicas(dadosTematicas);
   criarGraficoPizzaTematicas(dadosTematicas);
  
  } catch (error) {
   console.error("Erro ao carregar estatísticas de temáticas:", error);
-  // Você pode exibir um erro genérico para os gráficos aqui
  }
- // --- FIM DA OTIMIZAÇÃO ---
 
- // Gráfico de coordenadores (este está separado, o que está correto)
  criarGraficoPizzaCoordenadores();
 
- // Adiciona o evento de 'submit' ao formulário de filtro do portfólio
  document
   .getElementById("portifolio-filter-form")
   .addEventListener("submit", function (event) {
@@ -94,6 +87,7 @@ document.addEventListener("DOMContentLoaded", async function () { // <-- Adicion
    loadPortifolio(1, tematica, coordenador);
   });
 });
+
 // Gráfico 1: Coordenadores
 async function criarGraficoPizzaCoordenadores() {
   try {
@@ -185,10 +179,10 @@ async function criarGraficoPizzaCoordenadores() {
     if (container) container.innerHTML = "Não foi possível carregar o gráfico.";
   }
 }
+
 // Gráfico 2: Temáticas (Pizza) - Modificado
 function criarGraficoPizzaTematicas(data) { // <-- Recebe 'data'
  try {
-  // O 'fetch' foi removido daqui
 
   const labels = data.map((item) => item.tematica);
   const values = data.map((item) => parseInt(item.total_projetos, 10));
@@ -245,10 +239,10 @@ function criarGraficoPizzaTematicas(data) { // <-- Recebe 'data'
  }
 }
 
+
 // Gráfico de Barras de Temáticas - Modificado
 function criarGraficoTematicas(data) { // <-- Recebe 'data'
  try {
-  // O 'fetch' foi removido daqui
 
   const labels = data.map((item) => item.tematica);
   const values = data.map((item) => parseInt(item.total_projetos, 10));
@@ -303,6 +297,7 @@ function criarGraficoTematicas(data) { // <-- Recebe 'data'
   if (container) container.innerHTML = "Não foi possível carregar o gráfico.";
  }
 }
+
 /**
  * Carrega a lista de temáticas para o filtro.
  */
@@ -351,12 +346,8 @@ function updatePortifolioPagination(
   const paginationDiv = document.getElementById("pagination-portifolio");
   paginationDiv.innerHTML = "";
 
-  // Quantas páginas mostrar ao lado da página atual
   const context = 1; 
 
-  /**
-   * Helper para criar um botão de paginação
-   */
   const createButton = (page, text, isActive = false, isDisabled = false) => {
     const button = document.createElement("button");
     button.textContent = text || page;
@@ -373,7 +364,6 @@ function updatePortifolioPagination(
     // Adiciona o evento de clique apenas se não for desabilitado
     if (!isDisabled) {
       button.addEventListener("click", () => {
-        // O 'page' aqui será o número da página (ex: 5) ou (currentPage - 1)
         if (page >= 1 && page <= totalPages) {
           loadPortifolio(page, tematica, coordenador);
         }
@@ -382,9 +372,6 @@ function updatePortifolioPagination(
     return button;
   };
 
-  /**
-   * Helper para criar o "..." (ellipsis)
-   */
   const createEllipsis = () => {
     const span = document.createElement("span");
     span.textContent = "...";
@@ -392,34 +379,27 @@ function updatePortifolioPagination(
     return span;
   };
 
-  // --- 1. Botão "Anterior" (<) ---
   paginationDiv.appendChild(
     createButton(currentPage - 1, "<", false, currentPage === 1)
   );
 
   let lastPageShown = 0;
 
-  // --- 2. Números das Páginas ---
   for (let i = 1; i <= totalPages; i++) {
     const isFirstPage = i === 1;
     const isLastPage = i === totalPages;
-    // Verifica se a página 'i' está no "contexto" da página atual
     const isInContext = i >= currentPage - context && i <= currentPage + context;
 
-    // Se for a primeira, a última ou estiver no contexto, mostre o botão
     if (isFirstPage || isLastPage || isInContext) {
-      // Se houver um pulo desde a última página mostrada, adicione "..."
       if (i > lastPageShown + 1) {
         paginationDiv.appendChild(createEllipsis());
       }
       
-      // Adiciona o botão da página
       paginationDiv.appendChild(createButton(i, i, i === currentPage));
       lastPageShown = i;
     }
   }
 
-  // --- 3. Botão "Próximo" (>) ---
   paginationDiv.appendChild(
     createButton(currentPage + 1, ">", false, currentPage === totalPages)
   );
@@ -433,7 +413,6 @@ function updatePortifolioPagination(
  */
 async function loadPortifolio(page = 1, tematica = "", coordenador = "") {
  
- // 1. Seleciona o container correto da tabela (portifolio-tbody)
  const container = document.getElementById("portifolio-tbody");
  const paginationDiv = document.getElementById("pagination-portifolio");
  
@@ -446,10 +425,9 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "") {
  }
 
  try {
-  // 2. Monta a URL com os parâmetros de consulta
   const params = new URLSearchParams({
    page: page,
-   limit: 15, // O limite que você definiu no backend
+   limit: 15, 
   });
   if (tematica) {
    params.append("tematica", tematica);
@@ -458,29 +436,23 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "") {
    params.append("coordenador", coordenador);
   }
 
-  // 3. Busca os dados da API
   const response = await fetch(`/api/portifolio?${params.toString()}`);
   if (!response.ok) {
    throw new Error("Falha ao carregar dados do portfólio");
   }
   const result = await response.json();
 
-  // 4. Limpa o container
   if (container) {
    container.innerHTML = "";
   } else {
-   // Este erro não deve acontecer, já que o HTML existe
    console.error("Erro: Elemento com ID 'portifolio-tbody' não foi encontrado.");
    return;
   }
 
-  // 5. Renderiza os dados na tabela
   if (result.data && result.data.length > 0) {
    result.data.forEach((item) => {
     const row = document.createElement("tr");
-        
-        // CORREÇÃO: Renderiza apenas as 3 colunas que existem no <thead>
-    row.innerHTML = `
+      row.innerHTML = `
      <td>${item.titulo}</td>
      <td>${item.tematica}</td>
      <td>${item.nome_coordenador}</td>
@@ -488,12 +460,10 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "") {
     container.appendChild(row);
    });
   } else {
-   // Caso não venha nenhum resultado (colspan="3")
    container.innerHTML =
     '<tr><td colspan="3">Nenhum projeto encontrado.</td></tr>';
   }
 
-  // 6. Atualiza os controles de paginação
   updatePortifolioPagination(
    result.totalPages,
    result.currentPage,

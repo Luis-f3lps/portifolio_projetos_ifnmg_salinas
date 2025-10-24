@@ -52,11 +52,10 @@ app.listen(PORT, () => {
 });
 
 // Obter lista paginada de projetos do portfólio (com filtros)
-app.get('/api/portifolio', async (req, res) => { // 'Autenticado' foi removido daqui
+app.get('/api/portifolio', async (req, res) => { 
     const { page = 1, limit = 15, tematica, coordenador } = req.query;
 
     // Validação dos parâmetros de paginação
-    // CORREÇÃO AQUI: A base deve ser 10
     const pageInt = parseInt(page, 10);
     const limitInt = parseInt(limit, 10);
 
@@ -86,13 +85,13 @@ app.get('/api/portifolio', async (req, res) => { // 'Autenticado' foi removido d
         const params = [];
         const whereClauses = [];
 
-        // Adiciona filtro por temática (busca parcial, case-insensitive)
+        //  filtro por temática
         if (tematica) {
             params.push(`%${tematica}%`);
             whereClauses.push(`p.tematica ILIKE $${params.length}`);
         }
 
-        // Adiciona filtro por nome do coordenador (busca parcial, case-insensitive)
+        //  filtro por nome do coordenador
         if (coordenador) {
             params.push(`%${coordenador}%`);
             whereClauses.push(`c.nome_coordenador ILIKE $${params.length}`);
@@ -109,7 +108,6 @@ app.get('/api/portifolio', async (req, res) => { // 'Autenticado' foi removido d
         }
         const countResult = await pool.query(countQuery, params);
 
-        // CORREÇÃO AQUI: A base deve ser 10
         const totalItems = parseInt(countResult.rows[0].total, 10);
         const totalPages = Math.ceil(totalItems / finalLimit);
 
@@ -132,7 +130,7 @@ app.get('/api/portifolio', async (req, res) => { // 'Autenticado' foi removido d
 });
 
 // Obter a lista completa de coordenadores
-app.get('/api/coordenadores', async (req, res) => { // 'Autenticado' foi removido daqui
+app.get('/api/coordenadores', async (req, res) => { 
     try {
         const { rows } = await pool.query('SELECT * FROM coordenadores ORDER BY nome_coordenador ASC');
         res.json(rows);
@@ -213,8 +211,6 @@ app.get('/api/tematicas', async (req, res) => {
     `;
         const { rows } = await pool.query(query);
 
-        // Transforma o array de objetos [{tematica: 'IA'}, {tematica: 'Saúde'}]
-        // em um array simples: ['IA', 'Saúde']
         const tematicas = rows.map(item => item.tematica);
         res.json(tematicas);
 
@@ -223,6 +219,7 @@ app.get('/api/tematicas', async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor ao obter temáticas.' });
     }
 });
+
 // ROTA PARA DADOS DO GRÁFICO DE TEMÁTICAS
 app.get('/api/stats/tematicas', async (req, res) => {
   try {
@@ -241,13 +238,14 @@ app.get('/api/stats/tematicas', async (req, res) => {
     `;
 
     const { rows } = await pool.query(query);
-    res.json(rows); // Retorna um array como: [{ tematica: 'IA', total_projetos: '10' }, ...]
+    res.json(rows); 
 
   } catch (error) {
     console.error('Erro ao obter estatísticas por temática:', error);
     res.status(500).json({ error: 'Erro no servidor ao obter estatísticas.' });
   }
 });
+
 // ROTA PARA DADOS DO GRÁFICO DE COORDENADORES
 app.get('/api/stats/coordenadores', async (req, res) => {
     try {
@@ -266,7 +264,6 @@ app.get('/api/stats/coordenadores', async (req, res) => {
         `;
 
         const { rows } = await pool.query(query);
-        // Retorna um array como: [{ nome_coordenador: 'Ana Silva', total_projetos: '5' }, ...]
         res.json(rows);
 
     } catch (error) {

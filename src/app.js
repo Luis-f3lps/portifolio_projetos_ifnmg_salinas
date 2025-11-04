@@ -271,4 +271,21 @@ app.get('/api/stats/coordenadores', async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor ao obter estatísticas.' });
     }
 });
+
+app.get('/api/anos', async (req, res) => { 
+    try {
+
+        const { rows } = await pool.query(
+          'SELECT DISTINCT ano FROM portifolio ORDER BY ano DESC'
+        );
+        
+        // Mapeia para retornar um array simples: ["2025", "2024", "2023"]
+        const anos = rows.map(row => row.ano); 
+        res.json(anos);
+
+    } catch (error) {
+        console.error('Erro ao obter anos:', error);
+        res.status(500).json({ error: 'Erro no servidor ao obter anos.' });
+    }
+});
 export default app;

@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", async function () { // <-- Adicion
  loadTematicas();
  loadCoordenadores();
  loadPortifolio();
- 
+ loadAnos();
  try {
   const response = await fetch("/api/stats/tematicas");
   if (!response.ok) throw new Error("Falha ao buscar dados de temáticas");
@@ -317,7 +317,25 @@ function loadTematicas() {
   })
   .catch((error) => console.error("Erro ao carregar temáticas:", error));
 }
-
+/**
+ * Carrega a lista de anos dos projetos para o filtro.
+ */
+function loadAnos() {
+  // Novo endpoint que você precisará criar no backend
+  fetch("/api/anos") 
+    .then((response) => response.json())
+    .then((anos) => { // Espera um array de anos, ex: ["2025", "2024"]
+      const select = document.getElementById("anoProjeto-select");
+      
+      anos.forEach((ano) => {
+        const option = document.createElement("option");
+        option.value = ano;
+        option.textContent = ano;
+        select.appendChild(option);
+      });
+    })
+    .catch((error) => console.error("Erro ao carregar anos:", error));
+}
 /**
  * Carrega a lista de coordenadores para o filtro.
  */
@@ -435,7 +453,9 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "") {
   if (coordenador) {
    params.append("coordenador", coordenador);
   }
-
+if (ano) { 
+      params.append("ano", ano);
+    }
   const response = await fetch(`/api/portifolio?${params.toString()}`);
   if (!response.ok) {
    throw new Error("Falha ao carregar dados do portfólio");
@@ -468,7 +488,8 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "") {
    result.totalPages,
    result.currentPage,
    tematica,
-   coordenador
+   coordenador, 
+   ano
   );
   
  } catch (error) {

@@ -359,7 +359,8 @@ function updatePortifolioPagination(
   totalPages,
   currentPage,
   tematica = "",
-  coordenador = ""
+  coordenador = "",
+  ano = ""
 ) {
   const paginationDiv = document.getElementById("pagination-portifolio");
   paginationDiv.innerHTML = "";
@@ -380,10 +381,11 @@ function updatePortifolioPagination(
     }
 
     // Adiciona o evento de clique apenas se não for desabilitado
-    if (!isDisabled) {
+if (!isDisabled) {
       button.addEventListener("click", () => {
         if (page >= 1 && page <= totalPages) {
-          loadPortifolio(page, tematica, coordenador);
+          // E se a chamada aqui inclui 'ano'
+          loadPortifolio(page, tematica, coordenador, ano); 
         }
       });
     }
@@ -428,6 +430,7 @@ function updatePortifolioPagination(
  * @param {number} page - O número da página a ser buscada (padrão: 1)
  * @param {string} tematica - O filtro de temática (padrão: "")
  * @param {string} coordenador - O filtro de coordenador (padrão: "")
+ * * @param {string} ano -
  */
 async function loadPortifolio(page = 1, tematica = "", coordenador = "") {
  
@@ -476,6 +479,8 @@ if (ano) {
      <td>${item.titulo}</td>
      <td>${item.tematica}</td>
      <td>${item.nome_coordenador}</td>
+      <td>${item.ano}</td>
+
     `;
     container.appendChild(row);
    });

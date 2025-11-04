@@ -53,7 +53,7 @@ app.listen(PORT, () => {
 
 // Obter lista paginada de projetos do portfólio (com filtros)
 app.get('/api/portifolio', async (req, res) => { 
-    const { page = 1, limit = 15, tematica, coordenador } = req.query;
+    const { page = 1, limit = 15, tematica, coordenador, ano } = req.query;
 
     // Validação dos parâmetros de paginação
     const pageInt = parseInt(page, 10);
@@ -95,6 +95,10 @@ app.get('/api/portifolio', async (req, res) => {
         if (coordenador) {
             params.push(`%${coordenador}%`);
             whereClauses.push(`c.nome_coordenador ILIKE $${params.length}`);
+        }
+        if (ano) { // <-- ADICIONA O FILTRO DE ANO
+            queryParams.push(ano);
+            whereClauses.push(`p.ano = $${queryParams.length}`); 
         }
 
         if (whereClauses.length > 0) {

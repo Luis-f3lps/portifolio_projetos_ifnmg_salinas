@@ -59,33 +59,33 @@ document.querySelectorAll(".submenu > a").forEach((menu) => {
 });
 
 document.addEventListener("DOMContentLoaded", async function () { // <-- Adicionado 'async'
- // Carrega os filtros e a primeira página do portfólio
- loadTematicas();
- loadCoordenadores();
- loadPortifolio();
- loadAnos();
- try {
-  const response = await fetch("/api/stats/tematicas");
-  if (!response.ok) throw new Error("Falha ao buscar dados de temáticas");
-  const dadosTematicas = await response.json();
- 
-  criarGraficoTematicas(dadosTematicas);
-  criarGraficoPizzaTematicas(dadosTematicas);
- 
- } catch (error) {
-  console.error("Erro ao carregar estatísticas de temáticas:", error);
- }
+  // Carrega os filtros e a primeira página do portfólio
+  loadTematicas();
+  loadCoordenadores();
+  loadPortifolio();
+  loadAnos();
+  try {
+    const response = await fetch("/api/stats/tematicas");
+    if (!response.ok) throw new Error("Falha ao buscar dados de temáticas");
+    const dadosTematicas = await response.json();
 
- criarGraficoPizzaCoordenadores();
+    criarGraficoTematicas(dadosTematicas);
+    criarGraficoPizzaTematicas(dadosTematicas);
 
- document
-  .getElementById("portifolio-filter-form")
-  .addEventListener("submit", function (event) {
-   event.preventDefault();
-   const tematica = document.getElementById("tematica-select").value;
-   const coordenador = document.getElementById("coordenador-select").value;
-   loadPortifolio(1, tematica, coordenador);
-  });
+  } catch (error) {
+    console.error("Erro ao carregar estatísticas de temáticas:", error);
+  }
+
+  criarGraficoPizzaCoordenadores();
+
+  document
+    .getElementById("portifolio-filter-form")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+      const tematica = document.getElementById("tematica-select").value;
+      const coordenador = document.getElementById("coordenador-select").value;
+      loadPortifolio(1, tematica, coordenador);
+    });
 });
 
 // Gráfico 1: Coordenadores
@@ -182,151 +182,151 @@ async function criarGraficoPizzaCoordenadores() {
 
 // Gráfico 2: Temáticas (Pizza) - Modificado
 function criarGraficoPizzaTematicas(data) { // <-- Recebe 'data'
- try {
+  try {
 
-  const labels = data.map((item) => item.tematica);
-  const values = data.map((item) => parseInt(item.total_projetos, 10));
-  const totalProjetos = values.reduce((sum, current) => sum + current, 0);
+    const labels = data.map((item) => item.tematica);
+    const values = data.map((item) => parseInt(item.total_projetos, 10));
+    const totalProjetos = values.reduce((sum, current) => sum + current, 0);
 
-  const ctx = document
-   .getElementById("graficoPizzaTematicas")
-   .getContext("2d");
+    const ctx = document
+      .getElementById("graficoPizzaTematicas")
+      .getContext("2d");
 
-  new Chart(ctx, {
-   type: "pie",
-   data: {
-    labels: labels,
-    datasets: [
-     {
-      label: "Projetos",
-      data: values,
-      backgroundColor: PALETA_CORES_TEMATICAS,
-      borderColor: "#fff",
-      borderWidth: 2,
-     },
-    ],
-   },
-   options: {
-    responsive: true,
-    plugins: {
-     legend: { position: "right" },
-     title: {
-      display: true,
-      text: "Projetos por Área Temática",
-      font: { size: 36 },
-      position: "top",
-      align: "start",
-     },
-     tooltip: {
-      callbacks: {
-       label: function (context) {
-        const label = context.label || "";
-        const value = context.raw;
-        const percentage = ((value / totalProjetos) * 100).toFixed(1);
-        return `${label}: ${value} projetos (${percentage}%)`;
-       },
+    new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Projetos",
+            data: values,
+            backgroundColor: PALETA_CORES_TEMATICAS,
+            borderColor: "#fff",
+            borderWidth: 2,
+          },
+        ],
       },
-     },
-    },
-   },
-  });
- } catch (error) {
-  console.error("Erro ao criar o gráfico de temáticas:", error);
-  const container = document.getElementById(
-   "graficoPizzaTematicas"
-  ).parentElement;
-  if (container) container.innerHTML = "Não foi possível carregar o gráfico.";
- }
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: "right" },
+          title: {
+            display: true,
+            text: "Projetos por Área Temática",
+            font: { size: 36 },
+            position: "top",
+            align: "start",
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const label = context.label || "";
+                const value = context.raw;
+                const percentage = ((value / totalProjetos) * 100).toFixed(1);
+                return `${label}: ${value} projetos (${percentage}%)`;
+              },
+            },
+          },
+        },
+      },
+    });
+  } catch (error) {
+    console.error("Erro ao criar o gráfico de temáticas:", error);
+    const container = document.getElementById(
+      "graficoPizzaTematicas"
+    ).parentElement;
+    if (container) container.innerHTML = "Não foi possível carregar o gráfico.";
+  }
 }
 
 
 // Gráfico de Barras de Temáticas - Modificado
 function criarGraficoTematicas(data) { // <-- Recebe 'data'
- try {
+  try {
 
-  const labels = data.map((item) => item.tematica);
-  const values = data.map((item) => parseInt(item.total_projetos, 10));
+    const labels = data.map((item) => item.tematica);
+    const values = data.map((item) => parseInt(item.total_projetos, 10));
 
-  const ctx = document.getElementById("graficoTematicas").getContext("2d");
+    const ctx = document.getElementById("graficoTematicas").getContext("2d");
 
-  new Chart(ctx, {
-   type: "bar",
-   data: {
-    labels: labels,
-    datasets: [
-     {
-      label: "Quantidade de Projetos",
-      data: values,
-      backgroundColor: PALETA_CORES_TEMATICAS,
-      borderWidth: 0,
-     },
-    ],
-   },
-   options: {
-    indexAxis: "y", 
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-     y: {
-      beginAtZero: true,
-      ticks: {
-       autoSkip: false,
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Quantidade de Projetos",
+            data: values,
+            backgroundColor: PALETA_CORES_TEMATICAS,
+            borderWidth: 0,
+          },
+        ],
       },
-     },
-     x: {
-      ticks: {
-       stepSize: 1,
+      options: {
+        indexAxis: "y",
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              autoSkip: false,
+            },
+          },
+          x: {
+            ticks: {
+              stepSize: 1,
+            },
+          },
+        },
+        plugins: {
+          legend: {
+            display: false,
+          },
+          title: {
+            display: true,
+            text: "Projetos por Área Temática",
+            font: { size: 36 },
+          },
+        },
       },
-     },
-    },
-    plugins: {
-     legend: {
-      display: false,
-     },
-     title: {
-      display: true,
-      text: "Projetos por Área Temática",
-      font: { size: 36 },
-     },
-    },
-   },
-  });
- } catch (error) {
-  console.error("Erro ao criar o gráfico de barras:", error);
-  const container = document.getElementById("graficoTematicas").parentElement;
-  if (container) container.innerHTML = "Não foi possível carregar o gráfico.";
- }
+    });
+  } catch (error) {
+    console.error("Erro ao criar o gráfico de barras:", error);
+    const container = document.getElementById("graficoTematicas").parentElement;
+    if (container) container.innerHTML = "Não foi possível carregar o gráfico.";
+  }
 }
 
 /**
  * Carrega a lista de temáticas para o filtro.
  */
 function loadTematicas() {
- fetch("/api/tematicas") // Apenas busca a lista de temáticas
-  .then((response) => response.json())
-  .then((tematicas) => { // 'tematicas' agora é um array simples, ex: ['IA', 'Saúde']
-   const select = document.getElementById("tematica-select");
-   
-   // Não precisa mais de new Set() ou .map()
-   tematicas.forEach((tematica) => {
-    const option = document.createElement("option");
-    option.value = tematica;
-    option.textContent = tematica;
-    select.appendChild(option);
-   });
-  })
-  .catch((error) => console.error("Erro ao carregar temáticas:", error));
+  fetch("/api/tematicas") // Apenas busca a lista de temáticas
+    .then((response) => response.json())
+    .then((tematicas) => { // 'tematicas' agora é um array simples, ex: ['IA', 'Saúde']
+      const select = document.getElementById("tematica-select");
+
+      // Não precisa mais de new Set() ou .map()
+      tematicas.forEach((tematica) => {
+        const option = document.createElement("option");
+        option.value = tematica;
+        option.textContent = tematica;
+        select.appendChild(option);
+      });
+    })
+    .catch((error) => console.error("Erro ao carregar temáticas:", error));
 }
 /**
  * Carrega a lista de anos dos projetos para o filtro.
  */
 function loadAnos() {
   // Novo endpoint que você precisará criar no backend
-  fetch("/api/anos") 
+  fetch("/api/anos")
     .then((response) => response.json())
     .then((anos) => { // Espera um array de anos, ex: ["2025", "2024"]
       const select = document.getElementById("anoProjeto-select");
-      
+
       anos.forEach((ano) => {
         const option = document.createElement("option");
         option.value = ano;
@@ -365,7 +365,7 @@ function updatePortifolioPagination(
   const paginationDiv = document.getElementById("pagination-portifolio");
   paginationDiv.innerHTML = "";
 
-  const context = 1; 
+  const context = 1;
 
   const createButton = (page, text, isActive = false, isDisabled = false) => {
     const button = document.createElement("button");
@@ -381,11 +381,11 @@ function updatePortifolioPagination(
     }
 
     // Adiciona o evento de clique apenas se não for desabilitado
-if (!isDisabled) {
+    if (!isDisabled) {
       button.addEventListener("click", () => {
         if (page >= 1 && page <= totalPages) {
           // E se a chamada aqui inclui 'ano'
-          loadPortifolio(page, tematica, coordenador, ano); 
+          loadPortifolio(page, tematica, coordenador, ano);
         }
       });
     }
@@ -414,7 +414,7 @@ if (!isDisabled) {
       if (i > lastPageShown + 1) {
         paginationDiv.appendChild(createEllipsis());
       }
-      
+
       paginationDiv.appendChild(createButton(i, i, i === currentPage));
       lastPageShown = i;
     }
@@ -433,75 +433,75 @@ if (!isDisabled) {
  * * @param {string} ano -
  */
 async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "") {
- 
- const container = document.getElementById("portifolio-tbody");
- const paginationDiv = document.getElementById("pagination-portifolio");
- 
- if (container) {
-    // Colspan="3" para bater com as 3 colunas da tabela
-  container.innerHTML = '<tr><td colspan="3">Carregando...</td></tr>';
- }
- if (paginationDiv) {
-  paginationDiv.innerHTML = ""; // Limpa a paginação antiga
- }
 
- try {
-  const params = new URLSearchParams({
-   page: page,
-   limit: 15, 
-  });
-  if (tematica) {
-   params.append("tematica", tematica);
-  }
-  if (coordenador) {
-   params.append("coordenador", coordenador);
-  }
-if (ano) { 
-      params.append("ano", ano);
-    }
-  const response = await fetch(`/api/portifolio?${params.toString()}`);
-  if (!response.ok) {
-   throw new Error("Falha ao carregar dados do portfólio");
-  }
-  const result = await response.json();
+  const container = document.getElementById("portifolio-tbody");
+  const paginationDiv = document.getElementById("pagination-portifolio");
 
   if (container) {
-   container.innerHTML = "";
-  } else {
-   console.error("Erro: Elemento com ID 'portifolio-tbody' não foi encontrado.");
-   return;
+    // Colspan="3" para bater com as 3 colunas da tabela
+    container.innerHTML = '<tr><td colspan="3">Carregando...</td></tr>';
+  }
+  if (paginationDiv) {
+    paginationDiv.innerHTML = ""; // Limpa a paginação antiga
   }
 
-  if (result.data && result.data.length > 0) {
-   result.data.forEach((item) => {
-    const row = document.createElement("tr");
-      row.innerHTML = `
+  try {
+    const params = new URLSearchParams({
+      page: page,
+      limit: 15,
+    });
+    if (tematica) {
+      params.append("tematica", tematica);
+    }
+    if (coordenador) {
+      params.append("coordenador", coordenador);
+    }
+    if (ano) {
+      params.append("ano", ano);
+    }
+    const response = await fetch(`/api/portifolio?${params.toString()}`);
+    if (!response.ok) {
+      throw new Error("Falha ao carregar dados do portfólio");
+    }
+    const result = await response.json();
+
+    if (container) {
+      container.innerHTML = "";
+    } else {
+      console.error("Erro: Elemento com ID 'portifolio-tbody' não foi encontrado.");
+      return;
+    }
+
+    if (result.data && result.data.length > 0) {
+      result.data.forEach((item) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
      <td>${item.titulo}</td>
      <td>${item.tematica}</td>
      <td>${item.nome_coordenador}</td>
-      <td>${item.ano}</td>
+      <td>${item.ano|| 'N/D'}</td>
 
     `;
-    container.appendChild(row);
-   });
-  } else {
-   container.innerHTML =
-    '<tr><td colspan="3">Nenhum projeto encontrado.</td></tr>';
-  }
+        container.appendChild(row);
+      });
+    } else {
+      container.innerHTML =
+        '<tr><td colspan="3">Nenhum projeto encontrado.</td></tr>';
+    }
 
-  updatePortifolioPagination(
-   result.totalPages,
-   result.currentPage,
-   tematica,
-   coordenador, 
-   ano
-  );
-  
- } catch (error) {
-  console.error("Erro ao carregar portfólio:", error);
-  if (container) {
-   container.innerHTML =
-    '<tr><td colspan="3">Erro ao carregar dados. Tente novamente.</td></tr>';
+    updatePortifolioPagination(
+      result.totalPages,
+      result.currentPage,
+      tematica,
+      coordenador,
+      ano
+    );
+
+  } catch (error) {
+    console.error("Erro ao carregar portfólio:", error);
+    if (container) {
+      container.innerHTML =
+        '<tr><td colspan="3">Erro ao carregar dados. Tente novamente.</td></tr>';
+    }
   }
- }
 }

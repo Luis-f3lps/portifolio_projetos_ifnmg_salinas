@@ -55,50 +55,52 @@ app.listen(PORT, () => {
 app.get('/api/portifolio', async (req, res) => { 
     const { page = 1, limit = 15, tematica, coordenador, ano } = req.query;
 
-    // Validação dos parâmetros de paginação
+    // ... (toda a sua validação de paginação está ótima) ...
     const pageInt = parseInt(page, 10);
     const limitInt = parseInt(limit, 10);
-
     if (isNaN(pageInt) || isNaN(limitInt) || limitInt <= 0 || pageInt <= 0) {
         return res.status(400).json({ error: 'Os parâmetros de página e limite devem ser números inteiros positivos.' });
     }
-
-    // Limite máximo de itens por página
     const MAX_LIMIT = 100;
-    const finalLimit = Math.min(limitInt, MAX_LIMIT); // Agora limitInt será 15
+    const finalLimit = Math.min(limitInt, MAX_LIMIT);
     const offset = (pageInt - 1) * finalLimit;
 
     try {
         let query = `
-       SELECT 
-         p.id,
-         p.processo,
-         p.titulo,
-         p.tematica,
-         c.nome_coordenador
-       FROM 
-         portifolio p
-       JOIN 
-         coordenadores c ON p.coordenador_id = c.coordenador_id
-     `;
+        SELECT 
+            p.id,
+            p.processo,
+            p.titulo,
+            p.tematica,
+            c.nome_coordenador,
+            p.ano  -- // <-- MUDANÇA 1: Adicionar o ano no SELECT
+        FROM 
+            portifolio p
+        JOIN 
+            coordenadores c ON p.coordenador_id = c.coordenador_id
+        `;
 
         const params = [];
         const whereClauses = [];
 
-        //  filtro por temática
+        // filtro por temática
         if (tematica) {
             params.push(`%${tematica}%`);
             whereClauses.push(`p.tematica ILIKE $${params.length}`);
         }
 
-        //  filtro por nome do coordenador
+        // filtro por nome do coordenador
         if (coordenador) {
             params.push(`%${coordenador}%`);
             whereClauses.push(`c.nome_coordenador ILIKE $${params.length}`);
         }
-        if (ano) { // <-- ADICIONA O FILTRO DE ANO
-            queryParams.push(ano);
-            whereClauses.push(`p.ano = $${queryParams.length}`); 
+
+        // filtro de ano
+        if (ano) { 
+            // <-- MUDANÇA 2: Usar 'params' em vez de 'queryParams'
+            params.push(ano); 
+            // <-- MUDANÇA 3: Usar 'params.length'
+            whereClauses.push(`p.ano = $${params.length}`); 
         }
 
         if (whereClauses.length > 0) {
@@ -110,7 +112,9 @@ app.get('/api/portifolio', async (req, res) => {
         if (whereClauses.length > 0) {
             countQuery += ` WHERE ${whereClauses.join(' AND ')}`;
         }
-        const countResult = await pool.query(countQuery, params);
+        
+        // Aqui também estava o erro: a 'params' não tinha o ano antes
+        const countResult = await pool.query(countQuery, params); 
 
         const totalItems = parseInt(countResult.rows[0].total, 10);
         const totalPages = Math.ceil(totalItems / finalLimit);
@@ -122,7 +126,7 @@ app.get('/api/portifolio', async (req, res) => {
         const { rows } = await pool.query(query, params);
 
         res.json({
-            data: rows,
+            data: rows, // 'rows' agora vai conter a coluna 'ano'
             totalItems,
             totalPages,
             currentPage: pageInt,

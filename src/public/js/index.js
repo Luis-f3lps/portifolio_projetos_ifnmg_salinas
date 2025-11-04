@@ -439,7 +439,7 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
 
   if (container) {
     // Colspan="3" para bater com as 3 colunas da tabela
-    container.innerHTML = '<tr><td colspan="3">Carregando...</td></tr>';
+    container.innerHTML = '<tr><td colspan="4">Carregando...</td></tr>';
   }
   if (paginationDiv) {
     paginationDiv.innerHTML = ""; // Limpa a paginação antiga
@@ -486,7 +486,7 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
       });
     } else {
       container.innerHTML =
-        '<tr><td colspan="3">Nenhum projeto encontrado.</td></tr>';
+        '<tr><td colspan="4">Nenhum projeto encontrado.</td></tr>';
     }
 
     updatePortifolioPagination(
@@ -501,7 +501,7 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
     console.error("Erro ao carregar portfólio:", error);
     if (container) {
       container.innerHTML =
-        '<tr><td colspan="3">Erro ao carregar dados. Tente novamente.</td></tr>';
+        '<tr><td colspan="4">Erro ao carregar dados. Tente novamente.</td></tr>';
     }
   }
 }

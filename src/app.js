@@ -95,13 +95,11 @@ app.get('/api/portifolio', async (req, res) => {
             whereClauses.push(`c.nome_coordenador ILIKE $${params.length}`);
         }
 
-        // filtro de ano
-        if (ano) { 
-            // <-- MUDANÇA 2: Usar 'params' em vez de 'queryParams'
-            params.push(ano); 
-            // <-- MUDANÇA 3: Usar 'params.length'
-            whereClauses.push(`p.ano = $${params.length}`); 
-        }
+// filtro de ano
+    if (ano) { 
+      params.push(ano); 
+whereClauses.push(`p.ano = $${params.length}::SMALLINT`);
+    }
 
         if (whereClauses.length > 0) {
             query += ` WHERE ${whereClauses.join(' AND ')}`;

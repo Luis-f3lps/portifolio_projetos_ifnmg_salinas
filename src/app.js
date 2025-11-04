@@ -50,43 +50,55 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Servidor rodando no endereço http://localhost:${PORT}`);
 });
-app.get('/api/portifolio', async (req, res) => { 
+app.get('/api/portifolio', async (req, res) => {
     const { page = 1, limit = 15, tematica, coordenador, ano } = req.query;
 
-    // ADICIONE ESTE LOG BEM AQUI
-    console.log('\n--- [DEBUG] NOVO REQUEST RECEBIDO ---');
-    console.log('Parâmetros (req.query):', req.query);
-
-
-    // ... (validação de paginação) ...
+    // Validação dos parâmetros de paginação
     const pageInt = parseInt(page, 10);
-    // ... (resto da validação) ...
+    const limitInt = parseInt(limit, 10);
+
+    if (isNaN(pageInt) || isNaN(limitInt) || limitInt <= 0 || pageInt <= 0) {
+        return res.status(400).json({ error: 'Os parâmetros de página e limite devem ser números inteiros positivos.' });
+    }
+
+    const MAX_LIMIT = 100;
+    const finalLimit = Math.min(limitInt, MAX_LIMIT);
+    const offset = (pageInt - 1) * finalLimit;
 
     try {
-let query = `
-SELECT 
-    p.id,
-    p.processo,
-    p.titulo,
-    p.tematica,
-    c.nome_coordenador,
-    p.ano
-FROM 
-    portifolio p
-JOIN 
-    coordenadores c ON p.coordenador_id = c.id
-        `;
+        // ----- [FIX 1] -----
+        let query = `
+        SELECT 
+            p.id,
+            p.processo,
+            p.titulo,
+            p.tematica,
+            c.nome_coordenador,
+            p.ano
+        FROM 
+            portifolio p
+        JOIN 
+            coordenadores c ON p.coordenador_id = c.id
+        `; // <-- DEVE SER c.id
 
         const params = [];
         const whereClauses = [];
 
-        // ... (if tematica) ...
-        // ... (if coordenador) ...
+        // filtro por temática
+        if (tematica) {
+            params.push(`%${tematica}%`);
+            whereClauses.push(`p.tematica ILIKE $${params.length}`);
+        }
+
+        // filtro por nome do coordenador
+        if (coordenador) {
+            params.push(`%${coordenador}%`);
+            whereClauses.push(`c.nome_coordenador ILIKE $${params.length}`);
+        }
 
         // filtro de ano
-        if (ano) { 
-            console.log('--- [DEBUG] O FILTRO DE ANO ESTÁ ATIVO ---'); // Log para ver se entrou no IF
-            params.push(ano); 
+        if (ano) {
+            params.push(ano);
             whereClauses.push(`p.ano = $${params.length}::SMALLINT`);
         }
 
@@ -94,47 +106,40 @@ JOIN
             query += ` WHERE ${whereClauses.join(' AND ')}`;
         }
 
-        // --- Contagem do total de itens ---
-let countQuery = `SELECT COUNT(*) as total FROM portifolio p JOIN coordenadores c ON p.coordenador_id = c.id`;        if (whereClauses.length > 0) {
+        // --- Contagem do total de itens com os filtros aplicados ---
+
+        // ----- [FIX 2] -----
+        let countQuery = `SELECT COUNT(*) as total FROM portifolio p JOIN coordenadores c ON p.coordenador_id = c.id`; // <-- TAMBÉM DEVE SER c.id
+
+        if (whereClauses.length > 0) {
             countQuery += ` WHERE ${whereClauses.join(' AND ')}`;
         }
-        
-        // ADICIONE ESTES LOGS ANTES DA CONTAGEM
-        console.log('--- [DEBUG] QUERY DE CONTAGEM ---');
-        console.log('SQL:', countQuery);
-        console.log('Parâmetros:', params);
 
-        const countResult = await pool.query(countQuery, params); 
+        const countResult = await pool.query(countQuery, params);
 
         const totalItems = parseInt(countResult.rows[0].total, 10);
         const totalPages = Math.ceil(totalItems / finalLimit);
 
-        // --- Adiciona ordenação e paginação ---
+        // --- Adiciona ordenação e paginação à consulta principal ---
         query += ` ORDER BY LOWER(p.titulo) ASC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
         params.push(finalLimit, offset);
-
-        // ADICIONE ESTES LOGS ANTES DA QUERY PRINCIPAL
-        console.log('--- [DEBUG] QUERY PRINCIPAL ---');
-        console.log('SQL:', query);
-        console.log('Parâmetros:', params);
 
         const { rows } = await pool.query(query, params);
 
         res.json({
-            data: rows, 
+            data: rows,
             totalItems,
             totalPages,
             currentPage: pageInt,
         });
     } catch (error) {
-        // ADICIONE ESTE LOG NO ERRO
-        console.error('--- [DEBUG] OCORREU UM ERRO ---', error);
+        console.error('Erro ao obter portfólio:', error);
         res.status(500).json({ error: 'Erro no servidor ao obter portfólio.' });
     }
 });
 
 // Obter a lista completa de coordenadores
-app.get('/api/coordenadores', async (req, res) => { 
+app.get('/api/coordenadores', async (req, res) => {
     try {
         const { rows } = await pool.query('SELECT * FROM coordenadores ORDER BY nome_coordenador ASC');
         res.json(rows);
@@ -226,8 +231,8 @@ app.get('/api/tematicas', async (req, res) => {
 
 // ROTA PARA DADOS DO GRÁFICO DE TEMÁTICAS
 app.get('/api/stats/tematicas', async (req, res) => {
-  try {
-    const query = `
+    try {
+        const query = `
       SELECT 
         tematica, 
         COUNT(*) as total_projetos
@@ -241,13 +246,13 @@ app.get('/api/stats/tematicas', async (req, res) => {
         total_projetos DESC;
     `;
 
-    const { rows } = await pool.query(query);
-    res.json(rows); 
+        const { rows } = await pool.query(query);
+        res.json(rows);
 
-  } catch (error) {
-    console.error('Erro ao obter estatísticas por temática:', error);
-    res.status(500).json({ error: 'Erro no servidor ao obter estatísticas.' });
-  }
+    } catch (error) {
+        console.error('Erro ao obter estatísticas por temática:', error);
+        res.status(500).json({ error: 'Erro no servidor ao obter estatísticas.' });
+    }
 });
 
 // ROTA PARA DADOS DO GRÁFICO DE COORDENADORES
@@ -276,13 +281,13 @@ app.get('/api/stats/coordenadores', async (req, res) => {
     }
 });
 
-app.get('/api/anos', async (req, res) => { 
+app.get('/api/anos', async (req, res) => {
     try {
         // MUDE AQUI: de 'projetos' para 'portifolio'
         const { rows } = await pool.query(
-          'SELECT DISTINCT ano FROM portifolio WHERE ano IS NOT NULL ORDER BY ano DESC'
+            'SELECT DISTINCT ano FROM portifolio WHERE ano IS NOT NULL ORDER BY ano DESC'
         );
-        
+
         // Mapeia para retornar um array simples: ["2024", "2023", ...]
         const anos = rows.map(row => row.ano.toString()); // .toString() para garantir
         res.json(anos);

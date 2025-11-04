@@ -70,16 +70,26 @@ app.get('/api/portifolio', async (req, res) => {
         // ----- [FIX 1] -----
         let query = `
         SELECT 
+
             p.id,
+
             p.processo,
+
             p.titulo,
+
             p.tematica,
+
             c.nome_coordenador,
-            p.ano
+
+            p.ano  -- // <-- MUDANÇA 1: Adicionar o ano no SELECT
+
         FROM 
+
             portifolio p
+
         JOIN 
-            coordenadores c ON p.coordenador_id = c.id
+
+            coordenadores c ON p.coordenador_id = c.coordenador_id
         `; // <-- APOSTO UM PÃO DE QUEIJO QUE AQUI ESTÁ O ERRO: c.id
 
         const params = [];

@@ -280,13 +280,13 @@ app.get('/api/stats/coordenadores', async (req, res) => {
 
 app.get('/api/anos', async (req, res) => { 
     try {
-
+        // MUDE AQUI: de 'projetos' para 'portifolio'
         const { rows } = await pool.query(
-          'SELECT DISTINCT ano FROM portifolio ORDER BY ano DESC'
+          'SELECT DISTINCT ano FROM portifolio WHERE ano IS NOT NULL ORDER BY ano DESC'
         );
         
-        // Mapeia para retornar um array simples: ["2025", "2024", "2023"]
-        const anos = rows.map(row => row.ano); 
+        // Mapeia para retornar um array simples: ["2024", "2023", ...]
+        const anos = rows.map(row => row.ano.toString()); // .toString() para garantir
         res.json(anos);
 
     } catch (error) {

@@ -95,8 +95,7 @@ JOIN
         }
 
         // --- Contagem do total de itens ---
-        let countQuery = `SELECT COUNT(*) as total FROM portifolio p JOIN coordenadores c ON p.coordenador_id = c.coordenador_id`;
-        if (whereClauses.length > 0) {
+let countQuery = `SELECT COUNT(*) as total FROM portifolio p JOIN coordenadores c ON p.coordenador_id = c.id`;        if (whereClauses.length > 0) {
             countQuery += ` WHERE ${whereClauses.join(' AND ')}`;
         }
         

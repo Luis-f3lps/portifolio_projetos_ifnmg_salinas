@@ -64,12 +64,17 @@ app.get('/api/portifolio', async (req, res) => {
 
     try {
         let query = `
-        SELECT 
-        // ... (seu select) ...
-            p.ano 
-        FROM 
-            portifolio p
-        // ... (seu join) ...
+SELECT 
+      p.id,
+      p.processo,
+      p.titulo,
+      p.tematica,
+      c.nome_coordenador,
+      p.ano
+    FROM 
+      portifolio p
+    JOIN 
+      coordenadores c ON p.coordenador_id = c.coordenador_id
         `;
 
         const params = [];

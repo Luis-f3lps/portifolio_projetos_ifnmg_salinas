@@ -99,9 +99,8 @@ app.get('/api/portifolio', async (req, res) => {
 
         // filtro de ano
         if (ano) { 
+            console.log('--- [DEBUG] FILTRO DE ANO ATIVADO ---'); // <-- Queremos ver isso
             params.push(ano); 
-            // ----- [FIX 3] -----
-            // Mantendo a correção do tipo de dado (que era o erro 500 original)
             whereClauses.push(`p.ano = $${params.length}::SMALLINT`); 
         }
 
@@ -109,10 +108,7 @@ app.get('/api/portifolio', async (req, res) => {
             query += ` WHERE ${whereClauses.join(' AND ')}`;
         }
 
-        // --- Contagem do total de itens com os filtros aplicados ---
-        
-        // ----- [FIX 2] -----
-        // Voltando ao SEU JOIN original na query de contagem.
+
         let countQuery = `SELECT COUNT(*) as total FROM portifolio p JOIN coordenadores c ON p.coordenador_id = c.coordenador_id`; 
 
         if (whereClauses.length > 0) {
@@ -285,15 +281,15 @@ app.get('/api/stats/coordenadores', async (req, res) => {
     }
 });
 
-app.get('/api/anos', async (req, res) => {
+app.get('/api/anos', async (req, res) => { 
     try {
-        // MUDE AQUI: de 'projetos' para 'portifolio'
+        // AQUI É O PULO DO GATO: portifolio
         const { rows } = await pool.query(
-            'SELECT DISTINCT ano FROM portifolio WHERE ano IS NOT NULL ORDER BY ano DESC'
+          'SELECT DISTINCT ano FROM portifolio WHERE ano IS NOT NULL ORDER BY ano DESC'
         );
-
+        
         // Mapeia para retornar um array simples: ["2024", "2023", ...]
-        const anos = rows.map(row => row.ano.toString()); // .toString() para garantir
+        const anos = rows.map(row => row.ano.toString()); 
         res.json(anos);
 
     } catch (error) {

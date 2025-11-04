@@ -432,7 +432,7 @@ if (!isDisabled) {
  * @param {string} coordenador - O filtro de coordenador (padrão: "")
  * * @param {string} ano -
  */
-async function loadPortifolio(page = 1, tematica = "", coordenador = "") {
+async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "") {
  
  const container = document.getElementById("portifolio-tbody");
  const paginationDiv = document.getElementById("pagination-portifolio");

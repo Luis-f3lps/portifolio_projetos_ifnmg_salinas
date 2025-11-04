@@ -51,46 +51,36 @@ app.listen(PORT, () => {
     console.log(`Servidor rodando no endereço http://localhost:${PORT}`);
 });
 // Obter lista paginada de projetos do portfólio (com filtros)
+// Obter lista paginada de projetos do portfólio (com filtros)
 app.get('/api/portifolio', async (req, res) => { 
     const { page = 1, limit = 15, tematica, coordenador, ano } = req.query;
 
-    // Validação dos parâmetros de paginação
+    // ... (validação de paginação) ...
     const pageInt = parseInt(page, 10);
     const limitInt = parseInt(limit, 10);
-
     if (isNaN(pageInt) || isNaN(limitInt) || limitInt <= 0 || pageInt <= 0) {
         return res.status(400).json({ error: 'Os parâmetros de página e limite devem ser números inteiros positivos.' });
     }
-
     const MAX_LIMIT = 100;
     const finalLimit = Math.min(limitInt, MAX_LIMIT);
     const offset = (pageInt - 1) * finalLimit;
 
     try {
         // ----- [FIX 1] -----
+        // Voltando ao SEU JOIN original, que estava CERTO.
         let query = `
         SELECT 
-
             p.id,
-
             p.processo,
-
             p.titulo,
-
             p.tematica,
-
             c.nome_coordenador,
-
-            p.ano  -- // <-- MUDANÇA 1: Adicionar o ano no SELECT
-
+            p.ano
         FROM 
-
             portifolio p
-
         JOIN 
-
             coordenadores c ON p.coordenador_id = c.coordenador_id
-        `; // <-- APOSTO UM PÃO DE QUEIJO QUE AQUI ESTÁ O ERRO: c.id
+        `; 
 
         const params = [];
         const whereClauses = [];
@@ -110,7 +100,9 @@ app.get('/api/portifolio', async (req, res) => {
         // filtro de ano
         if (ano) { 
             params.push(ano); 
-            whereClauses.push(`p.ano = $${params.length}::SMALLINT`);
+            // ----- [FIX 3] -----
+            // Mantendo a correção do tipo de dado (que era o erro 500 original)
+            whereClauses.push(`p.ano = $${params.length}::SMALLINT`); 
         }
 
         if (whereClauses.length > 0) {
@@ -120,7 +112,8 @@ app.get('/api/portifolio', async (req, res) => {
         // --- Contagem do total de itens com os filtros aplicados ---
         
         // ----- [FIX 2] -----
-        let countQuery = `SELECT COUNT(*) as total FROM portifolio p JOIN coordenadores c ON p.coordenador_id = c.id`; // <-- E AQUI TAMBÉM: c.id
+        // Voltando ao SEU JOIN original na query de contagem.
+        let countQuery = `SELECT COUNT(*) as total FROM portifolio p JOIN coordenadores c ON p.coordenador_id = c.coordenador_id`; 
 
         if (whereClauses.length > 0) {
             countQuery += ` WHERE ${whereClauses.join(' AND ')}`;
@@ -144,7 +137,6 @@ app.get('/api/portifolio', async (req, res) => {
             currentPage: pageInt,
         });
     } catch (error) {
-        // O console do seu SERVIDOR (não o do navegador) vai mostrar o erro real aqui
         console.error('--- O SERVIDOR TRAVOU ---', error); 
         res.status(500).json({ error: 'Erro no servidor ao obter portfólio.' });
     }

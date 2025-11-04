@@ -78,7 +78,6 @@ document.addEventListener("DOMContentLoaded", async function () { // <-- Adicion
 
   criarGraficoPizzaCoordenadores();
 
-// A CORREÇÃO
 document
   .getElementById("portifolio-filter-form")
   .addEventListener("submit", function (event) {
@@ -86,10 +85,9 @@ document
     const tematica = document.getElementById("tematica-select").value;
     const coordenador = document.getElementById("coordenador-select").value;
     const ano = document.getElementById("anoProjeto-select").value; // <-- 1. PEGAR O ANO
-
-    // 2. ENVIAR O ANO
     loadPortifolio(1, tematica, coordenador, ano);
   });
+});
 
 // Gráfico 1: Coordenadores
 async function criarGraficoPizzaCoordenadores() {

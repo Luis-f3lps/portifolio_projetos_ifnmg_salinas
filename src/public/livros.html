@@ -31,24 +31,18 @@
 </div>
 
 <script>
-    // Pega todos os elementos com a classe "tab-links" e "tab-contents"
     var tablinks = document.getElementsByClassName("tab-links");
     var tabcontents = document.getElementsByClassName("tab-contents");
-    //abre uma aba específica
     function opentab(tabname) {
-        // Loop para remover a classe "active-link" de todos os links das abas
         for (var i = 0; i < tablinks.length; i++) {
             tablinks[i].classList.remove("active-link");
         }
-        // Mesma coisa da de cima só que com "active-tab" 
         for (var i = 0; i < tabcontents.length; i++) {
             tabcontents[i].classList.remove("active-tab");
-            // Se o id for igual ao nome da aba, adiciona a classe "active-tab" a esse trem para mostrar
             if (tabcontents[i].id === tabname) {
                 tabcontents[i].classList.add("active-tab");
             }
         }
-        // Adiciona a classe "active-link" ao link da aba que foi clicada
         event.currentTarget.classList.add("active-link");
     }
 </script>

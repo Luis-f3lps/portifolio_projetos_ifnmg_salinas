@@ -40,7 +40,7 @@ function carregarArtigos() {
         .then(response => response.json())
         .then(data => {
             const tbody = document.getElementById('artigos-tbody');
-            tbody.innerHTML = ''; // Limpa a tabela antes de adicionar os novos dados
+            tbody.innerHTML = ''; 
 
             if (Array.isArray(data)) {
                 data.forEach(artigo => {
@@ -71,24 +71,21 @@ function setupSearchFilter() {
         return;
     }
 
-    // O evento 'input' dispara a cada letra digitada
     filtro.addEventListener('input', function () {
         const termoBusca = this.value.toLowerCase().trim();
         const linhas = tabelaBody.getElementsByTagName('tr');
 
-        // Itera por todas as linhas (<tr>) da tabela
         for (let i = 0; i < linhas.length; i++) {
             const linha = linhas[i];
-            const celulaTitulo = linha.getElementsByTagName('td')[0]; // Pega a primeira célula (Título)
+            const celulaTitulo = linha.getElementsByTagName('td')[0]; 
 
             if (celulaTitulo) {
                 const titulo = celulaTitulo.textContent.toLowerCase();
 
-                // A mágica: se o título incluir o termo da busca, mostra. Senão, esconde.
                 if (titulo.includes(termoBusca)) {
-                    linha.style.display = ""; // Mostra a linha
+                    linha.style.display = ""; 
                 } else {
-                    linha.style.display = "none"; // Esconde a linha
+                    linha.style.display = "none"; 
                 }
             }
         }

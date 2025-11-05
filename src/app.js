@@ -50,12 +50,10 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Servidor rodando no endereço http://localhost:${PORT}`);
 });
-// Obter lista paginada de projetos do portfólio (com filtros)
-// Obter lista paginada de projetos do portfólio (com filtros)
+
 app.get('/api/portifolio', async (req, res) => { 
     const { page = 1, limit = 15, tematica, coordenador, ano } = req.query;
 
-    // ... (validação de paginação) ...
     const pageInt = parseInt(page, 10);
     const limitInt = parseInt(limit, 10);
     if (isNaN(pageInt) || isNaN(limitInt) || limitInt <= 0 || pageInt <= 0) {
@@ -66,8 +64,6 @@ app.get('/api/portifolio', async (req, res) => {
     const offset = (pageInt - 1) * finalLimit;
 
     try {
-        // ----- [FIX 1] -----
-        // Voltando ao SEU JOIN original, que estava CERTO.
         let query = `
         SELECT 
             p.id,
@@ -120,7 +116,6 @@ app.get('/api/portifolio', async (req, res) => {
         const totalItems = parseInt(countResult.rows[0].total, 10);
         const totalPages = Math.ceil(totalItems / finalLimit);
 
-        // --- Adiciona ordenação e paginação à consulta principal ---
         query += ` ORDER BY LOWER(p.titulo) ASC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
         params.push(finalLimit, offset);
 
@@ -182,7 +177,6 @@ app.get('/api/livros', async (req, res) => {
 // Rota para obter a lista de artigos com seus autores
 app.get('/api/artigos', async (req, res) => {
     try {
-        // A função STRING_AGG agrupa os nomes dos autores de um mesmo artigo, separados por vírgula
         const query = `
             SELECT 
                 a.id,
@@ -283,12 +277,10 @@ app.get('/api/stats/coordenadores', async (req, res) => {
 
 app.get('/api/anos', async (req, res) => { 
     try {
-        // AQUI É O PULO DO GATO: portifolio
         const { rows } = await pool.query(
           'SELECT DISTINCT ano FROM portifolio WHERE ano IS NOT NULL ORDER BY ano DESC'
         );
         
-        // Mapeia para retornar um array simples: ["2024", "2023", ...]
         const anos = rows.map(row => row.ano.toString()); 
         res.json(anos);
 

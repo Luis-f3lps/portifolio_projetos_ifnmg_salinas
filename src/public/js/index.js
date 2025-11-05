@@ -1,7 +1,6 @@
 var tablinks = document.getElementsByClassName("tab-links");
 var tabcontents = document.getElementsByClassName("tab-contents");
 
-// Paleta de cores para o gráfico de Coordenadores
 const PALETA_CORES_COORDENADORES = [
   "rgba(21, 67, 96, 0.9)", // 1. Azul Petróleo Escuro
   "rgba(27, 79, 114, 0.9)",
@@ -22,7 +21,6 @@ const PALETA_CORES_COORDENADORES = [
   "rgba(245, 249, 253, 0.8)", // 17. Azul Gelo (para "Outros")
 ];
 
-// Paleta de cores diferente para o gráfico de Temáticas
 const PALETA_CORES_TEMATICAS = [
   "rgba(211, 47, 47, 0.9)", // 1. Vermelho Escuro
   "rgba(231, 94, 24, 0.9)", // 2. Vermelho Claro
@@ -58,8 +56,7 @@ document.querySelectorAll(".submenu > a").forEach((menu) => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", async function () { // <-- Adicionado 'async'
-  // Carrega os filtros e a primeira página do portfólio
+document.addEventListener("DOMContentLoaded", async function () { 
   loadTematicas();
   loadCoordenadores();
   loadPortifolio();
@@ -84,7 +81,7 @@ document
     event.preventDefault();
     const tematica = document.getElementById("tematica-select").value;
     const coordenador = document.getElementById("coordenador-select").value;
-    const ano = document.getElementById("anoProjeto-select").value; // <-- 1. PEGAR O ANO
+    const ano = document.getElementById("anoProjeto-select").value; 
     loadPortifolio(1, tematica, coordenador, ano);
   });
 });
@@ -182,7 +179,7 @@ async function criarGraficoPizzaCoordenadores() {
 }
 
 // Gráfico 2: Temáticas (Pizza) - Modificado
-function criarGraficoPizzaTematicas(data) { // <-- Recebe 'data'
+function criarGraficoPizzaTematicas(data) { 
   try {
 
     const labels = data.map((item) => item.tematica);
@@ -241,8 +238,8 @@ function criarGraficoPizzaTematicas(data) { // <-- Recebe 'data'
 }
 
 
-// Gráfico de Barras de Temáticas - Modificado
-function criarGraficoTematicas(data) { // <-- Recebe 'data'
+// Gráfico de Barras de Temáticas
+function criarGraficoTematicas(data) {
   try {
 
     const labels = data.map((item) => item.tematica);
@@ -299,16 +296,13 @@ function criarGraficoTematicas(data) { // <-- Recebe 'data'
   }
 }
 
-/**
- * Carrega a lista de temáticas para o filtro.
- */
+
 function loadTematicas() {
-  fetch("/api/tematicas") // Apenas busca a lista de temáticas
+  fetch("/api/tematicas") 
     .then((response) => response.json())
-    .then((tematicas) => { // 'tematicas' agora é um array simples, ex: ['IA', 'Saúde']
+    .then((tematicas) => { 
       const select = document.getElementById("tematica-select");
 
-      // Não precisa mais de new Set() ou .map()
       tematicas.forEach((tematica) => {
         const option = document.createElement("option");
         option.value = tematica;
@@ -318,14 +312,11 @@ function loadTematicas() {
     })
     .catch((error) => console.error("Erro ao carregar temáticas:", error));
 }
-/**
- * Carrega a lista de anos dos projetos para o filtro.
- */
+
 function loadAnos() {
-  // Novo endpoint que você precisará criar no backend
   fetch("/api/anos")
     .then((response) => response.json())
-    .then((anos) => { // Espera um array de anos, ex: ["2025", "2024"]
+    .then((anos) => { 
       const select = document.getElementById("anoProjeto-select");
 
       anos.forEach((ano) => {
@@ -337,9 +328,7 @@ function loadAnos() {
     })
     .catch((error) => console.error("Erro ao carregar anos:", error));
 }
-/**
- * Carrega a lista de coordenadores para o filtro.
- */
+
 function loadCoordenadores() {
   fetch("/api/coordenadores")
     .then((response) => response.json())
@@ -378,14 +367,12 @@ function updatePortifolioPagination(
     }
     if (isDisabled) {
       button.disabled = true;
-      button.classList.add("disabled"); // Adiciona classe para estilização
+      button.classList.add("disabled"); 
     }
 
-    // Adiciona o evento de clique apenas se não for desabilitado
     if (!isDisabled) {
       button.addEventListener("click", () => {
         if (page >= 1 && page <= totalPages) {
-          // E se a chamada aqui inclui 'ano'
           loadPortifolio(page, tematica, coordenador, ano);
         }
       });
@@ -427,10 +414,9 @@ function updatePortifolioPagination(
 }
 
 /**
- * Carrega e exibe os dados do portfólio com paginação e filtros.
- * @param {number} page - O número da página a ser buscada (padrão: 1)
- * @param {string} tematica - O filtro de temática (padrão: "")
- * @param {string} coordenador - O filtro de coordenador (padrão: "")
+ * @param {number} page 
+ * @param {string} tematica 
+ * @param {string} coordenador 
  * * @param {string} ano -
  */
 async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "") {
@@ -439,11 +425,10 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
   const paginationDiv = document.getElementById("pagination-portifolio");
 
   if (container) {
-    // Colspan="3" para bater com as 3 colunas da tabela
     container.innerHTML = '<tr><td colspan="4">Carregando...</td></tr>';
   }
   if (paginationDiv) {
-    paginationDiv.innerHTML = ""; // Limpa a paginação antiga
+    paginationDiv.innerHTML = ""; 
   }
 
   try {

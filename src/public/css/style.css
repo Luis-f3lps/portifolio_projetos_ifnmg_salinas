@@ -13,7 +13,10 @@ body {
   background: white;
   color: white;
 }
-
+a {
+    color: #007BFF;
+    transition: color 0.3s ease-in-out;
+}
 /* --------------Home------------------*/
 #header {
   width: 100%;

@@ -348,7 +348,6 @@ nav .fa-solid{
 }
     a {
         color: #007BFF; /* Cor principal do link (um azul vibrante) */
-        position: relative; /* Necessário para o efeito de sublinhado animado */
         transition: color 0.3s ease-in-out; /* Transição suave para a mudança de cor */
     }
 

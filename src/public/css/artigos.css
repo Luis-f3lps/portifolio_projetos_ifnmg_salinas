@@ -968,4 +968,34 @@ nav .fa-solid{
 
         /* css livros */
 
+.search-container {
+margin-bottom: 24px; 
+max-width: 500px; 
+}
 
+.search-container label {
+display: block; 
+font-weight: 600; 
+margin-bottom: 8px; 
+color: #333; 
+}
+
+.search-container #filtro-titulo {
+width: 100%; 
+padding: 12px 15px; 
+font-size: 16px;
+border: 1px solid #ccc; 
+border-radius: 8px; 
+
+box-sizing: border-box; 
+
+transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-container #filtro-titulo:focus {
+outline: none;
+
+border-color: #28a745; 
+
+box-shadow: 0 0 8px rgba(40, 167, 69, 0.4); 
+}

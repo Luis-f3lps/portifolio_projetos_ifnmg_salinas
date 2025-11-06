@@ -424,8 +424,7 @@ nav .fa-solid {
   }
 
   p {
-    font-size: 22px;
-    color: black;
+    font-size: 28px;
   }
 
   .work-list-certificados {
@@ -446,7 +445,7 @@ nav .fa-solid {
     text-decoration: none;
     font-size: 65px;
     margin-right: 15px;
-    color: #ababab;
+    color: #ffffff;
     display: inline-block;
     transition: transform 0.5s;
   }
@@ -513,8 +512,8 @@ nav {
     justify-content: space-between;
     flex-wrap: wrap;
     position: fixed;
-    background: white;
-    width: 85%;
+    background: #21202e;
+    width: 100%;
 }
 
 

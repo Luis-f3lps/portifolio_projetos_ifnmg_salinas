@@ -30,6 +30,7 @@ a {
 
 .logo {
   width: 40px;
+  margin-left: 40px;
 }
 
 .logoIFNMG {
@@ -524,7 +525,6 @@ nav ul li {
 }
 
 nav ul li a {
-  color: #1b1e22;
   text-decoration: none;
   font-size: 22px;
   position: relative;
@@ -703,7 +703,7 @@ ul li {
 }
 
 nav ul li a {
-  color: black;
+  color: rgb(255, 255, 255);
 }
 
 nav ul .fa-solid {
@@ -863,10 +863,23 @@ nav ul .fa-solid {
     margin-top: 40px;
     position: relative;
      width: 95%;
-
+background-color: white;
   }
+  #bloco-descricao-dados {
+    font-size: 22px;
 }
-
+}
+#bloco-descricao-dados {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    padding: 25px;
+    border-left: 5px solid #28a745;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
 @media only screen and (max-width: 1080px) and (max-height: 2340px) {
   img {
     margin-top: 20px;

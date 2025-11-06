@@ -162,7 +162,7 @@ app.get('/api/livros', async (req, res) => {
             WHERE 
                 l.link_capa IS NOT NULL AND l.link_capa != '' -- Adicionado este filtro
             ORDER BY 
-                l.id;
+                l.id DESC;
         `;
 
         const { rows } = await pool.query(query);

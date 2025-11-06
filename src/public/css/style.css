@@ -189,7 +189,6 @@ nav ul li a:hover::after {
   margin-top: 20px;
   margin-bottom: 20px;
   font-weight: 400;
-  color: black;
 }
 
 .layer {
@@ -293,7 +292,7 @@ nav ul li a:hover::after {
   text-decoration: none;
   font-size: 30px;
   margin-right: 15px;
-  color: #ababab;
+  color: #ffffff;
   display: inline-block;
   transition: transform 0.5s;
 }
@@ -490,7 +489,6 @@ button.pagination-button.active {
 
   p {
     font-size: 22px;
-    color: black;
   }
 
   .work-list-certificados {
@@ -1062,5 +1060,6 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
+      background: #21202e;
   /* Garante que o texto dentro dos parágrafos também fique alinhado */
 }

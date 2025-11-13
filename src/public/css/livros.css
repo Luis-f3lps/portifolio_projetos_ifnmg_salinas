@@ -786,8 +786,13 @@ nav {
     opacity: 1;
     visibility: visible;
 }
+.livros-container{
+        margin-top: 120px;
+}
     @media only screen and (min-width: 901px) and (min-height: 1601px) {
-
+.livros-container{
+        margin-top: 0px;
+}
         .sobre {
             max-width: 900px;
             background-color: white; /* Um tom de cinza escuro para destacar o conteúdo */
@@ -813,6 +818,10 @@ nav {
             display: block;
             font-size: 40px;
             color: black;
+        }
+        nav{
+            background: #21202e;
+
         }
         .row {
             display: flex;

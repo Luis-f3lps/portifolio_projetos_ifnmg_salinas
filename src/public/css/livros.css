@@ -12,7 +12,7 @@ body{
     color: white;
 }
 .logoIFNMG {
-    width: 100px;
+    width: 80px;
     margin-bottom: 20px;
 }
 /* --------------Home------------------*/
@@ -724,7 +724,7 @@ nav .fa-solid{
         margin: 25px;
     }
     nav ul li a{
-        color: black;
+        color: rgb(255, 255, 255);
     }
     nav ul .fa-solid {
         position: absolute;

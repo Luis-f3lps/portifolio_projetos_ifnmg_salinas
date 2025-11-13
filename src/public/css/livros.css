@@ -764,7 +764,14 @@ nav .fa-solid{
     margin: 15px;
     box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.5);
 }
-
+nav {
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: fixed;
+    background: #21202e;
+    width: 100%;
+}
 /* Estilo INICIAL da descrição (usando a classe) */
 
 

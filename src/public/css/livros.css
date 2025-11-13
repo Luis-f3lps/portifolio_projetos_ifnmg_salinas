@@ -11,9 +11,15 @@ body{
     background: white;
     color: white;
 }
+.logo{
+    width: 40px;
+        margin-left: 40px;
+
+}
 .logoIFNMG {
     width: 80px;
-    margin-bottom: 20px;
+        margin-right: 30px;
+
 }
 /* --------------Home------------------*/
 #header{
@@ -24,10 +30,7 @@ body{
 .container{
     padding: 10px 8%;
 }
-.logo{
-    width: 40px;
-    margin-bottom: 20px;
-}nav{
+nav{
     display: flex;
     align-items: center;
     justify-content: space-between;

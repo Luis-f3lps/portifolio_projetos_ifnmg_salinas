@@ -307,8 +307,6 @@ app.get('/api/resumos-simples', async (req, res) => {
                 titulo ASC; 
         `;
         
-        // Se preferir ordenar pelo ID (ordem de inserção), troque para: ORDER BY id ASC
-
         const { rows } = await pool.query(query);
         res.json(rows);
 

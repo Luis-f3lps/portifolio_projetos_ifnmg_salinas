@@ -34,23 +34,23 @@ document.addEventListener('DOMContentLoaded', function () {
     setupSearchFilter();
 });
 
-
-function carregarArtigos() {
-    fetch('/api/resumos')
+function carregarResumosSimples() {
+    fetch('/api/resumos-simples')
         .then(response => response.json())
         .then(data => {
             const tbody = document.getElementById('resumos-tbody');
             tbody.innerHTML = ''; 
 
             if (Array.isArray(data)) {
-                data.forEach(artigo => {
+                data.forEach(resumo => {
                     const tr = document.createElement('tr');
 
                     tr.innerHTML = `
-                        <td>${artigo.titulo || 'N/A'}</td>
-                        <td>${artigo.autores || 'N/A'}</td>
+                        <td>${resumo.titulo || 'N/A'}</td>
+                        <td>${resumo.autores || 'N/A'}</td>
+                        <td>${resumo.evento || 'N/A'}</td>
                         <td>
-                            ${artigo.link_artigo ? `<a href="${artigo.link_artigo}" target="_blank">Acessar Artigo</a>` : 'Link indisponível'}
+                            ${resumo.link_pdf ? `<a href="${resumo.link_pdf}" target="_blank">Acessar PDF</a>` : 'Link indisponível'}
                         </td>
                     `;
 
@@ -62,6 +62,7 @@ function carregarArtigos() {
         })
         .catch(error => console.error('Erro ao carregar os resumos:', error));
 }
+
 function setupSearchFilter() {
     const filtro = document.getElementById('filtro-titulo');
     const tabelaBody = document.getElementById('resumos-tbody');

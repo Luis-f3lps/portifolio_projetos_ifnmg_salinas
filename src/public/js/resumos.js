@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 document.addEventListener('DOMContentLoaded', function () {
-    carregarArtigos();
+    carregarResumosSimples();
     setupSearchFilter();
 });
 

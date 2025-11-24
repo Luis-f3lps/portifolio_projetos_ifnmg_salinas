@@ -45,6 +45,9 @@ app.get('/livros', (req, res) => {
 app.get('/artigos', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'artigos.html'));
 });
+app.get('/resumos', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'resumos_simples.html'));
+});
 // Iniciar o servidor
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
@@ -287,6 +290,31 @@ app.get('/api/anos', async (req, res) => {
     } catch (error) {
         console.error('Erro ao obter anos:', error);
         res.status(500).json({ error: 'Erro no servidor ao obter anos.' });
+    }
+});
+app.get('/api/resumos-simples', async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                id,
+                titulo,
+                autores,
+                evento,
+                link_pdf
+            FROM 
+                resumos_simples
+            ORDER BY 
+                titulo ASC; 
+        `;
+        
+        // Se preferir ordenar pelo ID (ordem de inserção), troque para: ORDER BY id ASC
+
+        const { rows } = await pool.query(query);
+        res.json(rows);
+
+    } catch (error) {
+        console.error('Erro ao buscar resumos simples:', error);
+        res.status(500).json({ error: 'Erro no servidor ao buscar resumos simples.' });
     }
 });
 export default app;

@@ -983,7 +983,7 @@ nav .fa-solid{
 #painel-resumos .search-container label {
     display: block;
     font-size: 0.9rem;
-    color: #666;
+    color: #000000;
     margin-bottom: 8px;
     font-weight: 600;
     text-transform: uppercase;

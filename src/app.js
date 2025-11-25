@@ -319,7 +319,7 @@ app.get('/api/resumos-simples', async (req, res) => {
     }
 }); app.get('/api/eventos', async (req, res) => {
     try {
-        const query = `SELECT id, nome FROM eventos ORDER BY nome ASC`;
+        const query = `SELECT id, nome, sigla, link_imagem_fundo FROM eventos ORDER BY nome ASC`;
         const { rows } = await pool.query(query);
         res.json(rows);
     } catch (error) {

@@ -588,7 +588,7 @@ nav ul li a:hover::after {
 select {
   padding: 10px;
   font-size: 16px;
-  border: 2px solid #4caf50;
+  border: 2px solid #ffffff;
   border-radius: 5px;
   appearance: none;
   background-color: white;
@@ -603,7 +603,7 @@ select {
 
 select:focus {
   outline: none;
-  border-color: #45a049;
+  border-color: #ffffff;
 }
 
 table {
@@ -629,8 +629,8 @@ td {
 }
 
 #green {
-  background-color: #0035c5;
-  color: white;
+background-color: #00bfff;
+    color: #000000;
 }
 
 input[type="date"] {
@@ -1057,9 +1057,9 @@ body {
   background-color: rgba(0, 191, 255, 0.15);
 }
 #contact {
-    padding: 15px 0;
+    padding: 5px 0;
     text-align: center;
-    background-color: #1a1a1a;
+    background-color: #21202e;
 }
 
 #contact .sub-title-type-2 {

@@ -56,7 +56,7 @@ document.querySelectorAll(".submenu > a").forEach((menu) => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", async function () { 
+document.addEventListener("DOMContentLoaded", async function () {
   loadTematicas();
   loadCoordenadores();
   loadPortifolio();
@@ -75,15 +75,53 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   criarGraficoPizzaCoordenadores();
 
-document
-  .getElementById("portifolio-filter-form")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
-    const tematica = document.getElementById("tematica-select").value;
-    const coordenador = document.getElementById("coordenador-select").value;
-    const ano = document.getElementById("anoProjeto-select").value; 
-    loadPortifolio(1, tematica, coordenador, ano);
-  });
+  document
+    .getElementById("portifolio-filter-form")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+      const tematica = document.getElementById("tematica-select").value;
+      const coordenador = document.getElementById("coordenador-select").value;
+      const ano = document.getElementById("anoProjeto-select").value;
+      loadPortifolio(1, tematica, coordenador, ano);
+    });
+
+  const innerContainer = document.getElementById('logoloop-inner');
+  const originalList = document.getElementById('original-list');
+
+  if (!innerContainer || !originalList) {
+    console.error('Elementos necessários (logoloop-inner ou original-list) não encontrados.');
+    return;
+  }
+
+  function setupLogoLoop() {
+    innerContainer.querySelectorAll('.logoloop-list[aria-hidden="true"]').forEach(clone => clone.remove());
+
+    const totalClones = 2;
+
+    for (let i = 0; i < totalClones; i++) {
+      const clone = originalList.cloneNode(true); // Clonar com todo o conteúdo
+      clone.removeAttribute('id');
+      clone.setAttribute('aria-hidden', 'true'); // Ocultar para leitores de tela
+      innerContainer.appendChild(clone);
+    }
+
+
+    requestAnimationFrame(() => {
+      const originalWidth = originalList.offsetWidth;
+
+
+      innerContainer.style.setProperty('--scroll-distance', `${originalWidth}px`);
+    });
+  }
+
+  setupLogoLoop();
+
+  window.addEventListener('resize', setupLogoLoop);
+  // Seleciona os elementos
+  const sidebar = document.querySelector('.sidebar');
+  const openBtn = document.getElementById('menu-toggle-open');
+  const closeBtn = document.getElementById('menu-toggle-close');
+
 });
 
 // Gráfico 1: Coordenadores
@@ -179,7 +217,7 @@ async function criarGraficoPizzaCoordenadores() {
 }
 
 // Gráfico 2: Temáticas (Pizza) - Modificado
-function criarGraficoPizzaTematicas(data) { 
+function criarGraficoPizzaTematicas(data) {
   try {
 
     const labels = data.map((item) => item.tematica);
@@ -298,9 +336,9 @@ function criarGraficoTematicas(data) {
 
 
 function loadTematicas() {
-  fetch("/api/tematicas") 
+  fetch("/api/tematicas")
     .then((response) => response.json())
-    .then((tematicas) => { 
+    .then((tematicas) => {
       const select = document.getElementById("tematica-select");
 
       tematicas.forEach((tematica) => {
@@ -316,7 +354,7 @@ function loadTematicas() {
 function loadAnos() {
   fetch("/api/anos")
     .then((response) => response.json())
-    .then((anos) => { 
+    .then((anos) => {
       const select = document.getElementById("anoProjeto-select");
 
       anos.forEach((ano) => {
@@ -367,7 +405,7 @@ function updatePortifolioPagination(
     }
     if (isDisabled) {
       button.disabled = true;
-      button.classList.add("disabled"); 
+      button.classList.add("disabled");
     }
 
     if (!isDisabled) {
@@ -428,7 +466,7 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
     container.innerHTML = '<tr><td colspan="4">Carregando...</td></tr>';
   }
   if (paginationDiv) {
-    paginationDiv.innerHTML = ""; 
+    paginationDiv.innerHTML = "";
   }
 
   try {
@@ -465,7 +503,7 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
      <td>${item.titulo}</td>
      <td>${item.tematica}</td>
      <td>${item.nome_coordenador}</td>
-      <td>${item.ano|| 'N/D'}</td>
+      <td>${item.ano || 'N/D'}</td>
 
     `;
         container.appendChild(row);

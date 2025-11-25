@@ -24,10 +24,6 @@ a {
   background-position: center;
 }
 
-.container {
-  padding: 10px 8%;
-}
-
 .logo {
   width: 40px;
   margin-left: 40px;
@@ -77,6 +73,7 @@ nav ul li a:hover::after {
 
 .header-text {
   font-size: 30px;
+  padding:10px 8%;
 }
 
 .header-text h1 {
@@ -91,7 +88,7 @@ nav ul li a:hover::after {
 
 /* --------------Sobre------------------*/
 #about {
-  padding-top: 50px;
+  padding-top: 70px;
   padding-bottom: 20px;
   color: #cfcfcf;
 }
@@ -100,6 +97,8 @@ nav ul li a:hover::after {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+    padding:10px 8%;
+
 }
 
 .about-col-1 {
@@ -454,8 +453,8 @@ nav .fa-solid {
   }
 }
 button.pagination-button.active {
-    background-color: #030303;
-}
+background-color: #ffffff;
+    color: black;}
 .pagination-ellipsis{
   font-size: x-large;
 }
@@ -606,7 +605,8 @@ select:focus {
 
 table {
   border-collapse: collapse;
-  margin: 20px auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -747,6 +747,7 @@ nav ul .fa-solid {
   .header-text h1 {
     font-size: 50px;
     margin-left: 32px;
+  
   }
 
   .container {
@@ -774,6 +775,8 @@ nav ul .fa-solid {
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 10px 4%;
+            margin-bottom: 40px;
+
   }
 
   #sidemenu {
@@ -1076,4 +1079,64 @@ body {
   text-align: center;
       background: #21202e;
   /* Garante que o texto dentro dos parágrafos também fique alinhado */
+}
+
+/* 1. Contêiner de Visualização (Recorta o conteúdo) */
+.logoloop-track {
+    width: 100%;
+    overflow: hidden;
+    /* **Obrigatório** para esconder a parte que não está na tela */
+    white-space: nowrap;
+    /* Impede que os itens quebrem linha */
+    padding: 20px 0;
+    box-sizing: border-box;
+    /* Ajuste para que as imagens brancas apareçam em fundo escuro */
+    filter: invert(1);
+}
+
+/* 2. Contêiner Interno (Será animado) */
+.logoloop-inner {
+    display: flex;
+    width: max-content;
+    /* Permite que o conteúdo se estenda horizontalmente */
+    will-change: transform;
+
+    /* Aplica a animação: nome, duração, linear, infinito */
+    animation: scroll-x var(--scroll-duration) linear infinite;
+
+    /* Pausar animação quando o mouse passar por cima do track */
+    .logoloop-track:hover & {
+        animation-play-state: paused;
+    }
+}
+
+/* 3. Estilo da Lista de Logos e Itens */
+.logoloop-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.logoloop-item {
+    margin-right: var(--logo-gap);
+    height: var(--logo-height);
+    display: flex;
+    /* Para centralizar verticalmente a imagem */
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.logoloop-item:hover {
+    transform: scale(1.1);
+    /* Efeito de zoom ao passar o mouse */
+}
+
+.logoloop-item img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    /* Adicionando o cursor pointer para simular um link/botão */
+    cursor: pointer;
 }

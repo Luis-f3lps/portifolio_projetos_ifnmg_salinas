@@ -28,10 +28,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (window.location.pathname !== '/index.html') {
         redirecionarSeNaoAutenticado();
     }
-});document.addEventListener('DOMContentLoaded', function () {
+}); document.addEventListener('DOMContentLoaded', function () {
     carregarResumosSimples();
-    carregarEventosNoSelect(); 
-    setupFilters(); 
+    carregarEventosNoSelect();
+    setupFilters();
 });
 
 function carregarResumosSimples() {
@@ -39,28 +39,28 @@ function carregarResumosSimples() {
         .then(response => response.json())
         .then(data => {
             const tbody = document.getElementById('resumos-tbody');
-            tbody.innerHTML = ''; 
+            tbody.innerHTML = '';
 
             if (Array.isArray(data)) {
                 data.forEach(resumo => {
                     const tr = document.createElement('tr');
                     // Mantemos isso aqui para o filtro continuar funcionando
-                    tr.setAttribute('data-evento', resumo.evento || ''); 
+                    tr.setAttribute('data-evento', resumo.evento || '');
 
                     // Lógica para decidir se mostra Imagem ou Texto
                     let conteudoEvento = 'N/A';
                     if (resumo.link_imagem_fundo) {
                         // Cria uma imagem com altura fixa de 50px para não quebrar a tabela
                         // O 'title' mostra o nome do evento quando passa o mouse
-                        conteudoEvento = `<img src="${resumo.link_imagem_fundo}" alt="${resumo.evento}" title="${resumo.evento}" style="height: 50px; width: auto; border-radius: 4px; object-fit: cover;">`;
+                        conteudoEvento = `<img src="${resumo.link_imagem_fundo}" alt="${resumo.evento}" title="${resumo.evento}" style="height: 70px; width: auto; border-radius: 4px; object-fit: cover;">`;
                     } else {
                         conteudoEvento = resumo.evento || 'N/A';
                     }
 
                     tr.innerHTML = `
+                        <td style="text-align: center;">${conteudoEvento}</td>
                         <td>${resumo.titulo || 'N/A'}</td>
                         <td>${resumo.autores || 'N/A'}</td>
-                        <td style="text-align: center;">${conteudoEvento}</td>
                         <td>
                             ${resumo.link_pdf ? `<a href="${resumo.link_pdf}" target="_blank">Acessar PDF</a>` : 'Link indisponível'}
                         </td>
@@ -80,7 +80,7 @@ function carregarEventosNoSelect() {
             if (Array.isArray(data)) {
                 data.forEach(evento => {
                     const option = document.createElement('option');
-                    option.value = evento.nome; 
+                    option.value = evento.nome;
                     option.textContent = evento.nome;
                     select.appendChild(option);
                 });
@@ -105,9 +105,9 @@ function setupFilters() {
             const eventoDaLinha = linha.getAttribute('data-evento');
             if (celulaTitulo) {
                 const titulo = celulaTitulo.textContent.toLowerCase();
-                
+
                 const bateTexto = titulo.includes(termo);
-                
+
                 const bateEvento = eventoSelecionado === "" || eventoDaLinha === eventoSelecionado;
 
                 if (bateTexto && bateEvento) {

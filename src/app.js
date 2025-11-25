@@ -295,20 +295,20 @@ app.get('/api/anos', async (req, res) => {
 app.get('/api/resumos-simples', async (req, res) => {
     try {
         const query = `
-            SELECT 
-                r.id,
-                r.titulo,
-                r.autores,
-                r.link_pdf,
-                e.nome AS evento,
-                e.link_imagem_fundo  -- ADICIONADO AQUI
-            FROM 
-                resumos_simples r
-            LEFT JOIN 
-                eventos e ON r.evento_id = e.id
-            ORDER BY 
-                r.titulo ASC;
-        `;
+    SELECT 
+        r.id,
+        r.titulo,
+        r.autores,
+        r.link_pdf,
+        e.nome AS evento,
+        e.link_imagem_fundo
+    FROM 
+        resumos_simples r
+    LEFT JOIN 
+        eventos e ON r.evento_id = e.id
+    ORDER BY 
+        e.nome ASC, r.titulo ASC; -- Alterado: Primeiro agrupa por Evento, depois ordena Títulos
+`;
 
         const { rows } = await pool.query(query);
         res.json(rows);
@@ -317,7 +317,7 @@ app.get('/api/resumos-simples', async (req, res) => {
         console.error('Erro ao buscar resumos simples:', error);
         res.status(500).json({ error: 'Erro no servidor ao buscar resumos simples.' });
     }
-});app.get('/api/eventos', async (req, res) => {
+}); app.get('/api/eventos', async (req, res) => {
     try {
         const query = `SELECT id, nome FROM eventos ORDER BY nome ASC`;
         const { rows } = await pool.query(query);

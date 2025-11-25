@@ -54,7 +54,7 @@ app.listen(PORT, () => {
     console.log(`Servidor rodando no endereço http://localhost:${PORT}`);
 });
 
-app.get('/api/portifolio', async (req, res) => { 
+app.get('/api/portifolio', async (req, res) => {
     const { page = 1, limit = 15, tematica, coordenador, ano } = req.query;
 
     const pageInt = parseInt(page, 10);
@@ -79,7 +79,7 @@ app.get('/api/portifolio', async (req, res) => {
             portifolio p
         JOIN 
             coordenadores c ON p.coordenador_id = c.coordenador_id
-        `; 
+        `;
 
         const params = [];
         const whereClauses = [];
@@ -97,10 +97,10 @@ app.get('/api/portifolio', async (req, res) => {
         }
 
         // filtro de ano
-        if (ano) { 
+        if (ano) {
             console.log('--- [DEBUG] FILTRO DE ANO ATIVADO ---'); // <-- Queremos ver isso
-            params.push(ano); 
-            whereClauses.push(`p.ano = $${params.length}::SMALLINT`); 
+            params.push(ano);
+            whereClauses.push(`p.ano = $${params.length}::SMALLINT`);
         }
 
         if (whereClauses.length > 0) {
@@ -108,13 +108,13 @@ app.get('/api/portifolio', async (req, res) => {
         }
 
 
-        let countQuery = `SELECT COUNT(*) as total FROM portifolio p JOIN coordenadores c ON p.coordenador_id = c.coordenador_id`; 
+        let countQuery = `SELECT COUNT(*) as total FROM portifolio p JOIN coordenadores c ON p.coordenador_id = c.coordenador_id`;
 
         if (whereClauses.length > 0) {
             countQuery += ` WHERE ${whereClauses.join(' AND ')}`;
         }
-        
-        const countResult = await pool.query(countQuery, params); 
+
+        const countResult = await pool.query(countQuery, params);
 
         const totalItems = parseInt(countResult.rows[0].total, 10);
         const totalPages = Math.ceil(totalItems / finalLimit);
@@ -131,7 +131,7 @@ app.get('/api/portifolio', async (req, res) => {
             currentPage: pageInt,
         });
     } catch (error) {
-        console.error('--- O SERVIDOR TRAVOU ---', error); 
+        console.error('--- O SERVIDOR TRAVOU ---', error);
         res.status(500).json({ error: 'Erro no servidor ao obter portfólio.' });
     }
 });
@@ -278,13 +278,13 @@ app.get('/api/stats/coordenadores', async (req, res) => {
     }
 });
 
-app.get('/api/anos', async (req, res) => { 
+app.get('/api/anos', async (req, res) => {
     try {
         const { rows } = await pool.query(
-          'SELECT DISTINCT ano FROM portifolio WHERE ano IS NOT NULL ORDER BY ano DESC'
+            'SELECT DISTINCT ano FROM portifolio WHERE ano IS NOT NULL ORDER BY ano DESC'
         );
-        
-        const anos = rows.map(row => row.ano.toString()); 
+
+        const anos = rows.map(row => row.ano.toString());
         res.json(anos);
 
     } catch (error) {
@@ -295,24 +295,36 @@ app.get('/api/anos', async (req, res) => {
 app.get('/api/resumos-simples', async (req, res) => {
     try {
         const query = `
-            SELECT 
-                id,
-                titulo,
-                autores,
-                evento,
-                link_pdf
-            FROM 
-                resumos_simples
-            ORDER BY 
-                titulo ASC; 
-        `;
-        
+    SELECT 
+        r.id,
+        r.titulo,
+        r.autores,
+        r.link_pdf,
+        e.nome AS evento,
+        e.link_imagem_fundo
+    FROM 
+        resumos_simples r
+    LEFT JOIN 
+        eventos e ON r.evento_id = e.id
+    ORDER BY 
+        e.nome ASC, r.titulo ASC; -- Alterado: Primeiro agrupa por Evento, depois ordena Títulos
+`;
+
         const { rows } = await pool.query(query);
         res.json(rows);
 
     } catch (error) {
         console.error('Erro ao buscar resumos simples:', error);
         res.status(500).json({ error: 'Erro no servidor ao buscar resumos simples.' });
+    }
+}); app.get('/api/eventos', async (req, res) => {
+    try {
+        const query = `SELECT id, nome, sigla, link_imagem_fundo FROM eventos ORDER BY nome ASC`;
+        const { rows } = await pool.query(query);
+        res.json(rows);
+    } catch (error) {
+        console.error('Erro ao buscar eventos:', error);
+        res.status(500).json({ error: 'Erro ao buscar eventos.' });
     }
 });
 export default app;

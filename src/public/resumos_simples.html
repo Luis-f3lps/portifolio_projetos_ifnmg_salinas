@@ -49,38 +49,37 @@
                         real para a comunidade.</p>
                     </br>
                     <p></p>
-                    <div class="container-resumos">
-                        <div class="search-container">
-                            <div style="display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap;">
+                    <div class="main-content-wrapper">
 
-                                <div style="flex: 1;">
-                                    <label for="filtro-titulo">Pesquisar por Título:</label>
-                                    <input type="text" id="filtro-titulo" placeholder="Digite um título..."
-                                        style="width: 100%;">
-                                </div>
-
-                                <div style="flex: 1;">
-                                    <label for="filtro-evento">Filtrar por Evento:</label>
-                                    <select id="filtro-evento"
-                                        style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
-                                        <option value="">Todos os Eventos</option>
-                                    </select>
-                                </div>
-
-                            </div>
+                        <div id="galeria-eventos" class="cards-grid">
                         </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Título</th>
-                                    <th>Autores</th>
-                                    <th>Evento</th>
-                                    <th>Link</th>
-                                </tr>
-                            </thead>
-                            <tbody id="resumos-tbody">
-                            </tbody>
-                        </table>
+
+                        <div id="painel-resumos" class="tabela-wrapper" style="display: none;">
+                            <div class="header-painel">
+                                <button onclick="voltarParaEventos()" class="btn-voltar">
+                                    <i class="fa-solid fa-arrow-left"></i> Voltar
+                                </button>
+                                <h2 id="titulo-evento-ativo"></h2>
+                            </div>
+
+                            <div class="search-container">
+                                <label for="filtro-interno">Pesquisar neste evento:</label>
+                                <input type="text" id="filtro-interno" placeholder="Filtrar por título...">
+                            </div>
+
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Título</th>
+                                        <th>Autores</th>
+                                        <th style="width: 120px;">Link</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="corpo-tabela-resumos">
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>

@@ -90,7 +90,6 @@ nav ul li a:hover::after {
 
 /* --------------Sobre------------------*/
 #about {
-  padding-top: 70px;
   padding-bottom: 20px;
   color: #cfcfcf;
   background: #21202e;
@@ -1005,6 +1004,8 @@ body {
   border-bottom: 1px solid #00bfff;
   padding-bottom: 10px;
   display: inline-block;
+      margin-top: 30px;
+
 }
 
 .sobre h1:not(.sub-title) {

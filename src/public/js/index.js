@@ -84,46 +84,37 @@ document.addEventListener("DOMContentLoaded", async function () {
       const ano = document.getElementById("anoProjeto-select").value;
       loadPortifolio(1, tematica, coordenador, ano);
     });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    
+    const innerContainer = document.getElementById('logoloop-inner');
+    const originalList = document.getElementById('original-list');
 
-  const innerContainer = document.getElementById('logoloop-inner');
-  const originalList = document.getElementById('original-list');
-
-  if (!innerContainer || !originalList) {
-    console.error('Elementos necessários (logoloop-inner ou original-list) não encontrados.');
-    return;
-  }
-
-  function setupLogoLoop() {
-    innerContainer.querySelectorAll('.logoloop-list[aria-hidden="true"]').forEach(clone => clone.remove());
-
-    const totalClones = 2;
-
-    for (let i = 0; i < totalClones; i++) {
-      const clone = originalList.cloneNode(true); // Clonar com todo o conteúdo
-      clone.removeAttribute('id');
-      clone.setAttribute('aria-hidden', 'true'); // Ocultar para leitores de tela
-      innerContainer.appendChild(clone);
+    if (innerContainer && originalList) {
+        setupLogoLoop();
+        window.addEventListener('resize', setupLogoLoop);
     }
 
+    function setupLogoLoop() {
+        innerContainer.querySelectorAll('.logoloop-list[aria-hidden="true"]').forEach(clone => clone.remove());
 
-    requestAnimationFrame(() => {
-      const originalWidth = originalList.offsetWidth;
+        const totalClones = 2; 
+        
+        for (let i = 0; i < totalClones; i++) {
+            const clone = originalList.cloneNode(true);
+            clone.removeAttribute('id');
+            clone.setAttribute('aria-hidden', 'true');
+            innerContainer.appendChild(clone);
+        }
 
 
-      innerContainer.style.setProperty('--scroll-distance', `${originalWidth}px`);
-    });
-  }
+        const gap = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--logo-gap')) || 0;
+        const originalWidth = originalList.offsetWidth + gap;
 
-  setupLogoLoop();
-
-  window.addEventListener('resize', setupLogoLoop);
-  // Seleciona os elementos
-  const sidebar = document.querySelector('.sidebar');
-  const openBtn = document.getElementById('menu-toggle-open');
-  const closeBtn = document.getElementById('menu-toggle-close');
+        innerContainer.style.setProperty('--scroll-distance', `${originalWidth}px`);
+    }
 
 });
-
 // Gráfico 1: Coordenadores
 async function criarGraficoPizzaCoordenadores() {
   try {

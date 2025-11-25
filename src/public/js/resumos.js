@@ -50,7 +50,7 @@ function carregarResumosSimples() {
                         <td>${resumo.autores || 'N/A'}</td>
                         <td>${resumo.evento || 'N/A'}</td>
                         <td>
-                            ${resumo.link_pdf ? `<a href="${resumo.link_pdf}" target="_blank">Acessar PDF</a>` : 'Link indisponível'}
+                            ${resumo.link_pdf ? `<a href="${resumo.link_pdf}" target="_blank">Acessar Resumo Simples</a>` : 'Link indisponível'}
                         </td>
                     `;
 

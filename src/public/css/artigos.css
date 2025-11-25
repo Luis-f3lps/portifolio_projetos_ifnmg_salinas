@@ -84,7 +84,9 @@ nav ul li a:hover::after{
 }
 /* --------------Sobre------------------*/
 #about{
-    padding: 40px;
+    padding-left: 80px;
+        padding-right: 80px;
+padding-top: 40px;
     color: #cfcfcf;
 }
 .row{

@@ -1062,7 +1062,6 @@ body {
   text-align: center;
   background-color: #21202e;
 }
-/* Definição das variáveis que estavam faltando */
 :root {
     --scroll-duration: 30s;   /* Tempo para dar uma volta completa */
     --logo-height: 50px;      /* Altura fixa para não ficar gigante */
@@ -1073,33 +1072,26 @@ body {
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
-    padding: 20px 0;
     box-sizing: border-box;
-    /* filter: invert(1); <--- REMOVA ISSO se suas imagens forem coloridas. 
-       Isso inverte as cores (azul vira laranja, etc). Use apenas se forem ícones pretos que precisam ficar brancos. */
-    background-color: #f9f9f9; /* Uma corzinha de fundo pra destacar (opcional) */
+    background-color: #ffffff; /* Uma corzinha de fundo pra destacar (opcional) */
 }
 
 .logoloop-inner {
     display: flex;
     width: max-content;
     will-change: transform;
-    /* A animação usa a variável calculada pelo Javascript */
     animation: scroll-x var(--scroll-duration) linear infinite;
 }
 
-/* Pausa ao passar o mouse */
 .logoloop-track:hover .logoloop-inner {
     animation-play-state: paused;
 }
 
-/* A ANIMAÇÃO QUE FALTAVA */
 @keyframes scroll-x {
     0% {
         transform: translateX(0);
     }
     100% {
-        /* Move para a esquerda a distância calculada pelo JS */
         transform: translateX(calc(-1 * var(--scroll-distance)));
     }
 }
@@ -1114,7 +1106,7 @@ body {
 
 .logoloop-item {
     margin-right: var(--logo-gap);
-    height: var(--logo-height); /* Isso vai forçar o tamanho pequeno */
+    height: var(--logo-height); 
     display: flex;
     align-items: center;
     transition: transform 0.3s ease-in-out;

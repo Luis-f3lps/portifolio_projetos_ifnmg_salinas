@@ -24,101 +24,100 @@ document.querySelectorAll('.submenu > a').forEach(menu => {
     });
 });
 
+
+let todosResumos = [];
+
 document.addEventListener('DOMContentLoaded', function () {
-    if (window.location.pathname !== '/index.html') {
-        redirecionarSeNaoAutenticado();
-    }
-}); document.addEventListener('DOMContentLoaded', function () {
-    carregarResumosSimples();
-    carregarEventosNoSelect();
-    setupFilters();
+    carregarDadosIniciais();
+    setupFiltroInterno();
 });
 
-function carregarResumosSimples() {
-    fetch('/api/resumos-simples')
-        .then(response => response.json())
-        .then(data => {
-            const tbody = document.getElementById('resumos-tbody');
-            tbody.innerHTML = '';
-
-            if (Array.isArray(data)) {
-                data.forEach(resumo => {
-                    const tr = document.createElement('tr');
-                    // Mantemos isso aqui para o filtro continuar funcionando
-                    tr.setAttribute('data-evento', resumo.evento || '');
-
-                    // Lógica para decidir se mostra Imagem ou Texto
-                    let conteudoEvento = 'N/A';
-                    if (resumo.link_imagem_fundo) {
-                        // Cria uma imagem com altura fixa de 50px para não quebrar a tabela
-                        // O 'title' mostra o nome do evento quando passa o mouse
-                        conteudoEvento = `<img src="${resumo.link_imagem_fundo}" alt="${resumo.evento}" title="${resumo.evento}" style="height: 70px; width: auto; border-radius: 4px; object-fit: cover;">`;
-                    } else {
-                        conteudoEvento = resumo.evento || 'N/A';
-                    }
-
-                    tr.innerHTML = `
-                        <td style="text-align: center;">${conteudoEvento}</td>
-                        <td>${resumo.titulo || 'N/A'}</td>
-                        <td>${resumo.autores || 'N/A'}</td>
-                        <td>
-                            ${resumo.link_pdf ? `<a href="${resumo.link_pdf}" target="_blank">Acessar PDF</a>` : 'Link indisponível'}
-                        </td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            }
-        })
-        .catch(error => console.error('Erro ao carregar os resumos:', error));
+function carregarDadosIniciais() {
+    Promise.all([
+        fetch('/api/eventos').then(r => r.json()),
+        fetch('/api/resumos-simples').then(r => r.json())
+    ]).then(([eventos, resumos]) => {
+        todosResumos = resumos;
+        renderizarCards(eventos, resumos);
+    }).catch(err => console.error(err));
 }
 
-function carregarEventosNoSelect() {
-    fetch('/api/eventos')
-        .then(response => response.json())
-        .then(data => {
-            const select = document.getElementById('filtro-evento');
-            if (Array.isArray(data)) {
-                data.forEach(evento => {
-                    const option = document.createElement('option');
-                    option.value = evento.nome;
-                    option.textContent = evento.nome;
-                    select.appendChild(option);
-                });
+function renderizarCards(eventos, resumos) {
+    const container = document.getElementById('galeria-eventos');
+    container.innerHTML = '';
+
+    if (Array.isArray(eventos)) {
+        eventos.forEach(evento => {
+            const qtdResumos = resumos.filter(r => r.evento === evento.nome).length;
+            
+            const div = document.createElement('div');
+            div.className = 'card-evento';
+            
+            if (evento.link_imagem_fundo) {
+                div.style.backgroundImage = `url('${evento.link_imagem_fundo}')`;
+            } else {
+                div.style.backgroundColor = '#007bff'; 
             }
-        })
-        .catch(error => console.error('Erro ao carregar eventos:', error));
-}
 
-function setupFilters() {
-    const inputTitulo = document.getElementById('filtro-titulo');
-    const selectEvento = document.getElementById('filtro-evento');
-    const tabelaBody = document.getElementById('resumos-tbody');
+            div.innerHTML = `
+                <div class="card-content">
+                    <h3>${evento.sigla || evento.nome}</h3>
+                    <p>${qtdResumos} resumos</p>
+                </div>
+            `;
 
-    function filtrarTabela() {
-        const termo = inputTitulo.value.toLowerCase().trim();
-        const eventoSelecionado = selectEvento.value;
-        const linhas = tabelaBody.getElementsByTagName('tr');
-
-        for (let i = 0; i < linhas.length; i++) {
-            const linha = linhas[i];
-            const celulaTitulo = linha.getElementsByTagName('td')[0];
-            const eventoDaLinha = linha.getAttribute('data-evento');
-            if (celulaTitulo) {
-                const titulo = celulaTitulo.textContent.toLowerCase();
-
-                const bateTexto = titulo.includes(termo);
-
-                const bateEvento = eventoSelecionado === "" || eventoDaLinha === eventoSelecionado;
-
-                if (bateTexto && bateEvento) {
-                    linha.style.display = "";
-                } else {
-                    linha.style.display = "none";
-                }
-            }
-        }
+            div.onclick = () => abrirEvento(evento.nome);
+            container.appendChild(div);
+        });
     }
+}
 
-    inputTitulo.addEventListener('input', filtrarTabela);
-    selectEvento.addEventListener('change', filtrarTabela);
+function abrirEvento(nomeEvento) {
+    document.getElementById('galeria-eventos').style.display = 'none';
+    document.getElementById('painel-resumos').style.display = 'block';
+    
+    document.getElementById('titulo-evento-ativo').textContent = nomeEvento;
+    
+    const resumosDoEvento = todosResumos.filter(r => r.evento === nomeEvento);
+    preencherTabela(resumosDoEvento);
+}
+
+function voltarParaEventos() {
+    document.getElementById('painel-resumos').style.display = 'none';
+    document.getElementById('galeria-eventos').style.display = 'grid';
+    document.getElementById('filtro-interno').value = ''; 
+}
+
+function preencherTabela(dados) {
+    const tbody = document.getElementById('corpo-tabela-resumos');
+    tbody.innerHTML = '';
+
+    dados.forEach(resumo => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${resumo.titulo || 'N/A'}</td>
+            <td>${resumo.autores || 'N/A'}</td>
+            <td style="text-align: center;">
+                ${resumo.link_pdf ? `<a href="${resumo.link_pdf}" target="_blank" class="btn-link">Abrir PDF</a>` : '-'}
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function setupFiltroInterno() {
+    const input = document.getElementById('filtro-interno');
+    if (!input) return;
+
+    input.addEventListener('input', function() {
+        const termo = this.value.toLowerCase();
+        const eventoAtual = document.getElementById('titulo-evento-ativo').textContent;
+        
+        const filtrados = todosResumos.filter(r => 
+            r.evento === eventoAtual && 
+            r.titulo.toLowerCase().includes(termo)
+        );
+        
+        preencherTabela(filtrados);
+    });
 }

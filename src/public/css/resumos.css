@@ -1023,18 +1023,20 @@ box-shadow: 0 0 8px rgba(40, 167, 69, 0.4);
     gap: 20px;
     padding: 20px 0;
 }
-
 .card-evento {
     height: 150px;
     border-radius: 8px;
-    position: relative;
+    position: relative; 
     overflow: hidden;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: transform 0.2s, box-shadow 0.2s;
-    background-size: cover;
-    background-position: center;
+    
+    background-color: #003366; 
+    background-size: cover;      
+    background-position: center; 
     background-repeat: no-repeat;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1048,7 +1050,7 @@ box-shadow: 0 0 8px rgba(40, 167, 69, 0.4);
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6); 
+    background: rgba(0, 0, 30, 0.6); 
     z-index: 1;
 }
 
@@ -1059,7 +1061,7 @@ box-shadow: 0 0 8px rgba(40, 167, 69, 0.4);
 
 .card-content {
     position: relative;
-    z-index: 2;
+    z-index: 2; 
     color: white;
     padding: 15px;
 }

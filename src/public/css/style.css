@@ -975,8 +975,7 @@ nav ul .fa-solid {
   width: 100%;
   align-items: center;
   text-align: center;
-  padding: 10px 4%;
-  margin-top: 40px;
+padding: 10px 8%;  margin-top: 40px;
 }
 
 body {
@@ -1055,6 +1054,7 @@ body {
   width: 100%;
   margin: 20px auto;
   height: 500px;
+  padding: 10px 8%;
 }
 
 #contact {

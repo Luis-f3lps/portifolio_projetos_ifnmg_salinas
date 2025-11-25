@@ -300,7 +300,8 @@ app.get('/api/resumos-simples', async (req, res) => {
                 r.titulo,
                 r.autores,
                 r.link_pdf,
-                e.nome AS evento   -- Aqui está o segredo: pegamos o nome da tabela 'eventos' e apelidamos de 'evento'
+                e.nome AS evento,
+                e.link_imagem_fundo  -- ADICIONADO AQUI
             FROM 
                 resumos_simples r
             LEFT JOIN 

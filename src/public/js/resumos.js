@@ -44,12 +44,23 @@ function carregarResumosSimples() {
             if (Array.isArray(data)) {
                 data.forEach(resumo => {
                     const tr = document.createElement('tr');
+                    // Mantemos isso aqui para o filtro continuar funcionando
                     tr.setAttribute('data-evento', resumo.evento || ''); 
+
+                    // Lógica para decidir se mostra Imagem ou Texto
+                    let conteudoEvento = 'N/A';
+                    if (resumo.link_imagem_fundo) {
+                        // Cria uma imagem com altura fixa de 50px para não quebrar a tabela
+                        // O 'title' mostra o nome do evento quando passa o mouse
+                        conteudoEvento = `<img src="${resumo.link_imagem_fundo}" alt="${resumo.evento}" title="${resumo.evento}" style="height: 50px; width: auto; border-radius: 4px; object-fit: cover;">`;
+                    } else {
+                        conteudoEvento = resumo.evento || 'N/A';
+                    }
 
                     tr.innerHTML = `
                         <td>${resumo.titulo || 'N/A'}</td>
                         <td>${resumo.autores || 'N/A'}</td>
-                        <td>${resumo.evento || 'N/A'}</td>
+                        <td style="text-align: center;">${conteudoEvento}</td>
                         <td>
                             ${resumo.link_pdf ? `<a href="${resumo.link_pdf}" target="_blank">Acessar PDF</a>` : 'Link indisponível'}
                         </td>

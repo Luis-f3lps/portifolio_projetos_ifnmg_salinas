@@ -93,6 +93,7 @@ nav ul li a:hover::after {
   padding-top: 70px;
   padding-bottom: 20px;
   color: #cfcfcf;
+  background: #21202e;
 }
 
 .row {
@@ -456,18 +457,9 @@ only screen and (max-width: 2340px) and (min-height: 1080px) {
 }
 
 button.pagination-button.active {
-<<<<<<< HEAD
 background-color: #ffffff;
     color: black;}
-.pagination-ellipsis{
-=======
-  background-color: #030303;
-}
 
-.pagination-ellipsis {
->>>>>>> 85f9a8dfc1c00a97d54510c622a4aca98fccffc7
-  font-size: x-large;
-}
 
 /* --------------ódigo CSS para telas com largura maior ou igual a 1080p--------------- */
 @media only screen and (min-width: 1080px) {
@@ -1070,37 +1062,27 @@ body {
   background-color: #21202e;
 }
 
-<<<<<<< HEAD
-/* 1. Contêiner de Visualização (Recorta o conteúdo) */
 .logoloop-track {
     width: 100%;
     overflow: hidden;
-    /* **Obrigatório** para esconder a parte que não está na tela */
     white-space: nowrap;
-    /* Impede que os itens quebrem linha */
     padding: 20px 0;
     box-sizing: border-box;
-    /* Ajuste para que as imagens brancas apareçam em fundo escuro */
     filter: invert(1);
 }
 
-/* 2. Contêiner Interno (Será animado) */
 .logoloop-inner {
     display: flex;
     width: max-content;
-    /* Permite que o conteúdo se estenda horizontalmente */
     will-change: transform;
 
-    /* Aplica a animação: nome, duração, linear, infinito */
     animation: scroll-x var(--scroll-duration) linear infinite;
 
-    /* Pausar animação quando o mouse passar por cima do track */
     .logoloop-track:hover & {
         animation-play-state: paused;
     }
 }
 
-/* 3. Estilo da Lista de Logos e Itens */
 .logoloop-list {
     display: flex;
     list-style: none;
@@ -1113,23 +1095,19 @@ body {
     margin-right: var(--logo-gap);
     height: var(--logo-height);
     display: flex;
-    /* Para centralizar verticalmente a imagem */
     align-items: center;
     transition: transform 0.3s ease-in-out;
 }
 
 .logoloop-item:hover {
     transform: scale(1.1);
-    /* Efeito de zoom ao passar o mouse */
 }
 
 .logoloop-item img {
     height: 100%;
     width: auto;
     object-fit: contain;
-    /* Adicionando o cursor pointer para simular um link/botão */
-    cursor: pointer;
-=======
+    cursor: pointer;}
 #contact .sub-title-type-2 {
   font-size: 16px;
   margin-bottom: 8px;
@@ -1162,5 +1140,4 @@ body {
 #contact .social-icons a:hover {
   color: #ffffff;
   transform: translateY(-2px);
->>>>>>> 85f9a8dfc1c00a97d54510c622a4aca98fccffc7
 }

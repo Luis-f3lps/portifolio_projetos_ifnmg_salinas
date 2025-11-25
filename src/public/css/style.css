@@ -1043,25 +1043,42 @@ body {
   transform: translateX(10px);
   background-color: rgba(0, 191, 255, 0.15);
 }
-
-.chart-container {
-  margin: 20px auto;
-  display: block;
-  height: 700px;
-  width: 700px;
-}
-
-.chart-container-linhas {
-  width: 100%;
-  margin: 20px auto;
-  height: 500px;
-  padding: 10px 8%;
-}
-
 #contact {
-  padding: 15px 0;
-  text-align: center;
-  background-color: #21202e;
+    padding: 15px 0;
+    text-align: center;
+    background-color: #1a1a1a;
+}
+
+#contact .sub-title-type-2 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+#contact p {
+    font-size: 13px;
+    margin: 2px 0;
+    color: #ddd;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+#contact .social-icons {
+    margin-top: 10px;
+}
+
+#contact .social-icons a {
+    text-decoration: none;
+    font-size: 18px;
+    margin: 0 8px;
+    color: #ababab;
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+#contact .social-icons a:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
 }
 :root {
     --scroll-duration: 30s;   /* Tempo para dar uma volta completa */

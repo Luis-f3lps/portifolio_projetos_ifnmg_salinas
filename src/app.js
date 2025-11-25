@@ -316,5 +316,14 @@ app.get('/api/resumos-simples', async (req, res) => {
         console.error('Erro ao buscar resumos simples:', error);
         res.status(500).json({ error: 'Erro no servidor ao buscar resumos simples.' });
     }
+});app.get('/api/eventos', async (req, res) => {
+    try {
+        const query = `SELECT id, nome FROM eventos ORDER BY nome ASC`;
+        const { rows } = await pool.query(query);
+        res.json(rows);
+    } catch (error) {
+        console.error('Erro ao buscar eventos:', error);
+        res.status(500).json({ error: 'Erro ao buscar eventos.' });
+    }
 });
 export default app;

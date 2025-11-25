@@ -28,10 +28,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (window.location.pathname !== '/index.html') {
         redirecionarSeNaoAutenticado();
     }
-});
-document.addEventListener('DOMContentLoaded', function () {
+});document.addEventListener('DOMContentLoaded', function () {
     carregarResumosSimples();
-    setupSearchFilter();
+    carregarEventosNoSelect(); 
+    setupFilters(); 
 });
 
 function carregarResumosSimples() {
@@ -44,51 +44,70 @@ function carregarResumosSimples() {
             if (Array.isArray(data)) {
                 data.forEach(resumo => {
                     const tr = document.createElement('tr');
+                    tr.setAttribute('data-evento', resumo.evento || ''); 
 
                     tr.innerHTML = `
                         <td>${resumo.titulo || 'N/A'}</td>
                         <td>${resumo.autores || 'N/A'}</td>
                         <td>${resumo.evento || 'N/A'}</td>
                         <td>
-                            ${resumo.link_pdf ? `<a href="${resumo.link_pdf}" target="_blank">Acessar Resumo Simples</a>` : 'Link indisponível'}
+                            ${resumo.link_pdf ? `<a href="${resumo.link_pdf}" target="_blank">Acessar PDF</a>` : 'Link indisponível'}
                         </td>
                     `;
-
                     tbody.appendChild(tr);
                 });
-            } else {
-                console.error('Formato de resposta inesperado:', data);
             }
         })
         .catch(error => console.error('Erro ao carregar os resumos:', error));
 }
 
-function setupSearchFilter() {
-    const filtro = document.getElementById('filtro-titulo');
+function carregarEventosNoSelect() {
+    fetch('/api/eventos')
+        .then(response => response.json())
+        .then(data => {
+            const select = document.getElementById('filtro-evento');
+            if (Array.isArray(data)) {
+                data.forEach(evento => {
+                    const option = document.createElement('option');
+                    option.value = evento.nome; 
+                    option.textContent = evento.nome;
+                    select.appendChild(option);
+                });
+            }
+        })
+        .catch(error => console.error('Erro ao carregar eventos:', error));
+}
+
+function setupFilters() {
+    const inputTitulo = document.getElementById('filtro-titulo');
+    const selectEvento = document.getElementById('filtro-evento');
     const tabelaBody = document.getElementById('resumos-tbody');
 
-    if (!filtro || !tabelaBody) {
-        console.error("Elemento de filtro ou tabela não encontrado.");
-        return;
-    }
-
-    filtro.addEventListener('input', function () {
-        const termoBusca = this.value.toLowerCase().trim();
+    function filtrarTabela() {
+        const termo = inputTitulo.value.toLowerCase().trim();
+        const eventoSelecionado = selectEvento.value;
         const linhas = tabelaBody.getElementsByTagName('tr');
 
         for (let i = 0; i < linhas.length; i++) {
             const linha = linhas[i];
-            const celulaTitulo = linha.getElementsByTagName('td')[0]; 
-
+            const celulaTitulo = linha.getElementsByTagName('td')[0];
+            const eventoDaLinha = linha.getAttribute('data-evento');
             if (celulaTitulo) {
                 const titulo = celulaTitulo.textContent.toLowerCase();
+                
+                const bateTexto = titulo.includes(termo);
+                
+                const bateEvento = eventoSelecionado === "" || eventoDaLinha === eventoSelecionado;
 
-                if (titulo.includes(termoBusca)) {
-                    linha.style.display = ""; 
+                if (bateTexto && bateEvento) {
+                    linha.style.display = "";
                 } else {
-                    linha.style.display = "none"; 
+                    linha.style.display = "none";
                 }
             }
         }
-    });
+    }
+
+    inputTitulo.addEventListener('input', filtrarTabela);
+    selectEvento.addEventListener('change', filtrarTabela);
 }

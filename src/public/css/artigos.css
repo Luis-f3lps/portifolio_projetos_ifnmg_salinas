@@ -356,7 +356,7 @@ form .btn2{
 nav .fa-solid{
     display: none;
 }
-    a {
+    a {TEXT-DECORATION: NONE;
         color: #007BFF; /* Cor principal do link (um azul vibrante) */
         transition: color 0.3s ease-in-out; /* Transição suave para a mudança de cor */
     }

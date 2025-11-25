@@ -358,7 +358,7 @@ nav .fa-solid{
 }
     a {
         color: #007BFF; /* Cor principal do link (um azul vibrante) */
-        transition: color 0.3s ease-in-out; /* Transição suave para a mudança de cor */
+        transition: color 0.3s ease-in-out; /* Transição suave para a mudança de cor */TEXT-DECORATION: NONE;
     }
 
     a:hover {

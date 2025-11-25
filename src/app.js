@@ -295,21 +295,20 @@ app.get('/api/anos', async (req, res) => {
 app.get('/api/resumos-simples', async (req, res) => {
     try {
         const query = `
-    SELECT 
-        r.id,
-        r.titulo,
-        r.autores,
-        r.link_pdf,
-        e.nome AS nome_evento,
-        e.sigla AS sigla_evento,
-        e.link_imagem_fundo
-    FROM 
-        resumos_simples r
-    JOIN 
-        eventos e ON r.evento_id = e.id
-    ORDER BY 
-        r.titulo ASC;
-`;
+            SELECT 
+                r.id,
+                r.titulo,
+                r.autores,
+                r.link_pdf,
+                e.nome AS evento   -- Aqui está o segredo: pegamos o nome da tabela 'eventos' e apelidamos de 'evento'
+            FROM 
+                resumos_simples r
+            LEFT JOIN 
+                eventos e ON r.evento_id = e.id
+            ORDER BY 
+                r.titulo ASC;
+        `;
+
         const { rows } = await pool.query(query);
         res.json(rows);
 

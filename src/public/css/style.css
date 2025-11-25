@@ -745,11 +745,19 @@ nav ul .fa-solid {
 .-list div a {
   color: #ffffff;
 }
+.chart-container {
+  margin: 20px auto;
+  display: block;
+  height: 700px;
+  width: 700px;
+}
+
 .chart-container-linhas {
-    position: relative; /* Obrigatório para o Chart.js funcionar bem */
-    height: 400px;      /* Defina a altura fixa que você quer */
-    width: 100%;        /* Garante que ocupe a largura disponível */
-    margin-bottom: 30px; /* Espaço para não colar no próximo elemento */
+  width: 100%;
+  margin: 20px auto;
+  height: 500px;
+  padding: 10px 8%;
+
 }
 @media only screen and (min-width: 901px) and (min-height: 1601px) {
   .header-text h1 {

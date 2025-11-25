@@ -13,10 +13,12 @@ body {
   background: white;
   color: white;
 }
+
 a {
-    color: #007BFF;
-    transition: color 0.3s ease-in-out;
+  color: #007BFF;
+  transition: color 0.3s ease-in-out;
 }
+
 /* --------------Home------------------*/
 #header {
   width: 100%;
@@ -340,7 +342,7 @@ nav .fa-solid {
 }
 
 @media only screen and (max-width: 2532px) and (min-height: 1170px),
-  only screen and (max-width: 2340px) and (min-height: 1080px) {
+only screen and (max-width: 2340px) and (min-height: 1080px) {
   .tab-titles {
     margin: 60px 0 40px;
   }
@@ -453,12 +455,15 @@ nav .fa-solid {
     transition: transform 0.5s;
   }
 }
+
 button.pagination-button.active {
-    background-color: #030303;
+  background-color: #030303;
 }
-.pagination-ellipsis{
+
+.pagination-ellipsis {
   font-size: x-large;
 }
+
 /* --------------ódigo CSS para telas com largura maior ou igual a 1080p--------------- */
 @media only screen and (min-width: 1080px) {
   .work-list {
@@ -511,12 +516,12 @@ button.pagination-button.active {
 
 
 nav {
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    position: fixed;
-    background: #21202e;
-    width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: fixed;
+  background: #21202e;
+  width: 100%;
 }
 
 
@@ -864,24 +869,27 @@ nav ul .fa-solid {
   nav {
     margin-top: 40px;
     position: relative;
-     width: 95%;
-background-color: white;
+    width: 95%;
+    background-color: white;
   }
+
   #bloco-descricao-dados {
     font-size: 22px;
+  }
 }
-}
+
 #bloco-descricao-dados {
-    background-color: rgba(255, 255, 255, 0.05);
-    color: black;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    padding: 25px;
-    border-left: 5px solid #28a745;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: black;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  padding: 25px;
+  border-left: 5px solid #28a745;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
+
 @media only screen and (max-width: 1080px) and (max-height: 2340px) {
   img {
     margin-top: 20px;
@@ -1017,6 +1025,7 @@ body {
   padding-left: 0;
   margin-top: 25px;
 }
+
 .sobre li {
   background-color: rgba(0, 191, 255, 0.05);
   margin-bottom: 12px;
@@ -1047,39 +1056,41 @@ body {
 }
 
 #contact {
-    padding: 15px 0;
-    text-align: center;
-    background-color: #1a1a1a;
+  padding: 15px 0;
+  text-align: center;
+  background-color: #21202e;
 }
 
 #contact .sub-title-type-2 {
-    font-size: 16px;
-    margin-bottom: 8px;
-    color: #fff;
+  font-size: 16px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+
+  color: #fff;
 }
 
 #contact p {
-    font-size: 13px;
-    margin: 2px 0;
-    color: #ddd;
-    display: inline-block;
-    margin-right: 15px;
+  font-size: 13px;
+  margin: 2px 0;
+  color: #ddd;
+  display: inline-block;
+  margin-right: 15px;
 }
 
 #contact .social-icons {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 #contact .social-icons a {
-    text-decoration: none;
-    font-size: 18px;
-    margin: 0 8px;
-    color: #ababab;
-    display: inline-block;
-    transition: transform 0.3s;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 0 8px;
+  color: #ababab;
+  display: inline-block;
+  transition: transform 0.3s;
 }
 
 #contact .social-icons a:hover {
-    color: #ffffff;
-    transform: translateY(-2px);
+  color: #ffffff;
+  transform: translateY(-2px);
 }

@@ -491,7 +491,7 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
       result.data.forEach((item) => {
         const row = document.createElement("tr");
         row.innerHTML = `
-     <td>${item.titulo}</td>
+     <td><strong>${item.titulo}</strong></td>
      <td>${item.tematica}</td>
      <td>${item.nome_coordenador}</td>
       <td>${item.ano || 'N/D'}</td>

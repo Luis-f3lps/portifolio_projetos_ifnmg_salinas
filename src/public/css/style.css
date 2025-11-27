@@ -320,7 +320,7 @@ form textarea {
   width: 100%;
   border: 0;
   outline: none;
-  background: #262626;
+  background: #ffffff;
   padding: 15px;
   margin: 15px 0;
   color: #ffffff;
@@ -597,7 +597,7 @@ select {
   background-repeat: no-repeat;
   background-size: 20px;
   padding-right: 30px;
-  width: 300px;
+  /*width: 300px;*/
   transition: border-color 0.3s ease;
 }
 

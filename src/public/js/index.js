@@ -82,37 +82,38 @@ document.addEventListener("DOMContentLoaded", async function () {
       const tematica = document.getElementById("tematica-select").value;
       const coordenador = document.getElementById("coordenador-select").value;
       const ano = document.getElementById("anoProjeto-select").value;
-      loadPortifolio(1, tematica, coordenador, ano);
+      const titulo = document.getElementById('filtro-titulo').value;
+      loadPortifolio(1, tematica, coordenador, ano, titulo);
     });
 });
 document.addEventListener('DOMContentLoaded', function () {
-    
-    const innerContainer = document.getElementById('logoloop-inner');
-    const originalList = document.getElementById('original-list');
 
-    if (innerContainer && originalList) {
-        setupLogoLoop();
-        window.addEventListener('resize', setupLogoLoop);
+  const innerContainer = document.getElementById('logoloop-inner');
+  const originalList = document.getElementById('original-list');
+
+  if (innerContainer && originalList) {
+    setupLogoLoop();
+    window.addEventListener('resize', setupLogoLoop);
+  }
+
+  function setupLogoLoop() {
+    innerContainer.querySelectorAll('.logoloop-list[aria-hidden="true"]').forEach(clone => clone.remove());
+
+    const totalClones = 2;
+
+    for (let i = 0; i < totalClones; i++) {
+      const clone = originalList.cloneNode(true);
+      clone.removeAttribute('id');
+      clone.setAttribute('aria-hidden', 'true');
+      innerContainer.appendChild(clone);
     }
 
-    function setupLogoLoop() {
-        innerContainer.querySelectorAll('.logoloop-list[aria-hidden="true"]').forEach(clone => clone.remove());
 
-        const totalClones = 2; 
-        
-        for (let i = 0; i < totalClones; i++) {
-            const clone = originalList.cloneNode(true);
-            clone.removeAttribute('id');
-            clone.setAttribute('aria-hidden', 'true');
-            innerContainer.appendChild(clone);
-        }
+    const gap = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--logo-gap')) || 0;
+    const originalWidth = originalList.offsetWidth + gap;
 
-
-        const gap = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--logo-gap')) || 0;
-        const originalWidth = originalList.offsetWidth + gap;
-
-        innerContainer.style.setProperty('--scroll-distance', `${originalWidth}px`);
-    }
+    innerContainer.style.setProperty('--scroll-distance', `${originalWidth}px`);
+  }
 
 });
 // Gráfico 1: Coordenadores
@@ -379,7 +380,7 @@ function updatePortifolioPagination(
   currentPage,
   tematica = "",
   coordenador = "",
-  ano = ""
+  ano = "",   titulo = ""
 ) {
   const paginationDiv = document.getElementById("pagination-portifolio");
   paginationDiv.innerHTML = "";
@@ -402,7 +403,7 @@ function updatePortifolioPagination(
     if (!isDisabled) {
       button.addEventListener("click", () => {
         if (page >= 1 && page <= totalPages) {
-          loadPortifolio(page, tematica, coordenador, ano);
+          loadPortifolio(page, tematica, coordenador, ano, titulo);
         }
       });
     }
@@ -445,11 +446,12 @@ function updatePortifolioPagination(
 /**
  * @param {number} page 
  * @param {string} tematica 
+ *  * @param {string} titulo 
+
  * @param {string} coordenador 
  * * @param {string} ano -
  */
-async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "") {
-
+async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "", titulo = "") {
   const container = document.getElementById("portifolio-tbody");
   const paginationDiv = document.getElementById("pagination-portifolio");
 
@@ -465,6 +467,7 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
       page: page,
       limit: 15,
     });
+    if (titulo) { params.append("titulo", titulo); }
     if (tematica) {
       params.append("tematica", tematica);
     }
@@ -509,7 +512,8 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
       result.currentPage,
       tematica,
       coordenador,
-      ano
+      ano,
+      titulo
     );
 
   } catch (error) {

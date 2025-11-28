@@ -351,9 +351,10 @@ app.get('/api/graficos/eventos', async (req, res) => {
                 WHERE evento NOT IN (SELECT evento FROM Top15)
                 HAVING SUM(total) IS NOT NULL
             )
-            SELECT evento, total FROM Top15
+            -- AQUI ESTAVA O ERRO: Precisamos selecionar a coluna 'ordem' para poder ordenar por ela depois
+            SELECT evento, total, ordem FROM Top15
             UNION ALL
-            SELECT evento, total FROM Outros
+            SELECT evento, total, ordem FROM Outros
             ORDER BY ordem ASC, total DESC;
         `;
 

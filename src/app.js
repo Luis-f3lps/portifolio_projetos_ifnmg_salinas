@@ -409,4 +409,48 @@ app.get('/api/graficos/status-produtos', async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor ao obter status.' });
     }
 });
+app.get('/api/graficos/eventos-agrupados', async (req, res) => {
+    try {
+        const query = `
+            WITH DadosCategorizados AS (
+                SELECT 
+                    CASE 
+                        -- Agrupa tudo que tem "SIC" seguido de ano ou espaço
+                        WHEN evento ILIKE 'SIC %' OR evento ILIKE '% SIC%' THEN 'SIC (Todos)'
+                        -- Agrupa as Semanas Nacionais
+                        WHEN evento ILIKE '%Semana Nacional de Ciência e Tecnologia%' THEN 'Semana Nacional de C&T'
+                        -- Mantém o resto como está
+                        ELSE evento 
+                    END as nome_grupo,
+                    COUNT(id) as total
+                FROM produto
+                WHERE evento IS NOT NULL
+                GROUP BY nome_grupo
+            ),
+            Top10 AS (
+                SELECT nome_grupo, total, 1 as ordem
+                FROM DadosCategorizados
+                ORDER BY total DESC
+                LIMIT 10
+            ),
+            Outros AS (
+                SELECT 'Outros' as nome_grupo, SUM(total) as total, 2 as ordem
+                FROM DadosCategorizados
+                WHERE nome_grupo NOT IN (SELECT nome_grupo FROM Top10)
+                HAVING SUM(total) IS NOT NULL
+            )
+            SELECT nome_grupo as evento, total, ordem FROM Top10
+            UNION ALL
+            SELECT nome_grupo, total, ordem FROM Outros
+            ORDER BY ordem ASC, total DESC;
+        `;
+
+        const { rows } = await pool.query(query);
+        res.json(rows);
+
+    } catch (error) {
+        console.error('Erro ao obter eventos agrupados:', error);
+        res.status(500).json({ error: 'Erro no servidor.' });
+    }
+});
 export default app;

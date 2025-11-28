@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   loadTematicas();
   loadCoordenadores();
   loadPortifolio();
-  loadAnos(); carregarDadosEventos(); carregarDadosTipos(); carregarStatusProdutos();
+  loadAnos(); carregarDadosEventos(); carregarDadosTipos(); carregarStatusProdutos();carregarEventosAgrupados();
   try {
     const response = await fetch("/api/stats/tematicas");
     if (!response.ok) throw new Error("Falha ao buscar dados de temáticas");
@@ -813,5 +813,98 @@ function criarGraficoStatusProdutos(data) {
     });
   } catch (error) {
     console.error("Erro ao criar o gráfico de status:", error);
+  }
+}
+async function carregarEventosAgrupados() {
+    try {
+        const response = await fetch('/api/graficos/eventos-agrupados');
+        if (!response.ok) throw new Error('Erro na rede');
+        const data = await response.json();
+        criarGraficoAgrupado(data);
+    } catch (error) {
+        console.error("Erro ao buscar eventos agrupados:", error);
+    }
+}
+
+function criarGraficoAgrupado(data) {
+  try {
+    if (!data || data.length === 0) return;
+
+    const labels = data.map((item) => item.evento);
+    const values = data.map((item) => parseInt(item.total, 10));
+    const total = values.reduce((sum, current) => sum + current, 0);
+
+    const ctx = document.getElementById("graficoPizzaEventosAgrupado").getContext("2d");
+
+    if (window.meuGraficoAgrupado instanceof Chart) {
+        window.meuGraficoAgrupado.destroy();
+    }
+
+    window.meuGraficoAgrupado = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: labels,
+        datasets: [{
+            label: "Produtos",
+            data: values,
+            backgroundColor: PALETA_CORES_EVENTOS, 
+            borderColor: "#fff",
+            borderWidth: 1,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: { padding: { right: 50 } },
+        plugins: {
+          legend: { 
+              position: "right",
+              labels: {
+                  boxWidth: 15,
+                  padding: 15,
+                  font: { size: 12 },
+                  generateLabels: (chart) => {
+                    const data = chart.data;
+                    if (data.labels.length && data.datasets.length) {
+                        return data.labels.map((label, i) => {
+                            const meta = chart.getDatasetMeta(0);
+                            const style = meta.controller.getStyle(i);
+                            return {
+                                text: label,
+                                fillStyle: style.backgroundColor,
+                                strokeStyle: style.borderColor,
+                                lineWidth: style.borderWidth,
+                                hidden: isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
+                                index: i
+                            };
+                        });
+                    }
+                    return [];
+                  }
+              }
+          },
+          title: {
+            display: true,
+            text: "Eventos Agrupados (SIC e SNCT Unificados)",
+            font: { size: 20 },
+            position: "top",
+            align: "start",
+            padding: { bottom: 20 }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const label = context.label || "";
+                const value = context.raw;
+                const percentage = ((value / total) * 100).toFixed(1);
+                return ` ${label}: ${value} (${percentage}%)`;
+              },
+            },
+          },
+        },
+      },
+    });
+  } catch (error) {
+    console.error("Erro ao criar gráfico agrupado:", error);
   }
 }

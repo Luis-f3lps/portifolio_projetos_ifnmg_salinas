@@ -389,4 +389,24 @@ app.get('/api/graficos/tipos', async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor ao obter estatísticas de tipos.' });
     }
 });
+app.get('/api/graficos/status-produtos', async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                COUNT(DISTINCT p.id) FILTER (WHERE pr.id IS NOT NULL) as com_produto,
+                COUNT(DISTINCT p.id) FILTER (WHERE pr.id IS NULL) as sem_produto
+            FROM 
+                portifolio p
+            LEFT JOIN 
+                produto pr ON p.id = pr.portifolio_id;
+        `;
+
+        const { rows } = await pool.query(query);
+        res.json(rows[0]);
+
+    } catch (error) {
+        console.error('Erro ao obter status dos produtos:', error);
+        res.status(500).json({ error: 'Erro no servidor ao obter status.' });
+    }
+});
 export default app;

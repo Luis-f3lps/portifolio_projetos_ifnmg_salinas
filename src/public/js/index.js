@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   loadTematicas();
   loadCoordenadores();
   loadPortifolio();
-  loadAnos(); carregarDadosEventos();carregarDadosTipos();
+  loadAnos(); carregarDadosEventos(); carregarDadosTipos(); carregarStatusProdutos();
   try {
     const response = await fetch("/api/stats/tematicas");
     if (!response.ok) throw new Error("Falha ao buscar dados de temáticas");
@@ -564,12 +564,12 @@ async function carregarDadosEventos() {
 function criarGraficoPizzaEventos(data) {
   try {
     if (!data || data.length === 0) {
-        console.warn("Nenhum dado de evento encontrado para o gráfico.");
-        return;
+      console.warn("Nenhum dado de evento encontrado para o gráfico.");
+      return;
     }
 
-    const labels = data.map((item) => item.evento); 
-    const values = data.map((item) => parseInt(item.total, 10)); 
+    const labels = data.map((item) => item.evento);
+    const values = data.map((item) => parseInt(item.total, 10));
     const totalProdutos = values.reduce((sum, current) => sum + current, 0);
 
     const canvas = document.getElementById("graficoPizzaEventos");
@@ -577,7 +577,7 @@ function criarGraficoPizzaEventos(data) {
     const ctx = canvas.getContext("2d");
 
     if (window.meuGraficoEventos instanceof Chart) {
-        window.meuGraficoEventos.destroy();
+      window.meuGraficoEventos.destroy();
     }
 
     window.meuGraficoEventos = new Chart(ctx, {
@@ -585,55 +585,55 @@ function criarGraficoPizzaEventos(data) {
       data: {
         labels: labels,
         datasets: [{
-            label: "Produtos",
-            data: values,
-            backgroundColor: PALETA_CORES_EVENTOS.slice(0, data.length), 
-            borderColor: "#fff",
-            borderWidth: 1,
+          label: "Produtos",
+          data: values,
+          backgroundColor: PALETA_CORES_EVENTOS.slice(0, data.length),
+          borderColor: "#fff",
+          borderWidth: 1,
         }],
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         layout: {
-            padding: {
-                right: 50 
-            }
+          padding: {
+            right: 50
+          }
         },
         plugins: {
-          legend: { 
-              position: "right", 
-              align: "center",  
-              labels: {
-                  boxWidth: 15,    
-                  padding: 15,   
-                  font: {
-                    size: 12       
-                  },
-                  generateLabels: function(chart) {
-                    const data = chart.data;
-                    if (data.labels.length && data.datasets.length) {
-                        return data.labels.map((label, i) => {
-                            const meta = chart.getDatasetMeta(0);
-                            const style = meta.controller.getStyle(i);
-                            return {
-                                text: label, 
-                                fillStyle: style.backgroundColor, 
-                                strokeStyle: style.borderColor,
-                                lineWidth: style.borderWidth,
-                                hidden: isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
-                                index: i
-                            };
-                        });
-                    }
-                    return [];
-                  }
+          legend: {
+            position: "right",
+            align: "center",
+            labels: {
+              boxWidth: 15,
+              padding: 15,
+              font: {
+                size: 12
+              },
+              generateLabels: function (chart) {
+                const data = chart.data;
+                if (data.labels.length && data.datasets.length) {
+                  return data.labels.map((label, i) => {
+                    const meta = chart.getDatasetMeta(0);
+                    const style = meta.controller.getStyle(i);
+                    return {
+                      text: label,
+                      fillStyle: style.backgroundColor,
+                      strokeStyle: style.borderColor,
+                      lineWidth: style.borderWidth,
+                      hidden: isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
+                      index: i
+                    };
+                  });
+                }
+                return [];
               }
+            }
           },
           title: {
             display: true,
             text: "Produtos por Evento (Top 15 + Outros)",
-            font: { size: 20 }, 
+            font: { size: 20 },
             position: "top",
             align: "start",
             padding: { bottom: 20 }
@@ -657,26 +657,26 @@ function criarGraficoPizzaEventos(data) {
 }
 
 const PALETA_CORES_TIPOS = [
-    "#36A2EB", "#4BC0C0", "#9966FF", "#FF9F40", "#FF6384", "#FFCD56", "#C9CBCF"
+  "#36A2EB", "#4BC0C0", "#9966FF", "#FF9F40", "#FF6384", "#FFCD56", "#C9CBCF"
 ];
 
 async function carregarDadosTipos() {
-    try {
-        const response = await fetch('/api/graficos/tipos'); 
-        if (!response.ok) throw new Error('Erro na rede');
-        const data = await response.json();
-        criarGraficoPizzaTipos(data);
-    } catch (error) {
-        console.error("Erro ao buscar dados de tipos:", error);
-    }
+  try {
+    const response = await fetch('/api/graficos/tipos');
+    if (!response.ok) throw new Error('Erro na rede');
+    const data = await response.json();
+    criarGraficoPizzaTipos(data);
+  } catch (error) {
+    console.error("Erro ao buscar dados de tipos:", error);
+  }
 }
 
 function criarGraficoPizzaTipos(data) {
   try {
     if (!data || data.length === 0) return;
 
-    const labels = data.map((item) => item.tipo_produto); 
-    const values = data.map((item) => parseInt(item.total, 10)); 
+    const labels = data.map((item) => item.tipo_produto);
+    const values = data.map((item) => parseInt(item.total, 10));
     const total = values.reduce((sum, current) => sum + current, 0);
 
     const canvas = document.getElementById("graficoPizzaTipos");
@@ -684,40 +684,40 @@ function criarGraficoPizzaTipos(data) {
     const ctx = canvas.getContext("2d");
 
     if (window.meuGraficoTipos instanceof Chart) {
-        window.meuGraficoTipos.destroy();
+      window.meuGraficoTipos.destroy();
     }
 
     window.meuGraficoTipos = new Chart(ctx, {
-      type: "doughnut", 
+      type: "doughnut",
       data: {
         labels: labels,
         datasets: [{
-            label: "Quantidade",
-            data: values,
-            backgroundColor: PALETA_CORES_TIPOS, 
-            borderColor: "#fff",
-            borderWidth: 2,
+          label: "Quantidade",
+          data: values,
+          backgroundColor: PALETA_CORES_TIPOS,
+          borderColor: "#fff",
+          borderWidth: 2,
         }],
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         layout: {
-            padding: { right: 20 }
+          padding: { right: 20 }
         },
         plugins: {
-          legend: { 
-              position: "right",
-              labels: {
-                  boxWidth: 15,
-                  padding: 15,
-                  font: { size: 12 }
-              }
+          legend: {
+            position: "right",
+            labels: {
+              boxWidth: 15,
+              padding: 15,
+              font: { size: 12 }
+            }
           },
           title: {
             display: true,
             text: "Produtos por Tipo",
-            font: { size: 20 }, 
+            font: { size: 20 },
             position: "top",
             align: "start",
             padding: { bottom: 20 }
@@ -737,5 +737,81 @@ function criarGraficoPizzaTipos(data) {
     });
   } catch (error) {
     console.error("Erro ao criar o gráfico de tipos:", error);
+  }
+}
+
+async function carregarStatusProdutos() {
+  try {
+    const response = await fetch('/api/graficos/status-produtos');
+    if (!response.ok) throw new Error('Erro na rede');
+    const data = await response.json();
+    criarGraficoStatusProdutos(data);
+  } catch (error) {
+    console.error("Erro ao buscar status de produtos:", error);
+  }
+}
+
+function criarGraficoStatusProdutos(data) {
+  try {
+    if (!data) return;
+
+    const comProduto = parseInt(data.com_produto, 10);
+    const semProduto = parseInt(data.sem_produto, 10);
+    const total = comProduto + semProduto;
+
+    const canvas = document.getElementById("graficoStatusProdutos");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    if (window.meuGraficoStatus instanceof Chart) {
+      window.meuGraficoStatus.destroy();
+    }
+
+    window.meuGraficoStatus = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: ["Com Produto", "Sem Produto"],
+        datasets: [{
+          data: [comProduto, semProduto],
+          backgroundColor: ["#2ecc71", "#e74c3c"],
+          borderColor: "#fff",
+          borderWidth: 2,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: "right",
+            labels: {
+              boxWidth: 15,
+              padding: 15,
+              font: { size: 12 }
+            }
+          },
+          title: {
+            display: true,
+            text: "Portfólios com vs. Sem Produtos",
+            font: { size: 20 },
+            position: "top",
+            align: "start",
+            padding: { bottom: 20 }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const label = context.label || "";
+                const value = context.raw;
+                const percentage = ((value / total) * 100).toFixed(1);
+                return ` ${label}: ${value} (${percentage}%)`;
+              },
+            },
+          },
+        },
+      },
+    });
+  } catch (error) {
+    console.error("Erro ao criar o gráfico de status:", error);
   }
 }

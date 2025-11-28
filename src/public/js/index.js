@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   loadTematicas();
   loadCoordenadores();
   loadPortifolio();
-  loadAnos();
+  loadAnos(); carregarDadosEventos();
   try {
     const response = await fetch("/api/stats/tematicas");
     if (!response.ok) throw new Error("Falha ao buscar dados de temáticas");
@@ -380,7 +380,7 @@ function updatePortifolioPagination(
   currentPage,
   tematica = "",
   coordenador = "",
-  ano = "",   titulo = ""
+  ano = "", titulo = ""
 ) {
   const paginationDiv = document.getElementById("pagination-portifolio");
   paginationDiv.innerHTML = "";
@@ -525,29 +525,45 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
   }
 }
 const PALETA_CORES_EVENTOS = [
-  "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40", 
+  "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40",
   "#C9CBCF", "#2ecc71", "#e74c3c", "#34495e", "#f1c40f", "#e67e22"
 ];
 
 async function carregarDadosEventos() {
-    try {
-        const response = await fetch('/api/graficos/eventos'); 
-        criarGraficoPizzaEventos(data);
-    } catch (error) {
-        console.error("Erro ao buscar dados de eventos:", error);
+  try {
+    const response = await fetch('/api/graficos/eventos');
+    if (!response.ok) {
+      throw new Error('Falha na resposta da rede');
     }
-}
+    const data = await response.json();
+    criarGraficoPizzaEventos(data);
 
+  } catch (error) {
+    console.error("Erro ao buscar dados de eventos:", error);
+    const container = document.getElementById("graficoPizzaEventos");
+    if (container) {
+      container.parentElement.innerHTML = "<p style='text-align:center; color:red'>Erro ao carregar dados do gráfico.</p>";
+    }
+  }
+}
 function criarGraficoPizzaEventos(data) {
   try {
-    const labels = data.map((item) => item.evento); 
-    const values = data.map((item) => parseInt(item.total, 10)); 
-    
+    if (!data || data.length === 0) {
+      console.warn("Nenhum dado de evento encontrado para o gráfico.");
+      return;
+    }
+
+    const labels = data.map((item) => item.evento);
+    const values = data.map((item) => parseInt(item.total, 10));
+
     const totalProdutos = values.reduce((sum, current) => sum + current, 0);
 
-    const ctx = document
-      .getElementById("graficoPizzaEventos")
-      .getContext("2d");
+    const canvas = document.getElementById("graficoPizzaEventos");
+    if (!canvas) {
+      console.error("Canvas 'graficoPizzaEventos' não encontrado no HTML.");
+      return;
+    }
+    const ctx = canvas.getContext("2d");
 
     new Chart(ctx, {
       type: "pie",
@@ -557,7 +573,7 @@ function criarGraficoPizzaEventos(data) {
           {
             label: "Produtos",
             data: values,
-            backgroundColor: PALETA_CORES_EVENTOS, 
+            backgroundColor: PALETA_CORES_EVENTOS,
             borderColor: "#fff",
             borderWidth: 2,
           },
@@ -565,23 +581,33 @@ function criarGraficoPizzaEventos(data) {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false, 
+        maintainAspectRatio: false,
         plugins: {
-          legend: { 
-              position: "right",
-              labels: {
-                  boxWidth: 20,
-                  padding: 15
+          legend: {
+            position: "right",
+            labels: {
+              boxWidth: 20,
+              padding: 15,
+              generateLabels: (chart) => {
+                const original = Chart.defaults.plugins.legend.labels.generateLabels;
+                const labels = original.call(this, chart);
+                labels.forEach(label => {
+                  if (label.text.length > 25) {
+                    label.text = label.text.substring(0, 25) + '...';
+                  }
+                });
+                return labels;
               }
+            }
           },
           title: {
             display: true,
             text: "Produtos por Evento",
-            font: { size: 24 }, 
+            font: { size: 24 },
             position: "top",
             align: "start",
             padding: {
-                bottom: 20
+              bottom: 20
             }
           },
           tooltip: {
@@ -590,7 +616,7 @@ function criarGraficoPizzaEventos(data) {
                 const label = context.label || "";
                 const value = context.raw;
                 const percentage = ((value / totalProdutos) * 100).toFixed(1);
-                return `${label}: ${value} produtos (${percentage}%)`;
+                return ` ${label}: ${value} (${percentage}%)`;
               },
             },
           },
@@ -599,9 +625,5 @@ function criarGraficoPizzaEventos(data) {
     });
   } catch (error) {
     console.error("Erro ao criar o gráfico de eventos:", error);
-    const container = document.getElementById(
-      "graficoPizzaEventos"
-    ).parentElement;
-    if (container) container.innerHTML = "Não foi possível carregar o gráfico.";
   }
 }

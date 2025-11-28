@@ -330,4 +330,28 @@ app.get('/api/resumos-simples', async (req, res) => {
         res.status(500).json({ error: 'Erro ao buscar eventos.' });
     }
 });
+app.get('/api/graficos/eventos', async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                evento, 
+                COUNT(id) as total
+            FROM 
+                produto
+            WHERE 
+                evento IS NOT NULL
+            GROUP BY 
+                evento
+            ORDER BY 
+                total DESC;
+        `;
+
+        const { rows } = await pool.query(query);
+        res.json(rows);
+
+    } catch (error) {
+        console.error('Erro ao obter estatísticas por evento:', error);
+        res.status(500).json({ error: 'Erro no servidor ao obter estatísticas de eventos.' });
+    }
+});
 export default app;

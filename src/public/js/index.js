@@ -524,3 +524,84 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
     }
   }
 }
+const PALETA_CORES_EVENTOS = [
+  "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40", 
+  "#C9CBCF", "#2ecc71", "#e74c3c", "#34495e", "#f1c40f", "#e67e22"
+];
+
+async function carregarDadosEventos() {
+    try {
+        const response = await fetch('/api/graficos/eventos'); 
+        criarGraficoPizzaEventos(data);
+    } catch (error) {
+        console.error("Erro ao buscar dados de eventos:", error);
+    }
+}
+
+function criarGraficoPizzaEventos(data) {
+  try {
+    const labels = data.map((item) => item.evento); 
+    const values = data.map((item) => parseInt(item.total, 10)); 
+    
+    const totalProdutos = values.reduce((sum, current) => sum + current, 0);
+
+    const ctx = document
+      .getElementById("graficoPizzaEventos")
+      .getContext("2d");
+
+    new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Produtos",
+            data: values,
+            backgroundColor: PALETA_CORES_EVENTOS, 
+            borderColor: "#fff",
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, 
+        plugins: {
+          legend: { 
+              position: "right",
+              labels: {
+                  boxWidth: 20,
+                  padding: 15
+              }
+          },
+          title: {
+            display: true,
+            text: "Produtos por Evento",
+            font: { size: 24 }, 
+            position: "top",
+            align: "start",
+            padding: {
+                bottom: 20
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const label = context.label || "";
+                const value = context.raw;
+                const percentage = ((value / totalProdutos) * 100).toFixed(1);
+                return `${label}: ${value} produtos (${percentage}%)`;
+              },
+            },
+          },
+        },
+      },
+    });
+  } catch (error) {
+    console.error("Erro ao criar o gráfico de eventos:", error);
+    const container = document.getElementById(
+      "graficoPizzaEventos"
+    ).parentElement;
+    if (container) container.innerHTML = "Não foi possível carregar o gráfico.";
+  }
+}

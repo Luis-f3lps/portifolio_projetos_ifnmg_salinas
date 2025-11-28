@@ -525,8 +525,23 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
   }
 }
 const PALETA_CORES_EVENTOS = [
-  "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40",
-  "#C9CBCF", "#2ecc71", "#e74c3c", "#34495e", "#f1c40f", "#e67e22"
+  "rgba(21, 67, 96, 0.9)", // 1. Azul Petróleo Escuro
+  "rgba(27, 79, 114, 0.9)",
+  "rgba(33, 97, 140, 0.9)",
+  "rgba(21, 101, 192, 0.85)", // 4. Azul Escuro
+  "rgba(25, 118, 210, 0.85)",
+  "rgba(30, 136, 229, 0.85)",
+  "rgba(33, 150, 243, 0.85)", // 7. Azul Padrão
+  "rgba(66, 165, 245, 0.8)",
+  "rgba(100, 181, 246, 0.8)",
+  "rgba(144, 202, 249, 0.8)", // 10. Azul Claro
+  "rgba(174, 214, 241, 0.8)",
+  "rgba(187, 222, 251, 0.8)",
+  "rgba(212, 230, 241, 0.8)",
+  "rgba(229, 239, 247, 0.8)",
+  "rgba(235, 245, 251, 0.8)",
+  "rgba(240, 248, 255, 0.8)", // 16. Alice Blue
+  "rgba(245, 249, 253, 0.8)", // 17. Azul Gelo (para "Outros")
 ];
 
 async function carregarDadosEventos() {

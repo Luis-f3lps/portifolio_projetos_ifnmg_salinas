@@ -339,20 +339,19 @@ app.get('/api/graficos/eventos', async (req, res) => {
                 WHERE evento IS NOT NULL
                 GROUP BY evento
             ),
-            Top15 AS (
+            Top10 AS (  -- Mudamos o nome para Top10
                 SELECT evento, total, 1 as ordem
                 FROM EventosCount
                 ORDER BY total DESC
-                LIMIT 15
+                LIMIT 10  -- AQUI MUDOU: Agora limitamos a 10
             ),
             Outros AS (
                 SELECT 'Outros' as evento, SUM(total) as total, 2 as ordem
                 FROM EventosCount
-                WHERE evento NOT IN (SELECT evento FROM Top15)
+                WHERE evento NOT IN (SELECT evento FROM Top10) -- Referência atualizada
                 HAVING SUM(total) IS NOT NULL
             )
-            -- AQUI ESTAVA O ERRO: Precisamos selecionar a coluna 'ordem' para poder ordenar por ela depois
-            SELECT evento, total, ordem FROM Top15
+            SELECT evento, total, ordem FROM Top10
             UNION ALL
             SELECT evento, total, ordem FROM Outros
             ORDER BY ordem ASC, total DESC;

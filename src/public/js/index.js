@@ -549,66 +549,79 @@ async function carregarDadosEventos() {
 function criarGraficoPizzaEventos(data) {
   try {
     if (!data || data.length === 0) {
-      console.warn("Nenhum dado de evento encontrado para o gráfico.");
-      return;
+        console.warn("Nenhum dado de evento encontrado para o gráfico.");
+        return;
     }
 
-    const labels = data.map((item) => item.evento);
-    const values = data.map((item) => parseInt(item.total, 10));
-
+    const labels = data.map((item) => item.evento); 
+    const values = data.map((item) => parseInt(item.total, 10)); 
     const totalProdutos = values.reduce((sum, current) => sum + current, 0);
 
     const canvas = document.getElementById("graficoPizzaEventos");
-    if (!canvas) {
-      console.error("Canvas 'graficoPizzaEventos' não encontrado no HTML.");
-      return;
-    }
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
 
-    new Chart(ctx, {
+    if (window.meuGraficoEventos instanceof Chart) {
+        window.meuGraficoEventos.destroy();
+    }
+
+    window.meuGraficoEventos = new Chart(ctx, {
       type: "pie",
       data: {
         labels: labels,
-        datasets: [
-          {
+        datasets: [{
             label: "Produtos",
             data: values,
-            backgroundColor: PALETA_CORES_EVENTOS,
+            backgroundColor: PALETA_CORES_EVENTOS.slice(0, data.length), 
             borderColor: "#fff",
-            borderWidth: 2,
-          },
-        ],
+            borderWidth: 1,
+        }],
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: "right",
-            labels: {
-              boxWidth: 20,
-              padding: 15,
-              generateLabels: (chart) => {
-                const original = Chart.defaults.plugins.legend.labels.generateLabels;
-                const labels = original.call(this, chart);
-                labels.forEach(label => {
-                  if (label.text.length > 25) {
-                    label.text = label.text.substring(0, 25) + '...';
-                  }
-                });
-                return labels;
-              }
+        layout: {
+            padding: {
+                right: 50 
             }
+        },
+        plugins: {
+          legend: { 
+              position: "right", 
+              align: "center",  
+              labels: {
+                  boxWidth: 15,    
+                  padding: 15,   
+                  font: {
+                    size: 12       
+                  },
+                  generateLabels: function(chart) {
+                    const data = chart.data;
+                    if (data.labels.length && data.datasets.length) {
+                        return data.labels.map((label, i) => {
+                            const meta = chart.getDatasetMeta(0);
+                            const style = meta.controller.getStyle(i);
+                            return {
+                                text: label, 
+                                fillStyle: style.backgroundColor, 
+                                strokeStyle: style.borderColor,
+                                lineWidth: style.borderWidth,
+                                hidden: isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
+                                index: i
+                            };
+                        });
+                    }
+                    return [];
+                  }
+              }
           },
           title: {
             display: true,
-            text: "Produtos por Evento",
-            font: { size: 24 },
+            text: "Produtos por Evento (Top 15 + Outros)",
+            font: { size: 20 }, 
             position: "top",
             align: "start",
-            padding: {
-              bottom: 20
-            }
+            padding: { bottom: 20 }
           },
           tooltip: {
             callbacks: {

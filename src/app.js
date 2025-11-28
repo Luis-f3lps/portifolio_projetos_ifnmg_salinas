@@ -333,17 +333,28 @@ app.get('/api/resumos-simples', async (req, res) => {
 app.get('/api/graficos/eventos', async (req, res) => {
     try {
         const query = `
-            SELECT 
-                evento, 
-                COUNT(id) as total
-            FROM 
-                produto
-            WHERE 
-                evento IS NOT NULL
-            GROUP BY 
-                evento
-            ORDER BY 
-                total DESC;
+            WITH EventosCount AS (
+                SELECT evento, COUNT(id) as total
+                FROM produto
+                WHERE evento IS NOT NULL
+                GROUP BY evento
+            ),
+            Top15 AS (
+                SELECT evento, total, 1 as ordem
+                FROM EventosCount
+                ORDER BY total DESC
+                LIMIT 15
+            ),
+            Outros AS (
+                SELECT 'Outros' as evento, SUM(total) as total, 2 as ordem
+                FROM EventosCount
+                WHERE evento NOT IN (SELECT evento FROM Top15)
+                HAVING SUM(total) IS NOT NULL
+            )
+            SELECT evento, total FROM Top15
+            UNION ALL
+            SELECT evento, total FROM Outros
+            ORDER BY ordem ASC, total DESC;
         `;
 
         const { rows } = await pool.query(query);

@@ -365,4 +365,28 @@ app.get('/api/graficos/eventos', async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor ao obter estatísticas de eventos.' });
     }
 });
+app.get('/api/graficos/tipos', async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                tipo_produto, 
+                COUNT(id) as total
+            FROM 
+                produto
+            WHERE 
+                tipo_produto IS NOT NULL
+            GROUP BY 
+                tipo_produto
+            ORDER BY 
+                total DESC;
+        `;
+
+        const { rows } = await pool.query(query);
+        res.json(rows);
+
+    } catch (error) {
+        console.error('Erro ao obter estatísticas por tipo:', error);
+        res.status(500).json({ error: 'Erro no servidor ao obter estatísticas de tipos.' });
+    }
+});
 export default app;

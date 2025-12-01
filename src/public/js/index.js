@@ -713,7 +713,7 @@ function criarGraficoPizzaTipos(data) {
             borderColor: "#fff",
             borderWidth: 2,
             radius: 150,  // <--- VALOR FIXO (Sem aspas, sem %)
-            cutout: "80%", // O buraco será 60% desse raio fixo
+            cutout: "60%", // O buraco será 60% desse raio fixo
           },
         ],
       },
@@ -794,7 +794,7 @@ function criarGraficoStatusProdutos(data) {
             borderColor: "#fff",
             borderWidth: 2,
             radius: 150, // <--- O MESMO VALOR FIXO AQUI
-            cutout: "80%",
+            cutout: "60%",
           },
         ],
       },

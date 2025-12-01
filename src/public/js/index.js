@@ -527,23 +527,17 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
   }
 }
 const PALETA_CORES_EVENTOS = [
-  "rgba(48, 18, 59, 0.9)",   // Roxo Escuro
-  "rgba(64, 64, 161, 0.9)",  // Azul Índigo
-  "rgba(70, 107, 227, 0.9)", // Azul Real
-  "rgba(65, 147, 254, 0.9)", // Azul Céu
-  "rgba(40, 187, 235, 0.9)", // Ciano
-  "rgba(23, 220, 194, 0.9)", // Turquesa
-  "rgba(50, 241, 151, 0.9)", // Verde Menta
-  "rgba(109, 253, 98, 0.9)", // Verde Lima
-  "rgba(164, 252, 59, 0.9)", // Verde Amarelado
-  "rgba(205, 235, 52, 0.9)", // Amarelo Limão
-  "rgba(237, 207, 57, 0.9)", // Amarelo Ouro
-  "rgba(253, 171, 51, 0.9)", // Laranja
-  "rgba(250, 125, 32, 0.9)", // Laranja Queimado
-  "rgba(234, 80, 13, 0.9)",  // Laranja Avermelhado
-  "rgba(208, 47, 4, 0.9)",   // Vermelho Tijolo
-  "rgba(169, 21, 1, 0.9)",   // Vermelho Escuro
-  "rgba(122, 4, 2, 0.9)"     // Vinho
+"#007bff", // Azul Primary
+  "#6610f2", // Roxo Indigo
+  "#6f42c1", // Roxo Uva
+  "#e83e8c", // Rosa Pink
+  "#dc3545", // Vermelho Danger
+  "#fd7e14", // Laranja
+  "#ffc107", // Amarelo Warning
+  "#28a745", // Verde Success
+  "#20c997", // Verde Água
+  "#17a2b8", // Ciano Info
+  "#343a40"  // Cinza Escuro (Dark)
 ];
 
 async function carregarDadosEventos() {
@@ -632,13 +626,12 @@ function criarGraficoPizzaEventos(data) {
               }
             }
           },
-          title: {
+                    title: {
             display: true,
             text: "Produtos por Evento (Top 15 + Outros)",
-            font: { size: 20 },
+            font: { size: 36 },
             position: "top",
             align: "start",
-            padding: { bottom: 20 }
           },
           tooltip: {
             callbacks: {
@@ -719,10 +712,9 @@ function criarGraficoPizzaTipos(data) {
           title: {
             display: true,
             text: "Produtos por Tipo",
-            font: { size: 20 },
+            font: { size: 36 },
             position: "top",
             align: "start",
-            padding: { bottom: 20 }
           },
           tooltip: {
             callbacks: {
@@ -798,10 +790,9 @@ function criarGraficoStatusProdutos(data) {
           title: {
             display: true,
             text: "Portfólios com vs. Sem Produtos",
-            font: { size: 20 },
+            font: { size: 36 },
             position: "top",
             align: "start",
-            padding: { bottom: 20 }
           },
           tooltip: {
             callbacks: {
@@ -891,10 +882,9 @@ function criarGraficoAgrupado(data) {
           title: {
             display: true,
             text: "Eventos Agrupados (SIC e SNCT Unificados)",
-            font: { size: 20 },
+            font: { size: 32 },
             position: "top",
             align: "start",
-            padding: { bottom: 20 }
           },
           tooltip: {
             callbacks: {

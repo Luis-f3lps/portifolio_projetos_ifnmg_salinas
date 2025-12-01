@@ -418,7 +418,7 @@ app.get('/api/graficos/eventos-agrupados', async (req, res) => {
                         -- Agrupa tudo que tem "SIC" seguido de ano ou espaço
                         WHEN evento ILIKE 'SIC %' OR evento ILIKE '% SIC%' THEN 'SIC (Todos)'
                         -- Agrupa as Semanas Nacionais
-                        WHEN evento ILIKE '%Semana Nacional de Ciência e Tecnologia%' THEN 'Semana Nacional de C&T'
+                        WHEN evento ILIKE '%Semana Nacional de Ciência e Tecnologia%' THEN 'Semana Nacional de C&T(Todos)'
                         -- Mantém o resto como está
                         ELSE evento 
                     END as nome_grupo,

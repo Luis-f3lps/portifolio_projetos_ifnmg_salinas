@@ -15,23 +15,23 @@ function opentab(tabname) {
   event.currentTarget.classList.add("active-link");
 }
 const PALETA_CORES_COORDENADORES = [
-  "rgba(21, 67, 96, 0.9)", // 1. Azul Petróleo Escuro
-  "rgba(27, 79, 114, 0.9)",
-  "rgba(33, 97, 140, 0.9)",
-  "rgba(21, 101, 192, 0.85)", // 4. Azul Escuro
-  "rgba(25, 118, 210, 0.85)",
-  "rgba(30, 136, 229, 0.85)",
-  "rgba(33, 150, 243, 0.85)", // 7. Azul Padrão
-  "rgba(66, 165, 245, 0.8)",
-  "rgba(100, 181, 246, 0.8)",
-  "rgba(144, 202, 249, 0.8)", // 10. Azul Claro
-  "rgba(174, 214, 241, 0.8)",
-  "rgba(187, 222, 251, 0.8)",
-  "rgba(212, 230, 241, 0.8)",
-  "rgba(229, 239, 247, 0.8)",
-  "rgba(235, 245, 251, 0.8)",
-  "rgba(240, 248, 255, 0.8)", // 16. Alice Blue
-  "rgba(245, 249, 253, 0.8)", // 17. Azul Gelo (para "Outros")
+  "rgba(31, 119, 180, 0.9)",  // Azul Forte
+  "rgba(174, 199, 232, 0.9)", // Azul Claro
+  "rgba(255, 127, 14, 0.9)",  // Laranja
+  "rgba(255, 187, 120, 0.9)", // Laranja Claro
+  "rgba(44, 160, 44, 0.9)",   // Verde
+  "rgba(152, 223, 138, 0.9)", // Verde Claro
+  "rgba(214, 39, 40, 0.9)",   // Vermelho
+  "rgba(255, 152, 150, 0.9)", // Vermelho Claro
+  "rgba(148, 103, 189, 0.9)", // Roxo
+  "rgba(197, 176, 213, 0.9)", // Roxo Claro
+  "rgba(140, 86, 75, 0.9)",   // Marrom
+  "rgba(196, 156, 148, 0.9)", // Marrom Rosado
+  "rgba(227, 119, 194, 0.9)", // Rosa
+  "rgba(247, 182, 210, 0.9)", // Rosa Claro
+  "rgba(127, 127, 127, 0.9)", // Cinza
+  "rgba(199, 199, 199, 0.9)", // Cinza Claro
+  "rgba(188, 189, 34, 0.9)"   // Verde Oliva
 ];
 
 const PALETA_CORES_TEMATICAS = [

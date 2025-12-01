@@ -793,7 +793,7 @@ function criarGraficoStatusProdutos(data) {
             backgroundColor: ["#2ecc71", "#e74c3c"],
             borderColor: "#fff",
             borderWidth: 2,
-            radius: "83%", 
+            radius: "80%", 
             cutout: "60%",
           },
         ],

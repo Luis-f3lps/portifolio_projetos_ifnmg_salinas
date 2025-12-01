@@ -15,7 +15,7 @@ body {
 }
 
 a {
-  color: #007BFF;
+  color: #007bff;
   transition: color 0.3s ease-in-out;
 }
 
@@ -34,14 +34,19 @@ a {
 .logoIFNMG {
   width: 80px;
   margin-right: 30px;
-
 }
 .tab-links {
-    margin-right: 50px;
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-    position: relative;
+  margin-right: 50px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+}
+.tab-contents {
+  display: none;
+}
+.tab-contents.active-tab {
+  display: block;
 }
 nav {
   display: flex;
@@ -81,7 +86,7 @@ nav ul li a:hover::after {
 
 .header-text {
   font-size: 30px;
-  padding:10px 8%;
+  padding: 10px 8%;
 }
 
 .header-text h1 {
@@ -105,8 +110,7 @@ nav ul li a:hover::after {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-    padding:10px 8%;
-
+  padding: 10px 8%;
 }
 
 .about-col-1 {
@@ -347,7 +351,7 @@ nav .fa-solid {
 }
 
 @media only screen and (max-width: 2532px) and (min-height: 1170px),
-only screen and (max-width: 2340px) and (min-height: 1080px) {
+  only screen and (max-width: 2340px) and (min-height: 1080px) {
   .tab-titles {
     margin: 60px 0 40px;
   }
@@ -462,9 +466,9 @@ only screen and (max-width: 2340px) and (min-height: 1080px) {
 }
 
 button.pagination-button.active {
-background-color: #ffffff;
-    color: black;}
-
+  background-color: #ffffff;
+  color: black;
+}
 
 /* --------------ódigo CSS para telas com largura maior ou igual a 1080p--------------- */
 @media only screen and (min-width: 1080px) {
@@ -516,7 +520,6 @@ background-color: #ffffff;
   z-index: 2;
 }
 
-
 nav {
   align-items: center;
   justify-content: space-between;
@@ -524,9 +527,8 @@ nav {
   position: fixed;
   background: #21202e;
   width: 100%;
-  z-index: 1000; 
+  z-index: 1000;
 }
-
 
 nav ul li {
   display: inline-block;
@@ -635,8 +637,8 @@ td {
 }
 
 #green {
-background-color: #00bfff;
-    color: #000000;
+  background-color: #00bfff;
+  color: #000000;
 }
 
 input[type="date"] {
@@ -763,13 +765,11 @@ nav ul .fa-solid {
   margin: 20px auto;
   height: 500px;
   padding: 10px 8%;
-
 }
 @media only screen and (min-width: 901px) and (min-height: 1601px) {
   .header-text h1 {
     font-size: 50px;
     margin-left: 32px;
-  
   }
 
   .container {
@@ -797,8 +797,7 @@ nav ul .fa-solid {
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 10px 4%;
-            margin-bottom: 40px;
-
+    margin-bottom: 40px;
   }
 
   #sidemenu {
@@ -901,7 +900,7 @@ nav ul .fa-solid {
 #bloco-descricao-dados {
   background-color: rgba(255, 255, 255, 0.05);
   color: black;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
   line-height: 1.7;
   padding: 25px;
@@ -944,7 +943,6 @@ nav ul .fa-solid {
 }
 
 @media only screen and (max-width: 1366px) and (max-height: 768px) {
-
   img {
     margin-top: 5px;
   }
@@ -993,7 +991,8 @@ nav ul .fa-solid {
   width: 100%;
   align-items: center;
   text-align: center;
-padding: 10px 8%;  margin-top: 40px;
+  padding: 10px 8%;
+  margin-top: 40px;
 }
 
 body {
@@ -1023,8 +1022,7 @@ body {
   border-bottom: 1px solid #00bfff;
   padding-bottom: 10px;
   display: inline-block;
-      margin-top: 30px;
-
+  margin-top: 30px;
 }
 
 .sobre h1:not(.sub-title) {
@@ -1063,99 +1061,99 @@ body {
   background-color: rgba(0, 191, 255, 0.15);
 }
 #contact {
-    padding: 5px 0;
-    text-align: center;
-    background-color: #21202e;
+  padding: 5px 0;
+  text-align: center;
+  background-color: #21202e;
 }
 
 #contact .sub-title-type-2 {
-    font-size: 16px;
-    margin-bottom: 8px;
-    color: #fff;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #fff;
 }
 
 #contact p {
-    font-size: 13px;
-    margin: 2px 0;
-    color: #ddd;
-    display: inline-block;
-    margin-right: 15px;
+  font-size: 13px;
+  margin: 2px 0;
+  color: #ddd;
+  display: inline-block;
+  margin-right: 15px;
 }
 
 #contact .social-icons {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 #contact .social-icons a {
-    text-decoration: none;
-    font-size: 18px;
-    margin: 0 8px;
-    color: #ababab;
-    display: inline-block;
-    transition: transform 0.3s;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 0 8px;
+  color: #ababab;
+  display: inline-block;
+  transition: transform 0.3s;
 }
 
 #contact .social-icons a:hover {
-    color: #ffffff;
-    transform: translateY(-2px);
+  color: #ffffff;
+  transform: translateY(-2px);
 }
 :root {
-    --scroll-duration: 30s;   /* Tempo para dar uma volta completa */
-    --logo-height: 50px;      /* Altura fixa para não ficar gigante */
-    --logo-gap: 40px;         /* Espaço entre os ícones */
+  --scroll-duration: 30s; /* Tempo para dar uma volta completa */
+  --logo-height: 50px; /* Altura fixa para não ficar gigante */
+  --logo-gap: 40px; /* Espaço entre os ícones */
 }
 
 .logoloop-track {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    box-sizing: border-box;
-    background-color: #ffffff; /* Uma corzinha de fundo pra destacar (opcional) */
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  background-color: #ffffff; /* Uma corzinha de fundo pra destacar (opcional) */
 }
 
 .logoloop-inner {
-    display: flex;
-    width: max-content;
-    will-change: transform;
-    animation: scroll-x var(--scroll-duration) linear infinite;
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: scroll-x var(--scroll-duration) linear infinite;
 }
 
 .logoloop-track:hover .logoloop-inner {
-    animation-play-state: paused;
+  animation-play-state: paused;
 }
 
 @keyframes scroll-x {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-1 * var(--scroll-distance)));
-    }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-1 * var(--scroll-distance)));
+  }
 }
 
 .logoloop-list {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    align-items: center;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
 }
 
 .logoloop-item {
-    margin-right: var(--logo-gap);
-    height: var(--logo-height); 
-    display: flex;
-    align-items: center;
-    transition: transform 0.3s ease-in-out;
+  margin-right: var(--logo-gap);
+  height: var(--logo-height);
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease-in-out;
 }
 
 .logoloop-item:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .logoloop-item img {
-    height: 100%;
-    width: auto;
-    object-fit: contain;
-    cursor: pointer;
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  cursor: pointer;
 }

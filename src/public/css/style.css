@@ -41,6 +41,7 @@ a {
   font-weight: 500;
   cursor: pointer;
   position: relative;
+  color: black;
 }
 .tab-contents {
   display: none;

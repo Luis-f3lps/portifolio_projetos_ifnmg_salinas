@@ -1,6 +1,19 @@
 var tablinks = document.getElementsByClassName("tab-links");
 var tabcontents = document.getElementsByClassName("tab-contents");
 
+
+function opentab(tabname) {
+  for (var i = 0; i < tablinks.length; i++) {
+    tablinks[i].classList.remove("active-link");
+  }
+  for (var i = 0; i < tabcontents.length; i++) {
+    tabcontents[i].classList.remove("active-tab");
+    if (tabcontents[i].id === tabname) {
+      tabcontents[i].classList.add("active-tab");
+    }
+  }
+  event.currentTarget.classList.add("active-link");
+}
 const PALETA_CORES_COORDENADORES = [
   "rgba(21, 67, 96, 0.9)", // 1. Azul Petróleo Escuro
   "rgba(27, 79, 114, 0.9)",
@@ -34,18 +47,7 @@ const PALETA_CORES_TEMATICAS = [
   "rgba(0, 150, 136, 0.9)", // 10. Verde-azulado (Teal)
 ];
 
-function opentab(tabname) {
-  for (var i = 0; i < tablinks.length; i++) {
-    tablinks[i].classList.remove("active-link");
-  }
-  for (var i = 0; i < tabcontents.length; i++) {
-    tabcontents[i].classList.remove("active-tab");
-    if (tabcontents[i].id === tabname) {
-      tabcontents[i].classList.add("active-tab");
-    }
-  }
-  event.currentTarget.classList.add("active-link");
-}
+
 
 document.querySelectorAll(".submenu > a").forEach((menu) => {
   menu.addEventListener("click", function (e) {

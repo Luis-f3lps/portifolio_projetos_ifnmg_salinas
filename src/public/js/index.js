@@ -641,7 +641,7 @@ function criarGraficoPizzaEventos(data) {
           },
           title: {
             display: true,
-            text: "Produtos por Evento (Top 15 + Outros)",
+            text: "Produtos por Evento",
             font: { size: 28 },
             position: "top",
             align: "start",
@@ -712,7 +712,7 @@ function criarGraficoPizzaTipos(data) {
             backgroundColor: PALETA_CORES_TIPOS,
             borderColor: "#fff",
             borderWidth: 2,
-            radius: 200,  // <--- VALOR FIXO (Sem aspas, sem %)
+            radius: 400,  // <--- VALOR FIXO (Sem aspas, sem %)
             cutout: "80%", // O buraco será 60% desse raio fixo
           },
         ],
@@ -793,7 +793,7 @@ function criarGraficoStatusProdutos(data) {
             backgroundColor: ["#2ecc71", "#e74c3c"],
             borderColor: "#fff",
             borderWidth: 2,
-            radius: 200, // <--- O MESMO VALOR FIXO AQUI
+            radius: 400, // <--- O MESMO VALOR FIXO AQUI
             cutout: "80%",
           },
         ],
@@ -912,7 +912,7 @@ function criarGraficoAgrupado(data) {
           },
           title: {
             display: true,
-            text: "Eventos Agrupados (SIC e SNCT Unificados)",
+            text: "Produtos por Eventos Agrupados",
             font: { size: 28 },
             position: "top",
             align: "start",

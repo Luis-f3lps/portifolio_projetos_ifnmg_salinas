@@ -36,7 +36,13 @@ a {
   margin-right: 30px;
 
 }
-
+.tab-links {
+    margin-right: 50px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+}
 nav {
   display: flex;
   align-items: center;

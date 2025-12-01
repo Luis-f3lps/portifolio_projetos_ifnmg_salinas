@@ -1,7 +1,6 @@
 var tablinks = document.getElementsByClassName("tab-links");
 var tabcontents = document.getElementsByClassName("tab-contents");
 
-
 function opentab(tabname) {
   for (var i = 0; i < tablinks.length; i++) {
     tablinks[i].classList.remove("active-link");
@@ -47,8 +46,6 @@ const PALETA_CORES_TEMATICAS = [
   "rgba(0, 150, 136, 0.9)", // 10. Verde-azulado (Teal)
 ];
 
-
-
 document.querySelectorAll(".submenu > a").forEach((menu) => {
   menu.addEventListener("click", function (e) {
     e.preventDefault();
@@ -62,7 +59,11 @@ document.addEventListener("DOMContentLoaded", async function () {
   loadTematicas();
   loadCoordenadores();
   loadPortifolio();
-  loadAnos(); carregarDadosEventos(); carregarDadosTipos(); carregarStatusProdutos(); carregarEventosAgrupados();
+  loadAnos();
+  carregarDadosEventos();
+  carregarDadosTipos();
+  carregarStatusProdutos();
+  carregarEventosAgrupados();
   try {
     const response = await fetch("/api/stats/tematicas");
     if (!response.ok) throw new Error("Falha ao buscar dados de temáticas");
@@ -70,7 +71,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     criarGraficoTematicas(dadosTematicas);
     criarGraficoPizzaTematicas(dadosTematicas);
-
   } catch (error) {
     console.error("Erro ao carregar estatísticas de temáticas:", error);
   }
@@ -84,39 +84,43 @@ document.addEventListener("DOMContentLoaded", async function () {
       const tematica = document.getElementById("tematica-select").value;
       const coordenador = document.getElementById("coordenador-select").value;
       const ano = document.getElementById("anoProjeto-select").value;
-      const titulo = document.getElementById('filtro-titulo').value;
+      const titulo = document.getElementById("filtro-titulo").value;
       loadPortifolio(1, tematica, coordenador, ano, titulo);
     });
 });
-document.addEventListener('DOMContentLoaded', function () {
-
-  const innerContainer = document.getElementById('logoloop-inner');
-  const originalList = document.getElementById('original-list');
+document.addEventListener("DOMContentLoaded", function () {
+  const innerContainer = document.getElementById("logoloop-inner");
+  const originalList = document.getElementById("original-list");
 
   if (innerContainer && originalList) {
     setupLogoLoop();
-    window.addEventListener('resize', setupLogoLoop);
+    window.addEventListener("resize", setupLogoLoop);
   }
 
   function setupLogoLoop() {
-    innerContainer.querySelectorAll('.logoloop-list[aria-hidden="true"]').forEach(clone => clone.remove());
+    innerContainer
+      .querySelectorAll('.logoloop-list[aria-hidden="true"]')
+      .forEach((clone) => clone.remove());
 
     const totalClones = 2;
 
     for (let i = 0; i < totalClones; i++) {
       const clone = originalList.cloneNode(true);
-      clone.removeAttribute('id');
-      clone.setAttribute('aria-hidden', 'true');
+      clone.removeAttribute("id");
+      clone.setAttribute("aria-hidden", "true");
       innerContainer.appendChild(clone);
     }
 
-
-    const gap = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--logo-gap')) || 0;
+    const gap =
+      parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue(
+          "--logo-gap"
+        )
+      ) || 0;
     const originalWidth = originalList.offsetWidth + gap;
 
-    innerContainer.style.setProperty('--scroll-distance', `${originalWidth}px`);
+    innerContainer.style.setProperty("--scroll-distance", `${originalWidth}px`);
   }
-
 });
 // Gráfico 1: Coordenadores
 async function criarGraficoPizzaCoordenadores() {
@@ -213,7 +217,6 @@ async function criarGraficoPizzaCoordenadores() {
 // Gráfico 2: Temáticas (Pizza) - Modificado
 function criarGraficoPizzaTematicas(data) {
   try {
-
     const labels = data.map((item) => item.tematica);
     const values = data.map((item) => parseInt(item.total_projetos, 10));
     const totalProjetos = values.reduce((sum, current) => sum + current, 0);
@@ -269,11 +272,9 @@ function criarGraficoPizzaTematicas(data) {
   }
 }
 
-
 // Gráfico de Barras de Temáticas
 function criarGraficoTematicas(data) {
   try {
-
     const labels = data.map((item) => item.tematica);
     const values = data.map((item) => parseInt(item.total_projetos, 10));
 
@@ -328,7 +329,6 @@ function criarGraficoTematicas(data) {
   }
 }
 
-
 function loadTematicas() {
   fetch("/api/tematicas")
     .then((response) => response.json())
@@ -376,13 +376,13 @@ function loadCoordenadores() {
     .catch((error) => console.error("Erro ao carregar coordenadores:", error));
 }
 
-
 function updatePortifolioPagination(
   totalPages,
   currentPage,
   tematica = "",
   coordenador = "",
-  ano = "", titulo = ""
+  ano = "",
+  titulo = ""
 ) {
   const paginationDiv = document.getElementById("pagination-portifolio");
   paginationDiv.innerHTML = "";
@@ -428,7 +428,8 @@ function updatePortifolioPagination(
   for (let i = 1; i <= totalPages; i++) {
     const isFirstPage = i === 1;
     const isLastPage = i === totalPages;
-    const isInContext = i >= currentPage - context && i <= currentPage + context;
+    const isInContext =
+      i >= currentPage - context && i <= currentPage + context;
 
     if (isFirstPage || isLastPage || isInContext) {
       if (i > lastPageShown + 1) {
@@ -453,7 +454,13 @@ function updatePortifolioPagination(
  * @param {string} coordenador 
  * * @param {string} ano -
  */
-async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "", titulo = "") {
+async function loadPortifolio(
+  page = 1,
+  tematica = "",
+  coordenador = "",
+  ano = "",
+  titulo = ""
+) {
   const container = document.getElementById("portifolio-tbody");
   const paginationDiv = document.getElementById("pagination-portifolio");
 
@@ -469,7 +476,9 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
       page: page,
       limit: 15,
     });
-    if (titulo) { params.append("titulo", titulo); }
+    if (titulo) {
+      params.append("titulo", titulo);
+    }
     if (tematica) {
       params.append("tematica", tematica);
     }
@@ -488,7 +497,9 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
     if (container) {
       container.innerHTML = "";
     } else {
-      console.error("Erro: Elemento com ID 'portifolio-tbody' não foi encontrado.");
+      console.error(
+        "Erro: Elemento com ID 'portifolio-tbody' não foi encontrado."
+      );
       return;
     }
 
@@ -499,7 +510,7 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
      <td><strong>${item.titulo}</strong></td>
      <td>${item.tematica}</td>
      <td>${item.nome_coordenador}</td>
-      <td>${item.ano || 'N/D'}</td>
+      <td>${item.ano || "N/D"}</td>
 
     `;
         container.appendChild(row);
@@ -517,7 +528,6 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
       ano,
       titulo
     );
-
   } catch (error) {
     console.error("Erro ao carregar portfólio:", error);
     if (container) {
@@ -527,7 +537,7 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
   }
 }
 const PALETA_CORES_EVENTOS = [
-"#007bff", // Azul Primary
+  "#007bff", // Azul Primary
   "#6610f2", // Roxo Indigo
   "#6f42c1", // Roxo Uva
   "#e83e8c", // Rosa Pink
@@ -537,23 +547,23 @@ const PALETA_CORES_EVENTOS = [
   "#28a745", // Verde Success
   "#20c997", // Verde Água
   "#17a2b8", // Ciano Info
-  "#343a40"  // Cinza Escuro (Dark)
+  "#bdbdbdff", // Cinza Escuro (Dark)
 ];
 
 async function carregarDadosEventos() {
   try {
-    const response = await fetch('/api/graficos/eventos');
+    const response = await fetch("/api/graficos/eventos");
     if (!response.ok) {
-      throw new Error('Falha na resposta da rede');
+      throw new Error("Falha na resposta da rede");
     }
     const data = await response.json();
     criarGraficoPizzaEventos(data);
-
   } catch (error) {
     console.error("Erro ao buscar dados de eventos:", error);
     const container = document.getElementById("graficoPizzaEventos");
     if (container) {
-      container.parentElement.innerHTML = "<p style='text-align:center; color:red'>Erro ao carregar dados do gráfico.</p>";
+      container.parentElement.innerHTML =
+        "<p style='text-align:center; color:red'>Erro ao carregar dados do gráfico.</p>";
     }
   }
 }
@@ -580,21 +590,23 @@ function criarGraficoPizzaEventos(data) {
       type: "pie",
       data: {
         labels: labels,
-        datasets: [{
-          label: "Produtos",
-          data: values,
-          backgroundColor: PALETA_CORES_EVENTOS.slice(0, data.length),
-          borderColor: "#fff",
-          borderWidth: 1,
-        }],
+        datasets: [
+          {
+            label: "Produtos",
+            data: values,
+            backgroundColor: PALETA_CORES_EVENTOS.slice(0, data.length),
+            borderColor: "#fff",
+            borderWidth: 1,
+          },
+        ],
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         layout: {
           padding: {
-            right: 50
-          }
+            right: 50,
+          },
         },
         plugins: {
           legend: {
@@ -604,7 +616,7 @@ function criarGraficoPizzaEventos(data) {
               boxWidth: 15,
               padding: 15,
               font: {
-                size: 12
+                size: 12,
               },
               generateLabels: function (chart) {
                 const data = chart.data;
@@ -617,16 +629,17 @@ function criarGraficoPizzaEventos(data) {
                       fillStyle: style.backgroundColor,
                       strokeStyle: style.borderColor,
                       lineWidth: style.borderWidth,
-                      hidden: isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
-                      index: i
+                      hidden:
+                        isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
+                      index: i,
                     };
                   });
                 }
                 return [];
-              }
-            }
+              },
+            },
           },
-                    title: {
+          title: {
             display: true,
             text: "Produtos por Evento (Top 15 + Outros)",
             font: { size: 36 },
@@ -652,13 +665,19 @@ function criarGraficoPizzaEventos(data) {
 }
 
 const PALETA_CORES_TIPOS = [
-  "#36A2EB", "#4BC0C0", "#9966FF", "#FF9F40", "#FF6384", "#FFCD56", "#C9CBCF"
+  "#36A2EB",
+  "#4BC0C0",
+  "#9966FF",
+  "#FF9F40",
+  "#FF6384",
+  "#FFCD56",
+  "#C9CBCF",
 ];
 
 async function carregarDadosTipos() {
   try {
-    const response = await fetch('/api/graficos/tipos');
-    if (!response.ok) throw new Error('Erro na rede');
+    const response = await fetch("/api/graficos/tipos");
+    if (!response.ok) throw new Error("Erro na rede");
     const data = await response.json();
     criarGraficoPizzaTipos(data);
   } catch (error) {
@@ -686,19 +705,21 @@ function criarGraficoPizzaTipos(data) {
       type: "doughnut",
       data: {
         labels: labels,
-        datasets: [{
-          label: "Quantidade",
-          data: values,
-          backgroundColor: PALETA_CORES_TIPOS,
-          borderColor: "#fff",
-          borderWidth: 2,
-        }],
+        datasets: [
+          {
+            label: "Quantidade",
+            data: values,
+            backgroundColor: PALETA_CORES_TIPOS,
+            borderColor: "#fff",
+            borderWidth: 2,
+          },
+        ],
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         layout: {
-          padding: { right: 20 }
+          padding: { right: 20 },
         },
         plugins: {
           legend: {
@@ -706,8 +727,8 @@ function criarGraficoPizzaTipos(data) {
             labels: {
               boxWidth: 15,
               padding: 15,
-              font: { size: 12 }
-            }
+              font: { size: 12 },
+            },
           },
           title: {
             display: true,
@@ -736,8 +757,8 @@ function criarGraficoPizzaTipos(data) {
 
 async function carregarStatusProdutos() {
   try {
-    const response = await fetch('/api/graficos/status-produtos');
-    if (!response.ok) throw new Error('Erro na rede');
+    const response = await fetch("/api/graficos/status-produtos");
+    if (!response.ok) throw new Error("Erro na rede");
     const data = await response.json();
     criarGraficoStatusProdutos(data);
   } catch (error) {
@@ -765,18 +786,20 @@ function criarGraficoStatusProdutos(data) {
       type: "doughnut",
       data: {
         labels: ["Com Produto", "Sem Produto"],
-        datasets: [{
-          data: [comProduto, semProduto],
-          backgroundColor: ["#2ecc71", "#e74c3c"],
-          borderColor: "#fff",
-          borderWidth: 2,
-        }],
+        datasets: [
+          {
+            data: [comProduto, semProduto],
+            backgroundColor: ["#2ecc71", "#e74c3c"],
+            borderColor: "#fff",
+            borderWidth: 2,
+          },
+        ],
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         layout: {
-          padding: { right: 20 }
+          padding: { right: 20 },
         },
         plugins: {
           legend: {
@@ -784,8 +807,8 @@ function criarGraficoStatusProdutos(data) {
             labels: {
               boxWidth: 15,
               padding: 15,
-              font: { size: 12 }
-            }
+              font: { size: 12 },
+            },
           },
           title: {
             display: true,
@@ -813,8 +836,8 @@ function criarGraficoStatusProdutos(data) {
 }
 async function carregarEventosAgrupados() {
   try {
-    const response = await fetch('/api/graficos/eventos-agrupados');
-    if (!response.ok) throw new Error('Erro na rede');
+    const response = await fetch("/api/graficos/eventos-agrupados");
+    if (!response.ok) throw new Error("Erro na rede");
     const data = await response.json();
     criarGraficoAgrupado(data);
   } catch (error) {
@@ -830,7 +853,9 @@ function criarGraficoAgrupado(data) {
     const values = data.map((item) => parseInt(item.total, 10));
     const total = values.reduce((sum, current) => sum + current, 0);
 
-    const ctx = document.getElementById("graficoPizzaEventosAgrupado").getContext("2d");
+    const ctx = document
+      .getElementById("graficoPizzaEventosAgrupado")
+      .getContext("2d");
 
     if (window.meuGraficoAgrupado instanceof Chart) {
       window.meuGraficoAgrupado.destroy();
@@ -840,13 +865,15 @@ function criarGraficoAgrupado(data) {
       type: "pie",
       data: {
         labels: labels,
-        datasets: [{
-          label: "Produtos",
-          data: values,
-          backgroundColor: PALETA_CORES_EVENTOS,
-          borderColor: "#fff",
-          borderWidth: 1,
-        }],
+        datasets: [
+          {
+            label: "Produtos",
+            data: values,
+            backgroundColor: PALETA_CORES_EVENTOS,
+            borderColor: "#fff",
+            borderWidth: 1,
+          },
+        ],
       },
       options: {
         responsive: true,
@@ -870,14 +897,15 @@ function criarGraficoAgrupado(data) {
                       fillStyle: style.backgroundColor,
                       strokeStyle: style.borderColor,
                       lineWidth: style.borderWidth,
-                      hidden: isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
-                      index: i
+                      hidden:
+                        isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
+                      index: i,
                     };
                   });
                 }
                 return [];
-              }
-            }
+              },
+            },
           },
           title: {
             display: true,

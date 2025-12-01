@@ -547,7 +547,7 @@ const PALETA_CORES_EVENTOS = [
   "#28a745", // Verde Success
   "#20c997", // Verde Água
   "#17a2b8", // Ciano Info
-  "#bdbdbdff", // Cinza Escuro (Dark)
+  "rgba(235, 235, 235, 1)"
 ];
 
 async function carregarDadosEventos() {
@@ -642,7 +642,7 @@ function criarGraficoPizzaEventos(data) {
           title: {
             display: true,
             text: "Produtos por Evento (Top 15 + Outros)",
-            font: { size: 36 },
+            font: { size: 28 },
             position: "top",
             align: "start",
           },
@@ -910,7 +910,7 @@ function criarGraficoAgrupado(data) {
           title: {
             display: true,
             text: "Eventos Agrupados (SIC e SNCT Unificados)",
-            font: { size: 32 },
+            font: { size: 28 },
             position: "top",
             align: "start",
           },

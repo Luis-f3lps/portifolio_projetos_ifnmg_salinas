@@ -15,23 +15,23 @@ function opentab(tabname) {
   event.currentTarget.classList.add("active-link");
 }
 const PALETA_CORES_COORDENADORES = [
-  "rgba(31, 119, 180, 0.9)",  // Azul Forte
-  "rgba(174, 199, 232, 0.9)", // Azul Claro
-  "rgba(255, 127, 14, 0.9)",  // Laranja
-  "rgba(255, 187, 120, 0.9)", // Laranja Claro
-  "rgba(44, 160, 44, 0.9)",   // Verde
-  "rgba(152, 223, 138, 0.9)", // Verde Claro
-  "rgba(214, 39, 40, 0.9)",   // Vermelho
-  "rgba(255, 152, 150, 0.9)", // Vermelho Claro
-  "rgba(148, 103, 189, 0.9)", // Roxo
-  "rgba(197, 176, 213, 0.9)", // Roxo Claro
-  "rgba(140, 86, 75, 0.9)",   // Marrom
-  "rgba(196, 156, 148, 0.9)", // Marrom Rosado
-  "rgba(227, 119, 194, 0.9)", // Rosa
-  "rgba(247, 182, 210, 0.9)", // Rosa Claro
-  "rgba(127, 127, 127, 0.9)", // Cinza
-  "rgba(199, 199, 199, 0.9)", // Cinza Claro
-  "rgba(188, 189, 34, 0.9)"   // Verde Oliva
+  "rgba(21, 67, 96, 0.9)", // 1. Azul Petróleo Escuro
+  "rgba(27, 79, 114, 0.9)",
+  "rgba(33, 97, 140, 0.9)",
+  "rgba(21, 101, 192, 0.85)", // 4. Azul Escuro
+  "rgba(25, 118, 210, 0.85)",
+  "rgba(30, 136, 229, 0.85)",
+  "rgba(33, 150, 243, 0.85)", // 7. Azul Padrão
+  "rgba(66, 165, 245, 0.8)",
+  "rgba(100, 181, 246, 0.8)",
+  "rgba(144, 202, 249, 0.8)", // 10. Azul Claro
+  "rgba(174, 214, 241, 0.8)",
+  "rgba(187, 222, 251, 0.8)",
+  "rgba(212, 230, 241, 0.8)",
+  "rgba(229, 239, 247, 0.8)",
+  "rgba(235, 245, 251, 0.8)",
+  "rgba(240, 248, 255, 0.8)", // 16. Alice Blue
+  "rgba(245, 249, 253, 0.8)", // 17. Azul Gelo (para "Outros")
 ];
 
 const PALETA_CORES_TEMATICAS = [
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   loadTematicas();
   loadCoordenadores();
   loadPortifolio();
-  loadAnos(); carregarDadosEventos(); carregarDadosTipos(); carregarStatusProdutos();carregarEventosAgrupados();
+  loadAnos(); carregarDadosEventos(); carregarDadosTipos(); carregarStatusProdutos(); carregarEventosAgrupados();
   try {
     const response = await fetch("/api/stats/tematicas");
     if (!response.ok) throw new Error("Falha ao buscar dados de temáticas");
@@ -527,23 +527,23 @@ async function loadPortifolio(page = 1, tematica = "", coordenador = "", ano = "
   }
 }
 const PALETA_CORES_EVENTOS = [
-  "rgba(21, 67, 96, 0.9)", // 1. Azul Petróleo Escuro
-  "rgba(27, 79, 114, 0.9)",
-  "rgba(33, 97, 140, 0.9)",
-  "rgba(21, 101, 192, 0.85)", // 4. Azul Escuro
-  "rgba(25, 118, 210, 0.85)",
-  "rgba(30, 136, 229, 0.85)",
-  "rgba(33, 150, 243, 0.85)", // 7. Azul Padrão
-  "rgba(66, 165, 245, 0.8)",
-  "rgba(100, 181, 246, 0.8)",
-  "rgba(144, 202, 249, 0.8)", // 10. Azul Claro
-  "rgba(174, 214, 241, 0.8)",
-  "rgba(187, 222, 251, 0.8)",
-  "rgba(212, 230, 241, 0.8)",
-  "rgba(229, 239, 247, 0.8)",
-  "rgba(235, 245, 251, 0.8)",
-  "rgba(240, 248, 255, 0.8)", // 16. Alice Blue
-  "rgba(245, 249, 253, 0.8)", // 17. Azul Gelo (para "Outros")
+  "rgba(48, 18, 59, 0.9)",   // Roxo Escuro
+  "rgba(64, 64, 161, 0.9)",  // Azul Índigo
+  "rgba(70, 107, 227, 0.9)", // Azul Real
+  "rgba(65, 147, 254, 0.9)", // Azul Céu
+  "rgba(40, 187, 235, 0.9)", // Ciano
+  "rgba(23, 220, 194, 0.9)", // Turquesa
+  "rgba(50, 241, 151, 0.9)", // Verde Menta
+  "rgba(109, 253, 98, 0.9)", // Verde Lima
+  "rgba(164, 252, 59, 0.9)", // Verde Amarelado
+  "rgba(205, 235, 52, 0.9)", // Amarelo Limão
+  "rgba(237, 207, 57, 0.9)", // Amarelo Ouro
+  "rgba(253, 171, 51, 0.9)", // Laranja
+  "rgba(250, 125, 32, 0.9)", // Laranja Queimado
+  "rgba(234, 80, 13, 0.9)",  // Laranja Avermelhado
+  "rgba(208, 47, 4, 0.9)",   // Vermelho Tijolo
+  "rgba(169, 21, 1, 0.9)",   // Vermelho Escuro
+  "rgba(122, 4, 2, 0.9)"     // Vinho
 ];
 
 async function carregarDadosEventos() {
@@ -770,7 +770,7 @@ function criarGraficoStatusProdutos(data) {
     }
 
     window.meuGraficoStatus = new Chart(ctx, {
-      type: "pie",
+      type: "doughnut",
       data: {
         labels: ["Com Produto", "Sem Produto"],
         datasets: [{
@@ -783,6 +783,9 @@ function criarGraficoStatusProdutos(data) {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        layout: {
+          padding: { right: 20 }
+        },
         plugins: {
           legend: {
             position: "right",
@@ -818,14 +821,14 @@ function criarGraficoStatusProdutos(data) {
   }
 }
 async function carregarEventosAgrupados() {
-    try {
-        const response = await fetch('/api/graficos/eventos-agrupados');
-        if (!response.ok) throw new Error('Erro na rede');
-        const data = await response.json();
-        criarGraficoAgrupado(data);
-    } catch (error) {
-        console.error("Erro ao buscar eventos agrupados:", error);
-    }
+  try {
+    const response = await fetch('/api/graficos/eventos-agrupados');
+    if (!response.ok) throw new Error('Erro na rede');
+    const data = await response.json();
+    criarGraficoAgrupado(data);
+  } catch (error) {
+    console.error("Erro ao buscar eventos agrupados:", error);
+  }
 }
 
 function criarGraficoAgrupado(data) {
@@ -839,7 +842,7 @@ function criarGraficoAgrupado(data) {
     const ctx = document.getElementById("graficoPizzaEventosAgrupado").getContext("2d");
 
     if (window.meuGraficoAgrupado instanceof Chart) {
-        window.meuGraficoAgrupado.destroy();
+      window.meuGraficoAgrupado.destroy();
     }
 
     window.meuGraficoAgrupado = new Chart(ctx, {
@@ -847,11 +850,11 @@ function criarGraficoAgrupado(data) {
       data: {
         labels: labels,
         datasets: [{
-            label: "Produtos",
-            data: values,
-            backgroundColor: PALETA_CORES_EVENTOS, 
-            borderColor: "#fff",
-            borderWidth: 1,
+          label: "Produtos",
+          data: values,
+          backgroundColor: PALETA_CORES_EVENTOS,
+          borderColor: "#fff",
+          borderWidth: 1,
         }],
       },
       options: {
@@ -859,31 +862,31 @@ function criarGraficoAgrupado(data) {
         maintainAspectRatio: false,
         layout: { padding: { right: 50 } },
         plugins: {
-          legend: { 
-              position: "right",
-              labels: {
-                  boxWidth: 15,
-                  padding: 15,
-                  font: { size: 12 },
-                  generateLabels: (chart) => {
-                    const data = chart.data;
-                    if (data.labels.length && data.datasets.length) {
-                        return data.labels.map((label, i) => {
-                            const meta = chart.getDatasetMeta(0);
-                            const style = meta.controller.getStyle(i);
-                            return {
-                                text: label,
-                                fillStyle: style.backgroundColor,
-                                strokeStyle: style.borderColor,
-                                lineWidth: style.borderWidth,
-                                hidden: isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
-                                index: i
-                            };
-                        });
-                    }
-                    return [];
-                  }
+          legend: {
+            position: "right",
+            labels: {
+              boxWidth: 15,
+              padding: 15,
+              font: { size: 12 },
+              generateLabels: (chart) => {
+                const data = chart.data;
+                if (data.labels.length && data.datasets.length) {
+                  return data.labels.map((label, i) => {
+                    const meta = chart.getDatasetMeta(0);
+                    const style = meta.controller.getStyle(i);
+                    return {
+                      text: label,
+                      fillStyle: style.backgroundColor,
+                      strokeStyle: style.borderColor,
+                      lineWidth: style.borderWidth,
+                      hidden: isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
+                      index: i
+                    };
+                  });
+                }
+                return [];
               }
+            }
           },
           title: {
             display: true,

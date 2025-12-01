@@ -140,7 +140,6 @@
         </div>
 
         <div class="row">
-
             <h1 class="sub-title">Visualização de Dados</h1>
             <p id="bloco-descricao-dados">
                 A visualização de dados é fundamental pois transforma conjuntos de dados complexos e volumosos em
@@ -151,58 +150,71 @@
                 textos. Isso facilita a comunicação eficaz, promove uma compreensão mais profunda dos dados por públicos
                 variados e apoia uma tomada de decisão mais rápida, informada e baseada em evidências.
             </p>
-        </div>
-        <div class="chart-container-linhas">
-            <h2>Projetos por Temática</h2>
-            <canvas id="graficoTematicas"></canvas>
-        </div>
-        <div class="pizza">
-            <div class="chart-container">
-                <canvas id="graficoPizzaTematicas"></canvas>
+            <div class="tab-titles">
+                <p class="tab-links active-link" onclick="opentab('Temática')">Temática</p>
+                <p class="tab-links" onclick="opentab('Coordenadores')">Produtos</p>
+                <p class="tab-links" onclick="opentab('Eventos')">Eventos</p>
             </div>
-            <div class="chart-container">
-                <canvas id="graficoPizzaCoordenadores"></canvas>
+            <div class="tab-contents active-tab" id="Temática">
+                <div class="chart-container-linhas">
+                    <h2>Projetos por Temática</h2>
+                    <canvas id="graficoTematicas"></canvas>
+                </div>
+                <div class="pizza">
+                    <div class="chart-container">
+                        <canvas id="graficoPizzaTematicas"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="graficoPizzaCoordenadores"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-contents active-tab" id="Produtos">
+                <div class="chart-container">
+                    <canvas id="graficoStatusProdutos"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="graficoPizzaTipos"></canvas>
+                </div>
+            </div>
+            <div class="tab-contents active-tab" id="Eventos">
+                <div class="chart-container">
+                    <canvas id="graficoPizzaEventosAgrupado"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="graficoPizzaEventos"></canvas>
+                </div>
+            </div>
+
+            <!----------------- Contato ------------>
+
+        </div>
+        <div id="contact">
+
+            <h1 class="sub-title-type-2">Contato do Agente de Inovação do IFNMG Salinas</h1>
+            <p><i class="fa-solid fa-paper-plane" style="color: white;"></i> luisphelps671@gmail.com</p>
+            <p><i class="fa-brands fa-square-whatsapp"></i> 38 988643820</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/profile.php?id=100008665060845"><i
+                        class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="https://www.instagram.com/luis_f3lps/"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/luis-gustavo-barbosa-santiago-648395280/"><i
+                        class="fa-brands fa-linkedin"></i></a>
+
             </div>
         </div>
-        <div class="chart-container">
-            <canvas id="graficoPizzaEventos"></canvas>
-        </div>
-        <div class="chart-container">
-            <canvas id="graficoPizzaTipos"></canvas>
-        </div>
-        <div class="chart-container">
-    <canvas id="graficoStatusProdutos"></canvas>
-</div><div class="chart-container">
-    <canvas id="graficoPizzaEventosAgrupado"></canvas>
-</div>
-        <!----------------- Contato ------------>
-
-    </div>
-    <div id="contact">
-
-        <h1 class="sub-title-type-2">Contato do Agente de Inovação do IFNMG Salinas</h1>
-        <p><i class="fa-solid fa-paper-plane" style="color: white;"></i> luisphelps671@gmail.com</p>
-        <p><i class="fa-brands fa-square-whatsapp"></i> 38 988643820</p>
-        <div class="social-icons">
-            <a href="https://www.facebook.com/profile.php?id=100008665060845"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-            <a href="https://www.instagram.com/luis_f3lps/"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/luis-gustavo-barbosa-santiago-648395280/"><i
-                    class="fa-brands fa-linkedin"></i></a>
-
-        </div>
-    </div>
-    <script>
-        var sidemenu = document.getElementById("sidemenu");
-        function openmenu() {
-            sidemenu.style.right = "-200px";
-            sidemenu.style.left = "0px";
-        }
-        function clossmenu() {
-            sidemenu.style.left = "-800px";
-        }
-    </script>
-    <script src="js/index.js"></script>
+        <script>
+            var sidemenu = document.getElementById("sidemenu");
+            function openmenu() {
+                sidemenu.style.right = "-200px";
+                sidemenu.style.left = "0px";
+            }
+            function clossmenu() {
+                sidemenu.style.left = "-800px";
+            }
+        </script>
+        <script src="js/index.js"></script>
 
 </body>
 

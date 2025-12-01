@@ -153,9 +153,8 @@ nav ul li a:hover::after {
 
 .tab-titles {
   display: flex;
-  margin: 20px 0 40px;
+  margin: 20px 0 0px;
 }
-
 .active-link.active-link::after {
   width: 50%;
 }
@@ -583,10 +582,6 @@ nav ul li a:hover::after {
   color: #ff004f;
 }
 
-.tab-titles {
-  display: flex;
-  margin: 20px 0 40px;
-}
 
 .active-link.active-link::after {
   width: 50%;
@@ -780,9 +775,8 @@ nav ul .fa-solid {
 
 .chart-container-linhas {
   width: 100%;
-  margin: 20px auto;
   height: 500px;
-  padding: 10px 8%;
+  padding: 10px 2%;
 }
 
 @media only screen and (min-width: 901px) and (min-height: 1601px) {

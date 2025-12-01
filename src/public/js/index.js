@@ -709,11 +709,11 @@ function criarGraficoPizzaTipos(data) {
           {
             label: "Quantidade",
             data: values,
-            backgroundColor: PALETA_CORES_TIPOS, 
+            backgroundColor: PALETA_CORES_TIPOS,
             borderColor: "#fff",
             borderWidth: 2,
-            radius: "70%", 
-            cutout: "60%", 
+            radius: 130,  // <--- VALOR FIXO (Sem aspas, sem %)
+            cutout: "60%", // O buraco será 60% desse raio fixo
           },
         ],
       },
@@ -735,7 +735,7 @@ function criarGraficoPizzaTipos(data) {
           title: {
             display: true,
             text: "Produtos por Tipo",
-            font: { size: 24 }, 
+            font: { size: 24 },
             position: "top",
             align: "start",
           },
@@ -767,7 +767,6 @@ async function carregarStatusProdutos() {
     console.error("Erro ao buscar status de produtos:", error);
   }
 }
-
 function criarGraficoStatusProdutos(data) {
   try {
     if (!data) return;
@@ -794,8 +793,8 @@ function criarGraficoStatusProdutos(data) {
             backgroundColor: ["#2ecc71", "#e74c3c"],
             borderColor: "#fff",
             borderWidth: 2,
-            radius: "70%", 
-            cutout: "60%", 
+            radius: 130, // <--- O MESMO VALOR FIXO AQUI
+            cutout: "60%",
           },
         ],
       },
@@ -817,7 +816,7 @@ function criarGraficoStatusProdutos(data) {
           title: {
             display: true,
             text: "Portfólios com vs. Sem Produtos",
-            font: { size: 24 }, 
+            font: { size: 24 },
             position: "top",
             align: "start",
           },

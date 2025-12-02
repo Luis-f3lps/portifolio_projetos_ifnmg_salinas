@@ -934,36 +934,78 @@ function criarGraficoAgrupado(data) {
     console.error("Erro ao criar gráfico agrupado:", error);
   }
 }
-function renderTable(dados) {
+document.addEventListener('DOMContentLoaded', () => {
+    carregarListaProdutos();
+});
+
+// Função principal para buscar dados na API
+async function carregarListaProdutos() {
+    try {
+        const inputBusca = document.getElementById("filtro-interno");
+        const termoBusca = inputBusca ? inputBusca.value : "";
+
+        // Cria a URL com o parâmetro de busca se houver texto
+        const params = new URLSearchParams({ busca: termoBusca });
+        
+        // Chamada para a API (caminho relativo para Vercel)
+        const response = await fetch(`/api/produtos?${params.toString()}`);
+
+        if (!response.ok) throw new Error('Falha na comunicação com a API');
+
+        const dados = await response.json();
+        
+        // Chama a função para desenhar na tela
+        montarTabelaProdutos(dados);
+
+    } catch (erro) {
+        console.error(erro);
+        const tbody = document.getElementById("corpo-tabela-resumos");
+        if (tbody) {
+            tbody.innerHTML = "<tr><td colspan='3' style='text-align:center; color:red'>Erro ao carregar produtos.</td></tr>";
+        }
+    }
+}
+
+// Função para preencher o HTML da tabela
+function montarTabelaProdutos(lista) {
     const tbody = document.getElementById("corpo-tabela-resumos");
     if (!tbody) return;
-    
-    tbody.innerHTML = "";
 
-    if (!dados || dados.length === 0) {
-        tbody.innerHTML = "<tr><td colspan='3' style='text-align:center'>Nenhum projeto encontrado.</td></tr>";
+    tbody.innerHTML = ""; // Limpa conteúdo anterior
+
+    if (!lista || lista.length === 0) {
+        tbody.innerHTML = "<tr><td colspan='3' style='text-align:center; padding: 20px;'>Nenhum projeto encontrado com esse nome.</td></tr>";
         return;
     }
 
-    dados.forEach(item => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
+    lista.forEach(item => {
+        const linha = document.createElement("tr");
+        
+        linha.innerHTML = `
             <td class="coluna-projeto" style="font-weight: 500;">${item.nome_projeto}</td>
             <td>${item.nome_professor}</td>
-            <td style="text-align: center;">${criarBotaoLink(item.link_produto)}</td>
+            <td style="text-align: center;">
+                ${formatarLinkProduto(item.link_produto)}
+            </td>
         `;
-        tbody.appendChild(row);
+        tbody.appendChild(linha);
     });
 }
 
-function criarBotaoLink(link) {
-    if (link && link !== 'null' && link.trim() !== '') {
-        const urlFinal = link.startsWith('http') ? link : `arquivos/${link}`;
-        return `<a href="${urlFinal}" target="_blank" class="btn-link"><i class="fa-solid fa-file-pdf"></i> Abrir</a>`;
+// Função auxiliar para gerar o botão
+function formatarLinkProduto(url) {
+    if (url && url !== 'null' && url.trim() !== '') {
+        // Verifica se é link externo ou arquivo local
+        const caminhoFinal = url.startsWith('http') ? url : `arquivos/${url}`;
+        
+        return `<a href="${caminhoFinal}" target="_blank" class="btn-link">
+                    <i class="fa-solid fa-file-pdf"></i> Abrir
+                </a>`;
     }
-    return '<span style="color: #ccc;">Indisponível</span>';
+    return '<span style="color: #ccc; font-size: 0.9em;">Indisponível</span>';
 }
 
-function filtrarTabela() {
-    loadPortifolio();
+// Função chamada pelo onkeyup do input
+function pesquisarProdutos() {
+    carregarListaProdutos();
 }

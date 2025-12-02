@@ -353,7 +353,7 @@ form textarea {
   color: #000000;
   font-size: 18px;
   border-radius: 6px;
-      border: 2px solid #656565;
+      border: 2px solid #ffffff;
 
 }
 
@@ -610,7 +610,7 @@ nav ul li a:hover::after {
 select {
   padding: 10px;
   font-size: 16px;
-  border: 2px solid #797979;
+  border: 2px solid #ffffff;
   border-radius: 5px;
   appearance: none;
   background-color: white;

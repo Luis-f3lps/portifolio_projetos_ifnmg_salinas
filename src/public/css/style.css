@@ -1205,4 +1205,6 @@ body {
   width: auto;
   object-fit: contain;
   cursor: pointer;
+  visibility: visible;
+
 }

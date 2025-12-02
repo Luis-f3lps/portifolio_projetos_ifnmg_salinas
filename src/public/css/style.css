@@ -65,6 +65,15 @@ a {
   transition: 0.5s;
 }
 
+.produto-graficos {
+  max-width: 1400px;
+  margin-top: 40px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+}
+
 nav {
   display: flex;
   align-items: center;
@@ -813,10 +822,6 @@ nav ul .fa-solid {
     z-index: 2;
   }
 
-  #bloco-descricao-dados {
-    font-size: 36px;
-  }
-
   .tab-links {
     font-size: 32px;
   }
@@ -940,9 +945,6 @@ nav ul .fa-solid {
     background-color: white;
   }
 
-  #bloco-descricao-dados {
-    font-size: 22px;
-  }
 }
 
 #bloco-descricao-dados {

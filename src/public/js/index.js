@@ -62,7 +62,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   loadAnos();
   carregarDadosEventos();
   carregarDadosTipos();
-  buscarProdutos();
   carregarStatusProdutos();
   carregarEventosAgrupados();
   try {

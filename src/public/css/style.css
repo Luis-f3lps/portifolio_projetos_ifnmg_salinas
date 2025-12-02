@@ -353,7 +353,7 @@ form textarea {
   color: #000000;
   font-size: 18px;
   border-radius: 6px;
-      border: 2px solid #ffffff;
+  border: 2px solid #ffffff;
 
 }
 
@@ -370,7 +370,7 @@ nav .fa-solid {
 }
 
 @media only screen and (max-width: 2532px) and (min-height: 1170px),
-  only screen and (max-width: 2340px) and (min-height: 1080px) {
+only screen and (max-width: 2340px) and (min-height: 1080px) {
   .tab-titles {
     margin: 60px 0 40px;
   }
@@ -801,25 +801,31 @@ nav ul .fa-solid {
     background: #21202e;
     height: 50px;
   }
-#search-container{
-      font-size: 28px;
 
-}
+  #search-container {
+    font-size: 28px;
+
+  }
+
   .container {
     padding: 1px 1%;
     position: static;
     z-index: 2;
   }
+
   #bloco-descricao-dados {
     font-size: 36px;
   }
+
   .tab-links {
     font-size: 32px;
   }
+
   form input,
   form textarea {
     font-size: 28px;
   }
+
   tbody {
     font-size: x-large;
   }
@@ -1025,7 +1031,6 @@ nav ul .fa-solid {
   }
 }
 
-/* Importando uma fonte moderna do Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
 .pizza {
@@ -1143,11 +1148,8 @@ body {
 
 :root {
   --scroll-duration: 30s;
-  /* Tempo para dar uma volta completa */
   --logo-height: 50px;
-  /* Altura fixa para não ficar gigante */
   --logo-gap: 40px;
-  /* Espaço entre os ícones */
 }
 
 .logoloop-track {
@@ -1156,7 +1158,6 @@ body {
   white-space: nowrap;
   box-sizing: border-box;
   background-color: #ffffff;
-  /* Uma corzinha de fundo pra destacar (opcional) */
 }
 
 .logoloop-inner {

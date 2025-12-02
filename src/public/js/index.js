@@ -62,6 +62,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   loadAnos();
   carregarDadosEventos();
   carregarDadosTipos();
+  buscarProdutos();
   carregarStatusProdutos();
   carregarEventosAgrupados();
   try {
@@ -933,4 +934,67 @@ function criarGraficoAgrupado(data) {
   } catch (error) {
     console.error("Erro ao criar gráfico agrupado:", error);
   }
+}
+async function buscarProdutos(termo = "") {
+    try {
+        const url = termo ? `${API_URL}?busca=${encodeURIComponent(termo)}` : API_URL;
+        
+        const response = await fetch(url);
+        
+        if (!response.ok) throw new Error('Erro na requisição');
+        
+        const dados = await response.json();
+        carregarDadosNaTabela(dados);
+        
+    } catch (error) {
+        console.error(error);
+        const tbody = document.getElementById("corpo-tabela-resumos");
+        tbody.innerHTML = "<tr><td colspan='3' style='text-align:center; color: red'>Erro ao carregar dados.</td></tr>";
+    }
+}
+
+function carregarDadosNaTabela(dados) {
+    const tbody = document.getElementById("corpo-tabela-resumos");
+    tbody.innerHTML = "";
+
+    if (!dados || dados.length === 0) {
+        tbody.innerHTML = "<tr><td colspan='3' style='text-align:center'>Nenhum projeto encontrado.</td></tr>";
+        return;
+    }
+
+    dados.forEach(item => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td class="coluna-projeto" style="font-weight: 500;">${item.nome_projeto}</td>
+            <td>${item.nome_professor}</td>
+            <td style="text-align: center;">
+                ${criarBotaoLink(item.link_produto)}
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+function criarBotaoLink(link) {
+    if (link && link !== 'null' && link.trim() !== '') {
+        const urlFinal = link.startsWith('http') ? link : `arquivos/${link}`;
+        
+        return `<a href="${urlFinal}" target="_blank" class="btn-link">
+                    <i class="fa-solid fa-file-pdf"></i> Abrir
+                </a>`;
+    } else {
+        return '<span style="color: #ccc; font-size: 0.9em;">Indisponível</span>';
+    }
+}
+
+function filtrarTabela() {
+    const input = document.getElementById("filtro-interno");
+    const termo = input.value;
+
+    clearTimeout(timeoutDigitacao);
+
+    timeoutDigitacao = setTimeout(() => {
+        buscarProdutos(termo);
+    }, 300);
 }

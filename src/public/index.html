@@ -21,11 +21,11 @@
                 <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#header">Sobre</a></li>
 
                 <li class="dropdown-parent">
-                    <a href="#">Dados <i class="fa-solid fa-chevron-down"></i></a>
+                    <a href="#about">Projetos <i class="fa-solid fa-chevron-down"></i></a>
                     <ul class="dropdown-child">
                         <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#about">Projetos</a></li>
-                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#header">Gráficos</a></li>
-                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#header">Produtos</a></li>
+                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#dados">Gráficos</a></li>
+                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#produtos">Produtos</a></li>
                     </ul>
                 </li>
                 <li><a href="/livros">Livros</a></li>
@@ -208,6 +208,38 @@
 
             </div>
 
+        </div>
+        <div id="produtos">
+            <div class="row">
+                <div id="painel-resumos" class="tabela-wrapper" style="display: none;">
+    <div class="header-painel">
+        <button onclick="voltarParaEventos()" class="btn-voltar">
+            <i class="fa-solid fa-arrow-left"></i> Voltar
+        </button>
+        <h2 id="titulo-evento-ativo"></h2>
+    </div>
+
+    <div class="search-container">
+        <label for="filtro-interno">Pesquisar neste evento:</label>
+        <div class="input-wrapper">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="filtro-interno" onkeyup="filtrarTabela()" placeholder="Buscar por nome do projeto...">
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome do Projeto</th>
+                <th>Professor/Orientador</th>
+                <th style="width: 120px; text-align: center;">Produto</th>
+            </tr>
+        </thead>
+        <tbody id="corpo-tabela-resumos">
+            </tbody>
+    </table>
+</div>
+            </div>
         </div>
         <!----------------- Contato ------------>
 

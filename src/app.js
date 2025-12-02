@@ -453,4 +453,37 @@ app.get('/api/graficos/eventos-agrupados', async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor.' });
     }
 });
+app.get('/api/produtos', async (req, res) => {
+    try {
+        const { busca } = req.query;
+        const params = [];
+
+        let query = `
+            SELECT 
+                p.titulo AS nome_projeto,
+                c.nome_coordenador AS nome_professor,
+                pr.link_resumo AS link_produto
+            FROM 
+                produtos pr
+            INNER JOIN 
+                portifolio p ON pr.portifolio_id = p.id
+            INNER JOIN 
+                coordenadore c ON p.coordenador_id = c.coordenador_id
+            WHERE 
+                pr.link_resumo IS NOT NULL
+        `;
+
+        if (busca) {
+            query += ` AND p.titulo ILIKE $1`;
+            params.push(`%${busca}%`);
+        }
+
+        const { rows } = await pool.query(query, params);
+        
+        res.json(rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Erro ao buscar dados." });
+    }
+});
 export default app;

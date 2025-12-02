@@ -936,10 +936,12 @@ function criarGraficoAgrupado(data) {
 }
 function renderTable(dados) {
     const tbody = document.getElementById("corpo-tabela-resumos");
+    if (!tbody) return;
+    
     tbody.innerHTML = "";
 
     if (!dados || dados.length === 0) {
-        tbody.innerHTML = "<tr><td colspan='3' style='text-align:center'>Nenhum resultado encontrado.</td></tr>";
+        tbody.innerHTML = "<tr><td colspan='3' style='text-align:center'>Nenhum projeto encontrado.</td></tr>";
         return;
     }
 
@@ -963,8 +965,5 @@ function criarBotaoLink(link) {
 }
 
 function filtrarTabela() {
-    clearTimeout(timeoutDigitacao);
-    timeoutDigitacao = setTimeout(() => {
-        loadPortifolio();
-    }, 400);
+    loadPortifolio();
 }

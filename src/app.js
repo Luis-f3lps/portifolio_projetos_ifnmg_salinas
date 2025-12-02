@@ -455,8 +455,7 @@ app.get('/api/graficos/eventos-agrupados', async (req, res) => {
 });
 app.get('/api/produtos', async (req, res) => {
     try {
-        const { busca, tematica } = req.query;
-
+        const { busca } = req.query;
         let query = `
             SELECT 
                 p.titulo AS nome_projeto,
@@ -469,27 +468,16 @@ app.get('/api/produtos', async (req, res) => {
         `;
 
         const params = [];
-        let paramCount = 1;
-
         if (busca) {
-            query += ` AND p.titulo ILIKE $${paramCount}`;
+            query += ` AND p.titulo ILIKE $1`;
             params.push(`%${busca}%`);
-            paramCount++;
-        }
-
-        if (tematica && tematica !== "Todas") {
-            query += ` AND p.tematica = $${paramCount}`;
-            params.push(tematica);
-            paramCount++;
         }
 
         query += ` ORDER BY p.titulo ASC`;
 
         const { rows } = await pool.query(query, params);
         res.json(rows);
-
     } catch (err) {
-        console.error(err);
         res.status(500).json({ error: "Erro ao buscar dados." });
     }
 });

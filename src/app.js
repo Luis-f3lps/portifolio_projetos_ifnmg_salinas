@@ -461,9 +461,9 @@ app.get('/api/produtos', async (req, res) => {
                 p.titulo AS nome_projeto,
                 c.nome_coordenador AS nome_professor,
                 pr.link_resumo AS link_produto
-            FROM produtos pr
+            FROM produto pr
             INNER JOIN portifolio p ON pr.portifolio_id = p.id
-            INNER JOIN coordenadore c ON p.coordenador_id = c.coordenador_id
+            INNER JOIN coordenadores c ON p.coordenador_id = c.coordenador_id
             WHERE pr.link_resumo IS NOT NULL
         `;
 

@@ -1211,3 +1211,66 @@ body {
   visibility: visible;
 
 }
+.dropdown-parent {
+    position: relative;
+}
+
+.dropdown-child {
+    display: none;
+    position: absolute;
+    background-color: #2c3e50;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    list-style: none;
+    padding: 0;
+    border-radius: 5px;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown-child li {
+    display: block;
+    margin: 0;
+}
+
+.dropdown-child li a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-size: 14px;
+}
+
+.dropdown-child li a:hover {
+    background-color: #34495e;
+}
+
+.dropdown-parent:hover .dropdown-child {
+    display: block;
+}
+
+.dropdown-parent i {
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+    .dropdown-child {
+        position: static;
+        display: none;
+        background-color: transparent;
+        padding-left: 20px;
+        box-shadow: none;
+    }
+    
+    .dropdown-parent:hover .dropdown-child {
+        display: block;
+    }
+    
+    .dropdown-child li a {
+        font-size: 16px;
+        padding: 10px 0;
+    }
+}

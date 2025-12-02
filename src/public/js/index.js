@@ -935,9 +935,10 @@ function criarGraficoAgrupado(data) {
     console.error("Erro ao criar gráfico agrupado:", error);
   }
 }
+
 async function buscarProdutos(termo = "") {
     try {
-        const url = termo ? `${API_URL}?busca=${encodeURIComponent(termo)}` : API_URL;
+        const url = termo ? `${/api/resumos-simples}?busca=${encodeURIComponent(termo)}` : API_URL;
         
         const response = await fetch(url);
         

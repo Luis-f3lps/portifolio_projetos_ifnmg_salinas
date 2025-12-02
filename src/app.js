@@ -455,32 +455,39 @@ app.get('/api/graficos/eventos-agrupados', async (req, res) => {
 });
 app.get('/api/produtos', async (req, res) => {
     try {
-        const { busca } = req.query;
-        const params = [];
+        const { busca, tematica } = req.query;
 
         let query = `
             SELECT 
                 p.titulo AS nome_projeto,
                 c.nome_coordenador AS nome_professor,
                 pr.link_resumo AS link_produto
-            FROM 
-                produtos pr
-            INNER JOIN 
-                portifolio p ON pr.portifolio_id = p.id
-            INNER JOIN 
-                coordenadore c ON p.coordenador_id = c.coordenador_id
-            WHERE 
-                pr.link_resumo IS NOT NULL
+            FROM produtos pr
+            INNER JOIN portifolio p ON pr.portifolio_id = p.id
+            INNER JOIN coordenadore c ON p.coordenador_id = c.coordenador_id
+            WHERE pr.link_resumo IS NOT NULL
         `;
 
+        const params = [];
+        let paramCount = 1;
+
         if (busca) {
-            query += ` AND p.titulo ILIKE $1`;
+            query += ` AND p.titulo ILIKE $${paramCount}`;
             params.push(`%${busca}%`);
+            paramCount++;
         }
 
+        if (tematica && tematica !== "Todas") {
+            query += ` AND p.tematica = $${paramCount}`;
+            params.push(tematica);
+            paramCount++;
+        }
+
+        query += ` ORDER BY p.titulo ASC`;
+
         const { rows } = await pool.query(query, params);
-        
         res.json(rows);
+
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Erro ao buscar dados." });

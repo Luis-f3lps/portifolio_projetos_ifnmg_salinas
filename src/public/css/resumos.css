@@ -13,6 +13,12 @@ body {
     background: white;
     color: white;
 }
+nav ul .fa-solid.fa-chevron-down {
+    position: static;
+    color: white;
+        display: inline-table;
+
+}
 
 /* --------------Home------------------*/
 #header {

@@ -464,7 +464,7 @@ only screen and (max-width: 2340px) and (min-height: 1080px) {
   }
 
   a {
-    font-size: 26px;
+    font-size: 26pxpx;
   }
 
   p {
@@ -803,10 +803,13 @@ nav ul .fa-solid {
 position: static;
 color: white;
 }
-produtos-projetos{
+.fa-solid fa-file-pdf{
+    color: #ff0000;
+}
+.produtos-projetos{
 background-color: #21202e;
 }
-h2{
+.h2{
   margin-bottom: 50px;
 }
 @media only screen and (min-width: 901px) and (min-height: 1601px) {

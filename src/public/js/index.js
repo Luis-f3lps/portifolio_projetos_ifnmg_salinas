@@ -511,7 +511,7 @@ async function loadPortifolio(
      <td>${item.tematica}</td>
      <td>${item.nome_coordenador}</td>
       <td>${item.ano || "N/D"}</td>
-<td style="white-space: nowrap; font-size: 0.9em; color: #666;">
+<td style="white-space: nowrap; font-size: 0.9em; color: #00bfff;">
                 ${item.processo || "N/D"}
             </td>    `;
         container.appendChild(row);

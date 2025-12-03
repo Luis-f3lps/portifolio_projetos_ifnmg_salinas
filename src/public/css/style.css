@@ -810,10 +810,10 @@ nav ul .fa-solid.fa-chevron-down {
 #produtos-projetos{
 background-color: #21202e;
 }
-.produtos-projetos{
-background-color: #21202e;
+.dados{
+  width: 100%;
 }
-.h2{
+.titulo-evento-ativo{
   margin-bottom: 50px;
 }
 @media only screen and (min-width: 901px) and (min-height: 1601px) {

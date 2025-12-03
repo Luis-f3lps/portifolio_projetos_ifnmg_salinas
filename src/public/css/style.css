@@ -15,10 +15,12 @@ body {
 }
 
 a {
-  color: #007bff;
+  color: #ff0000;
   transition: color 0.3s ease-in-out;
 }
-
+.fa-solid fa-file-pdf{
+    color: #ff0000;
+}
 /* --------------Home------------------*/
 #header {
   width: 100%;

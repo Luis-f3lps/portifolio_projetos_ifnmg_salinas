@@ -13,10 +13,11 @@ body {
     background: white;
     color: white;
 }
+
 nav ul .fa-solid.fa-chevron-down {
     position: static;
     color: white;
-        display: inline-table;
+    display: inline-table;
 
 }
 
@@ -903,10 +904,8 @@ nav ul .fa-solid {
 
 .about-col-4 img {
     width: 350px;
-    /* Largura fixa para a imagem como exemplo */
     border-radius: 15px;
     cursor: pointer;
-    /* Muda o cursor para indicar interatividade */
     margin: 15px;
     box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.5);
 }
@@ -920,18 +919,10 @@ nav {
     width: 100%;
 }
 
-/* Estilo INICIAL da descrição (usando a classe) */
-
-
-/* Estilo FINAL da descrição (QUANDO o mouse está sobre o container) */
 .row:hover .sobre {
-    /* Estilos que você quer aplicar no hover */
     max-width: 900px;
     width: 50%;
     right: -350px;
-    /* Posição final (ajuste conforme necessário) */
-
-    /* Efeitos para mostrar */
     opacity: 1;
     visibility: visible;
 }
@@ -943,6 +934,24 @@ nav {
 @media only screen and (min-width: 901px) and (min-height: 1601px) {
     #livros-container {
         margin-top: 150px;
+    }
+
+    .dropdown-child {
+        display: none;
+        position: absolute;
+        background-color: #2c3e50;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        list-style: none;
+        padding: 0;
+        border-radius: 5px;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 400%;
+        border-radius: 25px;
+        padding: 30px;
     }
 
     .sobre {

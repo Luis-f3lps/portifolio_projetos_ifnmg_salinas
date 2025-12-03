@@ -797,9 +797,15 @@ nav ul .fa-solid {
   color: black;
   margin-top: 100px;
 }
-  #fa-solid fa-chevron-down{
+ .fa-solid fa-chevron-down{
 position: static;
 color: white;
+}
+produtos-projetos{
+background-color: #21202e;
+}
+h2{
+  margin-bottom: 50px;
 }
 @media only screen and (min-width: 901px) and (min-height: 1601px) {
   .header-text h1 {
@@ -807,7 +813,7 @@ color: white;
     margin-left: 32px;
     margin-top: 30px;
   }
-  #fa-solid fa-chevron-down{
+ .fa-solid fa-chevron-down{
     left: 300px;
     top: 10px;
 position: absolute;

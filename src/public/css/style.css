@@ -802,6 +802,8 @@ nav ul .fa-solid {
 nav ul .fa-solid.fa-chevron-down {
     position: static;
     color: white;
+        display: inline-table;
+
 }
 
 .fa-solid.fa-file-pdf {
@@ -813,7 +815,7 @@ background-color: #21202e;
 #dados{
   width: 100%;
 }
-.titulo-evento-ativo{
+#titulo-evento-ativo{
   margin-bottom: 50px;
 }
 @media only screen and (min-width: 901px) and (min-height: 1601px) {

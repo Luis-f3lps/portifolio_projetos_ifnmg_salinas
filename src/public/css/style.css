@@ -820,9 +820,10 @@ h2{
     top: 10px;
 position: absolute;
 color: white;
-
-
 }
+.produto-graficos {
+padding: 10px 8%;
+    margin-top: 100px;}
   .tracinho {
     display: block;
     background: #21202e;
@@ -1059,7 +1060,7 @@ color: white;
   align-items: center;
   text-align: center;
   padding: 10px 8%;
-  margin-top: 40px;
+  margin-top: 100px;
 }
 
 body {

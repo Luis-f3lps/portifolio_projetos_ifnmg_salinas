@@ -1006,11 +1006,13 @@ nav {
 
 .livroTexto {
     padding: 10px 8%;
-    visibility: none;
+    visibility: collapse;
 }
 
 @media only screen and (min-width: 901px) and (min-height: 1601px) {
-
+.container {
+    padding: 1px 1%;
+}
     .dropdown-child {
         display: none;
         position: absolute;
@@ -1052,7 +1054,8 @@ nav {
 
     .livroTexto {
         padding: 10px 8%;
-        visibility: visible
+        visibility: visible;
+        margin-top: 200px;
     }
 
     nav .fa-solid {

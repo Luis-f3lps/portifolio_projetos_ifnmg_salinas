@@ -27,7 +27,16 @@ nav ul .fa-solid.fa-chevron-down {
     background-size: cover;
     background-position: center;
 }
-
+.dropdown-child li a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-size: 14px;
+}.dropdown-parent:hover .dropdown-child {
+    display: block;
+}
 .logo {
     width: 40px;
     margin-left: 40px;

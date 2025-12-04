@@ -945,17 +945,14 @@ async function carregarListaProdutos() {
     const inputBusca = document.getElementById("filtro-interno");
     const termoBusca = inputBusca ? inputBusca.value : "";
 
-    // Cria a URL com o parâmetro de busca se houver texto
     const params = new URLSearchParams({ busca: termoBusca });
 
-    // Chamada para a API (caminho relativo para Vercel)
     const response = await fetch(`/api/produtos?${params.toString()}`);
 
     if (!response.ok) throw new Error("Falha na comunicação com a API");
 
     const dados = await response.json();
 
-    // Chama a função para desenhar na tela
     montarTabelaProdutos(dados);
   } catch (erro) {
     console.error(erro);
@@ -972,7 +969,7 @@ function montarTabelaProdutos(lista) {
   const tbody = document.getElementById("corpo-tabela-resumos");
   if (!tbody) return;
 
-  tbody.innerHTML = ""; // Limpa conteúdo anterior
+  tbody.innerHTML = ""; 
 
   if (!lista || lista.length === 0) {
     tbody.innerHTML =
@@ -998,7 +995,6 @@ function montarTabelaProdutos(lista) {
 // Função auxiliar para gerar o botão
 function formatarLinkProduto(url) {
   if (url && url !== "null" && url.trim() !== "") {
-    // Verifica se é link externo ou arquivo local
     const caminhoFinal = url.startsWith("http") ? url : `arquivos/${url}`;
 
     return `<a href="${caminhoFinal}" target="_blank" class="btn-link">
@@ -1008,7 +1004,6 @@ function formatarLinkProduto(url) {
   return '<span style="color: #ccc; font-size: 0.9em;">Indisponível</span>';
 }
 
-// Função chamada pelo onkeyup do input
 function pesquisarProdutos() {
   carregarListaProdutos();
 }

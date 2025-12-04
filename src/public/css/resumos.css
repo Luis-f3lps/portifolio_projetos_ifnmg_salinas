@@ -959,7 +959,9 @@ nav ul .fa-solid {
         justify-content: space-between;
         flex-wrap: wrap;
     }
-
+.dropdown-parent:hover .dropdown-child {
+    display: block;
+}
     .dropdown-child {
         display: none;
         position: absolute;

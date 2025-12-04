@@ -1004,6 +1004,11 @@ nav {
     margin-top: 120px;
 }
 
+.livroTexto {
+    padding: 10px 8%;
+    visibility: none;
+}
+
 @media only screen and (min-width: 901px) and (min-height: 1601px) {
 
     .dropdown-child {
@@ -1044,8 +1049,10 @@ nav {
         position: static;
         z-index: 2;
     }
-        .textoLivro {
+
+    .livroTexto {
         padding: 10px 8%;
+        visibility: visible
     }
 
     nav .fa-solid {
@@ -1158,6 +1165,7 @@ nav {
         padding: 20px;
     }
 }
+
 #bloco-descricao-dados {
     background-color: rgba(255, 255, 255, 0.05);
     color: black;
@@ -1169,6 +1177,7 @@ nav {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
+
 @media only screen and (max-width: 1080px) and (max-height: 2340px) {
     .about-col-4 img {
         width: 700px;

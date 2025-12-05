@@ -1178,7 +1178,7 @@ nav {
     background-color: rgba(255, 255, 255, 0.05);
     color: black;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 16px;
+    font-size: 32px;
     line-height: 1.7;
     padding: 25px;
     border-left: 5px solid #21202e;
@@ -1239,12 +1239,9 @@ body {
     /* Posição inicial, ao lado da imagem */
 }
 
-/* Estilização do subtítulo "Sobre" */
 .sub-title {
-    font-size: 1.1em;
-    /* Tamanho maior para o título principal da seção */
+    font-size: 24px;
     font-weight: 300;
-    /* Peso mais leve para um visual elegante */
     color: black;
     margin-top: 0;
     margin-bottom: 30px;
@@ -1255,7 +1252,6 @@ body {
     display: inline-block;
 }
 
-/* Estilização do título do objetivo */
 .sobre h1:not(.sub-title) {
     font-size: 1.0em;
     /* Tamanho de fonte um pouco menor que o subtítulo */

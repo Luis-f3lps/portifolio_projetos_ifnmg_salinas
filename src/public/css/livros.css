@@ -1007,6 +1007,8 @@ nav {
 .livroTexto {
     padding: 10px 8%;
     visibility: collapse;
+        display: none;
+
 }
 
 @media only screen and (min-width: 901px) and (min-height: 1601px) {
@@ -1058,6 +1060,7 @@ nav {
         padding: 16px 12%;
         visibility: visible;
         margin-top: 200px;
+        display: block;
     }
 
     nav .fa-solid {

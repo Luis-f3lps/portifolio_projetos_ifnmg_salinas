@@ -6,7 +6,7 @@
     <link rel="icon" href="images/tl.webp" type="image/png">
     <title>Projetos de Pesquisa do IFNMG Salinas</title>
     <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/relatorio.css">
+    <link rel="stylesheet" href="css/relatorio.css">
 
     <script src="https://kit.fontawesome.com/915b45d802.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -40,42 +40,43 @@
             <i class="fa-solid fa-bars" onclick="openmenu()"></i>
         </nav>
     </div>
-    
-<div class="painel-controle-mestre">
-    <header class="cabecalho-premium">
-        <h1>Painel de Visualização de Projetos</h1>
-        <p>Distribuição por Área Temática</p>
-    </header>
 
-    <div class="grade-analitica-visual">
-        <div class="cartao-insight">
-            <canvas id="barChart"></canvas>
+    <div class="painel-controle-mestre">
+        <header class="cabecalho-premium">
+            <h1>Painel de Visualização de Projetos</h1>
+            <p>Distribuição por Área Temática</p>
+        </header>
+
+        <div class="grade-analitica-visual">
+
+            <div class="cartao-insight">
+                <canvas id="doughnutChart"></canvas>
+            </div>
+            <div class="cartao-insight">
+                <canvas id="typeChart"></canvas>
+            </div>
         </div>
-        <div class="cartao-insight">
-            <canvas id="doughnutChart"></canvas>
+
+        <h2 class="titulo-secao-destaque">Dados Detalhados</h2>
+        <div class="area-tabela-flutuante">
+            <table id="tabelaDados" class="tabela-elegante">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Coordenador</th>
+                        <th>Área</th>
+                        <th>Tipo</th>
+                        <th>Ano</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
     </div>
 
-    <h2 class="titulo-secao-destaque">Dados Detalhados</h2>
-    <div class="area-tabela-flutuante">
-        <table id="tabelaDados" class="tabela-elegante">
-            <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>Coordenador</th>
-                    <th>Área</th>
-                    <th>Tipo</th>
-                    <th>Ano</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-</div>
-
-<script>
-    // --- 1. SEUS DADOS ---
-    const rawData = `Título do Projeto,Coordenador,Área,Tipo,Formação,Carreira,Processo SEI,ano
+    <script>
+        // --- 1. SEUS DADOS ---
+        const rawData = `Título do Projeto,Coordenador,Área,Tipo,Formação,Carreira,Processo SEI,ano
 MECANISMOS DE SUPRESSÃO DO CARBAMATO DE ETILA DURANTE A PRODUÇÃO E ARMAZENAMENTO DA CACHAÇA DE ALAMBIQUE,Alexandre Santos de Souza,Ciências Agrárias,Inovação,Doutorado,Docente,23396.000713/2025-39,2025
 """PRODUÇÃO DE PASTAGENS EM SISTEMA SILVIPASTORIL COM DIFERENTES ESPÉCIES LEGUMINOSAS""",Susi Cristina dos Santos Guimarães Martins,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,TAE,23396.000668/2025-12,2025
 INFLUÊNCIA DA LUMINOSIDADE E DO RECIPIENTE NA PRODUÇÃO DE MUDAS DE Astronium fraxinifolium Schott,Marília Dutra Massad,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.001809/2025-14,2025
@@ -143,143 +144,135 @@ SAÚDE MENTAL E EVASÃO ESCOLAR NA EDUCAÇÃO PROFISSIONAL TECNOLÓGICA: IMPACTO
 REGISTRO AUTOMÁTICO DE ACESSO DE VEÍCULOS NO IFNMG CAMPUS SALINAS UTILIZANDO IMAGENS PARA DETECÇÃO DE PLACA VEICULAR - ETAPA II,Arthur Faria Porto,Ciências Exatas e da Terra,Desenvolvimento Científico/Tecnológico,Mestrado,TAE,23396.000594/2021-91,2021
 EXTRAÇÃO DE PECTINA DE CLADÓDIOS DE PALMA (Opuntia fícus-indica) E ELABORAÇÃO DE GELEIA DE MARACUJÁ,Edilene Alves Barbosa,Ciências Agrárias,Inovação,Doutorado,Docente,23396.000581/2021-11,2021`;
 
-    function parseCSV(text) {
-        const rows = [];
-        let currentRow = [];
-        let currentCell = '';
-        let insideQuotes = false;
-        
-        text = text.replace(/\r\n/g, '\n');
+        function parseCSV(text) {
+            const rows = [];
+            let currentRow = [];
+            let currentCell = '';
+            let insideQuotes = false;
 
-        for (let i = 0; i < text.length; i++) {
-            const char = text[i];
-            const nextChar = text[i + 1];
+            text = text.replace(/\r\n/g, '\n');
 
-            if (char === '"') {
-                if (insideQuotes && nextChar === '"') {
-                    currentCell += '"';
-                    i++;
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                const nextChar = text[i + 1];
+
+                if (char === '"') {
+                    if (insideQuotes && nextChar === '"') {
+                        currentCell += '"';
+                        i++;
+                    } else {
+                        // Alternar estado de aspas
+                        insideQuotes = !insideQuotes;
+                    }
+                } else if (char === ',' && !insideQuotes) {
+                    // Fim da célula
+                    currentRow.push(currentCell.trim());
+                    currentCell = '';
+                } else if (char === '\n' && !insideQuotes) {
+                    currentRow.push(currentCell.trim());
+                    if (currentRow.length > 1) rows.push(currentRow);
+                    currentRow = [];
+                    currentCell = '';
                 } else {
-                    // Alternar estado de aspas
-                    insideQuotes = !insideQuotes;
+                    currentCell += char;
                 }
-            } else if (char === ',' && !insideQuotes) {
-                // Fim da célula
-                currentRow.push(currentCell.trim());
-                currentCell = '';
-            } else if (char === '\n' && !insideQuotes) {
-                currentRow.push(currentCell.trim());
-                if (currentRow.length > 1) rows.push(currentRow);
-                currentRow = [];
-                currentCell = '';
-            } else {
-                currentCell += char;
             }
-        }
-        if (currentCell) currentRow.push(currentCell.trim());
-        if (currentRow.length > 1) rows.push(currentRow);
+            if (currentCell) currentRow.push(currentCell.trim());
+            if (currentRow.length > 1) rows.push(currentRow);
 
-        return rows;
-    }
-
-    const rows = parseCSV(rawData);
-    
-    const headers = rows.shift(); 
-    
-    const areaCounts = {};
-    const tableBody = document.querySelector('#tabelaDados tbody');
-
-    rows.forEach(row => {
-        const area = row[2];
-                if (area) {
-            areaCounts[area] = (areaCounts[area] || 0) + 1;
+            return rows;
         }
 
-        const tr = document.createElement('tr');
+        const rows = parseCSV(rawData);
 
-        tr.innerHTML = `
+        const headers = rows.shift();
+
+        const areaCounts = {};
+        const tableBody = document.querySelector('#tabelaDados tbody');
+
+        rows.forEach(row => {
+            const area = row[2];
+            if (area) {
+                areaCounts[area] = (areaCounts[area] || 0) + 1;
+            }
+
+            const tr = document.createElement('tr');
+
+            tr.innerHTML = `
             <td>${row[0].replace(/^"+|"+$/g, '')}</td>
             <td>${row[1]}</td>
             <td>${row[2]}</td>
             <td>${row[3]}</td>
             <td>${row[7]}</td>
         `;
-        tableBody.appendChild(tr);
-    });
+            tableBody.appendChild(tr);
+        });
 
-    const labels = Object.keys(areaCounts);
-    const dataValues = Object.values(areaCounts);
-    
-    // Cores personalizadas
-    const backgroundColors = [
-        'rgba(46, 204, 113, 0.7)',  // Verde
-        'rgba(52, 152, 219, 0.7)',  // Azul
-        'rgba(155, 89, 182, 0.7)',  // Roxo
-        'rgba(241, 196, 15, 0.7)',  // Amarelo
-        'rgba(231, 76, 60, 0.7)'    // Vermelho
-    ];
+        const labels = Object.keys(areaCounts);
+        const dataValues = Object.values(areaCounts);
+
+        // Cores personalizadas
+        const backgroundColors = [
+            'rgba(46, 204, 113, 0.7)',  // Verde
+            'rgba(52, 152, 219, 0.7)',  // Azul
+            'rgba(155, 89, 182, 0.7)',  // Roxo
+            'rgba(241, 196, 15, 0.7)',  // Amarelo
+            'rgba(231, 76, 60, 0.7)'    // Vermelho
+        ];
 
 
-    new Chart(document.getElementById('barChart'), {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Total de Projetos',
-                data: dataValues,
-                backgroundColor: backgroundColors,
-                borderColor: backgroundColors.map(c => c.replace('0.7', '1')),
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: 'Total de Projetos por Área'
-                }
+
+
+        new Chart(document.getElementById('doughnutChart'), {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: dataValues,
+                    backgroundColor: backgroundColors,
+                    hoverOffset: 4
+                }]
             },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: { stepSize: 1 }
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Proporção por Área'
+                    }
                 }
             }
-        }
-    });
+        });
+        const typeLabels = Object.keys(typeCounts);
+        const typeValues = Object.values(typeCounts);
+        const typeColors = ['rgba(255, 159, 64, 0.7)', 'rgba(75, 192, 192, 0.7)'];
 
-    new Chart(document.getElementById('doughnutChart'), {
-        type: 'doughnut',
-        data: {
-            labels: labels,
-            datasets: [{
-                data: dataValues,
-                backgroundColor: backgroundColors,
-                hoverOffset: 4
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Proporção por Área'
+        new Chart(document.getElementById('typeChart'), {
+            type: 'pie',
+            data: {
+                labels: typeLabels,
+                datasets: [{
+                    data: typeValues,
+                    backgroundColor: typeColors,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Distribuição por Tipo' }
                 }
             }
+        });
+        var sidemenu = document.getElementById("sidemenu");
+        function openmenu() {
+            sidemenu.style.right = "-200px";
+            sidemenu.style.left = "0px";
         }
-    });
-
-            var sidemenu = document.getElementById("sidemenu");
-            function openmenu() {
-                sidemenu.style.right = "-200px";
-                sidemenu.style.left = "0px";
-            }
-            function clossmenu() {
-                sidemenu.style.left = "-800px";
-            }
-        </script>
+        function clossmenu() {
+            sidemenu.style.left = "-800px";
+        }
+    </script>
 
 
 </body>

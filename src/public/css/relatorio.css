@@ -1,6 +1,5 @@
 .painel-controle-mestre {
     max-width: 1280px;
-    margin: 40px auto;
     padding: 30px;
     background-color: #f8f9fa;
     border-radius: 20px;
@@ -9,7 +8,8 @@
 
 .cabecalho-premium {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 50px;    margin-top: 90px;
+
     position: relative;
 }
 

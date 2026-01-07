@@ -78,6 +78,11 @@ a {
   text-align: center;
 }
 
+cartao-insight {
+  height: 500px;
+  margin-bottom: 30px;
+}
+
 nav {
   display: flex;
   align-items: center;
@@ -892,7 +897,7 @@ nav ul .fa-solid.fa-chevron-down {
   }
 
   tbody {
-    font-size: x-large;
+    font-size: large;
   }
 
   thead {

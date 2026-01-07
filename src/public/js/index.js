@@ -1012,20 +1012,16 @@ function pesquisarProdutos() {
 
 async function carregarGraficoAnos() {
         try {
-            // 1. Busca os dados na sua API
             const response = await fetch('/api/graficos/anos');
             const dados = await response.json();
 
-            // 2. Separa os arrays para o Chart.js
-            // Supondo que o BD retorne: [{ ano: '2023', total: 10 }, { ano: '2024', total: 15 }]
             const labelsAno = dados.map(item => item.ano);
             const valuesAno = dados.map(item => item.total);
 
-            // 3. Renderiza o Gráfico
             const ctx = document.getElementById('yearChart').getContext('2d');
             
             new Chart(ctx, {
-                type: 'line', // 'line' é o melhor para anos
+                type: 'line', 
                 data: {
                     labels: labelsAno, // Eixo X (2023, 2024...)
                     datasets: [{
@@ -1038,17 +1034,17 @@ async function carregarGraficoAnos() {
                         pointBorderColor: 'rgba(54, 162, 235, 1)',
                         pointRadius: 5,
                         fill: true,
-                        tension: 0.3 // Curvatura suave da linha
+                        tension: 0.3 
                     }]
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false, // Se quiser que se adapte melhor ao container
+                    maintainAspectRatio: false, 
                     plugins: {
                         legend: { display: false },
                         title: { 
                             display: true, 
-                            text: 'Evolução Anual (Dados do Banco)',
+                            text: 'Evolução Anual dos Projetos de Pesquisa',
                             font: { size: 16 }
                         },
                         tooltip: {

@@ -490,10 +490,8 @@ app.get('/api/graficos/anos', async (req, res) => {
             SELECT 
                 ano, 
                 COUNT(id) as total
-            FROM produto
+            FROM portifolio
             WHERE ano IS NOT NULL 
-            -- Opcional: Se quiser pegar apenas dados recentes, descomente abaixo:
-            -- AND ano >= '2020' 
             GROUP BY ano
             ORDER BY ano ASC;
         `;

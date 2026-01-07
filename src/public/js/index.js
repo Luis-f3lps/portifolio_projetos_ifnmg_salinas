@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   carregarDadosTipos();
   carregarStatusProdutos();
   carregarEventosAgrupados();
+  carregarGraficoAnos();
   try {
     const response = await fetch("/api/stats/tematicas");
     if (!response.ok) throw new Error("Falha ao buscar dados de temáticas");
@@ -1007,3 +1008,67 @@ function formatarLinkProduto(url) {
 function pesquisarProdutos() {
   carregarListaProdutos();
 }
+
+
+async function carregarGraficoAnos() {
+        try {
+            // 1. Busca os dados na sua API
+            const response = await fetch('/api/graficos/anos');
+            const dados = await response.json();
+
+            // 2. Separa os arrays para o Chart.js
+            // Supondo que o BD retorne: [{ ano: '2023', total: 10 }, { ano: '2024', total: 15 }]
+            const labelsAno = dados.map(item => item.ano);
+            const valuesAno = dados.map(item => item.total);
+
+            // 3. Renderiza o Gráfico
+            const ctx = document.getElementById('yearChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'line', // 'line' é o melhor para anos
+                data: {
+                    labels: labelsAno, // Eixo X (2023, 2024...)
+                    datasets: [{
+                        label: 'Evolução de Projetos',
+                        data: valuesAno, // Eixo Y (Quantidade)
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#ffffff',
+                        pointBorderColor: 'rgba(54, 162, 235, 1)',
+                        pointRadius: 5,
+                        fill: true,
+                        tension: 0.3 // Curvatura suave da linha
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, // Se quiser que se adapte melhor ao container
+                    plugins: {
+                        legend: { display: false },
+                        title: { 
+                            display: true, 
+                            text: 'Evolução Anual (Dados do Banco)',
+                            font: { size: 16 }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#f0f0f0' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+        } catch (error) {
+            console.error('Erro ao carregar gráfico de anos:', error);
+        }
+    }

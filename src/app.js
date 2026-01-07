@@ -484,4 +484,26 @@ app.get('/api/produtos', async (req, res) => {
         res.status(500).json({ error: "Erro ao buscar dados." });
     }
 });
+app.get('/api/graficos/anos', async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                ano, 
+                COUNT(id) as total
+            FROM produto
+            WHERE ano IS NOT NULL 
+            -- Opcional: Se quiser pegar apenas dados recentes, descomente abaixo:
+            -- AND ano >= '2020' 
+            GROUP BY ano
+            ORDER BY ano ASC;
+        `;
+
+        const { rows } = await pool.query(query);
+        res.json(rows);
+
+    } catch (error) {
+        console.error('Erro ao obter estatísticas por ano:', error);
+        res.status(500).json({ error: 'Erro no servidor ao obter estatísticas de anos.' });
+    }
+});
 export default app;

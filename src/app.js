@@ -48,6 +48,9 @@ app.get('/artigos', (req, res) => {
 app.get('/resumos', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'resumos_simples.html'));
 });
+app.get('/relatorio', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'relatorio.html'));
+});
 // Iniciar o servidor
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

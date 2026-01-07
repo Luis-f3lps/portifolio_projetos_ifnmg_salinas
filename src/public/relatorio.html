@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="images/tl.webp" type="image/png">
+    <title>Projetos de Pesquisa do IFNMG Salinas</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/915b45d802.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="tracinho">
+    </div>
+    <div id="header">
+        <nav>
+            <img src="images/tl.webp" class="logo">
+            <ul id="sidemenu">
+                <li class="dropdown-parent">
+                    <a href="#logoloop-inner">Projetos <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="dropdown-child">
+                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#logoloop-inner">Projetos</a>
+                        </li>
+                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#dados">Gráficos</a></li>
+                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#painel-resumos">Produtos</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="/livros">Livros</a></li>
+                <li><a href="/artigos">Artigos</a></li>
+                <li><a href="/resumos">Resumos</a></li>
+                <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#header">Sobre</a></li>
+                <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#contact">Contato</a></li>
+                <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
+            </ul>
+            <img src="images/salinas_vertical_jpg (1).png" class="logoIFNMG">
+            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+        </nav>
+    </div>
+    
+<div class="container">
+    <header>
+        <h1>Painel de Visualização de Projetos</h1>
+        <p>Distribuição por Área Temática</p>
+    </header>
+
+    <div class="charts-container">
+        <div class="chart-box">
+            <canvas id="barChart"></canvas>
+        </div>
+        <div class="chart-box">
+            <canvas id="doughnutChart"></canvas>
+        </div>
+    </div>
+
+    <h2>Dados Detalhados</h2>
+    <div style="overflow-x:auto;">
+        <table id="tabelaDados">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Coordenador</th>
+                    <th>Área</th>
+                    <th>Tipo</th>
+                    <th>Ano</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // --- 1. SEUS DADOS ---
+    const rawData = `Título do Projeto,Coordenador,Área,Tipo,Formação,Carreira,Processo SEI,ano
+MECANISMOS DE SUPRESSÃO DO CARBAMATO DE ETILA DURANTE A PRODUÇÃO E ARMAZENAMENTO DA CACHAÇA DE ALAMBIQUE,Alexandre Santos de Souza,Ciências Agrárias,Inovação,Doutorado,Docente,23396.000713/2025-39,2025
+"""PRODUÇÃO DE PASTAGENS EM SISTEMA SILVIPASTORIL COM DIFERENTES ESPÉCIES LEGUMINOSAS""",Susi Cristina dos Santos Guimarães Martins,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,TAE,23396.000668/2025-12,2025
+INFLUÊNCIA DA LUMINOSIDADE E DO RECIPIENTE NA PRODUÇÃO DE MUDAS DE Astronium fraxinifolium Schott,Marília Dutra Massad,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.001809/2025-14,2025
+UTILIZAÇÃO DO RESÍDUO DO URUCUM NA PRODUÇÃO DE MUDAS DE Magonia pubescens A. St.-Hil. SOB DIFERENTES NÍVEIS DE SOMBREAMENTO,Marília Dutra Massad,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.001840/2025-55,2025
+QUALIDADE DE MUDAS DE Delonix regia SOB DIFERENTES VOLUMES DE RECIPIENTES E ADUBOS DE LIBERAÇÃO LENTA,Marília Dutra Massad,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.001832/2025-17,2025
+PRODUÇÃO DE MUDAS DE Moringa oleífera Lamarck SOB DIFERENTES VOLUMES DE TUBETES E DOSES DE OSMOCOTE®,Marília Dutra Massad,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.001996/2025-36,2025
+Fatores de risco associados à produção de queijo artesanal Queijo Cozido em cidades do Vale do Jequitinhonha e Norte de Minas Gerais,THIAGO MOREIRA DOS SANTOS,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.004480/2023-81,2024
+PRODUÇÃO DE CERVEJA ARTESANAL COM A INTRODUÇÃO DAS CASTANHAS DE BARU (Dipteryx alata),Marcos de Oliveira,Ciências Biológicas,Inovação,Doutorado,Docente,23396.004588/2023-74,2024
+Levantamento da Fauna Culicidae do IFNMG campus Salinas e o risco de transmissão de arboviroses.,Filipe Vieira Santos de Abreu,Ciências Biológicas,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.001242/2024-03,2024
+"Como os mosquitos vetores de doenças e as pragas agrícolas se espalham tão rapidamente por todas as regiões do Brasil, causando problemas econômicos e de saúde?",Filipe Vieira Santos de Abreu,Ciências Biológicas,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.001967/2024-93,2024
+PRODUÇÃO DE HIDROMEL UTILIZANDO LEVEDURAS SELECIONADAS DE DORNAS DE CACHAÇA DE ALAMBIQUE,Marcos de Oliveira,Ciências Biológicas,Inovação,Doutorado,Docente,23396.002012/2024-53,2024
+Avaliação dos parâmetros de identidade e qualidade (PQI’S) de cachaças produzidas com leveduras selecionadas do Norte de Minas Gerias,Felipe Cimino Duarte,Ciências Agrárias,Inovação,Doutorado,Docente,23396.002115/2024-13,2024
+VIGILÂNCIA EPIDEMIOLÓGICA UTILIZANDO DIAGNÓSTICO MOLECULAR PARA DETECÇÃO DO HERPESVÍRUS EQUINO-1 NA REGIÃO DE SALINAS-MG,Eduardo Garrido,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.002327/2024-09,2024
+Aprendizagem profunda na classificação de doenças da bananeira,Alison Zille Lopes,Ciências Exatas e da Terra,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.002202/2024-71,2024
+ÍNDICE DE QUALIDADE DE MUDAS DE Moringa oleifera (Lam.) SOB DIFERENTES SUBSTRATOS E NÍVEIS DE SOMBREAMENTO,Marília Dutra Massad,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.002628/2024-24,2024
+HISTÓRIA E MEMÓRIA DO CURSO TÉCNICO EM AGROPECUÁRIA DE SALINAS/MG,Lílian Gleisia Alves dos Santos,Ciências Humanas,Desenvolvimento Científico/Tecnológico,Mestrado,Docente,23396.001674/2023-25,2024
+PPbio Comcerrado: Nexus da SocioBiodiversidade e Sustentabilidade em tempos de mudanças globais - Subprojeto 5: Das cavernas às cidades: contínuo espaço-temporal da presença humana e o favorecimento dos insetos vetores de doenças no Cerrado - Mosquitos,Filipe Vieira Santos de Abreu,Ciências Biológicas,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.002147/2024-19,2024
+Aprendizagem de Máquina na Classificação da Evasão Segundo Dados Socioeconômicos,Alison Zille Lopes,Ciências Exatas e da Terra,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.001170/2022-24,2024
+AntSys - Otimização por Colônia de Formigas de Propósito Geral,Alison Zille Lopes,Ciências Exatas e da Terra,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.003170/2021-88,2024
+Sistema para controle de fotoperíodo na Avicultura,Leonardo Humberto Guimarães Silva,Ciências Exatas e da Terra,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.005016/2022-21,2023
+"Avaliação no controle populacional de pardais (Passer domesticus) nas dependências do IFNMG, Campus Salinas, Minas Gerais, através de técnicas de falcoaria: uma opção sustentável",Valéria Magro Octaviano Bernis,Ciências Biológicas,Desenvolvimento Científico/Tecnológico,Mestrado,Docente,23396.001968/2023-57,2023
+"DESENVOLVIMENTO, CARACTERIZAÇÃO E ANÁLISE SENSORIAL DE MOLHO À BASE DE BIOMASSA DE BANANA VERDE (Musa acuminata Cavendish)",Joyce de Sousa Moreno,Ciências Agrárias,Inovação,Mestrado,Docente,23396.001639/2023-14,2023
+CARACTERIZAÇÃO MICROBIOLÓGICA E FISICO-QUÍMICA DA ÁGUA E ANÁLISE DE SUPERFÍCIES DA PRODUÇÃO DE QUEIJO ARTESANAL CABACINHA EM DIFERENTES ÉPOCAS DO ANO,Thiago Moreira dos Santos,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.001486/2023-05,2023
+PRODUÇÃO DE MUDAS DE Tecoma stans (L.) Juss ex. Kenth SOB DIFERENTES NÍVEIS DE SOMBREAMENTO E SUBSTRATOS,Marília Dutra Massad,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.003674/2023-60,2023
+ELABORAÇÃO DE IOGURTE DO TIPO GREGO SABORIZADO COM FRUTOS DO CERRADO,Joyce de Sousa Moreno,Ciências Agrárias,Inovação,Mestrado,Docente,23396.001586/2023-23,2023
+Modelagem genético-nebulosa da relação entre variáveis ambientais e a temperatura retal de frangos de corte,Alison Zille Lopes,Ciências Exatas e da Terra,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.004281/2023-73,2023
+Inteligências Múltiplas no Projeto Existencial de emancipação do sujeito,Admilson Eustáquio Prates,Ciências Humanas,Inovação,Doutorado,Docente,23396.004398/2023-57,2023
+Suplementação a Pasto de Bezerros de Corte com Ração Peletizada de Palma Forrageira,Antônio Eustáquio Filho,Ciências Agrárias,Inovação,Doutorado,Docente,"23396.004160/2023-21
+23396.000191/2025-75",2023
+Resistência e protagonismo: a luta das mulheres indígenas em manter viva a memória cultural do seu povo,Romana Tatiane Soares Santos,Lingüística,Desenvolvimento Científico/Tecnológico,Mestrado,Docente,23396.001644/2023-19,2023
+DESENVOLVIMENTO DE PRODUTOS DESIDRATADOS DE BATATA-DOCE COMO ALTERNATIVAS SAUDÁVEIS E ENERGÉTICAS EM EMBALAGENS INOVADORAS,Felipe Cimino Duarte,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.001584/2023-34,2023
+Caraterização físico-química e comportamento higroscópico do maracujá desidratado por liofilização e secagem em camada de espuma,Isis Celena Amaral,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.004573/2023-14,2023
+LEVEDURAS ISOLADAS DE DORNAS DE CACHAÇA PARA PRODUÇÃO DE CERVEJA,Marcos de Oliveira,Ciências Biológicas,Inovação,Doutorado,Docente,23396.004538/2023-97,2023
+Desenvolvimento de aplicativo de celular inovador para o manejo populacional ético de cães em condição de vulnerabilidade no município de Salinas/MG,Aníbal Souza Felipe da Silva,Ciências Exatas e da Terra,Inovação,Doutorado,TAE,23396.004586/2023-85,2023
+"ASSISTÊNCIA ESTUDANTIL: POR DENTRO DA POLÍTICA DO INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DO NORTE DE MINAS GERAIS",Admilson Eustáquio Prates,Ciências Humanas,Inovação,Doutorado,Docente,23396.004843/2022-06,2022
+"FITOSSOCIOLOGIA EM ÁREAS DE PRESERVAÇÃO PERMANENTE FLUVIAL E ALTERNATIVAS PARA CONTROLE DE LEUCENA (Leucaena leucocephala) NO MUNICÍPIO DE SALINAS, MG",Alessandro de Paula Silva,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.001006/2022-17,2022
+LITERATURA E ARGUMENTAÇÃO: UM OLHAR PARA A REDAÇÃO DO ENEM,Alex Sander Luiz Campos,Ciências Sociais Aplicadas,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.000901/2022-14,2022
+AVALIAÇÃO DE BEM-ESTAR ANIMAL E ESTADO REPRODUTIVO DE FÊMEAS LEPORíDEAS DO SETOR DE CUNICULTURA DO IFNMG – CAMPUS SALINAS,Ana Carolina Leite,Ciências Biológicas,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.000833/2022-93,2022
+DESEMPENHO E COMPORTAMENTO INGESTIVO DE BOVINOS DE CORTE ALIMENTADOS COM O FARELO DE PALMA FORRAGEIRA EM SUBSTITUIÇÃO AO MILHO GRÃO.,ANTÔNIO EUSTÁQUIO FILHO,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.002215/2022-88,2022
+Aplicativo mobile para auxiliar no manejo de cocho de bovinos confinados.,ANTÔNIO EUSTÁQUIO FILHO,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.002430/2022-89,2022
+PROJETO DE SOFTWARE DE UM CHATBOT PARA COMUNICAÇÃO COM ALUNOS DO IFNMG – CAMPUS SALINAS,Arthur Faria Porto,Ciências Exatas e da Terra,Inovação,Mestrado,Docente,23396.001007/2022-61,2022
+Framework para o ensino de computação gráfica: abstração da complexidade de software no contexto do ensino superior,Caio Henriques Sica Lamas,Ciências Exatas e da Terra,Inovação,Mestrado,Docente,23396.004166/2022-18,2022
+Blend de óleo essencial de coentro (Coriandrum sativum) e orégano (Origanum vulgare) potencializando o efeito antimicrobiano da carne bovina in natura.,Isis Celena Amaral,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.000879/2022-11,2022
+DIAGNÓSTICO DA QUALIDADE DA ÁGUA NO RIO SALINAS/MG,Jane Bruna de Almeida,Ciências Exatas e da Terra,Desenvolvimento Científico/Tecnológico,Mestrado,Docente,23396.000989/2022-74,2022
+Desenvolvimento de meio diluente à base de água de coco in natura para diluição e criopresevação de sêmen de coelhos (Oryctolagus cuniculus),Júlio César Oliveira Dias,Ciências Agrárias,Inovação,Doutorado,Docente,23396.003115/2022-79,2022
+Software Bot para Notificações e Registro de Ocorrências relacionadas à Covid-19,Leonardo Humberto Guimarães Silva,Ciências Exatas e da Terra,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.000864/2022-44,2022
+A relevância da time geography para a compreensão dos fatos sociais e educacionais,Leonardo Luiz Silveira da Silva,Ciências Humanas,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.000194/2022-66,2022
+A RELEVÂNCIA DA TIME GEOGRAPHY PARA A COMPREENSÃO DOS FATOS SOCIAIS E EDUCACIONAIS: APLICANDO OS FUNDAMENTOS DA TEORIA,Leonardo Luiz Silveira da Silva,Ciências Humanas,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.000817/2022-09,2022
+UTILIZAÇÃO DO RESÍDUO DA MANDIOCA PARA A PRODUÇÃO DE MUDAS DE ESPÉCIES FLORESTAIS,Marília Dutra Massad,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.004337/2022-17,2022
+O Trabalho como Princípio Educativo: concepções discentes sobre o Ensino Médio Integrado à Educação Profissional e Tecnológica.,Ricardo dos Santos Silva,Ciências Humanas,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.000799/2022-57,2022
+"""Desempenho de bezerras de corte desmamadas submetidas ao manejo de suplementação a pasto""",Susi Cristina dos Santos Guimarães Martins,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,TAE,23396.002906/2022-81,2022
+Ensino de Física através de uma abordagem com enfoque CTS&A,Alisson Marques de Miranda,Ciências Humanas,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.002908/2021-90,2021
+SAÚDE MENTAL E EVASÃO ESCOLAR NA EDUCAÇÃO PROFISSIONAL TECNOLÓGICA: IMPACTOS DO ADOECIMENTO DOS ESTUDANTES DO ENSINO MÉDIO INTEGRADO DO IFNMG CAMPUS SALINAS,Renata Xavier Castro,Ciências Humanas,Desenvolvimento Científico/Tecnológico,Especialista,Docente,23396.003211/2021-36,2021
+"REVESTIMENTO COMESTÍVEL À BASE AMIDO DE MANDIOCA E FARELO DA CASCA DE MARACUJÁ DO CAMPO, ENRIQUECIDO COM ÓLEO ESSENCIAL DE CRAVO-DA-ÍNDIA (Syzygium aromaticum), NA CONSERVAÇÃO DA GOIABA (Psidium guajava)",Isis Celena Amaral,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.000514/2021-05,2021
+REGISTRO AUTOMÁTICO DE ACESSO DE VEÍCULOS NO IFNMG CAMPUS SALINAS UTILIZANDO IMAGENS PARA DETECÇÃO DE PLACA VEICULAR - ETAPA II,Arthur Faria Porto,Ciências Exatas e da Terra,Desenvolvimento Científico/Tecnológico,Mestrado,TAE,23396.000594/2021-91,2021
+EXTRAÇÃO DE PECTINA DE CLADÓDIOS DE PALMA (Opuntia fícus-indica) E ELABORAÇÃO DE GELEIA DE MARACUJÁ,Edilene Alves Barbosa,Ciências Agrárias,Inovação,Doutorado,Docente,23396.000581/2021-11,2021
+Ensino de Física através de uma abordagem com enfoque CTS&A,Alisson Marques de Miranda,Ciências Humanas,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.002908/2021-90,2021
+SAÚDE MENTAL E EVASÃO ESCOLAR NA EDUCAÇÃO PROFISSIONAL TECNOLÓGICA: IMPACTOS DO ADOECIMENTO DOS ESTUDANTES DO ENSINO MÉDIO INTEGRADO DO IFNMG CAMPUS SALINAS,Renata Xavier Castro,Ciências Humanas,Desenvolvimento Científico/Tecnológico,Especialista,Docente,23396.003211/2021-36,2021
+"REVESTIMENTO COMESTÍVEL À BASE AMIDO DE MANDIOCA E FARELO DA CASCA DE MARACUJÁ DO CAMPO, ENRIQUECIDO COM ÓLEO ESSENCIAL DE CRAVO-DA-ÍNDIA (Syzygium aromaticum), NA CONSERVAÇÃO DA GOIABA (Psidium guajava)",Isis Celena Amaral,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.000514/2021-05,2021
+REGISTRO AUTOMÁTICO DE ACESSO DE VEÍCULOS NO IFNMG CAMPUS SALINAS UTILIZANDO IMAGENS PARA DETECÇÃO DE PLACA VEICULAR - ETAPA II,Arthur Faria Porto,Ciências Exatas e da Terra,Desenvolvimento Científico/Tecnológico,Mestrado,TAE,23396.000594/2021-91,2021
+EXTRAÇÃO DE PECTINA DE CLADÓDIOS DE PALMA (Opuntia fícus-indica) E ELABORAÇÃO DE GELEIA DE MARACUJÁ,Edilene Alves Barbosa,Ciências Agrárias,Inovação,Doutorado,Docente,23396.000581/2021-11,2021
+Ensino de Física através de uma abordagem com enfoque CTS&A,Alisson Marques de Miranda,Ciências Humanas,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.002908/2021-90,2021
+SAÚDE MENTAL E EVASÃO ESCOLAR NA EDUCAÇÃO PROFISSIONAL TECNOLÓGICA: IMPACTOS DO ADOECIMENTO DOS ESTUDANTES DO ENSINO MÉDIO INTEGRADO DO IFNMG CAMPUS SALINAS,Renata Xavier Castro,Ciências Humanas,Desenvolvimento Científico/Tecnológico,Especialista,Docente,23396.003211/2021-36,2021
+"REVESTIMENTO COMESTÍVEL À BASE AMIDO DE MANDIOCA E FARELO DA CASCA DE MARACUJÁ DO CAMPO, ENRIQUECIDO COM ÓLEO ESSENCIAL DE CRAVO-DA-ÍNDIA (Syzygium aromaticum), NA CONSERVAÇÃO DA GOIABA (Psidium guajava)",Isis Celena Amaral,Ciências Agrárias,Desenvolvimento Científico/Tecnológico,Doutorado,Docente,23396.000514/2021-05,2021
+REGISTRO AUTOMÁTICO DE ACESSO DE VEÍCULOS NO IFNMG CAMPUS SALINAS UTILIZANDO IMAGENS PARA DETECÇÃO DE PLACA VEICULAR - ETAPA II,Arthur Faria Porto,Ciências Exatas e da Terra,Desenvolvimento Científico/Tecnológico,Mestrado,TAE,23396.000594/2021-91,2021
+EXTRAÇÃO DE PECTINA DE CLADÓDIOS DE PALMA (Opuntia fícus-indica) E ELABORAÇÃO DE GELEIA DE MARACUJÁ,Edilene Alves Barbosa,Ciências Agrárias,Inovação,Doutorado,Docente,23396.000581/2021-11,2021`;
+
+    function parseCSV(text) {
+        const rows = [];
+        let currentRow = [];
+        let currentCell = '';
+        let insideQuotes = false;
+        
+        text = text.replace(/\r\n/g, '\n');
+
+        for (let i = 0; i < text.length; i++) {
+            const char = text[i];
+            const nextChar = text[i + 1];
+
+            if (char === '"') {
+                if (insideQuotes && nextChar === '"') {
+                    currentCell += '"';
+                    i++;
+                } else {
+                    // Alternar estado de aspas
+                    insideQuotes = !insideQuotes;
+                }
+            } else if (char === ',' && !insideQuotes) {
+                // Fim da célula
+                currentRow.push(currentCell.trim());
+                currentCell = '';
+            } else if (char === '\n' && !insideQuotes) {
+                currentRow.push(currentCell.trim());
+                if (currentRow.length > 1) rows.push(currentRow);
+                currentRow = [];
+                currentCell = '';
+            } else {
+                currentCell += char;
+            }
+        }
+        if (currentCell) currentRow.push(currentCell.trim());
+        if (currentRow.length > 1) rows.push(currentRow);
+
+        return rows;
+    }
+
+    const rows = parseCSV(rawData);
+    
+    const headers = rows.shift(); 
+    
+    const areaCounts = {};
+    const tableBody = document.querySelector('#tabelaDados tbody');
+
+    rows.forEach(row => {
+        const area = row[2];
+                if (area) {
+            areaCounts[area] = (areaCounts[area] || 0) + 1;
+        }
+
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+            <td>${row[0].replace(/^"+|"+$/g, '')}</td>
+            <td>${row[1]}</td>
+            <td>${row[2]}</td>
+            <td>${row[3]}</td>
+            <td>${row[7]}</td>
+        `;
+        tableBody.appendChild(tr);
+    });
+
+    const labels = Object.keys(areaCounts);
+    const dataValues = Object.values(areaCounts);
+    
+    // Cores personalizadas
+    const backgroundColors = [
+        'rgba(46, 204, 113, 0.7)',  // Verde
+        'rgba(52, 152, 219, 0.7)',  // Azul
+        'rgba(155, 89, 182, 0.7)',  // Roxo
+        'rgba(241, 196, 15, 0.7)',  // Amarelo
+        'rgba(231, 76, 60, 0.7)'    // Vermelho
+    ];
+
+
+    new Chart(document.getElementById('barChart'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Total de Projetos',
+                data: dataValues,
+                backgroundColor: backgroundColors,
+                borderColor: backgroundColors.map(c => c.replace('0.7', '1')),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Total de Projetos por Área'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { stepSize: 1 }
+                }
+            }
+        }
+    });
+
+    new Chart(document.getElementById('doughnutChart'), {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: dataValues,
+                backgroundColor: backgroundColors,
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Proporção por Área'
+                }
+            }
+        }
+    });
+
+            var sidemenu = document.getElementById("sidemenu");
+            function openmenu() {
+                sidemenu.style.right = "-200px";
+                sidemenu.style.left = "0px";
+            }
+            function clossmenu() {
+                sidemenu.style.left = "-800px";
+            }
+        </script>
+
+
+</body>
+
+</html>

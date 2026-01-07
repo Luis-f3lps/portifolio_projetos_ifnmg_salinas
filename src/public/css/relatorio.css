@@ -74,6 +74,8 @@
   width: 100%;
   border-collapse: collapse;
   min-width: 600px;
+      margin-top: 0px;
+
 }
 
 .tabela-elegante th {

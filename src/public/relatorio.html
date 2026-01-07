@@ -55,6 +55,9 @@
             <div class="cartao-insight">
                 <canvas id="typeChart"></canvas>
             </div>
+            <div class="cartao-insight">
+                <canvas id="yearChart"></canvas>
+            </div>
         </div>
 
         <h2 class="titulo-secao-destaque">Dados Detalhados</h2>
@@ -192,13 +195,13 @@ EXTRAÇÃO DE PECTINA DE CLADÓDIOS DE PALMA (Opuntia fícus-indica) E ELABORAÇ
         const headers = rows.shift();
 
         const areaCounts = {};
-        const typeCounts = {};
+        const typeCounts = {}; const yearCounts = {};
         const tableBody = document.querySelector('#tabelaDados tbody');
 
         rows.forEach(row => {
             const area = row[2]; // Coluna Área
             const tipo = row[3]; // Coluna Tipo
-
+            const ano = row[7];
             if (area) areaCounts[area] = (areaCounts[area] || 0) + 1;
             if (tipo) typeCounts[tipo] = (typeCounts[tipo] || 0) + 1;
 
@@ -277,6 +280,37 @@ EXTRAÇÃO DE PECTINA DE CLADÓDIOS DE PALMA (Opuntia fícus-indica) E ELABORAÇ
         function clossmenu() {
             sidemenu.style.left = "-800px";
         }
+        const sortedYears = Object.keys(yearCounts).sort();
+        const yearValues = sortedYears.map(year => yearCounts[year]);
+
+        new Chart(document.getElementById('yearChart'), {
+            type: 'line',
+            data: {
+                labels: sortedYears,
+                datasets: [{
+                    label: 'Evolução de Projetos',
+                    data: yearValues,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Azul claro preenchimento
+                    borderColor: 'rgba(54, 162, 235, 1)',     // Azul forte linha
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Projetos por Ano' },
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 1 }
+                    }
+                }
+            }
+        });
         document.getElementById('campoPesquisa').addEventListener('input', function () {
             const termo = this.value.toLowerCase();
             const linhas = document.querySelectorAll('#tabelaDados tbody tr');

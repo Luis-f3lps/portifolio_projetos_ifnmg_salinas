@@ -1,98 +1,126 @@
 .painel-controle-mestre {
-    max-width: 1280px;
-    padding: 30px;
-    background-color: #f8f9fa;
-    border-radius: 20px;
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-        margin: auto
+  max-width: 1280px;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 20px;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  margin: auto
 }
 
 .cabecalho-premium {
-    text-align: center;
-    margin-bottom: 50px;    margin-top: 90px;
+  text-align: center;
+  margin-bottom: 50px;
+  margin-top: 90px;
 
-    position: relative;
+  position: relative;
 }
 
 .cabecalho-premium h1 {
-    font-size: 2.2rem;
-    color: #1a202c;
-    margin-bottom: 8px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+  font-size: 2.2rem;
+  color: #1a202c;
+  margin-bottom: 8px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .cabecalho-premium p {
-    color: #718096;
-    font-size: 1.1rem;
-    font-weight: 400;
+  color: #718096;
+  font-size: 1.1rem;
+  font-weight: 400;
 }
 
 .grade-analitica-visual {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    justify-content: center;
-    margin-bottom: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  margin-bottom: 60px;
 }
 
 .cartao-insight {
-    background: #ffffff;
-    flex: 1;
-    min-width: 320px;
-    padding: 24px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-    border: 1px solid rgba(226, 232, 240, 0.8);
-    transition: all 0.3s ease;
+  background: #ffffff;
+  flex: 1;
+  min-width: 320px;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  transition: all 0.3s ease;
 }
 
 .cartao-insight:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    border-color: #cbd5e0;
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: #cbd5e0;
 }
 
 .titulo-secao-destaque {
-    font-size: 1.5rem;
-    color: #2d3748;
-    margin-bottom: 20px;
-    border-left: 5px solid #3182ce;
-    padding-left: 15px;
+  font-size: 1.5rem;
+  color: #2d3748;
+  margin-bottom: 20px;
+  border-left: 5px solid #3182ce;
+  padding-left: 15px;
 }
 
 .area-tabela-flutuante {
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    overflow-x: auto;
-    border: 1px solid #e2e8f0;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+  border: 1px solid #e2e8f0;
 }
 
 .tabela-elegante {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 600px;
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
 }
 
 .tabela-elegante th {
-    background-color: #f7fafc;
-    color: #4a5568;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    padding: 16px 24px;
-    text-align: left;
-    border-bottom: 2px solid #e2e8f0;
+  background-color: #f7fafc;
+  color: #4a5568;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  padding: 16px 24px;
+  text-align: left;
+  border-bottom: 2px solid #e2e8f0;
 }
 
 .tabela-elegante td {
-    padding: 16px 24px;
-    color: #4a5568;
-    border-bottom: 1px solid #edf2f7;
-    font-size: 0.95rem;
+  padding: 16px 24px;
+  color: #4a5568;
+  border-bottom: 1px solid #edf2f7;
+  font-size: 0.95rem;
 }
 
 .tabela-elegante tbody tr:hover {
-    background-color: #f8fafc;
+  background-color: #f8fafc;
+}
+
+.container-pesquisa {
+  margin-bottom: 20px;
+}
+
+.input-pesquisa-moderno {
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  /* Garante que o padding não estoure a largura */
+}
+
+.input-pesquisa-moderno:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+
+.input-pesquisa-moderno::placeholder {
+  color: #a0aec0;
 }

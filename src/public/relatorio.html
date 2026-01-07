@@ -55,11 +55,14 @@
             <div class="cartao-insight">
                 <canvas id="typeChart"></canvas>
             </div>
+
+        </div>
+
+        <div class="grade-analitica-visual">
             <div class="cartao-insight">
                 <canvas id="yearChart"></canvas>
             </div>
         </div>
-
         <h2 class="titulo-secao-destaque">Dados Detalhados</h2>
         <div class="container-pesquisa">
             <input type="text" id="campoPesquisa" class="input-pesquisa-moderno"
@@ -204,7 +207,7 @@ EXTRAÇÃO DE PECTINA DE CLADÓDIOS DE PALMA (Opuntia fícus-indica) E ELABORAÇ
             const ano = row[7];
             if (area) areaCounts[area] = (areaCounts[area] || 0) + 1;
             if (tipo) typeCounts[tipo] = (typeCounts[tipo] || 0) + 1;
-
+            if (ano) yearCounts[ano] = (yearCounts[ano] || 0) + 1;
             const tr = document.createElement('tr');
             tr.innerHTML = `
             <td>${row[0].replace(/^"+|"+$/g, '')}</td>

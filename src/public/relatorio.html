@@ -58,6 +58,10 @@
         </div>
 
         <h2 class="titulo-secao-destaque">Dados Detalhados</h2>
+        <div class="container-pesquisa">
+            <input type="text" id="campoPesquisa" class="input-pesquisa-moderno"
+                placeholder="🔍 Digite o nome do projeto para filtrar...">
+        </div>
         <div class="area-tabela-flutuante">
             <table id="tabelaDados" class="tabela-elegante">
                 <thead>
@@ -273,6 +277,19 @@ EXTRAÇÃO DE PECTINA DE CLADÓDIOS DE PALMA (Opuntia fícus-indica) E ELABORAÇ
         function clossmenu() {
             sidemenu.style.left = "-800px";
         }
+        document.getElementById('campoPesquisa').addEventListener('input', function () {
+            const termo = this.value.toLowerCase();
+            const linhas = document.querySelectorAll('#tabelaDados tbody tr');
+
+            linhas.forEach(linha => {
+                const tituloProjeto = linha.cells[0].textContent.toLowerCase();
+                if (tituloProjeto.includes(termo)) {
+                    linha.style.display = '';
+                } else {
+                    linha.style.display = 'none';
+                }
+            });
+        });
     </script>
 
 

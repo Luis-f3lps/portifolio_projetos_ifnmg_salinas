@@ -6,6 +6,8 @@
     <link rel="icon" href="images/tl.webp" type="image/png">
     <title>Projetos de Pesquisa do IFNMG Salinas</title>
     <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/relatorio.css">
+
     <script src="https://kit.fontawesome.com/915b45d802.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -39,24 +41,24 @@
         </nav>
     </div>
     
-<div class="container">
-    <header>
+<div class="painel-controle-mestre">
+    <header class="cabecalho-premium">
         <h1>Painel de Visualização de Projetos</h1>
         <p>Distribuição por Área Temática</p>
     </header>
 
-    <div class="charts-container">
-        <div class="chart-box">
+    <div class="grade-analitica-visual">
+        <div class="cartao-insight">
             <canvas id="barChart"></canvas>
         </div>
-        <div class="chart-box">
+        <div class="cartao-insight">
             <canvas id="doughnutChart"></canvas>
         </div>
     </div>
 
-    <h2>Dados Detalhados</h2>
-    <div style="overflow-x:auto;">
-        <table id="tabelaDados">
+    <h2 class="titulo-secao-destaque">Dados Detalhados</h2>
+    <div class="area-tabela-flutuante">
+        <table id="tabelaDados" class="tabela-elegante">
             <thead>
                 <tr>
                     <th>Título</th>

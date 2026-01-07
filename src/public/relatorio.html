@@ -192,13 +192,13 @@ EXTRAÇÃO DE PECTINA DE CLADÓDIOS DE PALMA (Opuntia fícus-indica) E ELABORAÇ
         const tableBody = document.querySelector('#tabelaDados tbody');
 
         rows.forEach(row => {
-            const area = row[2];
-            if (area) {
-                areaCounts[area] = (areaCounts[area] || 0) + 1;
-            }
+            const area = row[2]; // Coluna Área
+            const tipo = row[3]; // Coluna Tipo
+
+            if (area) areaCounts[area] = (areaCounts[area] || 0) + 1;
+            if (tipo) typeCounts[tipo] = (typeCounts[tipo] || 0) + 1;
 
             const tr = document.createElement('tr');
-
             tr.innerHTML = `
             <td>${row[0].replace(/^"+|"+$/g, '')}</td>
             <td>${row[1]}</td>

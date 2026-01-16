@@ -1,13 +1,13 @@
 .painel-controle-mestre {
   max-width: 1280px;
   padding: 30px;
-  background-color: #f8f9fa;
+  background-color: #ffffff;
   border-radius: 20px;
   font-family: 'Inter', 'Segoe UI', sans-serif;
   margin: auto
 }
 body{
-  background-color: #f8f9fa;
+  background-color: #ffffff;
 }
 
 .cabecalho-premium {

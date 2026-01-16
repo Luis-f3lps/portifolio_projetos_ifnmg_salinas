@@ -39,7 +39,7 @@
 
 .cartao-insight {
   background: #ffffff;
-  flex: 1;
+  /* flex: 1; */
   min-width: 320px;
   padding: 24px;
   border-radius: 16px;

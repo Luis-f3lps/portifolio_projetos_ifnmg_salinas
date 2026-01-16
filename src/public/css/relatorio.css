@@ -6,6 +6,9 @@
   font-family: 'Inter', 'Segoe UI', sans-serif;
   margin: auto
 }
+body{
+  background-color: #f8f9fa;
+}
 
 .cabecalho-premium {
   text-align: center;

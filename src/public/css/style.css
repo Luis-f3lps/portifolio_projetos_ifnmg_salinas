@@ -146,6 +146,8 @@ nav ul li a:hover::after {
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 10px 8%;
+  margin-right: 100px;
+  margin-left: 100px;
 }
 
 .about-col-1 {
@@ -910,12 +912,24 @@ nav ul .fa-solid.fa-chevron-down {
     color: black;
   }
 
+  .painel-resumos {
+    margin-right: 40px;
+    margin-left: 40px;
+  }
+
+  #painel-resumos {
+    margin-right: 40px;
+    margin-left: 40px;
+  }
+
   .row {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 10px 4%;
     margin-bottom: 40px;
+    margin-right: 0px;
+    margin-left: 0px;
   }
 
   #sidemenu {

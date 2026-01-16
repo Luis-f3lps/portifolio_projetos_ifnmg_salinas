@@ -999,7 +999,7 @@ function formatarLinkProduto(url) {
     const caminhoFinal = url.startsWith("http") ? url : `arquivos/${url}`;
 
     return `<a href="${caminhoFinal}" target="_blank" class="btn-link">
-                    <i class="fa-solid fa-file-pdf"></i> Abrir
+                    <i class="fa-solid fa-file-pdf"></i>
                 </a>`;
   }
   return '<span style="color: #ccc; font-size: 0.9em;">Indisponível</span>';

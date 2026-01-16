@@ -970,7 +970,7 @@ function montarTabelaProdutos(lista) {
   const tbody = document.getElementById("corpo-tabela-resumos");
   if (!tbody) return;
 
-  tbody.innerHTML = ""; 
+  tbody.innerHTML = "";
 
   if (!lista || lista.length === 0) {
     tbody.innerHTML =
@@ -1011,60 +1011,60 @@ function pesquisarProdutos() {
 
 
 async function carregarGraficoAnos() {
-        try {
-            const response = await fetch('/api/graficos/anos');
-            const dados = await response.json();
+  try {
+    const response = await fetch('/api/graficos/anos');
+    const dados = await response.json();
 
-            const labelsAno = dados.map(item => item.ano);
-            const valuesAno = dados.map(item => item.total);
+    const labelsAno = dados.map(item => item.ano);
+    const valuesAno = dados.map(item => item.total);
 
-            const ctx = document.getElementById('yearChart').getContext('2d');
-            
-            new Chart(ctx, {
-                type: 'line', 
-                data: {
-                    labels: labelsAno, // Eixo X (2023, 2024...)
-                    datasets: [{
-                        label: 'Evolução de Projetos',
-                        data: valuesAno, // Eixo Y (Quantidade)
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 3,
-                        pointBackgroundColor: '#ffffff',
-                        pointBorderColor: 'rgba(54, 162, 235, 1)',
-                        pointRadius: 5,
-                        fill: true,
-                        tension: 0.3 
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false, 
-                    plugins: {
-                        legend: { display: false },
-                        title: { 
-                            display: true, 
-                            text: 'Evolução Anual dos Projetos de Pesquisa',
-                            font: { size: 16 }
-                        },
-                        tooltip: {
-                            mode: 'index',
-                            intersect: false,
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: { color: '#f0f0f0' }
-                        },
-                        x: {
-                            grid: { display: false }
-                        }
-                    }
-                }
-            });
+    const ctx = document.getElementById('yearChart').getContext('2d');
 
-        } catch (error) {
-            console.error('Erro ao carregar gráfico de anos:', error);
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labelsAno, // Eixo X (2023, 2024...)
+        datasets: [{
+          label: 'Evolução de Projetos',
+          data: valuesAno, // Eixo Y (Quantidade)
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 3,
+          pointBackgroundColor: '#ffffff',
+          pointBorderColor: 'rgba(54, 162, 235, 1)',
+          pointRadius: 5,
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: 'Evolução Anual dos Projetos de Pesquisa',
+            font: { size: 16 }
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false,
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: { color: '#f0f0f0' }
+          },
+          x: {
+            grid: { display: false }
+          }
         }
-    }
+      }
+    });
+
+  } catch (error) {
+    console.error('Erro ao carregar gráfico de anos:', error);
+  }
+}

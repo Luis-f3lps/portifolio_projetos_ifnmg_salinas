@@ -75,6 +75,9 @@
                 <canvas id="yearChart"></canvas>
             </div>
         </div>
+        <div style="width: 100%; max-width: 800px; margin: 20px auto;">
+    <canvas id="coordChart"></canvas>
+</div>
         <h2 class="titulo-secao-destaque">Dados Detalhados</h2>
         <div class="container-pesquisa">
             <input type="text" id="campoPesquisa" class="input-pesquisa-moderno"
@@ -212,14 +215,20 @@ EXTRAÇÃO DE PECTINA DE CLADÓDIOS DE PALMA (Opuntia fícus-indica) E ELABORAÇ
         const areaCounts = {};
         const typeCounts = {}; const yearCounts = {};
         const tableBody = document.querySelector('#tabelaDados tbody');
-
+const coordCounts = {};
         rows.forEach(row => {
             const area = row[2]; // Coluna Área
             const tipo = row[3]; // Coluna Tipo
             const ano = row[7];
+            const coord = row[1];
             if (area) areaCounts[area] = (areaCounts[area] || 0) + 1;
             if (tipo) typeCounts[tipo] = (typeCounts[tipo] || 0) + 1;
             if (ano) yearCounts[ano] = (yearCounts[ano] || 0) + 1;
+            if (coord) {
+            // Padroniza para maiúsculo e remove espaços extras
+            const cleanCoord = coord.trim().toUpperCase();
+            coordCounts[cleanCoord] = (coordCounts[cleanCoord] || 0) + 1;
+        }
             const tr = document.createElement('tr');
             tr.innerHTML = `
             <td>${row[0].replace(/^"+|"+$/g, '')}</td>
@@ -326,6 +335,64 @@ EXTRAÇÃO DE PECTINA DE CLADÓDIOS DE PALMA (Opuntia fícus-indica) E ELABORAÇ
                 }
             }
         });
+        // 1. Transformar objeto em array e ordenar (Maior -> Menor)
+    let sortedCoords = Object.keys(coordCounts).map(key => {
+        return { nome: key, qtd: coordCounts[key] };
+    }).sort((a, b) => b.qtd - a.qtd);
+
+    // 2. Lógica de Agrupamento
+    let finalCoordData = [];
+    const TOP_N = 10;
+
+    if (sortedCoords.length > TOP_N) {
+        const topCoords = sortedCoords.slice(0, TOP_N);
+        const outrosList = sortedCoords.slice(TOP_N);
+        const somaOutros = outrosList.reduce((acc, curr) => acc + curr.qtd, 0);
+        finalCoordData = [...topCoords, { nome: 'OUTROS', qtd: somaOutros }];
+    } else {
+        finalCoordData = sortedCoords;
+    }
+
+    // 3. Preparar dados para o Chart.js
+    const coordLabels = finalCoordData.map(item => item.nome);
+    const coordValues = finalCoordData.map(item => item.qtd);
+    
+    // Cores (Azul para Top 10, Cinza para Outros)
+    const coordColors = coordLabels.map(label => 
+        label === 'OUTROS' ? 'rgba(201, 203, 207, 0.8)' : 'rgba(54, 162, 235, 0.7)'
+    );
+
+    // 4. Renderizar Gráfico
+    new Chart(document.getElementById('coordChart'), {
+        type: 'bar',
+        data: {
+            labels: coordLabels,
+            datasets: [{
+                label: 'Projetos',
+                data: coordValues,
+                backgroundColor: coordColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            indexAxis: 'y', // Barra Horizontal
+            responsive: true,
+            maintainAspectRatio: false, // Permite ajustar altura pelo CSS se precisar
+            plugins: {
+                legend: { display: false },
+                title: { display: true, text: 'Top 10 Coordenadores' }
+            },
+            scales: {
+                x: { beginAtZero: true, ticks: { stepSize: 1 } },
+                y: { 
+                    ticks: { 
+                        autoSkip: false,
+                        font: { size: 10 } 
+                    } 
+                }
+            }
+        }
+    });
         document.getElementById('campoPesquisa').addEventListener('input', function () {
             const termo = this.value.toLowerCase();
             const linhas = document.querySelectorAll('#tabelaDados tbody tr');

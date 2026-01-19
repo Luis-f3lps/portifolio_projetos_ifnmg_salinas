@@ -75,7 +75,7 @@
                 <canvas id="yearChart"></canvas>
             </div>
         </div>
-<div style="width: 100%; max-width: 800px; margin: 20px auto;">
+<div style="width: 100%; max-width: 600px; margin: 20px auto;">
     <canvas id="coordChart"></canvas>
 </div>
         <h2 class="titulo-secao-destaque">Dados Detalhados</h2>
@@ -335,12 +335,12 @@ const coordCounts = {};
                 }
             }
         });
-       // 1. Transformar objeto em array e ordenar (Maior -> Menor)
+      
+    
     let sortedCoords = Object.keys(coordCounts).map(key => {
         return { nome: key, qtd: coordCounts[key] };
     }).sort((a, b) => b.qtd - a.qtd);
 
-    // 2. Lógica de Agrupamento
     let finalCoordData = [];
     const TOP_N = 10;
 
@@ -348,51 +348,55 @@ const coordCounts = {};
         const topCoords = sortedCoords.slice(0, TOP_N);
         const outrosList = sortedCoords.slice(TOP_N);
         const somaOutros = outrosList.reduce((acc, curr) => acc + curr.qtd, 0);
-        finalCoordData = [...topCoords, { nome: 'OUTROS', qtd: somaOutros }];
+        finalCoordData = [...topCoords, { nome: 'OUTROS (Agrupado)', qtd: somaOutros }];
     } else {
         finalCoordData = sortedCoords;
     }
 
-    // 3. Preparar dados para o Chart.js
     const coordLabels = finalCoordData.map(item => item.nome);
     const coordValues = finalCoordData.map(item => item.qtd);
     
-    // Cores (Azul para Top 10, Cinza para Outros)
-    const coordColors = coordLabels.map(label => 
-        label === 'OUTROS' ? 'rgba(201, 203, 207, 0.8)' : 'rgba(54, 162, 235, 0.7)'
+    const palette = [
+        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', 
+        '#FF9F40', '#8AC249', '#EA5C2B', '#00BCD4', '#E91E63'
+    ];
+    const coordColors = coordLabels.map((label, index) => 
+        label === 'OUTROS (Agrupado)' ? '#C9CBCF' : palette[index % palette.length]
     );
 
-    // 4. Renderizar Gráfico
+    // 5. Gerar Gráfico de Rosca
     new Chart(document.getElementById('coordChart'), {
-        type: 'bar',
+        type: 'doughnut', 
         data: {
             labels: coordLabels,
             datasets: [{
-                label: 'Projetos',
                 data: coordValues,
                 backgroundColor: coordColors,
-                borderWidth: 1
+                hoverOffset: 10
             }]
         },
         options: {
-            indexAxis: 'y', // Barra Horizontal
             responsive: true,
-            maintainAspectRatio: false, // Permite ajustar altura pelo CSS se precisar
             plugins: {
-                legend: { display: false },
-                title: { display: true, text: 'Top 10 Coordenadores' }
-            },
-            scales: {
-                x: { beginAtZero: true, ticks: { stepSize: 1 } },
-                y: { 
-                    ticks: { 
-                        autoSkip: false,
-                        font: { size: 10 } 
-                    } 
+                title: { 
+                    display: true, 
+                    text: 'Top 10 Coordenadores' 
+                },
+                legend: {
+                    position: 'right', // Legenda na direita para facilitar a leitura dos nomes
+                    labels: {
+                        boxWidth: 12,
+                        font: { size: 10 }
+                    }
                 }
+            },
+            layout: {
+                padding: 20
             }
         }
     });
+
+
         document.getElementById('campoPesquisa').addEventListener('input', function () {
             const termo = this.value.toLowerCase();
             const linhas = document.querySelectorAll('#tabelaDados tbody tr');

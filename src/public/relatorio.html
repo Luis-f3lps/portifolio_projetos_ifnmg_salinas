@@ -75,7 +75,7 @@
                 <canvas id="yearChart"></canvas>
             </div>
         </div>
-        <div style="width: 100%; max-width: 800px; margin: 20px auto;">
+<div style="width: 100%; max-width: 800px; margin: 20px auto;">
     <canvas id="coordChart"></canvas>
 </div>
         <h2 class="titulo-secao-destaque">Dados Detalhados</h2>
@@ -335,7 +335,7 @@ const coordCounts = {};
                 }
             }
         });
-        // 1. Transformar objeto em array e ordenar (Maior -> Menor)
+       // 1. Transformar objeto em array e ordenar (Maior -> Menor)
     let sortedCoords = Object.keys(coordCounts).map(key => {
         return { nome: key, qtd: coordCounts[key] };
     }).sort((a, b) => b.qtd - a.qtd);

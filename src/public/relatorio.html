@@ -69,15 +69,18 @@
             </div>
 
         </div>
-
         <div class="grade-analitica-visual">
-            <div class="cartao-insight">
-                <canvas id="yearChart"></canvas>
+
+            <div class="grade-analitica-visual">
+                <div class="cartao-insight">
+                    <canvas id="yearChart"></canvas>
+                </div>
+            </div>
+            <div style="width: 100%; max-width: 600px; margin: 20px auto;">
+                <canvas id="coordChart"></canvas>
             </div>
         </div>
-<div style="width: 100%; max-width: 600px; margin: 20px auto;">
-    <canvas id="coordChart"></canvas>
-</div>
+
         <h2 class="titulo-secao-destaque">Dados Detalhados</h2>
         <div class="container-pesquisa">
             <input type="text" id="campoPesquisa" class="input-pesquisa-moderno"
@@ -215,7 +218,7 @@ EXTRAÇÃO DE PECTINA DE CLADÓDIOS DE PALMA (Opuntia fícus-indica) E ELABORAÇ
         const areaCounts = {};
         const typeCounts = {}; const yearCounts = {};
         const tableBody = document.querySelector('#tabelaDados tbody');
-const coordCounts = {};
+        const coordCounts = {};
         rows.forEach(row => {
             const area = row[2]; // Coluna Área
             const tipo = row[3]; // Coluna Tipo
@@ -225,10 +228,10 @@ const coordCounts = {};
             if (tipo) typeCounts[tipo] = (typeCounts[tipo] || 0) + 1;
             if (ano) yearCounts[ano] = (yearCounts[ano] || 0) + 1;
             if (coord) {
-            // Padroniza para maiúsculo e remove espaços extras
-            const cleanCoord = coord.trim().toUpperCase();
-            coordCounts[cleanCoord] = (coordCounts[cleanCoord] || 0) + 1;
-        }
+                // Padroniza para maiúsculo e remove espaços extras
+                const cleanCoord = coord.trim().toUpperCase();
+                coordCounts[cleanCoord] = (coordCounts[cleanCoord] || 0) + 1;
+            }
             const tr = document.createElement('tr');
             tr.innerHTML = `
             <td>${row[0].replace(/^"+|"+$/g, '')}</td>
@@ -335,66 +338,66 @@ const coordCounts = {};
                 }
             }
         });
-      
-    
-    let sortedCoords = Object.keys(coordCounts).map(key => {
-        return { nome: key, qtd: coordCounts[key] };
-    }).sort((a, b) => b.qtd - a.qtd);
 
-    let finalCoordData = [];
-    const TOP_N = 10;
 
-    if (sortedCoords.length > TOP_N) {
-        const topCoords = sortedCoords.slice(0, TOP_N);
-        const outrosList = sortedCoords.slice(TOP_N);
-        const somaOutros = outrosList.reduce((acc, curr) => acc + curr.qtd, 0);
-        finalCoordData = [...topCoords, { nome: 'OUTROS (Agrupado)', qtd: somaOutros }];
-    } else {
-        finalCoordData = sortedCoords;
-    }
+        let sortedCoords = Object.keys(coordCounts).map(key => {
+            return { nome: key, qtd: coordCounts[key] };
+        }).sort((a, b) => b.qtd - a.qtd);
 
-    const coordLabels = finalCoordData.map(item => item.nome);
-    const coordValues = finalCoordData.map(item => item.qtd);
-    
-    const palette = [
-        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', 
-        '#FF9F40', '#8AC249', '#EA5C2B', '#00BCD4', '#E91E63'
-    ];
-    const coordColors = coordLabels.map((label, index) => 
-        label === 'OUTROS (Agrupado)' ? '#C9CBCF' : palette[index % palette.length]
-    );
+        let finalCoordData = [];
+        const TOP_N = 10;
 
-    // 5. Gerar Gráfico de Rosca
-    new Chart(document.getElementById('coordChart'), {
-        type: 'doughnut', 
-        data: {
-            labels: coordLabels,
-            datasets: [{
-                data: coordValues,
-                backgroundColor: coordColors,
-                hoverOffset: 10
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: { 
-                    display: true, 
-                    text: 'Top 10 Coordenadores' 
-                },
-                legend: {
-                    position: 'right', // Legenda na direita para facilitar a leitura dos nomes
-                    labels: {
-                        boxWidth: 12,
-                        font: { size: 10 }
-                    }
-                }
-            },
-            layout: {
-                padding: 20
-            }
+        if (sortedCoords.length > TOP_N) {
+            const topCoords = sortedCoords.slice(0, TOP_N);
+            const outrosList = sortedCoords.slice(TOP_N);
+            const somaOutros = outrosList.reduce((acc, curr) => acc + curr.qtd, 0);
+            finalCoordData = [...topCoords, { nome: 'OUTROS (Agrupado)', qtd: somaOutros }];
+        } else {
+            finalCoordData = sortedCoords;
         }
-    });
+
+        const coordLabels = finalCoordData.map(item => item.nome);
+        const coordValues = finalCoordData.map(item => item.qtd);
+
+        const palette = [
+            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
+            '#FF9F40', '#8AC249', '#EA5C2B', '#00BCD4', '#E91E63'
+        ];
+        const coordColors = coordLabels.map((label, index) =>
+            label === 'OUTROS (Agrupado)' ? '#C9CBCF' : palette[index % palette.length]
+        );
+
+        // 5. Gerar Gráfico de Rosca
+        new Chart(document.getElementById('coordChart'), {
+            type: 'doughnut',
+            data: {
+                labels: coordLabels,
+                datasets: [{
+                    data: coordValues,
+                    backgroundColor: coordColors,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Top 10 Coordenadores'
+                    },
+                    legend: {
+                        position: 'right', // Legenda na direita para facilitar a leitura dos nomes
+                        labels: {
+                            boxWidth: 12,
+                            font: { size: 10 }
+                        }
+                    }
+                },
+                layout: {
+                    padding: 20
+                }
+            }
+        });
 
 
         document.getElementById('campoPesquisa').addEventListener('input', function () {

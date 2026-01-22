@@ -514,7 +514,6 @@ app.get('/api/projetos-antigos', async (req, res) => {
         const { busca } = req.query;
         let query = `
             SELECT 
-                id,
                 coordenador,
                 titulo,
                 data,

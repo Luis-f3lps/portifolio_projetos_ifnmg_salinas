@@ -1,136 +1,176 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="images/tl.webp" type="image/png">
-    <title>Acervo Acadêmico do IFNMG Salinas </title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://kit.fontawesome.com/915b45d802.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="images/tl.webp" type="image/png" />
+    <title>Acervo Acadêmico do IFNMG Salinas</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script
+      src="https://kit.fontawesome.com/915b45d802.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
+  </head>
 
-<body>
-    <div class="tracinho">
-    </div>
+  <body>
+    <div class="tracinho"></div>
     <div id="header">
-        <nav>
-            <img src="images/tl.webp" class="logo">
-            <ul id="sidemenu">
-                <li class="dropdown-parent">
-                    <a href="#logoloop-inner">Projetos <i class="fa-solid fa-chevron-down"></i></a>
-                    <ul class="dropdown-child">
-                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#logoloop-inner">Projetos</a>
-                        </li>
-                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#dados">Gráficos</a></li>
-                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#painel-resumos">Produtos</a>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="/livros">Livros</a></li>
-                <li><a href="/artigos">Artigos</a></li>
-                <li><a href="/resumos">Resumos</a></li>
-                <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#header">Sobre</a></li>
-                <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#contact">Contato</a></li>
-                <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
+      <nav>
+        <img src="images/tl.webp" class="logo" />
+        <ul id="sidemenu">
+          <li class="dropdown-parent">
+            <a href="#logoloop-inner"
+              >Projetos <i class="fa-solid fa-chevron-down"></i
+            ></a>
+            <ul class="dropdown-child">
+              <li>
+                <a
+                  href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#logoloop-inner"
+                  >Projetos</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#dados"
+                  >Gráficos</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#painel-resumos"
+                  >Produtos</a
+                >
+              </li>
             </ul>
-            <img src="images/salinas_vertical_jpg (1).png" class="logoIFNMG">
-            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
-        </nav>
+          </li>
+          <li><a href="/livros">Livros</a></li>
+          <li><a href="/artigos">Artigos</a></li>
+          <li><a href="/resumos">Resumos</a></li>
+          <li>
+            <a
+              href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#header"
+              >Sobre</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#contact"
+              >Contato</a
+            >
+          </li>
+          <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
+        </ul>
+        <img src="images/salinas_vertical_jpg (1).png" class="logoIFNMG" />
+        <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+      </nav>
     </div>
     <div class="container">
+      <div class="antigos">
         <div class="search-box">
-            <input type="text" id="buscaInput" placeholder="Pesquisar por título ou coordenador...">
+          <input
+            type="text"
+            id="buscaInput"
+            placeholder="Pesquisar por título ou coordenador..."
+          />
         </div>
 
         <table>
-            <thead>
-                <tr>
-                    <th width="5%">ID</th>
-                    <th width="25%">Coordenador</th>
-                    <th width="45%">Título</th>
-                    <th width="15%">Data</th>
-                    <th width="10%">Protocolo</th>
-                </tr>
-            </thead>
-            <tbody id="tabelaCorpo">
-            </tbody>
+          <thead>
+            <tr>
+              <th width="5%">ID</th>
+              <th width="25%">Coordenador</th>
+              <th width="45%">Título</th>
+              <th width="15%">Data</th>
+              <th width="10%">Protocolo</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaCorpo"></tbody>
         </table>
-        <div id="mensagem" class="no-results" style="display: none;">Nenhum projeto encontrado.</div>
+        <div id="mensagem" class="no-results" style="display: none">
+          Nenhum projeto encontrado.
+        </div>
+      </div>
     </div>
 
     <div id="contact">
-
-        <h1 class="sub-title-type-2">Contato do Agente de Inovação do IFNMG Salinas</h1>
-        <p><i class="fa-solid fa-paper-plane" style="color: white;"></i> luisphelps671@gmail.com</p>
-        <p><i class="fa-brands fa-square-whatsapp"></i> 38 988643820</p>
-        <div class="social-icons">
-            <a href="https://www.facebook.com/profile.php?id=100008665060845"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-            <a href="https://www.instagram.com/luis_f3lps/"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/luis-gustavo-barbosa-santiago-648395280/"><i
-                    class="fa-brands fa-linkedin"></i></a>
-
-        </div>
+      <h1 class="sub-title-type-2">
+        Contato do Agente de Inovação do IFNMG Salinas
+      </h1>
+      <p>
+        <i class="fa-solid fa-paper-plane" style="color: white"></i>
+        luisphelps671@gmail.com
+      </p>
+      <p><i class="fa-brands fa-square-whatsapp"></i> 38 988643820</p>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/profile.php?id=100008665060845"
+          ><i class="fa-brands fa-facebook"></i
+        ></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="https://www.instagram.com/luis_f3lps/"
+          ><i class="fa-brands fa-instagram"></i
+        ></a>
+        <a
+          href="https://www.linkedin.com/in/luis-gustavo-barbosa-santiago-648395280/"
+          ><i class="fa-brands fa-linkedin"></i
+        ></a>
+      </div>
     </div>
     <script>
-        var sidemenu = document.getElementById("sidemenu");
-        function openmenu() {
-            sidemenu.style.right = "-200px";
-            sidemenu.style.left = "0px";
-        }
-        function clossmenu() {
-            sidemenu.style.left = "-800px";
-        }
-        const buscaInput = document.getElementById('buscaInput');
-        const tabelaCorpo = document.getElementById('tabelaCorpo');
-        const mensagem = document.getElementById('mensagem');
+      var sidemenu = document.getElementById("sidemenu");
+      function openmenu() {
+        sidemenu.style.right = "-200px";
+        sidemenu.style.left = "0px";
+      }
+      function clossmenu() {
+        sidemenu.style.left = "-800px";
+      }
+      const buscaInput = document.getElementById("buscaInput");
+      const tabelaCorpo = document.getElementById("tabelaCorpo");
+      const mensagem = document.getElementById("mensagem");
 
-        async function carregarProjetos(termo = '') {
-            try {
-                const response = await fetch(`/api/projetos-antigos?busca=${encodeURIComponent(termo)}`);
-                const dados = await response.json();
+      async function carregarProjetos(termo = "") {
+        try {
+          const response = await fetch(
+            `/api/projetos-antigos?busca=${encodeURIComponent(termo)}`,
+          );
+          const dados = await response.json();
 
-                tabelaCorpo.innerHTML = '';
+          tabelaCorpo.innerHTML = "";
 
-                if (dados.length === 0) {
-                    mensagem.style.display = 'block';
-                    return;
-                }
+          if (dados.length === 0) {
+            mensagem.style.display = "block";
+            return;
+          }
 
-                mensagem.style.display = 'none';
+          mensagem.style.display = "none";
 
-                dados.forEach(projeto => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
+          dados.forEach((projeto) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
                     <td>${projeto.id}</td>
                     <td>${projeto.coordenador}</td>
                     <td>${projeto.titulo}</td>
-                    <td>${projeto.data || '-'}</td>
-                    <td>${projeto.protocolo || '-'}</td>
+                    <td>${projeto.data || "-"}</td>
+                    <td>${projeto.protocolo || "-"}</td>
                 `;
-                    tabelaCorpo.appendChild(tr);
-                });
-
-            } catch (error) {
-                console.error(error);
-                mensagem.textContent = 'Erro ao carregar dados.';
-                mensagem.style.display = 'block';
-            }
+            tabelaCorpo.appendChild(tr);
+          });
+        } catch (error) {
+          console.error(error);
+          mensagem.textContent = "Erro ao carregar dados.";
+          mensagem.style.display = "block";
         }
+      }
 
-        let timeoutId;
-        buscaInput.addEventListener('input', (e) => {
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => {
-                carregarProjetos(e.target.value);
-            }, 300);
-        });
+      let timeoutId;
+      buscaInput.addEventListener("input", (e) => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          carregarProjetos(e.target.value);
+        }, 300);
+      });
 
-        carregarProjetos();
-
+      carregarProjetos();
     </script>
-
-</body>
-
+  </body>
 </html>

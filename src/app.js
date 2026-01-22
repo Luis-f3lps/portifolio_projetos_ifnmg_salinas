@@ -45,6 +45,9 @@ app.get('/livros', (req, res) => {
 app.get('/artigos', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'artigos.html'));
 });
+app.get('/antigos', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'antigos.html'));
+});
 app.get('/resumos', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'resumos_simples.html'));
 });

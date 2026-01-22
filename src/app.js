@@ -484,6 +484,7 @@ app.get('/api/produtos', async (req, res) => {
         res.status(500).json({ error: "Erro ao buscar dados." });
     }
 });
+
 app.get('/api/graficos/anos', async (req, res) => {
     try {
         const query = `
@@ -502,6 +503,35 @@ app.get('/api/graficos/anos', async (req, res) => {
     } catch (error) {
         console.error('Erro ao obter estatísticas por ano:', error);
         res.status(500).json({ error: 'Erro no servidor ao obter estatísticas de anos.' });
+    }
+});
+
+app.get('/api/projetos-antigos', async (req, res) => {
+    try {
+        const { busca } = req.query;
+        let query = `
+            SELECT 
+                id,
+                coordenador,
+                titulo,
+                data,
+                protocolo
+            FROM projetos_antigos
+        `;
+
+        const params = [];
+        
+        if (busca) {
+            query += ` WHERE titulo ILIKE $1 OR coordenador ILIKE $1`;
+            params.push(`%${busca}%`);
+        }
+
+        query += ` ORDER BY titulo ASC`;
+
+        const { rows } = await pool.query(query, params);
+        res.json(rows);
+    } catch (err) {
+        res.status(500).json({ error: "Erro ao buscar dados." });
     }
 });
 export default app;

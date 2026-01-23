@@ -536,4 +536,20 @@ app.get('/api/projetos-antigos', async (req, res) => {
         res.status(500).json({ error: "Erro ao buscar dados." });
     }
 });
+app.get('/api/grafico-coordenadores', async (req, res) => {
+    try {
+        const query = `
+            SELECT coordenador, COUNT(*)::int as total
+            FROM projetos_antigos
+            GROUP BY coordenador
+            ORDER BY total DESC
+        `;
+
+        const { rows } = await pool.query(query);
+        res.json(rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Erro ao buscar dados do gráfico." });
+    }
+});
 export default app;

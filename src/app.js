@@ -552,4 +552,19 @@ app.get('/api/grafico-coordenadores', async (req, res) => {
         res.status(500).json({ error: "Erro ao buscar dados do gráfico." });
     }
 });
+app.get('/api/grafico-anos', async (req, res) => {
+    try {
+        const query = `
+            SELECT ano, COUNT(*)::int as total
+            FROM projetos_antigos
+            WHERE ano IS NOT NULL
+            GROUP BY ano
+            ORDER BY ano ASC
+        `;
+        const { rows } = await pool.query(query);
+        res.json(rows);
+    } catch (err) {
+        res.status(500).json({ error: "Erro ao buscar dados." });
+    }
+});
 export default app;

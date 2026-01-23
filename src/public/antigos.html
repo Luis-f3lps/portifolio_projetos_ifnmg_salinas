@@ -51,6 +51,10 @@
         <h2 style="text-align: center;">Projetos por Coordenador</h2>
         <canvas id="graficoPizza"></canvas>
       </div>
+      <div class="chart-container" style="width: 90%; max-width: 800px; margin: 40px auto;">
+        <h2 style="text-align: center;">Evolução de Projetos por Ano</h2>
+        <canvas id="graficoLinha"></canvas>
+      </div>
       <div class="search-box">
         <input type="text" id="buscaInput" placeholder="Pesquisar por título ou coordenador..." />
       </div>
@@ -214,7 +218,63 @@
         console.error("Erro ao carregar gráfico:", error);
       }
     }
+    async function carregarGraficoLinha() {
+      try {
+        const response = await fetch('/api/grafico-anos');
+        const dados = await response.json();
 
+        const anos = dados.map(item => item.ano);
+        const totais = dados.map(item => item.total);
+
+        const ctx = document.getElementById('graficoLinha').getContext('2d');
+
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: anos,
+            datasets: [{
+              label: 'Quantidade de Projetos',
+              data: totais,
+              borderColor: '#3498db', // Azul
+              backgroundColor: 'rgba(52, 152, 219, 0.2)', // Azul transparente para preenchimento
+              borderWidth: 3,
+              pointBackgroundColor: '#fff',
+              pointBorderColor: '#2980b9',
+              pointRadius: 5,
+              pointHoverRadius: 7,
+              fill: true, // Preenche a área embaixo da linha
+              tension: 0.3 // Deixa a linha levemente curva (suave)
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                display: false // Esconde a legenda se só tiver uma linha
+              },
+              tooltip: {
+                mode: 'index',
+                intersect: false,
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  stepSize: 1 // Garante que mostre números inteiros no eixo Y
+                }
+              }
+            }
+          }
+        });
+
+      } catch (error) {
+        console.error("Erro ao carregar gráfico de linha:", error);
+      }
+    }
+
+    // Chama a função
+    carregarGraficoLinha();
     // Inicia
     carregarGrafico();
   </script>

@@ -47,9 +47,9 @@
   </div>
   <div class="container">
     <div class="antigos">
-      <div class="chart-container">
-        <h2>Projetos por Coordenador</h2>
-        <canvas id="meuGraficoPizza"></canvas>
+      <div class="chart-container" style="width: 90%; max-width: 600px; margin: 20px auto;">
+        <h2 style="text-align: center;">Projetos por Coordenador</h2>
+        <canvas id="graficoPizza"></canvas>
       </div>
       <div class="search-box">
         <input type="text" id="buscaInput" placeholder="Pesquisar por título ou coordenador..." />
@@ -58,8 +58,8 @@
       <table>
         <thead>
           <tr>
-            <th width="25%">Coordenador</th>
             <th width="50%">Título</th>
+            <th width="25%">Coordenador</th>
             <th width="15%">Data</th>
             <th width="10%">Protocolo</th>
           </tr>
@@ -121,8 +121,9 @@
         dados.forEach((projeto) => {
           const tr = document.createElement("tr");
           tr.innerHTML = `
-                    <td>${projeto.coordenador}</td>
                     <td>${projeto.titulo}</td>
+                                        <td>${projeto.coordenador}</td>
+
                     <td>${projeto.data || "-"}</td>
                     <td>${projeto.protocolo || "-"}</td>
                 `;

@@ -555,16 +555,32 @@ app.get('/api/grafico-coordenadores', async (req, res) => {
 app.get('/api/grafico-anos', async (req, res) => {
     try {
         const query = `
-            SELECT ano, COUNT(*)::int as total
-            FROM projetos_antigos
-            WHERE ano IS NOT NULL
+            SELECT ano, SUM(total)::int as total
+            FROM (
+                -- 1. Tabela de Projetos Antigos
+                SELECT ano, COUNT(*)::int as total
+                FROM projetos_antigos
+                WHERE ano IS NOT NULL
+                GROUP BY ano
+
+                UNION ALL
+
+                -- 2. Tabela Nova (Portfólio)
+                -- Agora usando a coluna 'ano' direta
+                SELECT ano, COUNT(*)::int as total
+                FROM portifolio
+                WHERE ano IS NOT NULL
+                GROUP BY ano
+            ) as uniao
             GROUP BY ano
             ORDER BY ano ASC
         `;
+        
         const { rows } = await pool.query(query);
         res.json(rows);
     } catch (err) {
-        res.status(500).json({ error: "Erro ao buscar dados." });
+        console.error(err);
+        res.status(500).json({ error: "Erro ao buscar dados combinados." });
     }
 });
 export default app;

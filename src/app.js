@@ -508,31 +508,41 @@ app.get('/api/graficos/anos', async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor ao obter estatísticas de anos.' });
     }
 });
-
 app.get('/api/projetos-antigos', async (req, res) => {
     try {
-        const { busca } = req.query;
-        let query = `
-            SELECT 
-                coordenador,
-                titulo,
-                data,
-                protocolo
-            FROM projetos_antigos
-        `;
-
-        const params = [];
+        const { busca, ano } = req.query; 
         
+        let query = `
+            SELECT id, coordenador, titulo, data, protocolo
+            FROM projetos_antigos
+            WHERE 1=1
+        `;
+        const params = [];
+        let paramCount = 1;
+
         if (busca) {
-            query += ` WHERE titulo ILIKE $1 OR coordenador ILIKE $1`;
+
+            query += ` AND (titulo ILIKE $${paramCount} OR coordenador ILIKE $${paramCount})`;
             params.push(`%${busca}%`);
+            paramCount++;
         }
 
-        query += ` ORDER BY titulo ASC`;
+        if (ano) {
+            query += ` AND ano = $${paramCount}`;
+            params.push(ano);
+            paramCount++;
+        }
+
+        if (busca) {
+            query += ` ORDER BY (CASE WHEN titulo ILIKE $1 THEN 0 ELSE 1 END), ano DESC, titulo ASC`;
+        } else {
+            query += ` ORDER BY ano DESC, titulo ASC`;
+        }
 
         const { rows } = await pool.query(query, params);
         res.json(rows);
     } catch (err) {
+        console.error(err);
         res.status(500).json({ error: "Erro ao buscar dados." });
     }
 });

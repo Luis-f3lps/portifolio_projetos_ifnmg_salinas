@@ -147,53 +147,52 @@
     function clossmenu() {
       sidemenu.style.left = "-800px";
     }
-    const buscaInput = document.getElementById("buscaInput");
-    const tabelaCorpo = document.getElementById("tabelaCorpo");
-    const mensagem = document.getElementById("mensagem");
+  const buscaInput = document.getElementById("buscaInput");
+const tabelaCorpo = document.getElementById("tabelaCorpo");
+const mensagem = document.getElementById("mensagem");
 
-    async function carregarProjetos(termo = "") {
-      try {
-        const response = await fetch(
-          `/api/projetos-antigos?busca=${encodeURIComponent(termo)}`,
-        );
-        const dados = await response.json();
+async function carregarProjetos(termo = "") {
+  try {
+    const response = await fetch(
+      `/api/projetos-antigos?busca=${encodeURIComponent(termo)}`
+    );
+    const dados = await response.json();
 
-        tabelaCorpo.innerHTML = "";
+    tabelaCorpo.innerHTML = "";
 
-        if (dados.length === 0) {
-          mensagem.style.display = "block";
-          return;
-        }
-
-        mensagem.style.display = "none";
-
-        dados.forEach((projeto) => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
-                    <td>${projeto.titulo}</td>
-                                        <td>${projeto.coordenador}</td>
-
-                    <td>${projeto.data || "-"}</td>
-                    <td>${projeto.protocolo || "-"}</td>
-                `;
-          tabelaCorpo.appendChild(tr);
-        });
-      } catch (error) {
-        console.error(error);
-        mensagem.textContent = "Erro ao carregar dados.";
-        mensagem.style.display = "block";
-      }
+    if (dados.length === 0) {
+      mensagem.style.display = "block";
+      return;
     }
 
-    let timeoutId;
-    buscaInput.addEventListener("input", (e) => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        carregarProjetos(e.target.value);
-      }, 300);
-    });
+    mensagem.style.display = "none";
 
-    carregarProjetos();
+    dados.forEach((projeto) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+         <td>${projeto.titulo}</td>
+         <td>${projeto.coordenador}</td>
+         <td>${projeto.data || "-"}</td>
+         <td>${projeto.protocolo || "-"}</td>
+      `;
+      tabelaCorpo.appendChild(tr);
+    });
+  } catch (error) {
+    console.error(error);
+    mensagem.textContent = "Erro ao carregar dados.";
+    mensagem.style.display = "block";
+  }
+}
+
+let timeoutId;
+buscaInput.addEventListener("input", (e) => {
+  clearTimeout(timeoutId);
+  timeoutId = setTimeout(() => {
+    carregarProjetos(e.target.value);
+  }, 300);
+});
+
+carregarProjetos();
     async function carregarGrafico() {
       try {
         const response = await fetch('/api/grafico-coordenadores');

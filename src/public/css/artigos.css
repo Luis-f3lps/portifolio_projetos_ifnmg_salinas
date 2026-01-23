@@ -1009,8 +1009,7 @@ nav ul .fa-solid {
     color: #ffffff;
 }
 
-@media only screen and (min-width: 901px) and (min-height: 1601px) {
-    .header-text h1 {
+@media only screen and (max-width: 768px) {    .header-text h1 {
         font-size: 50px;
         margin-left: 32px;
     }

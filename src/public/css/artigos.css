@@ -1010,7 +1010,7 @@ nav ul .fa-solid {
 }
 
 @media only screen and (min-width: 901px) and (min-height: 1601px) {
-        .header-text h1 {
+    .header-text h1 {
         font-size: 50px;
         margin-left: 32px;
     }
@@ -1030,7 +1030,7 @@ nav ul .fa-solid {
         display: block;
         font-size: 40px;
         color: black;
-                margin-right: 30px;
+        margin-right: 30px;
 
     }
 
@@ -1117,7 +1117,7 @@ nav ul .fa-solid {
         padding: 10px;
         font-size: 46px;
         color: #ffffff;
-                font-size: 52px;
+        font-size: 52px;
 
     }
 
@@ -1160,6 +1160,16 @@ nav ul .fa-solid {
         background: #ffffff;
 
     }
+
+    .antigos {
+        margin-left: 60px;
+        margin-right: 60px;
+        margin-top: 100px;
+    }
+
+    .graficos {
+        display: block;
+    }
 }
 
 @media only screen and (max-width: 1080px) and (max-height: 2340px) {
@@ -1178,13 +1188,16 @@ nav ul .fa-solid {
     img {
         margin-top: 5px;
     }
-}@media only screen and (max-width: 768px) {
+}
 
-        .antigos {
+@media only screen and (max-width: 768px) {
+
+    .antigos {
         margin-left: 60px;
         margin-right: 60px;
         margin-top: 100px;
     }
+
     .graficos {
         display: block;
     }

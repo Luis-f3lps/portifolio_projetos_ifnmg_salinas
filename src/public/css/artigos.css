@@ -1008,17 +1008,7 @@ nav ul .fa-solid {
 .services-list div a {
     color: #ffffff;
 }
-@media only screen and (max-width: 768px) {
 
-        .antigos {
-        margin-left: 60px;
-        margin-right: 60px;
-        margin-top: 100px;
-    }
-    .graficos {
-        display: block;
-    }
-}
 @media only screen and (min-width: 901px) and (min-height: 1601px) {
         .header-text h1 {
         font-size: 50px;
@@ -1040,6 +1030,8 @@ nav ul .fa-solid {
         display: block;
         font-size: 40px;
         color: black;
+                margin-right: 30px;
+
     }
 
     .row {
@@ -1186,37 +1178,39 @@ nav ul .fa-solid {
     img {
         margin-top: 5px;
     }
+}@media only screen and (max-width: 768px) {
+
+        .antigos {
+        margin-left: 60px;
+        margin-right: 60px;
+        margin-top: 100px;
+    }
+    .graficos {
+        display: block;
+    }
 }
 
-/* Importando uma fonte moderna do Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-/* Estilização geral do corpo da página */
 body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
 }
 
-/* Container principal da seção "Sobre" */
 .sobre {
     max-width: 900px;
     width: 100%;
     background-color: white;
-    /* Um tom de cinza escuro para destacar o conteúdo */
     padding: 40px 50px;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border-left: 5px solid #00BFFF;
-    /* Um detalhe em azul ciano para dar um toque de cor */
 }
 
-/* Estilização do subtítulo "Sobre" */
 .sub-title {
     font-size: 2em;
-    /* Tamanho maior para o título principal da seção */
     font-weight: 300;
-    /* Peso mais leve para um visual elegante */
     color: black;
     margin-top: 0;
     margin-bottom: 30px;
@@ -1227,39 +1221,28 @@ body {
     display: inline-block;
 }
 
-/* Estilização do título do objetivo */
 .sobre h1:not(.sub-title) {
     font-size: 1.8em;
-    /* Tamanho de fonte um pouco menor que o subtítulo */
     color: #00BFFF;
-    /* Cor de destaque azul ciano */
     margin-bottom: 25px;
     font-weight: 600;
-    /* Peso mais forte para ênfase */
 }
 
-/* Estilização dos parágrafos */
 .sobre p {
     font-size: 1.1em;
     line-height: 1.7;
-    /* Espaçamento entre linhas para melhor legibilidade */
     margin-bottom: 20px;
     color: black;
-    /* Cor de texto ligeiramente mais suave */
 }
 
-/* Estilização da lista não ordenada */
 .sobre ul {
     list-style-type: none;
-    /* Remove os marcadores padrão */
     padding-left: 0;
     margin-top: 25px;
 }
 
-/* Estilização dos itens da lista */
 .sobre li {
     background-color: rgba(0, 191, 255, 0.05);
-    /* Fundo sutil para os itens da lista */
     margin-bottom: 12px;
     padding: 15px 20px;
     border-radius: 8px;
@@ -1269,13 +1252,11 @@ body {
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-/* Efeito de hover nos itens da lista para interatividade */
 .sobre li:hover {
     transform: translateX(10px);
     background-color: rgba(0, 191, 255, 0.15);
 }
 
-/* css livros */
 
 .search-container {
     margin-bottom: 24px;

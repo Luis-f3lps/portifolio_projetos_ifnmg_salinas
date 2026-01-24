@@ -1031,7 +1031,8 @@ nav ul .fa-solid.fa-chevron-down {
     position: relative;
     width: 95%;
     background-color: white;
-  }
+  }  .sobre {
+    width: 100%;}
 
 }
 

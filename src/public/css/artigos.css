@@ -1007,8 +1007,14 @@ nav ul .fa-solid {
 
 .services-list div a {
     color: #ffffff;
-}
+}@media only screen and (max-width: 768px) {
 
+        .antigos {
+        margin-left: 60px;
+        margin-right: 60px;
+        margin-top: 100px;
+    }
+}
 @media only screen and (min-width: 901px) and (min-height: 1601px) {
         .header-text h1 {
         font-size: 50px;

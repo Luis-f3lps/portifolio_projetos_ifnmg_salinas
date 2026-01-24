@@ -1305,7 +1305,18 @@ body {
 }
 
 /* CSS PROJETOS ANTIGOS */
+@media (min-width: 1024px) {
+        .antigos {
+        margin-left: 200px;
+        margin-right: 200px;
+        margin-top: 100px;
+    }
 
+    .graficos {
+        display: block;
+    }
+
+}
 .graficos {
     display: flex;
 }

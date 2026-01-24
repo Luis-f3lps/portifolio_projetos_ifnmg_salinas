@@ -1190,7 +1190,7 @@ nav ul .fa-solid {
     }
 }
 
-@media only screen and (min-width: 901px) {
+@media only screen and (max-width: 901px) {
 
     .antigos {
         margin-left: 60px;

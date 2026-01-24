@@ -1168,7 +1168,8 @@ nav ul .fa-solid {
     }
 
     .graficos {
-        display: block;
+               flex-direction: column;
+
     }
 }
 
@@ -1304,11 +1305,6 @@ body {
 }
 
 /* CSS PROJETOS ANTIGOS */
-.antigos {
-    margin-left: 200px;
-    margin-right: 200px;
-    margin-top: 100px;
-}
 
 .graficos {
     display: flex;

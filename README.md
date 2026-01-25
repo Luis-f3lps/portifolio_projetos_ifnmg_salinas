@@ -3,7 +3,6 @@
 ![Versão](https://img.shields.io/badge/Vers%C3%A3o-1.0-blue?style=for-the-badge)
 ![Foco](https://img.shields.io/badge/Foco-Inova%C3%A7%C3%A3o_e_Transpar%C3%AAncia-orange?style=for-the-badge)
 [![Deploy](https://img.shields.io/badge/Live_Demo-Acesse_Aqui-0077B5?style=for-the-badge&logo=vercel)](https://portifolio-projetos-ifnmg-salinas.vercel.app/)
-![Status](https://img.shields.io/badge/Status-Em_Desenvolvimento-orange?style=for-the-badge)
 O **Acervo Digital** é o portal central de preservação e democratização da produção científica do IFNMG - Campus Salinas. Este projeto atua como o principal instrumento de difusão do conhecimento da instituição, conectando a academia com o produtor rural e as empresas do Norte de Minas.
 
 ---

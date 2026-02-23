@@ -114,37 +114,102 @@
   </main>
 </div>
   <script>
-    var sidemenu = document.getElementById("sidemenu");
-    function openmenu() {
-      sidemenu.style.right = "-200px";
-      sidemenu.style.left = "0px";
-    }
-    function clossmenu() {
-      sidemenu.style.left = "-800px";
-    }
-    async function carregarDados() {
-    const resProjetos = await fetch('/api/projetos');
-    const projetos = await resProjetos.json();
-    document.getElementById('lista-projetos').innerHTML = projetos.map(p => `
-        <tr>
-            <td>${p.id}</td>
-            <td>${p.titulo}</td>
-            <td>${p.processo}</td>
-            <td>${p.nome_coordenador}</td>
-            <td><button class="btn-delete" onclick="apagarProjeto(${p.id})"><i class="fa-solid fa-trash"></i></button></td>
-        </tr>
-    `).join('');
+var sidemenu = document.getElementById("sidemenu");
 
-    const resCoord = await fetch('/api/coordenadores');
-    const coords = await resCoord.json();
-    document.getElementById('lista-coordenadores').innerHTML = coords.map(c => `
-        <tr>
-            <td>${c.coordenador_id}</td>
-            <td>${c.nome_coordenador}</td>
-            <td><a href="${c.link_lattes}" target="_blank">Lattes</a></td>
-            <td><button class="btn-delete" onclick="apagarCoordenador(${c.coordenador_id})"><i class="fa-solid fa-trash"></i></button></td>
-        </tr>
-    `).join('');
+function openmenu() {
+    sidemenu.style.right = "-200px";
+    sidemenu.style.left = "0px";
+}
+
+function clossmenu() {
+    sidemenu.style.left = "-800px";
+}
+
+async function carregarDados() {
+    try {
+        const resProjetos = await fetch('/api/projetos');
+        const projetos = await resProjetos.json();
+        document.getElementById('lista-projetos').innerHTML = projetos.map(p => `
+            <tr>
+                <td>${p.id}</td>
+                <td>${p.titulo}</td>
+                <td>${p.nome_coordenador}</td>
+                <td>${p.ano}</td>
+                <td>
+                    <button class="btn-action btn-delete" onclick="apagarProjeto(${p.id})">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        `).join('');
+
+        const resCoord = await fetch('/api/coordenadores');
+        const coords = await resCoord.json();
+        document.getElementById('lista-coordenadores').innerHTML = coords.map(c => `
+            <tr>
+                <td>${c.coordenador_id}</td>
+                <td>${c.nome_coordenador}</td>
+                <td><a href="${c.link_lattes}" target="_blank" style="color: #32a041;"><i class="fa-solid fa-link"></i> Lattes</a></td>
+                <td>
+                    <button class="btn-action btn-delete" onclick="apagarCoordenador(${c.coordenador_id})">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        `).join('');
+    } catch (error) {
+        console.error('Erro ao carregar dados:', error);
+    }
+}
+
+document.getElementById('form-projeto').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+
+    const response = await fetch('/api/projetos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+        e.target.reset();
+        carregarDados();
+    }
+});
+
+document.getElementById('form-coordenador').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = {
+        nome_coordenador: e.target.nome.value,
+        link_lattes: e.target.lattes.value
+    };
+
+    const response = await fetch('/api/coordenadores', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+        e.target.reset();
+        carregarDados();
+    }
+});
+
+async function apagarProjeto(id) {
+    if (confirm('Tem certeza que deseja excluir este projeto?')) {
+        const res = await fetch(`/api/projetos/${id}`, { method: 'DELETE' });
+        if (res.ok) carregarDados();
+    }
+}
+
+async function apagarCoordenador(id) {
+    if (confirm('Atenção: Isso pode afetar projetos vinculados. Confirmar exclusão?')) {
+        const res = await fetch(`/api/coordenadores/${id}`, { method: 'DELETE' });
+        if (res.ok) carregarDados();
+    }
 }
 
 window.onload = carregarDados;

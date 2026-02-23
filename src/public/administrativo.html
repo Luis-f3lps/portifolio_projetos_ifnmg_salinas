@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="images/tl.webp" type="image/png" />
+  <title>Acervo Acadêmico do IFNMG Salinas</title>
+  <link rel="stylesheet" href="css/adm.css" />
+  <script src="https://kit.fontawesome.com/915b45d802.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="tracinho"></div>
+  <div id="header">
+    <nav>
+      <img src="images/tl.webp" class="logo" />
+      <ul id="sidemenu">
+        <li class="dropdown-parent">
+          <a href="#logoloop-inner">Projetos <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="dropdown-child">
+                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#logoloop-inner">Projetos</a>
+                        </li>
+                        <li><a href="/antigos">Projetos Antigos</a></li>
+                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#dados">Gráficos</a></li>
+                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#painel-resumos">Produtos</a>
+                        </li>
+                    </ul>
+        </li>
+        <li><a href="/livros">Livros</a></li>
+        <li><a href="/artigos">Artigos</a></li>
+        <li><a href="/resumos">Resumos</a></li>
+        <li>
+          <a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#header">Sobre</a>
+        </li>
+        <li>
+          <a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#contact">Contato</a>
+        </li>
+        <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
+      </ul>
+      <img src="images/salinas_vertical_jpg (1).png" class="logoIFNMG" />
+      <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+    </nav>
+  </div>
+<div class="container">
+
+  <main class="admin-grid">
+    <section class="admin-card section-projetos">
+      <div class="card-header">
+        <h2><i class="fa-solid fa-folder-open"></i> Projetos</h2>
+      </div>
+      
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Coordenador</th>
+              <th>Ano</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="lista-projetos">
+            </tbody>
+        </table>
+      </div>
+
+      <div class="form-container">
+        <h3>Adicionar Novo Projeto</h3>
+        <form id="form-projeto" class="grid-form">
+          <input type="text" name="titulo" placeholder="Título do Projeto" class="input-field full-width" required>
+          <input type="text" name="processo" placeholder="Nº Processo" class="input-field" required>
+          <input type="number" name="coordenador_id" placeholder="ID Coordenador" class="input-field" required>
+          <input type="text" name="tematica" placeholder="Temática" class="input-field">
+          <input type="number" name="ano" placeholder="Ano" class="input-field">
+          <input type="date" name="vigencia_inicio" class="input-field">
+          <input type="date" name="vigencia_termino" class="input-field">
+          <input type="text" name="campus" placeholder="Campus" value="Salinas" class="input-field">
+          <button type="submit" class="btn-action btn-save">Cadastrar Projeto</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="admin-card section-coordenadores">
+      <div class="card-header">
+        <h2><i class="fa-solid fa-user-tie"></i> Coordenadores</h2>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Lattes</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="lista-coordenadores">
+            </tbody>
+        </table>
+      </div>
+
+      <div class="form-container">
+        <h3>Novo Coordenador</h3>
+        <form id="form-coordenador" class="stack-form">
+          <input type="text" name="nome" placeholder="Nome do Professor" class="input-field" required>
+          <input type="url" name="lattes" placeholder="URL do Lattes" class="input-field" required>
+          <button type="submit" class="btn-action btn-save">Cadastrar Coordenador</button>
+        </form>
+      </div>
+    </section>
+  </main>
+</div>
+  <script>
+    var sidemenu = document.getElementById("sidemenu");
+    function openmenu() {
+      sidemenu.style.right = "-200px";
+      sidemenu.style.left = "0px";
+    }
+    function clossmenu() {
+      sidemenu.style.left = "-800px";
+    }
+    async function carregarDados() {
+    const resProjetos = await fetch('/api/projetos');
+    const projetos = await resProjetos.json();
+    document.getElementById('lista-projetos').innerHTML = projetos.map(p => `
+        <tr>
+            <td>${p.id}</td>
+            <td>${p.titulo}</td>
+            <td>${p.processo}</td>
+            <td>${p.nome_coordenador}</td>
+            <td><button class="btn-delete" onclick="apagarProjeto(${p.id})"><i class="fa-solid fa-trash"></i></button></td>
+        </tr>
+    `).join('');
+
+    const resCoord = await fetch('/api/coordenadores');
+    const coords = await resCoord.json();
+    document.getElementById('lista-coordenadores').innerHTML = coords.map(c => `
+        <tr>
+            <td>${c.coordenador_id}</td>
+            <td>${c.nome_coordenador}</td>
+            <td><a href="${c.link_lattes}" target="_blank">Lattes</a></td>
+            <td><button class="btn-delete" onclick="apagarCoordenador(${c.coordenador_id})"><i class="fa-solid fa-trash"></i></button></td>
+        </tr>
+    `).join('');
+}
+
+window.onload = carregarDados;
+  </script>
+</body>
+
+</html>

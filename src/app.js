@@ -41,6 +41,8 @@ app.get('/', (req, res) => {
 });
 app.get('/livros', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'livros.html'));
+});app.get('/administrativo', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'administrativo.html'));
 });
 app.get('/artigos', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'artigos.html'));
@@ -144,7 +146,44 @@ if (titulo) {
         res.status(500).json({ error: 'Erro no servidor ao obter portfólio.' });
     }
 });
+app.get('/api/projetos-adm', async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                p.id, p.processo, p.titulo, p.tematica, p.ano, p.vigencia_inicio, p.vigencia_termino,
+                p.num_bolsistas, p.num_voluntarios, p.num_colaboradores, p.status, p.campus,
+                c.nome_coordenador, c.coordenador_id
+            FROM portifolio p
+            JOIN coordenadores c ON p.coordenador_id = c.coordenador_id
+            ORDER BY p.ano DESC, p.id DESC`;
+        const { rows } = await pool.query(query);
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao obter projetos' });
+    }
+});
 
+app.post('/api/projetos', async (req, res) => {
+    try {
+        const { processo, titulo, coordenador_id, tematica, ano, vigencia_inicio, vigencia_termino, num_bolsistas, num_voluntarios, num_colaboradores, status, campus } = req.body;
+        const query = `
+            INSERT INTO portifolio (processo, titulo, coordenador_id, tematica, ano, vigencia_inicio, vigencia_termino, num_bolsistas, num_voluntarios, num_colaboradores, status, campus)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`;
+        await pool.query(query, [processo, titulo, coordenador_id, tematica, ano, vigencia_inicio, vigencia_termino, num_bolsistas, num_voluntarios, num_colaboradores, status, campus]);
+        res.status(201).send();
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao salvar projeto' });
+    }
+});
+
+app.delete('/api/projetos/:id', async (req, res) => {
+    try {
+        await pool.query('DELETE FROM portifolio WHERE id = $1', [req.params.id]);
+        res.status(204).send();
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao deletar projeto' });
+    }
+});
 // Obter a lista completa de coordenadores
 app.get('/api/coordenadores', async (req, res) => {
     try {
@@ -155,7 +194,24 @@ app.get('/api/coordenadores', async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor ao obter coordenadores.' });
     }
 });
+app.post('/api/coordenadores', async (req, res) => {
+    try {
+        const { nome_coordenador, link_lattes } = req.body;
+        await pool.query('INSERT INTO coordenadores (nome_coordenador, link_lattes) VALUES ($1, $2)', [nome_coordenador, link_lattes]);
+        res.status(201).send();
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao salvar coordenador' });
+    }
+});
 
+app.delete('/api/coordenadores/:id', async (req, res) => {
+    try {
+        await pool.query('DELETE FROM coordenadores WHERE coordenador_id = $1', [req.params.id]);
+        res.status(204).send();
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao deletar coordenador' });
+    }
+});
 // Rota para obter a lista de livros com os nomes dos coordenadores
 app.get('/api/livros', async (req, res) => {
     try {

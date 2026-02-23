@@ -155,7 +155,7 @@ app.get('/api/projetos-adm', async (req, res) => {
                 c.nome_coordenador, c.coordenador_id
             FROM portifolio p
             JOIN coordenadores c ON p.coordenador_id = c.coordenador_id
-            ORDER BY p.ano DESC, p.id DESC`;
+            ORDER BY p.titulo ASC, p.id ASC`;
         const { rows } = await pool.query(query);
         res.json(rows);
     } catch (error) {

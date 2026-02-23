@@ -164,30 +164,14 @@ app.get('/api/projetos-adm', async (req, res) => {
 });
 
 // Rota de Projetos
-app.post('/api/projetos', async (req, res) => {
-    try {
-        const { processo, titulo, coordenador_id, tematica, ano, vigencia_inicio, vigencia_termino, num_bolsistas, num_voluntarios, num_colaboradores, status, campus } = req.body;
-        
-        // Verifique se os nomes abaixo batem EXATAMENTE com o seu banco
-        const query = `
-            INSERT INTO portifolio (processo, titulo, coordenador_id, tematica, ano, vigencia_inicio, vigencia_termino, num_bolsistas, num_voluntarios, num_colaboradores, status, campus)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
-        `;
-        
-        await pool.query(query, [processo, titulo, coordenador_id, tematica, ano, vigencia_inicio || null, vigencia_termino || null, num_bolsistas || 0, num_voluntarios || 0, num_colaboradores || 0, status || 'pendente', campus || 'Salinas']);
-        
-        res.status(201).json({ message: 'Sucesso' });
-    } catch (error) {
-        console.error('ERRO NO POST PROJETOS:', error.message); // Isso vai aparecer no log do Vercel/Terminal
-        res.status(500).json({ error: error.message });
-    }
-});
-
-// Rota de Coordenadores
+// Ajuste na rota de Coordenadores
 app.post('/api/coordenadores', async (req, res) => {
     try {
         const { nome_coordenador, link_lattes } = req.body;
-        await pool.query('INSERT INTO coordenadores (nome_coordenador, link_lattes) VALUES ($1, $2)', [nome_coordenador, link_lattes]);
+        await pool.query(
+            'INSERT INTO coordenadores (nome_coordenador, link_lattes) VALUES ($1, $2)', 
+            [nome_coordenador, link_lattes]
+        );
         res.status(201).json({ message: 'Sucesso' });
     } catch (error) {
         console.error('ERRO NO POST COORDENADORES:', error.message);
@@ -195,6 +179,28 @@ app.post('/api/coordenadores', async (req, res) => {
     }
 });
 
+app.post('/api/projetos', async (req, res) => {
+    try {
+        const { processo, titulo, coordenador_id, tematica, ano, vigencia_inicio, vigencia_termino, num_bolsistas, num_voluntarios, num_colaboradores, status, campus } = req.body;
+        
+        const query = `
+            INSERT INTO portifolio (processo, titulo, coordenador_id, tematica, ano, vigencia_inicio, vigencia_termino, num_bolsistas, num_voluntarios, num_colaboradores, status, campus)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+        `;
+        
+        await pool.query(query, [
+            processo, titulo, coordenador_id, tematica, ano, 
+            vigencia_inicio || null, vigencia_termino || null, 
+            num_bolsistas || 0, num_voluntarios || 0, num_colaboradores || 0, 
+            status || 'pendente', campus || 'Salinas'
+        ]);
+        
+        res.status(201).json({ message: 'Sucesso' });
+    } catch (error) {
+        console.error('ERRO NO POST PROJETOS:', error.message);
+        res.status(500).json({ error: error.message });
+    }
+});
 app.delete('/api/projetos/:id', async (req, res) => {
     try {
         await pool.query('DELETE FROM portifolio WHERE id = $1', [req.params.id]);

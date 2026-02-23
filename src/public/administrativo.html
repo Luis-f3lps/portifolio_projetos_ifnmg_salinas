@@ -18,14 +18,14 @@
       <ul id="sidemenu">
         <li class="dropdown-parent">
           <a href="#logoloop-inner">Projetos <i class="fa-solid fa-chevron-down"></i></a>
-                    <ul class="dropdown-child">
-                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#logoloop-inner">Projetos</a>
-                        </li>
-                        <li><a href="/antigos">Projetos Antigos</a></li>
-                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#dados">Gráficos</a></li>
-                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#painel-resumos">Produtos</a>
-                        </li>
-                    </ul>
+          <ul class="dropdown-child">
+            <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#logoloop-inner">Projetos</a>
+            </li>
+            <li><a href="/antigos">Projetos Antigos</a></li>
+            <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#dados">Gráficos</a></li>
+            <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#painel-resumos">Produtos</a>
+            </li>
+          </ul>
         </li>
         <li><a href="/livros">Livros</a></li>
         <li><a href="/artigos">Artigos</a></li>
@@ -42,91 +42,103 @@
       <i class="fa-solid fa-bars" onclick="openmenu()"></i>
     </nav>
   </div>
-<div class="container">
+  <div class="container">
 
-  <main class="admin-grid">
-    <section class="admin-card section-projetos">
-      <div class="card-header">
-        <h2><i class="fa-solid fa-folder-open"></i> Projetos</h2>
-      </div>
-      
-      <div class="table-wrapper">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Título</th>
-              <th>Coordenador</th>
-              <th>Ano</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody id="lista-projetos">
+    <main class="admin-grid">
+      <section class="admin-card section-projetos">
+        <div class="card-header">
+          <h2><i class="fa-solid fa-folder-open"></i> Projetos</h2>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Coordenador</th>
+                <th>Ano</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="lista-projetos">
             </tbody>
-        </table>
-      </div>
+          </table>
+        </div>
 
-      <div class="form-container">
-        <h3>Adicionar Novo Projeto</h3>
-        <form id="form-projeto" class="grid-form">
-          <input type="text" name="titulo" placeholder="Título do Projeto" class="input-field full-width" required>
-          <input type="text" name="processo" placeholder="Nº Processo" class="input-field" required>
-          <input type="number" name="coordenador_id" placeholder="ID Coordenador" class="input-field" required>
-          <input type="text" name="tematica" placeholder="Temática" class="input-field">
-          <input type="number" name="ano" placeholder="Ano" class="input-field">
-          <input type="date" name="vigencia_inicio" class="input-field">
-          <input type="date" name="vigencia_termino" class="input-field">
-          <input type="text" name="campus" placeholder="Campus" value="Salinas" class="input-field">
-          <button type="submit" class="btn-action btn-save">Cadastrar Projeto</button>
-        </form>
-      </div>
-    </section>
+        <div class="form-container">
+          <h3>Adicionar Novo Projeto</h3>
+          <form id="form-projeto" class="grid-form">
+            <input type="text" name="titulo" placeholder="Título do Projeto" class="input-field full-width" required>
+            <input type="text" name="processo" placeholder="Nº Processo" class="input-field" required>
+            <input type="number" name="coordenador_id" placeholder="ID Coordenador" class="input-field" required>
+            <input type="text" name="tematica" placeholder="Temática" class="input-field">
+            <input type="number" name="ano" placeholder="Ano" class="input-field">
+            <input type="date" name="vigencia_inicio" class="input-field">
+            <input type="date" name="vigencia_termino" class="input-field">
+            <input type="text" name="campus" placeholder="Campus" value="Salinas" class="input-field">
+            <button type="submit" class="btn-action btn-save">Cadastrar Projeto</button>
+          </form>
+        </div>
+      </section>
 
-    <section class="admin-card section-coordenadores">
-      <div class="card-header">
-        <h2><i class="fa-solid fa-user-tie"></i> Coordenadores</h2>
-      </div>
+      <section class="admin-card section-coordenadores">
+        <div class="card-header">
+          <h2><i class="fa-solid fa-user-tie"></i> Coordenadores</h2>
+        </div>
 
-      <div class="table-wrapper">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Lattes</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody id="lista-coordenadores">
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Lattes</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="lista-coordenadores">
             </tbody>
-        </table>
-      </div>
+          </table>
+        </div>
 
-      <div class="form-container">
-        <h3>Novo Coordenador</h3>
-        <form id="form-coordenador" class="stack-form">
-          <input type="text" name="nome" placeholder="Nome do Professor" class="input-field" required>
-          <input type="url" name="lattes" placeholder="URL do Lattes" class="input-field" required>
-          <button type="submit" class="btn-action btn-save">Cadastrar Coordenador</button>
-        </form>
-      </div>
-    </section>
-  </main>
-</div>
+        <div class="form-container">
+          <h3>Novo Coordenador</h3>
+          <form id="form-coordenador" class="stack-form">
+            <input type="text" name="nome" placeholder="Nome do Professor" class="input-field" required>
+            <input type="url" name="lattes" placeholder="URL do Lattes" class="input-field" required>
+            <button type="submit" class="btn-action btn-save">Cadastrar Coordenador</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
   <script>
-var sidemenu = document.getElementById("sidemenu");
+    var sidemenu = document.getElementById("sidemenu");
 
-function openmenu() {
-    sidemenu.style.right = "-200px";
-    sidemenu.style.left = "0px";
-}
+    function openmenu() {
+      sidemenu.style.right = "-200px";
+      sidemenu.style.left = "0px";
+    }
 
-function clossmenu() {
-    sidemenu.style.left = "-800px";
-}
+    function clossmenu() {
+      sidemenu.style.left = "-800px";
+    }
 
-async function carregarDados() {
-    try {
+    // Função para simplificar os alertas
+    function toast(titulo, icone) {
+      Swal.fire({
+        title: titulo,
+        icon: icone,
+        timer: 2000,
+        showConfirmButton: false,
+        toast: true,
+        position: 'top-end'
+      });
+    }
+
+    async function carregarDados() {
+      try {
         const resProjetos = await fetch('/api/projetos-adm');
         const projetos = await resProjetos.json();
         document.getElementById('lista-projetos').innerHTML = projetos.map(p => `
@@ -157,63 +169,123 @@ async function carregarDados() {
                 </td>
             </tr>
         `).join('');
-    } catch (error) {
+      } catch (error) {
         console.error('Erro ao carregar dados:', error);
+      }
     }
-}
 
-document.getElementById('form-projeto').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
+    // ADICIONAR PROJETO
+    document.getElementById('form-projeto').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData);
 
-    const response = await fetch('/api/projetos', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+      try {
+        const response = await fetch('/api/projetos', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          e.target.reset();
+          carregarDados();
+          toast('Projeto adicionado!', 'success');
+        } else {
+          const err = await response.json();
+          Swal.fire('Erro!', err.error || 'Erro ao adicionar projeto.', 'error');
+        }
+      } catch (error) {
+        Swal.fire('Erro!', 'Falha na conexão com o servidor.', 'error');
+      }
     });
 
-    if (response.ok) {
-        e.target.reset();
-        carregarDados();
-    }
-});
-
-document.getElementById('form-coordenador').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const data = {
+    // ADICIONAR COORDENADOR
+    document.getElementById('form-coordenador').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = {
         nome_coordenador: e.target.nome.value,
         link_lattes: e.target.lattes.value
-    };
+      };
 
-    const response = await fetch('/api/coordenadores', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+      try {
+        const response = await fetch('/api/coordenadores', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          e.target.reset();
+          carregarDados();
+          toast('Coordenador cadastrado!', 'success');
+        } else {
+          const err = await response.json();
+          Swal.fire('Erro!', err.error || 'Erro ao cadastrar coordenador.', 'error');
+        }
+      } catch (error) {
+        Swal.fire('Erro!', 'Falha na conexão com o servidor.', 'error');
+      }
     });
 
-    if (response.ok) {
-        e.target.reset();
-        carregarDados();
-    }
-});
+    // APAGAR PROJETO
+    async function apagarProjeto(id) {
+      const confirmacao = await Swal.fire({
+        title: 'Excluir projeto?',
+        text: "Essa ação não pode ser desfeita!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sim, excluir!',
+        cancelButtonText: 'Cancelar'
+      });
 
-async function apagarProjeto(id) {
-    if (confirm('Tem certeza que deseja excluir este projeto?')) {
-        const res = await fetch(`/api/projetos/${id}`, { method: 'DELETE' });
-        if (res.ok) carregarDados();
+      if (confirmacao.isConfirmed) {
+        try {
+          const res = await fetch(`/api/projetos/${id}`, { method: 'DELETE' });
+          if (res.ok) {
+            carregarDados();
+            toast('Excluído com sucesso!', 'success');
+          } else {
+            Swal.fire('Erro!', 'Não foi possível excluir o projeto.', 'error');
+          }
+        } catch (error) {
+          Swal.fire('Erro!', 'Erro ao processar exclusão.', 'error');
+        }
+      }
     }
-}
 
-async function apagarCoordenador(id) {
-    if (confirm('Atenção: Isso pode afetar projetos vinculados. Confirmar exclusão?')) {
-        const res = await fetch(`/api/coordenadores/${id}`, { method: 'DELETE' });
-        if (res.ok) carregarDados();
+    // APAGAR COORDENADOR
+    async function apagarCoordenador(id) {
+      const confirmacao = await Swal.fire({
+        title: 'Excluir coordenador?',
+        text: "Isso pode impedir o funcionamento de projetos vinculados!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Sim, excluir!',
+        cancelButtonText: 'Cancelar'
+      });
+
+      if (confirmacao.isConfirmed) {
+        try {
+          const res = await fetch(`/api/coordenadores/${id}`, { method: 'DELETE' });
+          if (res.ok) {
+            carregarDados();
+            toast('Coordenador removido!', 'success');
+          } else {
+            const err = await res.json();
+            Swal.fire('Não excluído!', err.error || 'Existem projetos dependentes.', 'error');
+          }
+        } catch (error) {
+          Swal.fire('Erro!', 'Erro ao processar exclusão.', 'error');
+        }
+      }
     }
-}
 
-window.onload = carregarDados;
-  </script>
+    window.onload = carregarDados;</script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

@@ -147,19 +147,33 @@ if (titulo) {
     }
 });
 app.get('/api/projetos-adm', async (req, res) => {
+
     try {
+        const { processo, titulo, coordenador_id, tematica, ano, vigencia_inicio, vigencia_termino, num_bolsistas, num_voluntarios, num_colaboradores, status, campus } = req.body;
+        
         const query = `
-            SELECT 
-                p.id, p.processo, p.titulo, p.tematica, p.ano, p.vigencia_inicio, p.vigencia_termino,
-                p.num_bolsistas, p.num_voluntarios, p.num_colaboradores, p.status, p.campus,
-                c.nome_coordenador, c.coordenador_id
-            FROM portifolio p
-            JOIN coordenadores c ON p.coordenador_id = c.coordenador_id
-            ORDER BY p.titulo ASC, p.id ASC`;
-        const { rows } = await pool.query(query);
-        res.json(rows);
+            INSERT INTO portifolio (processo, titulo, coordenador_id, tematica, ano, vigencia_inicio, vigencia_termino, num_bolsistas, num_voluntarios, num_colaboradores, status, campus)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+        `;
+        
+        await pool.query(query, [processo, titulo, coordenador_id, tematica, ano, vigencia_inicio || null, vigencia_termino || null, num_bolsistas || 0, num_voluntarios || 0, num_colaboradores || 0, status || 'pendente', campus || 'Salinas']);
+        
+        res.status(201).json({ message: 'Sucesso' });
     } catch (error) {
-        res.status(500).json({ error: 'Erro ao obter projetos' });
+        console.error('ERRO NO POST PROJETOS:', error.message); 
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Rota de Coordenadores
+app.post('/api/coordenadores', async (req, res) => {
+    try {
+        const { nome_coordenador, link_lattes } = req.body;
+        await pool.query('INSERT INTO coordenadores (nome_coordenador, link_lattes) VALUES ($1, $2)', [nome_coordenador, link_lattes]);
+        res.status(201).json({ message: 'Sucesso' });
+    } catch (error) {
+        console.error('ERRO NO POST COORDENADORES:', error.message);
+        res.status(500).json({ error: error.message });
     }
 });
 
@@ -184,16 +198,7 @@ app.delete('/api/projetos/:id', async (req, res) => {
         res.status(500).json({ error: 'Erro ao deletar projeto' });
     }
 });
-// Obter a lista completa de coordenadores
-app.get('/api/coordenadores', async (req, res) => {
-    try {
-        const { rows } = await pool.query('SELECT * FROM coordenadores ORDER BY nome_coordenador ASC');
-        res.json(rows);
-    } catch (error) {
-        console.error('Erro ao obter coordenadores:', error);
-        res.status(500).json({ error: 'Erro no servidor ao obter coordenadores.' });
-    }
-});
+
 app.post('/api/coordenadores', async (req, res) => {
     try {
         const { nome_coordenador, link_lattes } = req.body;

@@ -127,7 +127,7 @@ function clossmenu() {
 
 async function carregarDados() {
     try {
-        const resProjetos = await fetch('/api/projetos');
+        const resProjetos = await fetch('/api/projetos-adm');
         const projetos = await resProjetos.json();
         document.getElementById('lista-projetos').innerHTML = projetos.map(p => `
             <tr>

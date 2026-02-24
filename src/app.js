@@ -543,6 +543,7 @@ app.get('/api/produtos', async (req, res) => {
             INNER JOIN portifolio p ON pr.portifolio_id = p.id
             INNER JOIN coordenadores c ON p.coordenador_id = c.coordenador_id
             WHERE pr.link_resumo IS NOT NULL
+              AND pr.tipo_produto != 'Apresentação Oral'
         `;
 
         const params = [];

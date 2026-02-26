@@ -1366,3 +1366,8 @@ body {
     padding: 10px 0;
   }
 }
+.fundo{
+background-image: url('images/fundo.png');
+}#fundo{
+background-image: url('images/fundo.png');
+}

@@ -825,7 +825,7 @@ nav ul .fa-solid.fa-chevron-down {
 }
 
 .fa-solid.fa-file-pdf {
-  color: #ff0000;
+  color: #ffffff;
   /* Vermelho */
 }
 
@@ -1378,7 +1378,7 @@ background-image: url('/images/fundo.png');
 }
 
 .projeto-card {
-    background: #1e2029; 
+    background: #ffffff; 
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -1394,7 +1394,7 @@ background-image: url('/images/fundo.png');
 }
 
 .projeto-card-titulo {
-    color: #ffffff;
+    color: #000000;
     font-size: 1.1em;
     font-weight: bold;
     margin-bottom: 12px;
@@ -1413,7 +1413,7 @@ background-image: url('/images/fundo.png');
 }
 
 .projeto-card-info {
-    color: #a0a0b0;
+    color: #000000;
     font-size: 0.9em;
     margin-bottom: 8px;
     display: flex;
@@ -1449,4 +1449,63 @@ background-image: url('/images/fundo.png');
 
 #produtos-grid a:hover {
     background: #c82333;
+}
+.filtros-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; 
+    gap: 15px; 
+    margin-bottom: 25px;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+}
+
+.search-container-inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1; 
+}
+
+.search-container-inline label {
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+}
+
+.filtros-inline input[type="text"],
+.filtros-inline select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.filtros-inline input[type="text"] {
+    width: 100%;
+    max-width: 350px;
+}
+
+.filtros-inline input[type="text"]:focus,
+.filtros-inline select:focus {
+    border-color: #00bfff;
+}
+
+.filtros-inline button {
+    padding: 10px 20px;
+    background-color: #008CBA; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filtros-inline button:hover {
+    background-color: #006b8f;
 }

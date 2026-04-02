@@ -980,12 +980,8 @@ function montarTabelaProdutos(lista) {
   lista.forEach((item) => {
     const card = document.createElement("div");
     card.className = "projeto-card"; 
-    
+
     card.innerHTML = `
-        <div class="projeto-card-badge" style="background: rgba(255, 193, 7, 0.15); color: #ffc107;">
-            <i class="fa-solid fa-box-open"></i> Produto
-        </div>
-        
         <div class="projeto-card-titulo">${item.nome_projeto}</div>
         
         <div class="projeto-card-info" style="margin-bottom: 20px;">

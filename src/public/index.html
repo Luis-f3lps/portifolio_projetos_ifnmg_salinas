@@ -111,21 +111,24 @@
                     </br>
                     <p></p>
                     <div>
-                        <form id="portifolio-filter-form">
-                            <div class="search-container" style="margin-bottom: 15px;">
-                                <label for="filtro-titulo" style="font-weight: bold;">Pesquisar por Título:</label>
-                                <input type="text" id="filtro-titulo" placeholder="Digite um título..."
-                                    style="padding: 5px; width: 100%; max-width: 300px;">
+                        <form id="portifolio-filter-form" class="filtros-inline">
+                            <div class="search-container-inline">
+                                <label for="filtro-titulo">Pesquisar por Título:</label>
+                                <input type="text" id="filtro-titulo" placeholder="Digite um título...">
                             </div>
+
                             <select id="tematica-select">
                                 <option value="">Todas as Temáticas</option>
                             </select>
+
                             <select id="coordenador-select">
                                 <option value="">Todos os Coordenadores</option>
                             </select>
+
                             <select id="anoProjeto-select">
                                 <option value="">Todos os Anos</option>
                             </select>
+
                             <button type="submit">Filtrar</button>
                         </form>
                         <div id="portifolio-grid" class="cards-grid"></div>

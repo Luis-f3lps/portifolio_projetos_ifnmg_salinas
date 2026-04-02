@@ -128,19 +128,9 @@
                             </select>
                             <button type="submit">Filtrar</button>
                         </form>
-                        <table>
-                            <thead>
-                                <tr id="green">
-                                    <th>Título</th>
-                                    <th>Temática</th>
-                                    <th>Coordenador</th>
-                                    <th>Ano</th>
-                                    <th>Processo</th>
-                                </tr>
-                            </thead>
-                            <tbody id="portifolio-tbody">
-                            </tbody>
-                        </table>
+                        <div id="portifolio-grid" class="cards-grid"></div>
+
+                        <div id="pagination-portifolio"></div>
                         <div id="pagination-portifolio">
                         </div>
                     </div>
@@ -214,31 +204,19 @@
         <div id="produtos-projetos">
             <div class="row">
                 <div id="painel-resumos" class="tabela-wrapper">
-                    <h1 class="sub-title" style="
-           color: rgb(255, 255, 255); ">Produtos gerados dos projetos</h1>
+                    <h1 class="sub-title" style="color: rgb(255, 255, 255);">Produtos gerados dos projetos</h1>
+
                     <div class="search-container" style="margin-bottom: 20px;">
                         <div class="input-wrapper" style="position: relative; max-width: 400px;">
                             <i class="fa-solid fa-magnifying-glass"
                                 style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #666;"></i>
-
-                            <input type="text" id="filtro-interno" onkeyup="pesquisarProdutos()"
+                            <input type="text" id="filtro-interno" onkeyup="carregarListaProdutos()"
                                 placeholder="Pesquisar pelo nome do projeto..."
                                 style="width: 100%; padding: 10px 10px 10px 35px; border: 1px solid #ddd; border-radius: 5px;">
                         </div>
                     </div>
-                    <div style="overflow-x: auto; height: 100vh;">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Nome do Projeto</th>
-                                    <th>Professor/Orientador</th>
-                                    <th style="width: 120px; text-align: center;">Produto</th>
-                                </tr>
-                            </thead>
-                            <tbody id="corpo-tabela-resumos">
-                            </tbody>
-                        </table>
-                    </div>
+
+                    <div id="produtos-grid" class="cards-grid"></div>
 
                 </div>
             </div>

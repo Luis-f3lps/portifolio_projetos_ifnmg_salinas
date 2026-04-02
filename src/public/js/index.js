@@ -450,10 +450,9 @@ function updatePortifolioPagination(
 /**
  * @param {number} page 
  * @param {string} tematica 
- *  * @param {string} titulo 
-
+ * @param {string} titulo 
  * @param {string} coordenador 
- * * @param {string} ano -
+ * @param {string} ano
  */
 async function loadPortifolio(
   page = 1,
@@ -462,11 +461,11 @@ async function loadPortifolio(
   ano = "",
   titulo = ""
 ) {
-  const container = document.getElementById("portifolio-tbody");
+  const container = document.getElementById("portifolio-grid"); 
   const paginationDiv = document.getElementById("pagination-portifolio");
 
   if (container) {
-    container.innerHTML = '<tr><td colspan="4">Carregando...</td></tr>';
+    container.innerHTML = '<p style="color: white;">Carregando projetos...</p>';
   }
   if (paginationDiv) {
     paginationDiv.innerHTML = "";
@@ -477,49 +476,51 @@ async function loadPortifolio(
       page: page,
       limit: 15,
     });
-    if (titulo) {
-      params.append("titulo", titulo);
-    }
-    if (tematica) {
-      params.append("tematica", tematica);
-    }
-    if (coordenador) {
-      params.append("coordenador", coordenador);
-    }
-    if (ano) {
-      params.append("ano", ano);
-    }
+    if (titulo) params.append("titulo", titulo);
+    if (tematica) params.append("tematica", tematica);
+    if (coordenador) params.append("coordenador", coordenador);
+    if (ano) params.append("ano", ano);
+
     const response = await fetch(`/api/portifolio?${params.toString()}`);
     if (!response.ok) {
       throw new Error("Falha ao carregar dados do portfólio");
     }
     const result = await response.json();
 
-    if (container) {
-      container.innerHTML = "";
-    } else {
-      console.error(
-        "Erro: Elemento com ID 'portifolio-tbody' não foi encontrado."
-      );
+    if (!container) {
+      console.error("Erro: Elemento com ID 'portifolio-grid' não foi encontrado.");
       return;
     }
 
+    container.innerHTML = ""; 
+
     if (result.data && result.data.length > 0) {
       result.data.forEach((item) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-     <td><strong>${item.titulo}</strong></td>
-     <td>${item.tematica}</td>
-     <td>${item.nome_coordenador}</td>
-      <td>${item.ano || "N/D"}</td>
-<td style="white-space: nowrap; font-size: 0.9em; color: #00bfff;">
-                ${item.processo || "N/D"}
-            </td>    `;
-        container.appendChild(row);
+        const card = document.createElement("div");
+        card.className = "projeto-card";
+        
+        card.innerHTML = `
+            <div class="projeto-card-badge"><i class="fa-solid fa-tag"></i> ${item.tematica}</div>
+            <div class="projeto-card-titulo">${item.titulo}</div>
+            
+            <div class="projeto-card-info">
+                <i class="fa-solid fa-user-tie"></i> 
+                <span><strong>Coordenador:</strong> ${item.nome_coordenador}</span>
+            </div>
+            
+            <div class="projeto-card-info">
+                <i class="fa-regular fa-calendar"></i>
+                <span><strong>Ano:</strong> ${item.ano || "N/D"}</span>
+            </div>
+
+            <div class="projeto-card-processo">
+                <i class="fa-solid fa-file-contract"></i> Processo: ${item.processo || "N/D"}
+            </div>
+        `;
+        container.appendChild(card);
       });
     } else {
-      container.innerHTML =
-        '<tr><td colspan="4">Nenhum projeto encontrado.</td></tr>';
+      container.innerHTML = '<p style="color: white; grid-column: 1 / -1; text-align: center;">Nenhum projeto encontrado.</p>';
     }
 
     updatePortifolioPagination(
@@ -533,8 +534,7 @@ async function loadPortifolio(
   } catch (error) {
     console.error("Erro ao carregar portfólio:", error);
     if (container) {
-      container.innerHTML =
-        '<tr><td colspan="4">Erro ao carregar dados. Tente novamente.</td></tr>';
+      container.innerHTML = '<p style="color: #ff4c4c;">Erro ao carregar dados. Tente novamente.</p>';
     }
   }
 }
@@ -967,29 +967,37 @@ async function carregarListaProdutos() {
 
 // Função para preencher o HTML da tabela
 function montarTabelaProdutos(lista) {
-  const tbody = document.getElementById("corpo-tabela-resumos");
-  if (!tbody) return;
+  const grid = document.getElementById("produtos-grid");
+  if (!grid) return;
 
-  tbody.innerHTML = "";
+  grid.innerHTML = "";
 
   if (!lista || lista.length === 0) {
-    tbody.innerHTML =
-      "<tr><td colspan='3' style='text-align:center; padding: 20px;'>Nenhum projeto encontrado com esse nome.</td></tr>";
+    grid.innerHTML = "<p style='color: white; grid-column: 1 / -1; text-align: center; padding: 20px;'>Nenhum produto encontrado com esse nome.</p>";
     return;
   }
 
   lista.forEach((item) => {
-    const linha = document.createElement("tr");
-
-    linha.innerHTML = `
-            <td class="coluna-projeto" style="font-weight: 500;">${item.nome_projeto
-      }</td>
-            <td>${item.nome_professor}</td>
-            <td style="text-align: center;">
-                ${formatarLinkProduto(item.link_produto)}
-            </td>
-        `;
-    tbody.appendChild(linha);
+    const card = document.createElement("div");
+    card.className = "projeto-card"; 
+    
+    card.innerHTML = `
+        <div class="projeto-card-badge" style="background: rgba(255, 193, 7, 0.15); color: #ffc107;">
+            <i class="fa-solid fa-box-open"></i> Produto
+        </div>
+        
+        <div class="projeto-card-titulo">${item.nome_projeto}</div>
+        
+        <div class="projeto-card-info" style="margin-bottom: 20px;">
+            <i class="fa-solid fa-user-tie"></i> 
+            <span><strong>Orientador:</strong> ${item.nome_professor}</span>
+        </div>
+        
+        <div style="margin-top: auto; display: flex; justify-content: flex-end;">
+            ${formatarLinkProduto(item.link_produto)}
+        </div>
+    `;
+    grid.appendChild(card);
   });
 }
 

@@ -1509,3 +1509,20 @@ background-image: url('/images/fundo.png');
 .filtros-inline button:hover {
     background-color: #006b8f;
 }
+.btn-artigo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #28a745; /* Verde combinando com a tag */
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn-artigo:hover {
+    background: #218838;
+}

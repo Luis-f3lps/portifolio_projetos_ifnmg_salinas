@@ -39,53 +39,72 @@ function carregarArtigos() {
     fetch('/api/artigos')
         .then(response => response.json())
         .then(data => {
-            const tbody = document.getElementById('artigos-tbody');
-            tbody.innerHTML = ''; 
+            const grid = document.getElementById('artigos-grid');
+            if (!grid) return;
 
-            if (Array.isArray(data)) {
+            grid.innerHTML = '';
+
+            if (Array.isArray(data) && data.length > 0) {
                 data.forEach(artigo => {
-                    const tr = document.createElement('tr');
+                    const card = document.createElement('div');
+                    card.className = 'projeto-card';
 
-                    tr.innerHTML = `
-                        <td>${artigo.titulo || 'N/A'}</td>
-                        <td>${artigo.autores || 'N/A'}</td>
-                        <td>
-                            ${artigo.link_artigo ? `<a href="${artigo.link_artigo}" target="_blank">Acessar Artigo</a>` : 'Link indisponível'}
-                        </td>
+                    card.innerHTML = `
+                        <div class="projeto-card-badge" style="background: rgba(40, 167, 69, 0.15); color: #28a745;">
+                            <i class="fa-solid fa-file-lines"></i> Artigo
+                        </div>
+                        
+                        <div class="projeto-card-titulo">${artigo.titulo || 'N/A'}</div>
+                        
+                        <div class="projeto-card-info" style="margin-bottom: 20px;">
+                            <i class="fa-solid fa-users"></i> 
+                            <span><strong>Autores:</strong> ${artigo.autores || 'N/A'}</span>
+                        </div>
+                        
+                        <div style="margin-top: auto; display: flex; justify-content: flex-end;">
+                            ${artigo.link_artigo ?
+                            `<a href="${artigo.link_artigo}" target="_blank" class="btn-artigo">Acessar Artigo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>`
+                            : '<span style="color: #888; font-size: 0.9em;">Link indisponível</span>'}
+                        </div>
                     `;
 
-                    tbody.appendChild(tr);
+                    grid.appendChild(card);
                 });
             } else {
-                console.error('Formato de resposta inesperado:', data);
+                grid.innerHTML = "<p style='color: white; grid-column: 1 / -1; text-align: center; padding: 20px;'>Nenhum artigo encontrado.</p>";
             }
         })
-        .catch(error => console.error('Erro ao carregar os artigos:', error));
+        .catch(error => {
+            console.error('Erro ao carregar os artigos:', error);
+            const grid = document.getElementById('artigos-grid');
+            if (grid) grid.innerHTML = "<p style='color: red; grid-column: 1 / -1; text-align: center;'>Erro ao carregar dados.</p>";
+        });
 }
+
 function setupSearchFilter() {
     const filtro = document.getElementById('filtro-titulo');
-    const tabelaBody = document.getElementById('artigos-tbody');
+    const grid = document.getElementById('artigos-grid');
 
-    if (!filtro || !tabelaBody) {
-        console.error("Elemento de filtro ou tabela não encontrado.");
+    if (!filtro || !grid) {
+        console.error("Elemento de filtro ou grid não encontrado.");
         return;
     }
 
     filtro.addEventListener('input', function () {
         const termoBusca = this.value.toLowerCase().trim();
-        const linhas = tabelaBody.getElementsByTagName('tr');
+        const cards = grid.getElementsByClassName('projeto-card');
 
-        for (let i = 0; i < linhas.length; i++) {
-            const linha = linhas[i];
-            const celulaTitulo = linha.getElementsByTagName('td')[0]; 
+        for (let i = 0; i < cards.length; i++) {
+            const card = cards[i];
+            const tituloElement = card.querySelector('.projeto-card-titulo');
 
-            if (celulaTitulo) {
-                const titulo = celulaTitulo.textContent.toLowerCase();
+            if (tituloElement) {
+                const titulo = tituloElement.textContent.toLowerCase();
 
                 if (titulo.includes(termoBusca)) {
-                    linha.style.display = ""; 
+                    card.style.display = "";
                 } else {
-                    linha.style.display = "none"; 
+                    card.style.display = "none";
                 }
             }
         }

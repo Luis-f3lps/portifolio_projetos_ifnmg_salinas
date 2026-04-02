@@ -1351,7 +1351,7 @@ body {
 }
 
 .projeto-card {
-    background: #1e2029;
+    background: #f8f8f8;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -1378,7 +1378,7 @@ body {
 }
 
 .projeto-card-titulo {
-    color: #ffffff;
+    color: #000000;
     font-size: 1.1em;
     font-weight: bold;
     margin-bottom: 12px;
@@ -1386,7 +1386,7 @@ body {
 }
 
 .projeto-card-info {
-    color: #a0a0b0;
+    color: #000000;
     font-size: 0.9em;
     margin-bottom: 8px;
     display: flex;

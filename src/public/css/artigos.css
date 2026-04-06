@@ -1351,11 +1351,11 @@ body {
 }
 
 .projeto-card {
-    background: #f8f8f8;
+    background: #ffffff;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    border-left: 5px solid #000000;
+    border-left: 5px solid #6500d9;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -1395,7 +1395,7 @@ body {
 }
 
 .projeto-card-info strong {
-    color: #dcdcdc;
+    color: #000000;
 }
 
 .btn-artigo {

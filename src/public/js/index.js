@@ -1136,5 +1136,100 @@ async function carregarGraficoGenero() {
     console.error("Erro ao carregar dados do gráfico de gênero: ", error);
   }
 }
+// ROTA PARA DADOS DO GRÁFICO DE PRODUTOS POR GÊNERO
+app.get('/api/graficos/produtos-genero', async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                c.sexo, 
+                COUNT(pr.id)::int as total
+            FROM 
+                produto pr
+            JOIN 
+                portifolio p ON pr.portifolio_id = p.id
+            JOIN 
+                coordenadores c ON p.coordenador_id = c.coordenador_id
+            WHERE 
+                c.sexo IS NOT NULL
+            GROUP BY 
+                c.sexo
+            ORDER BY 
+                total DESC;
+        `;
 
+        const { rows } = await pool.query(query);
+        res.json(rows);
+
+    } catch (error) {
+        console.error('Erro ao obter estatísticas de produtos por gênero:', error);
+        res.status(500).json({ error: 'Erro no servidor ao obter estatísticas de produtos por gênero.' });
+    }
+});
+
+async function carregarGraficoProdutosGenero() {
+  try {
+    const response = await fetch('/api/graficos/produtos-genero');
+    const dados = await response.json();
+
+    const labelsGenero = dados.map(item => item.sexo);
+    const valuesGenero = dados.map(item => item.total);
+
+    const coresFundo = labelsGenero.map(sexo => {
+      if (sexo.toLowerCase() === 'masculino') return '#36A2EB'; // Azul
+      if (sexo.toLowerCase() === 'feminino') return '#FF6384'; // Rosa
+      return '#cccccc'; // Cinza para não informados
+    });
+
+    const ctx = document.getElementById('produtosGeneroChart').getContext('2d');
+
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: labelsGenero,
+        datasets: [{
+          label: 'Quantidade de Produtos',
+          data: valuesGenero,
+          backgroundColor: coresFundo,
+          borderColor: '#ffffff',
+          borderWidth: 2,
+          hoverOffset: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { 
+            display: true,
+            position: 'bottom'
+          },
+          title: {
+            display: true,
+            text: 'Produtos Gerados por Gênero do Coordenador',
+            font: { size: 16 }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                let label = context.label || '';
+                if (label) {
+                  label += ': ';
+                }
+                if (context.parsed !== null) {
+                  label += context.parsed + ' produtos';
+                }
+                return label;
+              }
+            }
+          }
+        }
+      }
+    });
+
+  } catch (error) {
+    console.error("Erro ao carregar dados do gráfico de produtos por gênero: ", error);
+  }
+}
+
+carregarGraficoProdutosGenero();
 carregarGraficoGenero();

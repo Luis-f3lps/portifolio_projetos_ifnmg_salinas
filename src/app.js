@@ -693,4 +693,33 @@ app.get('/api/graficos/genero', async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor ao obter estatísticas de gênero.' });
     }
 });
+// ROTA PARA DADOS DO GRÁFICO DE PRODUTOS POR GÊNERO
+app.get('/api/graficos/produtos-genero', async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                c.sexo, 
+                COUNT(pr.id)::int as total
+            FROM 
+                produto pr
+            JOIN 
+                portifolio p ON pr.portifolio_id = p.id
+            JOIN 
+                coordenadores c ON p.coordenador_id = c.coordenador_id
+            WHERE 
+                c.sexo IS NOT NULL
+            GROUP BY 
+                c.sexo
+            ORDER BY 
+                total DESC;
+        `;
+
+        const { rows } = await pool.query(query);
+        res.json(rows);
+
+    } catch (error) {
+        console.error('Erro ao obter estatísticas de produtos por gênero:', error);
+        res.status(500).json({ error: 'Erro no servidor ao obter estatísticas de produtos por gênero.' });
+    }
+});
 export default app;

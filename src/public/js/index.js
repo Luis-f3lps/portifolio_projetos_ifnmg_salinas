@@ -1072,3 +1072,69 @@ async function carregarGraficoAnos() {
     console.error('Erro ao carregar gráfico de anos:', error);
   }
 }
+async function carregarGraficoGenero() {
+  try {
+    const response = await fetch('/api/graficos/genero');
+    const dados = await response.json();
+
+    const labelsGenero = dados.map(item => item.sexo);
+    const valuesGenero = dados.map(item => item.total);
+
+    const coresFundo = labelsGenero.map(sexo => {
+      if (sexo.toLowerCase() === 'masculino') return '#36A2EB'; // Azul
+      if (sexo.toLowerCase() === 'feminino') return '#FF6384'; // Rosa
+      return '#cccccc'; 
+    });
+
+    const ctx = document.getElementById('genderChart').getContext('2d');
+
+    new Chart(ctx, {
+      type: 'pie', 
+      data: {
+        labels: labelsGenero,
+        datasets: [{
+          label: 'Quantidade de Projetos',
+          data: valuesGenero,
+          backgroundColor: coresFundo,
+          borderColor: '#ffffff', // Borda branca entre as fatias
+          borderWidth: 2,
+          hoverOffset: 4 
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { 
+            display: true,
+            position: 'bottom' 
+          },
+          title: {
+            display: true,
+            text: 'Projetos por Gênero do Coordenador',
+            font: { size: 16 }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                let label = context.label || '';
+                if (label) {
+                  label += ': ';
+                }
+                if (context.parsed !== null) {
+                  label += context.parsed + ' projetos';
+                }
+                return label;
+              }
+            }
+          }
+        }
+      }
+    });
+
+  } catch (error) {
+    console.error("Erro ao carregar dados do gráfico de gênero: ", error);
+  }
+}
+
+carregarGraficoGenero();

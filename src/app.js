@@ -666,4 +666,31 @@ app.get('/api/grafico-anos', async (req, res) => {
         res.status(500).json({ error: "Erro ao buscar dados combinados." });
     }
 });
+// ROTA PARA DADOS DO GRÁFICO DE PROJETOS POR GÊNERO
+app.get('/api/graficos/genero', async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                c.sexo, 
+                COUNT(p.id)::int as total
+            FROM 
+                portifolio p
+            JOIN 
+                coordenadores c ON p.coordenador_id = c.coordenador_id
+            WHERE 
+                c.sexo IS NOT NULL
+            GROUP BY 
+                c.sexo
+            ORDER BY 
+                total DESC;
+        `;
+
+        const { rows } = await pool.query(query);
+        res.json(rows);
+
+    } catch (error) {
+        console.error('Erro ao obter estatísticas por gênero:', error);
+        res.status(500).json({ error: 'Erro no servidor ao obter estatísticas de gênero.' });
+    }
+});
 export default app;

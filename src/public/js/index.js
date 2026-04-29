@@ -317,7 +317,7 @@ function criarGraficoTematicas(data) {
           },
           title: {
             display: true,
-            text: "Projetos por Área Temática",
+            text: "Projetos por Área*",
             font: { size: 36 },
           },
         },

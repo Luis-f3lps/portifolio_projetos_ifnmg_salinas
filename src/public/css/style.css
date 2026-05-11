@@ -1401,17 +1401,17 @@ background-image: url('/images/fundo.png');
     line-height: 1.4;
 }
 
-.projeto-card-badge {
+.projeto-card-badge
+ {
     align-self: flex-start;
-    background: rgb(49 49 49 / 15%);
-    color: #070808;
+    background: #00bfff;
+    color: #000000;
     padding: 5px 12px;
     border-radius: 20px;
     font-size: 0.85em;
     font-weight: 600;
     margin-bottom: 15px;
 }
-
 .projeto-card-info {
     color: #000000;
     font-size: 0.9em;

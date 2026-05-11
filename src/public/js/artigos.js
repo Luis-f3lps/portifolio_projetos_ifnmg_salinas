@@ -50,7 +50,8 @@ function carregarArtigos() {
                     card.className = 'projeto-card';
 
                     card.innerHTML = `
-                        <div class="projeto-card-badge" style="background: rgba(40, 167, 69, 0.15); color: #28a745;">
+                        <div class="projeto-card-badge" style="background: rgb(49 49 49 / 15%);
+    color: #070808;">
                             <i class="fa-solid fa-file-lines"></i> Artigo
                         </div>
                         

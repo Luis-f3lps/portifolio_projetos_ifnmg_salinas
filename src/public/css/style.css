@@ -1403,8 +1403,8 @@ background-image: url('/images/fundo.png');
 
 .projeto-card-badge {
     align-self: flex-start;
-    background: rgba(0, 191, 255, 0.15);
-    color: #00bfff;
+    background: rgb(49 49 49 / 15%);
+    color: #070808;
     padding: 5px 12px;
     border-radius: 20px;
     font-size: 0.85em;
@@ -1437,7 +1437,7 @@ background-image: url('/images/fundo.png');
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #dc3545; 
+    background: #ff004f; 
     color: white;
     padding: 8px 16px;
     border-radius: 5px;

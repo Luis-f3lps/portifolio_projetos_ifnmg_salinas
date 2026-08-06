@@ -461,7 +461,7 @@ async function loadPortifolio(
   ano = "",
   titulo = ""
 ) {
-  const container = document.getElementById("portifolio-grid"); 
+  const container = document.getElementById("portifolio-grid");
   const paginationDiv = document.getElementById("pagination-portifolio");
 
   if (container) {
@@ -492,28 +492,34 @@ async function loadPortifolio(
       return;
     }
 
-    container.innerHTML = ""; 
+    container.innerHTML = "";
 
     if (result.data && result.data.length > 0) {
-result.data.forEach((item) => {
-            const card = document.createElement("div");
-            card.className = "projeto-card";
-            
-            // Lógica de verificação do PDF
-            const hasPdf = item.link_pdf && item.link_pdf !== "null" && item.link_pdf.trim() !== "";
-            const iconColor = hasPdf ? "#ff0000" : "#cccccc";
-            const cursorType = hasPdf ? "pointer" : "not-allowed";
-            const iconTitle = hasPdf ? "Baixar Arquivo PDF" : "Produto não disponível";
-            
-            let pdfHTML = "";
-            if (hasPdf) {
-                const linkUrl = item.link_pdf.startsWith("http") ? item.link_pdf : `arquivos/${item.link_pdf}`;
-                pdfHTML = `<a href="${linkUrl}" target="_blank" style="color: ${iconColor}; text-decoration: none;" title="${iconTitle}"><i class="fa-solid fa-file-pdf fa-2x"></i></a>`;
-            } else {
-                pdfHTML = `<span style="color: ${iconColor}; cursor: ${cursorType};" title="${iconTitle}"><i class="fa-solid fa-file-pdf fa-2x"></i></span>`;
-            }
+      result.data.forEach((item) => {
+        const card = document.createElement("div");
+        card.className = "projeto-card";
 
-            card.innerHTML = `
+        // Lógica de verificação do PDF
+        const hasPdf = item.link_pdf && item.link_pdf !== "null" && item.link_pdf.trim() !== "";
+        const iconColor = hasPdf ? "#ff0000" : "#cccccc";
+        const cursorType = hasPdf ? "pointer" : "not-allowed";
+        const iconTitle = hasPdf ? "Baixar Arquivo PDF" : "Produto não disponível";
+
+        let pdfHTML = "";
+        if (hasPdf) {
+          const linkUrl = item.link_pdf.startsWith("http") ? item.link_pdf : `arquivos/${item.link_pdf}`;
+          // Note que o style="color: ${iconColor};" agora está dentro do <i>
+          pdfHTML = `<a href="${linkUrl}" target="_blank" style="text-decoration: none;" title="${iconTitle}">
+                               <i class="fa-solid fa-file-pdf fa-2x" style="color: ${iconColor};"></i>
+                           </a>`;
+        } else {
+          // Aqui também, o style="color: ${iconColor};" foi para o <i>
+          pdfHTML = `<span style="cursor: ${cursorType};" title="${iconTitle}">
+                               <i class="fa-solid fa-file-pdf fa-2x" style="color: ${iconColor};"></i>
+                           </span>`;
+        }
+
+        card.innerHTML = `
                 <div class="projeto-card-badge"><i class="fa-solid fa-tag"></i> ${item.tematica}</div>
                 <div class="projeto-card-titulo">${item.titulo}</div>
                 
@@ -536,8 +542,8 @@ result.data.forEach((item) => {
                     </div>
                 </div>
             `;
-            container.appendChild(card);
-        });
+        container.appendChild(card);
+      });
     } else {
       container.innerHTML = '<p style="color: white; grid-column: 1 / -1; text-align: center;">Nenhum projeto encontrado.</p>';
     }
@@ -998,7 +1004,7 @@ function montarTabelaProdutos(lista) {
 
   lista.forEach((item) => {
     const card = document.createElement("div");
-    card.className = "projeto-card"; 
+    card.className = "projeto-card";
 
     card.innerHTML = `
         <div class="projeto-card-titulo">${item.nome_projeto}</div>
@@ -1102,13 +1108,13 @@ async function carregarGraficoGenero() {
     const coresFundo = labelsGenero.map(sexo => {
       if (sexo.toLowerCase() === 'masculino') return '#36A2EB'; // Azul
       if (sexo.toLowerCase() === 'feminino') return '#FF6384'; // Rosa
-      return '#cccccc'; 
+      return '#cccccc';
     });
 
     const ctx = document.getElementById('genderChart').getContext('2d');
 
     new Chart(ctx, {
-      type: 'pie', 
+      type: 'pie',
       data: {
         labels: labelsGenero,
         datasets: [{
@@ -1117,16 +1123,16 @@ async function carregarGraficoGenero() {
           backgroundColor: coresFundo,
           borderColor: '#ffffff', // Borda branca entre as fatias
           borderWidth: 2,
-          hoverOffset: 4 
+          hoverOffset: 4
         }]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { 
+          legend: {
             display: true,
-            position: 'bottom' 
+            position: 'bottom'
           },
           title: {
             display: true,
@@ -1135,7 +1141,7 @@ async function carregarGraficoGenero() {
           },
           tooltip: {
             callbacks: {
-              label: function(context) {
+              label: function (context) {
                 let label = context.label || '';
                 if (label) {
                   label += ': ';
@@ -1190,7 +1196,7 @@ async function carregarGraficoProdutosGenero() {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { 
+          legend: {
             display: true,
             position: 'bottom'
           },
@@ -1201,7 +1207,7 @@ async function carregarGraficoProdutosGenero() {
           },
           tooltip: {
             callbacks: {
-              label: function(context) {
+              label: function (context) {
                 let label = context.label || '';
                 if (label) {
                   label += ': ';

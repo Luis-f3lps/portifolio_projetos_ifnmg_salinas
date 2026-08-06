@@ -84,14 +84,15 @@ app.get('/api/portifolio', async (req, res) => {
     const offset = (pageInt - 1) * finalLimit;
 
     try {
-        let query = `
+let query = `
         SELECT 
             p.id,
             p.processo,
             p.titulo,
             p.tematica,
             c.nome_coordenador,
-            p.ano
+            p.ano,
+            (SELECT pr.link_resumo FROM produto pr WHERE pr.portifolio_id = p.id AND pr.link_resumo IS NOT NULL LIMIT 1) as link_pdf
         FROM 
             portifolio p
         JOIN 

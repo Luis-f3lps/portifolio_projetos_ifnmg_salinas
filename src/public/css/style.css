@@ -797,17 +797,37 @@ nav ul .fa-solid {
 }
 
 .chart-container {
-  display: block;
-  height: 700px;
-  width: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 380px; /* Reduzido de 700px */
+  width: 100%;
+  max-width: 500px; /* Evita que fique um disco gigante */
+  margin: 0 auto;
 }
 
 .chart-container-linhas {
   width: 100%;
-  height: 500px;
+  height: 350px; /* Reduzido de 500px */
   padding: 10px 2%;
+  margin-bottom: 20px;
 }
 
+.cartao-insight {
+  height: 350px; /* Reduzido de 500px */
+  margin-bottom: 30px;
+}
+
+.pizza {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  padding: 10px 8%;
+  margin-top: 40px; /* Reduzido o espaço do topo */
+  gap: 30px; /* Adiciona espaçamento interno entre os gráficos */
+  justify-content: space-around;
+}
 .tracinho {
   display: none;
 }

@@ -495,30 +495,49 @@ async function loadPortifolio(
     container.innerHTML = ""; 
 
     if (result.data && result.data.length > 0) {
-      result.data.forEach((item) => {
-        const card = document.createElement("div");
-        card.className = "projeto-card";
-        
-        card.innerHTML = `
-            <div class="projeto-card-badge"><i class="fa-solid fa-tag"></i> ${item.tematica}</div>
-            <div class="projeto-card-titulo">${item.titulo}</div>
+result.data.forEach((item) => {
+            const card = document.createElement("div");
+            card.className = "projeto-card";
             
-            <div class="projeto-card-info">
-                <i class="fa-solid fa-user-tie"></i> 
-                <span><strong>Coordenador:</strong> ${item.nome_coordenador}</span>
-            </div>
+            // Lógica de verificação do PDF
+            const hasPdf = item.link_pdf && item.link_pdf !== "null" && item.link_pdf.trim() !== "";
+            const iconColor = hasPdf ? "#ff0000" : "#cccccc";
+            const cursorType = hasPdf ? "pointer" : "not-allowed";
+            const iconTitle = hasPdf ? "Baixar Arquivo PDF" : "Produto não disponível";
             
-            <div class="projeto-card-info">
-                <i class="fa-regular fa-calendar"></i>
-                <span><strong>Ano:</strong> ${item.ano || "N/D"}</span>
-            </div>
+            let pdfHTML = "";
+            if (hasPdf) {
+                const linkUrl = item.link_pdf.startsWith("http") ? item.link_pdf : `arquivos/${item.link_pdf}`;
+                pdfHTML = `<a href="${linkUrl}" target="_blank" style="color: ${iconColor}; text-decoration: none;" title="${iconTitle}"><i class="fa-solid fa-file-pdf fa-2x"></i></a>`;
+            } else {
+                pdfHTML = `<span style="color: ${iconColor}; cursor: ${cursorType};" title="${iconTitle}"><i class="fa-solid fa-file-pdf fa-2x"></i></span>`;
+            }
 
-            <div class="projeto-card-processo">
-                <i class="fa-solid fa-file-contract"></i> Processo: ${item.processo || "N/D"}
-            </div>
-        `;
-        container.appendChild(card);
-      });
+            card.innerHTML = `
+                <div class="projeto-card-badge"><i class="fa-solid fa-tag"></i> ${item.tematica}</div>
+                <div class="projeto-card-titulo">${item.titulo}</div>
+                
+                <div class="projeto-card-info">
+                    <i class="fa-solid fa-user-tie"></i> 
+                    <span><strong>Coordenador:</strong> ${item.nome_coordenador}</span>
+                </div>
+                
+                <div class="projeto-card-info">
+                    <i class="fa-regular fa-calendar"></i>
+                    <span><strong>Ano:</strong> ${item.ano || "N/D"}</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: auto; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.1);">
+                    <div class="projeto-card-processo" style="border: none; padding: 0;">
+                        <i class="fa-solid fa-file-contract"></i> Processo: ${item.processo || "N/D"}
+                    </div>
+                    <div>
+                        ${pdfHTML}
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
     } else {
       container.innerHTML = '<p style="color: white; grid-column: 1 / -1; text-align: center;">Nenhum projeto encontrado.</p>';
     }

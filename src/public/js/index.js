@@ -535,7 +535,7 @@ async function loadPortifolio(
 
                 <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: auto; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.1);">
                     <div class="projeto-card-processo" style="border: none; padding: 0;">
-                        <i class="fa-solid fa-file-contract"></i> Processo: ${item.processo || "N/D"}
+                        Processo: ${item.processo || "N/D"}
                     </div>
                     <div>
                         ${pdfHTML}

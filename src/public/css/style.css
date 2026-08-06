@@ -135,7 +135,62 @@ nav ul li a:hover::after {
 .header-text h1 span {
   color: #ff004f;
 }
+/* =========================================
+   DASHBOARD E GRÁFICOS (UI MODERNA)
+   ========================================= */
+#dados {
+    width: 100%;
+    padding: 20px 0;
+}
 
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.chart-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 30px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0,0,0,0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 450px; 
+    position: relative;
+}
+
+.chart-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 191, 255, 0.12); /* Brilho azul suave no hover */
+}
+
+.chart-card.full-width {
+    grid-column: 1 / -1; /* Força o card a ocupar a tela toda */
+    height: 500px;
+}
+
+.chart-card canvas {
+    max-height: 100% !important;
+    max-width: 100% !important;
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    .chart-card, .chart-card.full-width {
+        height: 380px;
+        padding: 15px;
+    }
+}
 /* --------------Sobre------------------*/
 #about {
   padding-bottom: 20px;

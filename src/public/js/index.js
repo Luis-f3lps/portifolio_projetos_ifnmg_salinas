@@ -1,6 +1,20 @@
 var tablinks = document.getElementsByClassName("tab-links");
 var tabcontents = document.getElementsByClassName("tab-contents");
 
+// ==========================================
+// CONFIGURAÇÕES GLOBAIS DO CHART.JS
+// ==========================================
+Chart.defaults.font.family = "'Poppins', sans-serif";
+Chart.defaults.color = "#666"; // Cor do texto dos eixos
+Chart.defaults.plugins.title.color = "#222"; // Cor do título principal
+Chart.defaults.plugins.title.font.size = 22;
+Chart.defaults.plugins.title.font.weight = "600";
+Chart.defaults.plugins.tooltip.backgroundColor = "rgba(15, 23, 42, 0.9)"; // Fundo escuro moderno
+Chart.defaults.plugins.tooltip.padding = 12;
+Chart.defaults.plugins.tooltip.cornerRadius = 8; // Tooltip arredondada
+Chart.defaults.plugins.tooltip.titleFont = { size: 14, family: "'Poppins', sans-serif", weight: 'bold' };
+Chart.defaults.plugins.tooltip.bodyFont = { size: 13, family: "'Poppins', sans-serif" };
+
 function opentab(tabname) {
   for (var i = 0; i < tablinks.length; i++) {
     tablinks[i].classList.remove("active-link");
@@ -285,40 +299,30 @@ function criarGraficoTematicas(data) {
       type: "bar",
       data: {
         labels: labels,
-        datasets: [
-          {
-            label: "Quantidade de Projetos",
-            data: values,
-            backgroundColor: PALETA_CORES_TEMATICAS,
-            borderWidth: 0,
-          },
-        ],
+datasets: [
+        {
+          label: "Quantidade de Projetos",
+          data: values,
+          backgroundColor: PALETA_CORES_TEMATICAS,
+          borderWidth: 0,
+          borderRadius: 6, // Deixa as pontas das barras arredondadas
+          borderSkipped: false // Arredonda todos os cantos
+        },
+      ],
       },
-      options: {
+options: {
         indexAxis: "y",
         responsive: true,
         maintainAspectRatio: false,
         scales: {
           y: {
+            grid: { display: false }, // Remove as linhas horizontais feias
             beginAtZero: true,
-            ticks: {
-              autoSkip: false,
-            },
+            ticks: { autoSkip: false },
           },
           x: {
-            ticks: {
-              stepSize: 1,
-            },
-          },
-        },
-        plugins: {
-          legend: {
-            display: false,
-          },
-          title: {
-            display: true,
-            text: "Projetos por Área*",
-            font: { size: 36 },
+            grid: { color: "rgba(0,0,0,0.04)" }, // Linhas verticais bem sutis
+            ticks: { stepSize: 1 },
           },
         },
       },

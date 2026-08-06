@@ -196,16 +196,19 @@ async function criarGraficoPizzaCoordenadores() {
           },
         ],
       },
-      options: {
+options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
-          legend: { position: "right" },
+          legend: { 
+            position: "right",
+            labels: { font: { size: 11 }, boxWidth: 12 }
+          },
           title: {
             display: true,
             text: "Projetos por Coordenador",
-            font: { size: 36 },
-            position: "top",
-            align: "start",
+            font: { size: 20 },
+            padding: { bottom: 15 }
           },
           tooltip: {
             callbacks: {
@@ -218,7 +221,7 @@ async function criarGraficoPizzaCoordenadores() {
             },
           },
         },
-      },
+      }
     });
   } catch (error) {
     console.error("Erro ao criar o gráfico de coordenadores:", error);
@@ -254,16 +257,19 @@ function criarGraficoPizzaTematicas(data) {
           },
         ],
       },
-      options: {
+options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
-          legend: { position: "right" },
+          legend: { 
+            position: "right",
+            labels: { font: { size: 11 }, boxWidth: 12 }
+          },
           title: {
             display: true,
             text: "Projetos por Área Temática",
-            font: { size: 36 },
-            position: "top",
-            align: "start",
+            font: { size: 20 },
+            padding: { bottom: 15 }
           },
           tooltip: {
             callbacks: {
@@ -276,7 +282,7 @@ function criarGraficoPizzaTematicas(data) {
             },
           },
         },
-      },
+      }
     });
   } catch (error) {
     console.error("Erro ao criar o gráfico de temáticas:", error);
@@ -631,24 +637,16 @@ function criarGraficoPizzaEventos(data) {
           },
         ],
       },
-      options: {
+options: {
         responsive: true,
         maintainAspectRatio: false,
-        layout: {
-          padding: {
-            right: 50,
-          },
-        },
         plugins: {
           legend: {
             position: "right",
             align: "center",
             labels: {
-              boxWidth: 15,
-              padding: 15,
-              font: {
-                size: 12,
-              },
+              boxWidth: 12,
+              font: { size: 11 },
               generateLabels: function (chart) {
                 const data = chart.data;
                 if (data.labels.length && data.datasets.length) {
@@ -660,8 +658,7 @@ function criarGraficoPizzaEventos(data) {
                       fillStyle: style.backgroundColor,
                       strokeStyle: style.borderColor,
                       lineWidth: style.borderWidth,
-                      hidden:
-                        isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
+                      hidden: isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
                       index: i,
                     };
                   });
@@ -673,9 +670,8 @@ function criarGraficoPizzaEventos(data) {
           title: {
             display: true,
             text: "Produtos por Evento",
-            font: { size: 28 },
-            position: "top",
-            align: "start",
+            font: { size: 20 },
+            padding: { bottom: 15 }
           },
           tooltip: {
             callbacks: {
@@ -688,7 +684,7 @@ function criarGraficoPizzaEventos(data) {
             },
           },
         },
-      },
+      }
     });
   } catch (error) {
     console.error("Erro ao criar o gráfico de eventos:", error);
@@ -909,17 +905,15 @@ function criarGraficoAgrupado(data) {
           },
         ],
       },
-      options: {
+options: {
         responsive: true,
         maintainAspectRatio: false,
-        layout: { padding: { right: 50 } },
         plugins: {
           legend: {
             position: "right",
             labels: {
-              boxWidth: 15,
-              padding: 15,
-              font: { size: 12 },
+              boxWidth: 12,
+              font: { size: 11 },
               generateLabels: (chart) => {
                 const data = chart.data;
                 if (data.labels.length && data.datasets.length) {
@@ -931,8 +925,7 @@ function criarGraficoAgrupado(data) {
                       fillStyle: style.backgroundColor,
                       strokeStyle: style.borderColor,
                       lineWidth: style.borderWidth,
-                      hidden:
-                        isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
+                      hidden: isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
                       index: i,
                     };
                   });
@@ -944,9 +937,8 @@ function criarGraficoAgrupado(data) {
           title: {
             display: true,
             text: "Produtos por Eventos Agrupados",
-            font: { size: 28 },
-            position: "top",
-            align: "start",
+            font: { size: 20 },
+            padding: { bottom: 15 }
           },
           tooltip: {
             callbacks: {
@@ -959,7 +951,7 @@ function criarGraficoAgrupado(data) {
             },
           },
         },
-      },
+      }
     });
   } catch (error) {
     console.error("Erro ao criar gráfico agrupado:", error);

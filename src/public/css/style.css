@@ -135,6 +135,55 @@ nav ul li a:hover::after {
 .header-text h1 span {
   color: #ff004f;
 }
+.filtros-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; 
+    gap: 15px; 
+    margin-bottom: 25px;
+    
+    /* Novo visual Slim & Moderno */
+    background: rgba(255, 255, 255, 0.05); /* Fundo escuro translúcido */
+    backdrop-filter: blur(10px); /* Efeito de vidro (Glassmorphism) */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borda fina e elegante */
+    padding: 12px 20px; /* Reduzido de 15px para afinar a barra */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra suave para destacar */
+}
+
+/* Ajusta a cor do texto "Pesquisar por Título:" */
+.search-container-inline label {
+    font-weight: 600;
+    color: #e0e0e0; /* Cinza claro em vez de um preto/branco forte */
+    white-space: nowrap;
+}
+.filtros-inline input[type="text"],
+.filtros-inline select {
+    /* Cores e Fundo */
+    background: rgba(0, 0, 0, 0.25); /* Fundo mais escuro para dar profundidade */
+    color: #ffffff; /* Texto branco */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    
+    /* Dimensões Slim */
+    padding: 8px 12px; /* Padding reduzido para afinar o input */
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+/* Cor do texto de placeholder (Digite um título...) */
+.filtros-inline input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Efeito ao clicar no input (Focus) */
+.filtros-inline input[type="text"]:focus,
+.filtros-inline select:focus {
+    border-color: #00bfff;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 2px rgba(0, 191, 255, 0.2); /* Halo azul de foco */
+}
 /* =========================================
    DASHBOARD E GRÁFICOS (UI MODERNA)
    ========================================= */
@@ -697,7 +746,7 @@ select {
   border-radius: 5px;
   appearance: none;
   background-color: white;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234CAF50' width='24px' height='24px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff' width='24px' height='24px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
   background-position: right 10px top 50%;
   background-repeat: no-repeat;
   background-size: 20px;
@@ -1139,6 +1188,7 @@ nav ul .fa-solid.fa-chevron-down {
 
   select {
     font-size: x-large;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff' width='24px' height='24px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
   }
 
   button[type="submit"],

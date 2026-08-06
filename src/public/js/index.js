@@ -478,7 +478,7 @@ async function loadPortifolio(
   try {
     const params = new URLSearchParams({
       page: page,
-      limit: 15,
+      limit: 8,
     });
     if (titulo) params.append("titulo", titulo);
     if (tematica) params.append("tematica", tematica);

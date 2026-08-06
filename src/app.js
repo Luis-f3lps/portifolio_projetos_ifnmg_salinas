@@ -72,7 +72,7 @@ app.listen(PORT, () => {
 });
 
 app.get('/api/portifolio', async (req, res) => {
-    const { page = 1, limit = 15, tematica, coordenador, ano, titulo } = req.query;
+    const { page = 1, limit = 8, tematica, coordenador, ano, titulo } = req.query;
 
     const pageInt = parseInt(page, 10);
     const limitInt = parseInt(limit, 10);

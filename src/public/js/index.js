@@ -4,7 +4,7 @@ var tabcontents = document.getElementsByClassName("tab-contents");
 // ==========================================
 // CONFIGURAÇÕES GLOBAIS DO CHART.JS
 // ==========================================
-Chart.defaults.font.family = "'Poppins', sans-serif";
+Chart.defaults.font.family = "'Inter', sans-serif";
 Chart.defaults.color = "#666"; // Cor do texto dos eixos
 Chart.defaults.plugins.title.color = "#222"; // Cor do título principal
 Chart.defaults.plugins.title.font.size = 22;
@@ -520,34 +520,27 @@ async function loadPortifolio(
           const linkUrl = item.link_pdf.startsWith("http") ? item.link_pdf : `arquivos/${item.link_pdf}`;
           // Note que o style="color: ${iconColor};" agora está dentro do <i>
           pdfHTML = `<a href="${linkUrl}" target="_blank" style="text-decoration: none;" title="${iconTitle}">
-                               <i class="fa-solid fa-file-pdf fa-2x" style="color: ${iconColor};"></i>
+                               <i class="fa-regular fa-file-pdf" style="color: ${iconColor};"></i> PDF
                            </a>`;
         } else {
           // Aqui também, o style="color: ${iconColor};" foi para o <i>
           pdfHTML = `<span style="cursor: ${cursorType};" title="${iconTitle}">
-                               <i class="fa-solid fa-file-pdf fa-2x" style="color: ${iconColor};"></i>
+                               <i class="fa-regular fa-file-pdf" style="color: ${iconColor};"></i> PDF
                            </span>`;
         }
 
         card.innerHTML = `
-                <div class="projeto-card-badge"><i class="fa-solid fa-tag"></i> ${item.tematica}</div>
-                <div class="projeto-card-titulo">${item.titulo}</div>
+                <div class="projeto-card-badge">${item.tematica}</div>
+                <h3 class="projeto-card-titulo">${item.titulo}</h3>
                 
                 <div class="projeto-card-info">
-                    <i class="fa-solid fa-user-tie"></i> 
                     <span><strong>Coordenador:</strong> ${item.nome_coordenador}</span>
-                </div>
-                
-                <div class="projeto-card-info">
-                    <i class="fa-regular fa-calendar"></i>
                     <span><strong>Ano:</strong> ${item.ano || "N/D"}</span>
                 </div>
 
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: auto; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.1);">
-                    <div class="projeto-card-processo" style="border: none; padding: 0;">
-                        Processo: ${item.processo || "N/D"}
-                    </div>
-                    <div>
+                <div style="border-top: 1px solid var(--border-color); padding-top: 16px; display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
+                    <span style="font-size: 11px; color: #adb5bd;">Proc: ${item.processo || "N/D"}</span>
+                    <div style="color: var(--color-danger); font-weight: 700; font-size: 13px; display: flex; align-items: center; gap: 6px;">
                         ${pdfHTML}
                     </div>
                 </div>

@@ -515,18 +515,18 @@ async function loadPortifolio(
         const cursorType = hasPdf ? "pointer" : "not-allowed";
         const iconTitle = hasPdf ? "Baixar Arquivo PDF" : "Produto não disponível";
 
+const svgIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>`;
+        
         let pdfHTML = "";
         if (hasPdf) {
           const linkUrl = item.link_pdf.startsWith("http") ? item.link_pdf : `arquivos/${item.link_pdf}`;
-          // Note que o style="color: ${iconColor};" agora está dentro do <i>
-          pdfHTML = `<a href="${linkUrl}" target="_blank" style="text-decoration: none;" title="${iconTitle}">
-                               <i class="fa-solid fa-file-pdf fa-2x" style="color: ${iconColor};"></i>
-                           </a>`;
+          pdfHTML = `<a href="${linkUrl}" target="_blank" class="btn-pdf" title="${iconTitle}">
+                        ${svgIcon} PDF
+                     </a>`;
         } else {
-          // Aqui também, o style="color: ${iconColor};" foi para o <i>
-          pdfHTML = `<span style="cursor: ${cursorType};" title="${iconTitle}">
-                               <i class="fa-solid fa-file-pdf fa-2x" style="color: ${iconColor};"></i>
-                           </span>`;
+          pdfHTML = `<span class="btn-pdf disabled" title="${iconTitle}">
+                        ${svgIcon} PDF
+                     </span>`;
         }
 
         card.innerHTML = `
@@ -1020,14 +1020,15 @@ function montarTabelaProdutos(lista) {
 
 // Função auxiliar para gerar o botão
 function formatarLinkProduto(url) {
+  const svgIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>`;
+  
   if (url && url !== "null" && url.trim() !== "") {
     const caminhoFinal = url.startsWith("http") ? url : `arquivos/${url}`;
-
-    return `<a href="${caminhoFinal}" target="_blank" class="btn-link">
-                    <i class="fa-solid fa-file-pdf"></i>
-                </a>`;
+    return `<a href="${caminhoFinal}" target="_blank" class="btn-pdf">
+                ${svgIcon} PDF
+            </a>`;
   }
-  return '<span style="color: #ccc; font-size: 0.9em;">Indisponível</span>';
+  return `<span class="btn-pdf disabled">${svgIcon} Indisponível</span>`;
 }
 
 function pesquisarProdutos() {

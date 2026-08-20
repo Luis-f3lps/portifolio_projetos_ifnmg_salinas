@@ -1,19 +1,7 @@
-:root {
-  --bg-body: #f8f9fc;
-  --bg-nav: #1a1a24;
-  --text-nav: #d1d1d6;
-  --color-primary: #28a745;
-  --color-danger: #dc3545;
-  --text-dark: #212529;
-  --text-muted: #6c757d;
-  --border-color: #e9ecef;
-  --card-bg: #ffffff;
-}
-
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: "Poppins", sans-serif;
   box-sizing: border-box;
 }
 
@@ -22,8 +10,8 @@ html {
 }
 
 body {
-  background-color: var(--bg-body);
-  color: var(--text-dark);
+  background: white;
+  color: white;
 }
 
 a {
@@ -43,13 +31,6 @@ a {
 }
 
 .logo {
-  color: white;
-  font-size: 24px;
-  font-weight: 700;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
   width: 40px;
   margin-left: 40px;
 }
@@ -122,9 +103,21 @@ nav ul li a {
   position: relative;
 }
 
+nav ul li a::after {
+  content: "";
+  width: 0;
+  height: 3px;
+  background: blue;
+  color: blue;
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  transition: 0.5s;
+}
 
-
-
+nav ul li a:hover::after {
+  width: 100%;
+}
 
 .header-text {
   font-size: 30px;
@@ -145,38 +138,39 @@ nav ul li a {
 .filtros-inline {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-end; 
-    gap: 20px; 
-    margin-bottom: 30px;
-    background: var(--card-bg);
-    padding: 24px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.03); 
+    align-items: center; 
+    gap: 15px; 
+    margin-bottom: 25px;
+    
+    /* Novo visual Slim & Moderno */
+    background: rgba(255, 255, 255, 0.05); /* Fundo escuro translúcido */
+    backdrop-filter: blur(10px); /* Efeito de vidro (Glassmorphism) */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borda fina e elegante */
+    padding: 12px 20px; /* Reduzido de 15px para afinar a barra */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra suave para destacar */
 }
 
 /* Ajusta a cor do texto "Pesquisar por Título:" */
-.search-container-inline label, .filtros-inline label {
-    font-size: 13px;
-    color: var(--text-muted);
-    font-weight: 500;
-    display: block;
-    margin-bottom: 8px;
+.search-container-inline label {
+    font-weight: 600;
+    color: #e0e0e0; /* Cinza claro em vez de um preto/branco forte */
+    white-space: nowrap;
 }
 .filtros-inline input[type="text"],
 .filtros-inline select {
-    padding: 12px 16px;
-    border: 1px solid var(--border-color);
+    /* Cores e Fundo */
+    background: rgba(0, 0, 0, 0.25); /* Fundo mais escuro para dar profundidade */
+    color: #ffffff; /* Texto branco */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    
+    /* Dimensões Slim */
+    padding: 8px 12px; /* Padding reduzido para afinar o input */
     border-radius: 6px;
     font-size: 14px;
-    color: var(--text-dark);
     outline: none;
-    transition: border-color 0.2s;
-    background: #fff;
-    width: 100%;
+    transition: all 0.3s ease;
 }
-.filtros-inline .search-container-inline { flex: 2; flex-direction: column; align-items: flex-start;}
-.filtros-inline select { flex: 1; }
-
 
 /* Cor do texto de placeholder (Digite um título...) */
 .filtros-inline input[type="text"]::placeholder {
@@ -682,11 +676,9 @@ nav {
   justify-content: space-between;
   flex-wrap: wrap;
   position: fixed;
-  background: var(--bg-nav);
+  background: #21202e;
   width: 100%;
   z-index: 1000;
-  padding: 0 40px;
-  height: 70px;
 }
 
 nav ul li {
@@ -701,9 +693,20 @@ nav ul li a {
   position: relative;
 }
 
+nav ul li a::after {
+  content: "";
+  width: 0;
+  height: 3px;
+  background: #cc4b01;
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  transition: 0.5s;
+}
 
-
-
+nav ul li a:hover::after {
+  width: 100%;
+}
 
 .header-text h1 {
   font-size: 60px;
@@ -859,16 +862,7 @@ ul li {
 }
 
 nav ul li a {
-  color: var(--text-nav);
-  font-size: 15px;
-  font-weight: 500;
-  transition: color 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-nav ul li a:hover {
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 nav ul .fa-solid {
@@ -1267,7 +1261,11 @@ nav ul .fa-solid.fa-chevron-down {
   margin-top: 100px;
 }
 
-
+body {
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
 
 .sobre {
   max-width: 900px;
@@ -1498,27 +1496,21 @@ background-image: url('/images/fundo.png');
 }
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
-@media (max-width: 900px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .cards-grid { grid-template-columns: 1fr; } }
-
 
 .projeto-card {
-    background: var(--card-bg);
-    border-radius: 8px;
-    padding: 24px;
-    border: 1px solid var(--border-color);
+    background: #ffffff; 
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-left: 5px solid #e4e4e4;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    transition: box-shadow 0.2s, transform 0.2s;
-}
-.projeto-card:hover {
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-    transform: translateY(-2px);
 }
 
 .projeto-card:hover {
@@ -1527,37 +1519,31 @@ background-image: url('/images/fundo.png');
 }
 
 .projeto-card-titulo {
-    font-size: 16px;
-    font-weight: 700;
+    color: #000000;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 12px;
     line-height: 1.4;
-    margin-bottom: 24px;
-    color: #111;
-    flex-grow: 1;
 }
 
-.projeto-card-badge {
-    background-color: #e8f5e9;
-    color: var(--color-primary);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
+.projeto-card-badge
+ {
     align-self: flex-start;
-    margin-bottom: 16px;
-    letter-spacing: 0.5px;
+    background: #ecf6fa;
+    color: #000000;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-bottom: 15px;
 }
 .projeto-card-info {
+    color: #000000;
+    font-size: 0.9em;
+    margin-bottom: 8px;
     display: flex;
-    flex-direction: column;
-    gap: 6px;
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 10px;
-}
-.projeto-card-info strong {
-    color: var(--text-dark);
-    font-weight: 600;
+    align-items: center;
+    gap: 8px;
 }
 
 .projeto-card-info strong {
@@ -1592,13 +1578,13 @@ background-image: url('/images/fundo.png');
 .filtros-inline {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-end; 
-    gap: 20px; 
-    margin-bottom: 30px;
-    background: var(--card-bg);
-    padding: 24px;
+    align-items: center; 
+    gap: 15px; 
+    margin-bottom: 25px;
+    background: #ffffff;
+    padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.03); 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
 }
 
 .search-container-inline {
@@ -1608,29 +1594,21 @@ background-image: url('/images/fundo.png');
     flex-grow: 1; 
 }
 
-.search-container-inline label, .filtros-inline label {
-    font-size: 13px;
-    color: var(--text-muted);
-    font-weight: 500;
-    display: block;
-    margin-bottom: 8px;
+.search-container-inline label {
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
 }
 
 .filtros-inline input[type="text"],
 .filtros-inline select {
-    padding: 12px 16px;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     font-size: 14px;
-    color: var(--text-dark);
     outline: none;
-    transition: border-color 0.2s;
-    background: #fff;
-    width: 100%;
+    transition: border-color 0.3s;
 }
-.filtros-inline .search-container-inline { flex: 2; flex-direction: column; align-items: flex-start;}
-.filtros-inline select { flex: 1; }
-
 
 .filtros-inline input[type="text"] {
     width: 100%;
@@ -1643,16 +1621,14 @@ background-image: url('/images/fundo.png');
 }
 
 .filtros-inline button {
-    background-color: var(--color-primary);
+    padding: 10px 20px;
+    background-color: #008CBA; 
     color: white;
     border: none;
-    padding: 12px 24px;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 14px;
+    border-radius: 5px;
+    font-weight: bold;
     cursor: pointer;
-    height: 43px;
-    transition: background-color 0.2s;
+    transition: background-color 0.3s;
 }
 
 .filtros-inline button:hover {

@@ -5,7 +5,6 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="images/tl.webp" type="image/png">
     <title>Acervo Acadêmico do IFNMG Salinas </title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/915b45d802.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -16,23 +15,27 @@
     </div>
     <div id="header">
         <nav>
-            <a href="#" class="logo" style="display: flex; align-items: center; gap: 8px;">
-                camara<span style="color: #5c5cff;">ux</span> <i class="fa-solid fa-border-all" style="font-size: 18px; color: #a5a5ff;"></i>
-            </a>
+            <img src="images/tl.webp" class="logo">
             <ul id="sidemenu">
-                <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#logoloop-inner">Projetos</a></li>
                 <li class="dropdown-parent">
-                    <a href="#">Recursos gratuitos <i class="fa-solid fa-chevron-down" style="font-size: 12px;"></i></a>
+                    <a href="#logoloop-inner">Projetos <i class="fa-solid fa-chevron-down"></i></a>
                     <ul class="dropdown-child">
-                        <li><a href="/livros">Livros</a></li>
-                        <li><a href="/artigos">Artigos</a></li>
-                        <li><a href="/resumos">Resumos</a></li>
+                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#logoloop-inner">Projetos</a>
+                        </li>
+                        <li><a href="/antigos">Projetos Antigos</a></li>
+                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#dados">Gráficos</a></li>
+                        <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#painel-resumos">Produtos</a>
+                        </li>
                     </ul>
                 </li>
+                <li><a href="/livros">Livros</a></li>
+                <li><a href="/artigos">Artigos</a></li>
+                <li><a href="/resumos">Resumos</a></li>
                 <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#header">Sobre</a></li>
                 <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#contact">Contato</a></li>
                 <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
             </ul>
+            <img src="images/salinas_vertical_jpg (1).png" class="logoIFNMG">
             <i class="fa-solid fa-bars" onclick="openmenu()"></i>
         </nav>
     </div>
@@ -114,11 +117,15 @@
                                 <input type="text" id="filtro-titulo" placeholder="Digite um título...">
                             </div>
 
-                            <div><label>Temática</label><select id="tematica-select">
+                            <select id="tematica-select">
                                 <option value="">Todas as Temáticas</option>
-                            </select></div><div><label>Coordenador</label><select id="coordenador-select">
+                            </select>
+
+                            <select id="coordenador-select">
                                 <option value="">Todos os Coordenadores</option>
-                            </select></div><div><label>Ano</label><select id="anoProjeto-select">
+                            </select>
+
+                            <select id="anoProjeto-select">
                                 <option value="">Todos os Anos</option>
                             </select>
 
